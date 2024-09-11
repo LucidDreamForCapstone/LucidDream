@@ -1,0 +1,585 @@
+fileFormatVersion: 2
+guid: bb9894b4d0b93a8438691efb367dbd99
+TextureImporter:
+  internalIDToNameTable: []
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 0
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 16
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 3
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: ghost_death_0
+      rect:
+        serializedVersion: 2
+        x: 22
+        y: 34
+        width: 43
+        height: 60
+      alignment: 9
+      pivot: {x: 0.45360458, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4dc65a956458e654f81586f878c1c119
+      internalID: 1564518166
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ghost_death_1
+      rect:
+        serializedVersion: 2
+        x: 112
+        y: 34
+        width: 43
+        height: 60
+      alignment: 9
+      pivot: {x: 0.4548301, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 715dbb88700910e4f864eb74bbafc108
+      internalID: -915423828
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ghost_death_2
+      rect:
+        serializedVersion: 2
+        x: 202
+        y: 34
+        width: 43
+        height: 62
+      alignment: 9
+      pivot: {x: 0.4554425, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: cddc829df0e33d04892855e9ac856425
+      internalID: 1920148761
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ghost_death_3
+      rect:
+        serializedVersion: 2
+        x: 292
+        y: 34
+        width: 43
+        height: 60
+      alignment: 9
+      pivot: {x: 0.4537169, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 248567da8b8457342b23bb01afa493f0
+      internalID: 1623647954
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ghost_death_4
+      rect:
+        serializedVersion: 2
+        x: 382
+        y: 34
+        width: 45
+        height: 60
+      alignment: 9
+      pivot: {x: 0.4324382, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 02726d7d491ec0148a92fd25e88e1237
+      internalID: -830436846
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ghost_death_5
+      rect:
+        serializedVersion: 2
+        x: 474
+        y: 34
+        width: 47
+        height: 60
+      alignment: 9
+      pivot: {x: 0.3716437, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 79230fc75dcc69d45a45079f2a2fbbe6
+      internalID: -552801723
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ghost_death_6
+      rect:
+        serializedVersion: 2
+        x: 565
+        y: 34
+        width: 51
+        height: 60
+      alignment: 9
+      pivot: {x: 0.3235509, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 139e456ef3ecda641b513b242fe6f778
+      internalID: 1559854621
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ghost_death_7
+      rect:
+        serializedVersion: 2
+        x: 660
+        y: 34
+        width: 48
+        height: 60
+      alignment: 9
+      pivot: {x: 0.2389653, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b415a6c7961e5f14ea8b1db3cea6d791
+      internalID: -2022217812
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ghost_death_8
+      rect:
+        serializedVersion: 2
+        x: 758
+        y: 33
+        width: 40
+        height: 60
+      alignment: 9
+      pivot: {x: 0.087, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 252404ed338995749a3789d814fb22d9
+      internalID: 711497789
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ghost_death_10
+      rect:
+        serializedVersion: 2
+        x: 848
+        y: 31
+        width: 40
+        height: 60
+      alignment: 9
+      pivot: {x: 0.08699951, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e6d18f65545a75448ac59c7e67851af4
+      internalID: -1829702683
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ghost_death_18
+      rect:
+        serializedVersion: 2
+        x: 938
+        y: 31
+        width: 38
+        height: 60
+      alignment: 9
+      pivot: {x: 0.09359902, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8b558b98f88f2024b8c604ff886b31a2
+      internalID: -1062043416
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ghost_death_20
+      rect:
+        serializedVersion: 2
+        x: 1028
+        y: 31
+        width: 38
+        height: 60
+      alignment: 9
+      pivot: {x: 0.09283768, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 604c7b82ae6292e49b9b9f359dcf97ac
+      internalID: 477806416
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ghost_death_21
+      rect:
+        serializedVersion: 2
+        x: 1118
+        y: 31
+        width: 38
+        height: 60
+      alignment: 9
+      pivot: {x: 0.09283768, y: 0.5417707}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 27bf2e8e16067fe4aa195d88a1f27d7d
+      internalID: -1856034725
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ghost_death_22
+      rect:
+        serializedVersion: 2
+        x: 1208
+        y: 7
+        width: 38
+        height: 60
+      alignment: 9
+      pivot: {x: 0.09283768, y: 0.5278471}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c4c88a3b643bc8146b7052b637d5798a
+      internalID: 1895408487
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ghost_death_23
+      rect:
+        serializedVersion: 2
+        x: 1299
+        y: 0
+        width: 38
+        height: 60
+      alignment: 9
+      pivot: {x: 0.09283768, y: 0.4999999}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0fa9162d6c9c6f9458b0470d29520896
+      internalID: -1641549395
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ghost_death_24
+      rect:
+        serializedVersion: 2
+        x: 1391
+        y: 0
+        width: 38
+        height: 60
+      alignment: 9
+      pivot: {x: 0.09283768, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2b1dc3195a0c10744af040b0aebe33e7
+      internalID: -621121423
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ghost_death_25
+      rect:
+        serializedVersion: 2
+        x: 1484
+        y: 0
+        width: 38
+        height: 60
+      alignment: 9
+      pivot: {x: 0.09283768, y: 0.4999999}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 53a1417bc88f76e4885003aaae5d3615
+      internalID: 1027371319
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ghost_death_26
+      rect:
+        serializedVersion: 2
+        x: 1578
+        y: 0
+        width: 39
+        height: 60
+      alignment: 9
+      pivot: {x: 0.09283768, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 51ffa03a360a1af41b0e8934aa378648
+      internalID: -749180779
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ghost_death_27
+      rect:
+        serializedVersion: 2
+        x: 1672
+        y: 0
+        width: 38
+        height: 60
+      alignment: 9
+      pivot: {x: 0.09283768, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1c464b0fa680df94fbdcf425c16e3c59
+      internalID: 501422056
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ghost_death_28
+      rect:
+        serializedVersion: 2
+        x: 1762
+        y: 0
+        width: 38
+        height: 60
+      alignment: 9
+      pivot: {x: 0.09283768, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 793d5cf9647fd9745b06d3dfd9ec6d0c
+      internalID: -1385787375
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ghost_death_29
+      rect:
+        serializedVersion: 2
+        x: 1852
+        y: 0
+        width: 38
+        height: 91
+      alignment: 9
+      pivot: {x: 0.09283768, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 72c70822c9c72894c95dce834786f006
+      internalID: -719749745
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    physicsShape: []
+    bones: []
+    spriteID: 5e97eb03825dee720800000000000000
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    nameFileIdTable:
+      ghost_death_0: 1564518166
+      ghost_death_1: -915423828
+      ghost_death_10: -1829702683
+      ghost_death_11: 1243174811
+      ghost_death_12: 691131502
+      ghost_death_13: 742502519
+      ghost_death_14: -839628266
+      ghost_death_15: 1407920513
+      ghost_death_16: -888671353
+      ghost_death_17: -1795323644
+      ghost_death_18: -1062043416
+      ghost_death_19: 963972853
+      ghost_death_2: 1920148761
+      ghost_death_20: 477806416
+      ghost_death_21: -1856034725
+      ghost_death_22: 1895408487
+      ghost_death_23: -1641549395
+      ghost_death_24: -621121423
+      ghost_death_25: 1027371319
+      ghost_death_26: -749180779
+      ghost_death_27: 501422056
+      ghost_death_28: -1385787375
+      ghost_death_29: -719749745
+      ghost_death_3: 1623647954
+      ghost_death_4: -830436846
+      ghost_death_5: -552801723
+      ghost_death_6: 1559854621
+      ghost_death_7: -2022217812
+      ghost_death_8: 711497789
+      ghost_death_9: -1770297414
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

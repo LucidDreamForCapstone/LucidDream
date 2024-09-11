@@ -1,0 +1,17 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 04dded18ceb7a7b44a6b2f05ea0c27dc, type: 3}
+  m_Name: GungeonPostProcess Stage2
+  m_EditorClassIdentifier: 
+  Enemies:
+  - {fileID: 8826311704905396590, guid: 752e57880b5880f428f602120f0b96a7, type: 3}
+  - {fileID: 7180420007774047862, guid: 6b5bf13520a68c5489cb3f9c51eb3767, type: 3}

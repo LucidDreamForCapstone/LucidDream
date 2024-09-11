@@ -1,0 +1,82 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!78 &1
+TagManager:
+  serializedVersion: 2
+  tags:
+  - Bullet
+  - Enemy
+  - PooledItem
+  - Interactable
+  - Item
+  - Wall
+  layers:
+  - Default
+  - TransparentFX
+  - Ignore Raycast
+  - 
+  - Water
+  - UI
+  - Enemy
+  - Item
+  - Player
+  - Wall
+  - EnemyBody
+  - DeadEnemy
+  - CollidableEnemy
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  m_SortingLayers:
+  - name: Default
+    uniqueID: 0
+    locked: 0
+  - name: Ground
+    uniqueID: 3453186717
+    locked: 0
+  - name: Background
+    uniqueID: 2162006193
+    locked: 0
+  - name: Item
+    uniqueID: 1133919873
+    locked: 0
+  - name: EnemyGround
+    uniqueID: 1700648299
+    locked: 0
+  - name: EnemySky
+    uniqueID: 1995931233
+    locked: 0
+  - name: Object
+    uniqueID: 3711630167
+    locked: 0
+  - name: Player
+    uniqueID: 3582341989
+    locked: 0
+  - name: Boss
+    uniqueID: 1757058003
+    locked: 0
+  - name: Bullet
+    uniqueID: 2793385973
+    locked: 0
+  - name: Effect
+    uniqueID: 2307361013
+    locked: 0
+  - name: UI
+    uniqueID: 422267223
+    locked: 0
