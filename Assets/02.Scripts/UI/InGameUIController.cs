@@ -1,3 +1,5 @@
+using Cysharp.Threading.Tasks;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
@@ -240,13 +242,15 @@ public class InGameUIController : MonoBehaviour {
     }
 
 
-    private void OnClick_Card(Card card) {
+    private async void OnClick_Card(Card card) {
+        Debug.Log("카드 적용한다");
         CardManage.Instance.ApplyCard(card);
 
         if (1 <= _levelUpCount) {
             ShowCardSelect(CardManage.Instance.DrawCards(), _levelUpCount);
         }
         else {
+            //await WaitTime(1f);
             Time.timeScale = 1f;
             _cardUIController.SetHide();
         }
@@ -313,5 +317,10 @@ public class InGameUIController : MonoBehaviour {
 
         fadeCoroutine = null; // 코루틴 종료 후 null로 설정
     }
+
+    private async UniTask WaitTime(float waitTime) {
+        await UniTask.Delay(TimeSpan.FromSeconds(waitTime), ignoreTimeScale: true);
+    }
+
     #endregion // private funcs
 }

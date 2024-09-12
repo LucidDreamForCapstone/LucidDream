@@ -30,7 +30,6 @@ public class MonsterGhost : MonsterBase {
 
     new private void OnEnable() {
         base.OnEnable();
-        Spawn().Forget();
         _isAttackReady = true;
         _isAttacking = false;
         _attackDelay = 0.5f;
@@ -48,7 +47,7 @@ public class MonsterGhost : MonsterBase {
     #region protected funcs
 
     protected override void AttackMove() {
-        if (!_isAttacking && !_isDead && !_isStun && _isSpawnComplete) {
+        if (!_isAttacking && !_isDead && !_isStun) {
             double dist = CalculateManhattanDist(transform.position, _playerScript.transform.position);
 
             if (dist < _attackRange) {//플레이어를 향해 공격

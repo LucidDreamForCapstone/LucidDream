@@ -13,6 +13,7 @@ public class CardSelectUIController : UIBase {
     #region private variables
 
     private System.Action<Card> _cardCallback;
+    private CardUI _card;
 
     #endregion // private variables
 
@@ -39,9 +40,9 @@ public class CardSelectUIController : UIBase {
             if (null != _cards[i]) {
                 _cards[i].Initialize(_cardCallback);
                 _cards[i].SetShow(cards[i]);
+
             }
         }
-
         base.SetShow();
     }
 

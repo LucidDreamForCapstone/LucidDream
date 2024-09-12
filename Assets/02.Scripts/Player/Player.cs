@@ -1,4 +1,4 @@
-ï»¿using Cysharp.Threading.Tasks;
+using Cysharp.Threading.Tasks;
 using DG.Tweening;
 using Edgar.Unity.Examples.Gungeon;
 using System;
@@ -43,7 +43,7 @@ public class Player : MonoBehaviour {
     [SerializeField] protected AudioClip dyingSound1;
     [SerializeField] protected AudioClip dyingSound2;
     [SerializeField] private AudioClip dyingEffectSound;
-    [SerializeField] private DeathUIController deathUIController; // DeathUIController ì°¸ì¡°
+    [SerializeField] private DeathUIController deathUIController; // DeathUIController ÂüÁ¶
     #endregion // serialized field 
 
 
@@ -52,9 +52,9 @@ public class Player : MonoBehaviour {
 
     #region private variable
     private bool _isDead;
-    private bool _isInvincible;//í”¼ê²© í›„ ë¬´ì  ìƒíƒœ
-    private bool _isRollInvincible;//êµ¬ë¥´ê¸° ì¤‘ ë¬´ì  ìƒíƒœ
-    private bool _isCustomInvincible;//íŠ¹ìˆ˜ í•¨ìˆ˜ì— ì˜í•œ ë¬´ì  ìƒíƒœ
+    private bool _isInvincible;//ÇÇ°İ ÈÄ ¹«Àû »óÅÂ
+    private bool _isRollInvincible;//±¸¸£±â Áß ¹«Àû »óÅÂ
+    private bool _isCustomInvincible;//Æ¯¼ö ÇÔ¼ö¿¡ ÀÇÇÑ ¹«Àû »óÅÂ
     private bool _isRollReady;
     private bool _isAttacking;
     private bool _beforeFlipX;
@@ -174,7 +174,7 @@ public class Player : MonoBehaviour {
         monster.Damaged((int)(dmg * multiplier), isCrit);
     }
 
-    // ì”¬ì„ 04.Dungeonìœ¼ë¡œ ë‹¤ì‹œ ë¡œë“œí•˜ëŠ” í•¨ìˆ˜
+    // ¾ÀÀ» 04.DungeonÀ¸·Î ´Ù½Ã ·ÎµåÇÏ´Â ÇÔ¼ö
     public void ReturnToDungeon() {
         if (GungeonGameManager.Instance != null) {
             GungeonGameManager.Instance.SetIsGenerating(true);
@@ -224,18 +224,18 @@ public class Player : MonoBehaviour {
         int firstLevel = level;
         int levelExp = PlayerDataManager.Instance.Status.GetMaxExp();
         if (levelExp == -1) {
-            Debug.Log("ì˜ëª»ëœ í”Œë ˆì´ì–´ ë ˆë²¨ì„");
+            Debug.Log("Àß¸øµÈ ÇÃ·¹ÀÌ¾î ·¹º§ÀÓ");
             return;
         }
 
         PlayerDataManager.Instance.SetExp(currentExp + gainedExp);
 
         if (level == PlayerDataManager.Instance.Status._maxLevel) {
-            Debug.Log("ìµœëŒ€ ë ˆë²¨ì´ë¯€ë¡œ ê²½í—˜ì¹˜ë¥¼ íšë“í•  ìˆ˜ ì—†ìŠµë‹ˆë‹¤.");
+            Debug.Log("ÃÖ´ë ·¹º§ÀÌ¹Ç·Î °æÇèÄ¡¸¦ È¹µæÇÒ ¼ö ¾ø½À´Ï´Ù.");
         }
         else {
             while (PlayerDataManager.Instance.Status._exp >= levelExp) {
-                Debug.Log(level + "->" + (level + 1) + "ë¡œ ë ˆë²¨ì—…");
+                Debug.Log(level + "->" + (level + 1) + "·Î ·¹º§¾÷");
                 PlayerDataManager.Instance.SetLevel(++level);
                 PlayerDataManager.Instance.SetExp(PlayerDataManager.Instance.Status._exp - levelExp);
                 PlayerDataManager.Instance.SetMaxFeverGauge();
@@ -367,18 +367,18 @@ public class Player : MonoBehaviour {
 
     private async UniTaskVoid Roll() {
         if (Input.GetKeyDown(KeyCode.Space) && _isRollReady && !_isStun && !_isPause && !_isDead && !CheckWall()) {
-            //Debug.Log("êµ¬ë¥¸ë‹¤");
+            //Debug.Log("±¸¸¥´Ù");
             PlaySound(avoidSound);
             _isRollInvincible = true;
             _isRollReady = false;
             Vector3 startPos = transform.position;
             Vector3 moveVec = MoveDir * _rollDist;
             await RollMove(_rigid, startPos + moveVec, _rollLastTime);
-            //Debug.Log("êµ¬ë¥´ê¸° ì™„");
+            //Debug.Log("±¸¸£±â ¿Ï");
             _isRollInvincible = false;
             await UniTask.Delay(TimeSpan.FromSeconds(_rollCoolTime));
             _isRollReady = true;
-            //Debug.Log("êµ¬ë¥´ê¸° ì¿¨ ëŒì•˜ìŒ");
+            //Debug.Log("±¸¸£±â Äğ µ¹¾ÒÀ½");
         }
     }
 
@@ -417,26 +417,26 @@ public class Player : MonoBehaviour {
     }
 
     private async UniTaskVoid Die() {
-        // Guard ì•„ì´í…œì´ ì¸ë²¤í† ë¦¬ì— ìˆëŠ”ì§€ í™•ì¸
+        // Guard ¾ÆÀÌÅÛÀÌ ÀÎº¥Åä¸®¿¡ ÀÖ´ÂÁö È®ÀÎ
         if (InventoryManager.Instance.HasItem(ItemType.Guard)) {
-            // ì²´ë ¥ 30% íšŒë³µ
+            // Ã¼·Â 30% È¸º¹
             PlaySound(GuardSound);
             PlayerDataManager.Instance.HealByMaxPercent(30);
-            // Guard ì•„ì´í…œ ë°œë™ ì´í™íŠ¸ ìƒì„±
+            // Guard ¾ÆÀÌÅÛ ¹ßµ¿ ÀÌÆåÆ® »ı¼º
             if (guardEffectPrefab != null) {
                 Vector3 effect0Position = this.transform.position + new Vector3(0, 0.7f, 0);
-                // ì´í™íŠ¸ ì˜¤ë¸Œì íŠ¸ ìƒì„±
+                // ÀÌÆåÆ® ¿ÀºêÁ§Æ® »ı¼º
                 GameObject effectInstance = Instantiate(guardEffectPrefab, effect0Position, Quaternion.identity);
 
-                // ì´í™íŠ¸ë¥¼ í”Œë ˆì´ì–´ì˜ ìì‹ ì˜¤ë¸Œì íŠ¸ë¡œ ì„¤ì •
+                // ÀÌÆåÆ®¸¦ ÇÃ·¹ÀÌ¾îÀÇ ÀÚ½Ä ¿ÀºêÁ§Æ®·Î ¼³Á¤
                 effectInstance.transform.SetParent(this.transform);
             }
             _controller.offGuard();
-            // Guard ì•„ì´í…œ ì¸ë²¤í† ë¦¬ì—ì„œ ì œê±°
+            // Guard ¾ÆÀÌÅÛ ÀÎº¥Åä¸®¿¡¼­ Á¦°Å
             InventoryManager.Instance.RemoveItem(ItemType.Guard);
         }
         else {
-            Debug.Log("í”Œë ˆì´ì–´ ì‚¬ë§");
+            Debug.Log("ÇÃ·¹ÀÌ¾î »ç¸Á");
             _isDead = true;
             AudioClip selectedDyingClip = Random.Range(0, 2) == 0 ? dyingSound1 : dyingSound2;
             PlaySoundDelay(selectedDyingClip, 1.4f).Forget();
@@ -449,20 +449,20 @@ public class Player : MonoBehaviour {
             _animator.SetTrigger("Die");
             _armAnimator.SetTrigger("Die");
             await UniTask.Delay(TimeSpan.FromSeconds(2.5f));
-            deathUIController.ShowDeathUI().Forget();
+            deathUIController.ShowDeathUI();
         }
     }
 
     private async UniTaskVoid Invincibility() {
         _isInvincible = true;
-        //Debug.Log("ë¬´ì  ìƒíƒœ ëŒì…");
+        //Debug.Log("¹«Àû »óÅÂ µ¹ÀÔ");
         _spriteRenderer.DOColor(_invincibleColor, 0.1f).ToUniTask().Forget();
         _leftArmRenderer.color = _invincibleColor;
         _rightArmRenderer.color = _invincibleColor;
         PlayerWeaponManager.Instance.GetEquippedWeapon().SetWeaponColor(_invincibleColor);
         await UniTask.Delay(TimeSpan.FromSeconds(_invincibleLastTime));
         _isInvincible = false;
-        //Debug.Log("ë¬´ì  ìƒíƒœ í•´ì œ");
+        //Debug.Log("¹«Àû »óÅÂ ÇØÁ¦");
         PlayerWeaponManager.Instance.GetEquippedWeapon().SetWeaponColor(Color.white);
         _rightArmRenderer.color = Color.white;
         _leftArmRenderer.color = Color.white;

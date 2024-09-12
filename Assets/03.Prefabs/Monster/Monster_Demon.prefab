@@ -158,7 +158,7 @@ MonoBehaviour:
   _damagedColor:
     serializedVersion: 2
     rgba: 4283322111
-  _exp: 3
+  _exp: 100
   _feverAmount: 40
   _fireballObj: {fileID: 5669199885704005852, guid: f1986fb65ce9a034299b160d450281f8, type: 3}
   _fireSpeed: 5

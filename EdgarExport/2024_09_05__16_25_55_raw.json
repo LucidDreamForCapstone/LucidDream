@@ -1,0 +1,1003 @@
+{
+  "roomDescriptionsList": [
+    {
+      "Key": {
+        "Id": 0,
+        "Name": "Entrance"
+      },
+      "Value": {
+        "IsCorridor": false,
+        "RoomTemplates": [
+          {
+            "Name": "Entrance",
+            "Outline": {
+              "points": [
+                {
+                  "X": 1,
+                  "Y": 5
+                },
+                {
+                  "X": 12,
+                  "Y": 5
+                },
+                {
+                  "X": 12,
+                  "Y": -6
+                },
+                {
+                  "X": 1,
+                  "Y": -6
+                }
+              ]
+            },
+            "Doors": {
+              "$type": "Edgar.GraphBasedGenerator.Grid2D.ManualDoorModeGrid2D, EdgarSingleFile",
+              "Doors": null,
+              "DoorLines": [
+                {
+                  "Line": {
+                    "From": {
+                      "X": 1,
+                      "Y": -4
+                    },
+                    "To": {
+                      "X": 1,
+                      "Y": 2
+                    },
+                    "degeneratedDirection": 1,
+                    "Length": 6
+                  },
+                  "Length": 1,
+                  "Type": 0
+                },
+                {
+                  "Line": {
+                    "From": {
+                      "X": 3,
+                      "Y": 5
+                    },
+                    "To": {
+                      "X": 9,
+                      "Y": 5
+                    },
+                    "degeneratedDirection": 2,
+                    "Length": 6
+                  },
+                  "Length": 1,
+                  "Type": 0
+                },
+                {
+                  "Line": {
+                    "From": {
+                      "X": 12,
+                      "Y": -4
+                    },
+                    "To": {
+                      "X": 12,
+                      "Y": 2
+                    },
+                    "degeneratedDirection": 1,
+                    "Length": 6
+                  },
+                  "Length": 1,
+                  "Type": 0
+                },
+                {
+                  "Line": {
+                    "From": {
+                      "X": 3,
+                      "Y": -6
+                    },
+                    "To": {
+                      "X": 9,
+                      "Y": -6
+                    },
+                    "degeneratedDirection": 2,
+                    "Length": 6
+                  },
+                  "Length": 1,
+                  "Type": 0
+                }
+              ]
+            },
+            "RepeatMode": 0,
+            "AllowedTransformations": [
+              0
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "Key": {
+        "Id": 1,
+        "Name": "Exit"
+      },
+      "Value": {
+        "IsCorridor": false,
+        "RoomTemplates": [
+          {
+            "Name": "Exit",
+            "Outline": {
+              "points": [
+                {
+                  "X": -3,
+                  "Y": 4
+                },
+                {
+                  "X": 4,
+                  "Y": 4
+                },
+                {
+                  "X": 4,
+                  "Y": -1
+                },
+                {
+                  "X": -3,
+                  "Y": -1
+                }
+              ]
+            },
+            "Doors": {
+              "$type": "Edgar.GraphBasedGenerator.Grid2D.ManualDoorModeGrid2D, EdgarSingleFile",
+              "Doors": [
+                {
+                  "From": {
+                    "X": 4,
+                    "Y": 2
+                  },
+                  "To": {
+                    "X": 4,
+                    "Y": 1
+                  },
+                  "Type": 0
+                },
+                {
+                  "From": {
+                    "X": -3,
+                    "Y": 2
+                  },
+                  "To": {
+                    "X": -3,
+                    "Y": 1
+                  },
+                  "Type": 0
+                },
+                {
+                  "From": {
+                    "X": 0,
+                    "Y": 4
+                  },
+                  "To": {
+                    "X": 1,
+                    "Y": 4
+                  },
+                  "Type": 0
+                },
+                {
+                  "From": {
+                    "X": 0,
+                    "Y": -1
+                  },
+                  "To": {
+                    "X": 1,
+                    "Y": -1
+                  },
+                  "Type": 0
+                }
+              ],
+              "DoorLines": null
+            },
+            "RepeatMode": 0,
+            "AllowedTransformations": [
+              0
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "Key": {
+        "Id": 2,
+        "Name": "Boss"
+      },
+      "Value": {
+        "IsCorridor": false,
+        "RoomTemplates": [
+          {
+            "Name": "Boss",
+            "Outline": {
+              "points": [
+                {
+                  "X": -11,
+                  "Y": 20
+                },
+                {
+                  "X": 40,
+                  "Y": 20
+                },
+                {
+                  "X": 40,
+                  "Y": -31
+                },
+                {
+                  "X": -11,
+                  "Y": -31
+                }
+              ]
+            },
+            "Doors": {
+              "$type": "Edgar.GraphBasedGenerator.Grid2D.ManualDoorModeGrid2D, EdgarSingleFile",
+              "Doors": null,
+              "DoorLines": [
+                {
+                  "Line": {
+                    "From": {
+                      "X": -11,
+                      "Y": -28
+                    },
+                    "To": {
+                      "X": -11,
+                      "Y": 16
+                    },
+                    "degeneratedDirection": 1,
+                    "Length": 44
+                  },
+                  "Length": 1,
+                  "Type": 0
+                },
+                {
+                  "Line": {
+                    "From": {
+                      "X": -8,
+                      "Y": 20
+                    },
+                    "To": {
+                      "X": 36,
+                      "Y": 20
+                    },
+                    "degeneratedDirection": 2,
+                    "Length": 44
+                  },
+                  "Length": 1,
+                  "Type": 0
+                },
+                {
+                  "Line": {
+                    "From": {
+                      "X": 40,
+                      "Y": -28
+                    },
+                    "To": {
+                      "X": 40,
+                      "Y": 16
+                    },
+                    "degeneratedDirection": 1,
+                    "Length": 44
+                  },
+                  "Length": 1,
+                  "Type": 0
+                },
+                {
+                  "Line": {
+                    "From": {
+                      "X": -8,
+                      "Y": -31
+                    },
+                    "To": {
+                      "X": 36,
+                      "Y": -31
+                    },
+                    "degeneratedDirection": 2,
+                    "Length": 44
+                  },
+                  "Length": 1,
+                  "Type": 0
+                }
+              ]
+            },
+            "RepeatMode": 0,
+            "AllowedTransformations": [
+              0
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "Key": {
+        "Id": 3,
+        "Name": "Shop"
+      },
+      "Value": {
+        "IsCorridor": false,
+        "RoomTemplates": [
+          {
+            "Name": "Shop",
+            "Outline": {
+              "points": [
+                {
+                  "X": -8,
+                  "Y": 7
+                },
+                {
+                  "X": -7,
+                  "Y": 7
+                },
+                {
+                  "X": -7,
+                  "Y": 8
+                },
+                {
+                  "X": 3,
+                  "Y": 8
+                },
+                {
+                  "X": 3,
+                  "Y": 7
+                },
+                {
+                  "X": 4,
+                  "Y": 7
+                },
+                {
+                  "X": 4,
+                  "Y": -3
+                },
+                {
+                  "X": 3,
+                  "Y": -3
+                },
+                {
+                  "X": 3,
+                  "Y": -4
+                },
+                {
+                  "X": -7,
+                  "Y": -4
+                },
+                {
+                  "X": -7,
+                  "Y": -3
+                },
+                {
+                  "X": -8,
+                  "Y": -3
+                }
+              ]
+            },
+            "Doors": {
+              "$type": "Edgar.GraphBasedGenerator.Grid2D.ManualDoorModeGrid2D, EdgarSingleFile",
+              "Doors": null,
+              "DoorLines": [
+                {
+                  "Line": {
+                    "From": {
+                      "X": -8,
+                      "Y": -1
+                    },
+                    "To": {
+                      "X": -8,
+                      "Y": 4
+                    },
+                    "degeneratedDirection": 1,
+                    "Length": 5
+                  },
+                  "Length": 1,
+                  "Type": 0
+                },
+                {
+                  "Line": {
+                    "From": {
+                      "X": -5,
+                      "Y": 8
+                    },
+                    "To": {
+                      "X": 0,
+                      "Y": 8
+                    },
+                    "degeneratedDirection": 2,
+                    "Length": 5
+                  },
+                  "Length": 1,
+                  "Type": 0
+                },
+                {
+                  "Line": {
+                    "From": {
+                      "X": 4,
+                      "Y": -1
+                    },
+                    "To": {
+                      "X": 4,
+                      "Y": 4
+                    },
+                    "degeneratedDirection": 1,
+                    "Length": 5
+                  },
+                  "Length": 1,
+                  "Type": 0
+                },
+                {
+                  "Line": {
+                    "From": {
+                      "X": -5,
+                      "Y": -4
+                    },
+                    "To": {
+                      "X": 0,
+                      "Y": -4
+                    },
+                    "degeneratedDirection": 2,
+                    "Length": 5
+                  },
+                  "Length": 1,
+                  "Type": 0
+                }
+              ]
+            },
+            "RepeatMode": 0,
+            "AllowedTransformations": [
+              0
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "Key": {
+        "Id": 4,
+        "Name": "Corridor"
+      },
+      "Value": {
+        "$id": "107",
+        "IsCorridor": true,
+        "RoomTemplates": [
+          {
+            "Name": "Hor 5",
+            "Outline": {
+              "points": [
+                {
+                  "X": -7,
+                  "Y": 1
+                },
+                {
+                  "X": 3,
+                  "Y": 1
+                },
+                {
+                  "X": 3,
+                  "Y": -2
+                },
+                {
+                  "X": -7,
+                  "Y": -2
+                }
+              ]
+            },
+            "Doors": {
+              "$type": "Edgar.GraphBasedGenerator.Grid2D.ManualDoorModeGrid2D, EdgarSingleFile",
+              "Doors": [
+                {
+                  "From": {
+                    "X": -7,
+                    "Y": 0
+                  },
+                  "To": {
+                    "X": -7,
+                    "Y": -1
+                  },
+                  "Type": 0
+                },
+                {
+                  "From": {
+                    "X": 3,
+                    "Y": 0
+                  },
+                  "To": {
+                    "X": 3,
+                    "Y": -1
+                  },
+                  "Type": 0
+                }
+              ],
+              "DoorLines": null
+            },
+            "RepeatMode": 0,
+            "AllowedTransformations": [
+              0
+            ]
+          },
+          {
+            "Name": "Hor 7",
+            "Outline": {
+              "points": [
+                {
+                  "X": -4,
+                  "Y": 1
+                },
+                {
+                  "X": 2,
+                  "Y": 1
+                },
+                {
+                  "X": 2,
+                  "Y": -2
+                },
+                {
+                  "X": -4,
+                  "Y": -2
+                }
+              ]
+            },
+            "Doors": {
+              "$type": "Edgar.GraphBasedGenerator.Grid2D.ManualDoorModeGrid2D, EdgarSingleFile",
+              "Doors": [
+                {
+                  "From": {
+                    "X": 2,
+                    "Y": 0
+                  },
+                  "To": {
+                    "X": 2,
+                    "Y": -1
+                  },
+                  "Type": 0
+                },
+                {
+                  "From": {
+                    "X": -4,
+                    "Y": 0
+                  },
+                  "To": {
+                    "X": -4,
+                    "Y": -1
+                  },
+                  "Type": 0
+                }
+              ],
+              "DoorLines": null
+            },
+            "RepeatMode": 0,
+            "AllowedTransformations": [
+              0
+            ]
+          },
+          {
+            "Name": "Hor 9",
+            "Outline": {
+              "points": [
+                {
+                  "X": -4,
+                  "Y": 1
+                },
+                {
+                  "X": 4,
+                  "Y": 1
+                },
+                {
+                  "X": 4,
+                  "Y": -2
+                },
+                {
+                  "X": -4,
+                  "Y": -2
+                }
+              ]
+            },
+            "Doors": {
+              "$type": "Edgar.GraphBasedGenerator.Grid2D.ManualDoorModeGrid2D, EdgarSingleFile",
+              "Doors": [
+                {
+                  "From": {
+                    "X": 4,
+                    "Y": 0
+                  },
+                  "To": {
+                    "X": 4,
+                    "Y": -1
+                  },
+                  "Type": 0
+                },
+                {
+                  "From": {
+                    "X": -4,
+                    "Y": 0
+                  },
+                  "To": {
+                    "X": -4,
+                    "Y": -1
+                  },
+                  "Type": 0
+                }
+              ],
+              "DoorLines": null
+            },
+            "RepeatMode": 0,
+            "AllowedTransformations": [
+              0
+            ]
+          },
+          {
+            "Name": "Ver 5",
+            "Outline": {
+              "points": [
+                {
+                  "X": -3,
+                  "Y": 2
+                },
+                {
+                  "X": 0,
+                  "Y": 2
+                },
+                {
+                  "X": 0,
+                  "Y": -2
+                },
+                {
+                  "X": -3,
+                  "Y": -2
+                }
+              ]
+            },
+            "Doors": {
+              "$type": "Edgar.GraphBasedGenerator.Grid2D.ManualDoorModeGrid2D, EdgarSingleFile",
+              "Doors": [
+                {
+                  "From": {
+                    "X": -2,
+                    "Y": -2
+                  },
+                  "To": {
+                    "X": -1,
+                    "Y": -2
+                  },
+                  "Type": 0
+                },
+                {
+                  "From": {
+                    "X": -2,
+                    "Y": 2
+                  },
+                  "To": {
+                    "X": -1,
+                    "Y": 2
+                  },
+                  "Type": 0
+                }
+              ],
+              "DoorLines": null
+            },
+            "RepeatMode": 0,
+            "AllowedTransformations": [
+              0
+            ]
+          },
+          {
+            "Name": "Ver 7",
+            "Outline": {
+              "points": [
+                {
+                  "X": -3,
+                  "Y": 4
+                },
+                {
+                  "X": 0,
+                  "Y": 4
+                },
+                {
+                  "X": 0,
+                  "Y": -2
+                },
+                {
+                  "X": -3,
+                  "Y": -2
+                }
+              ]
+            },
+            "Doors": {
+              "$type": "Edgar.GraphBasedGenerator.Grid2D.ManualDoorModeGrid2D, EdgarSingleFile",
+              "Doors": [
+                {
+                  "From": {
+                    "X": -2,
+                    "Y": -2
+                  },
+                  "To": {
+                    "X": -1,
+                    "Y": -2
+                  },
+                  "Type": 0
+                },
+                {
+                  "From": {
+                    "X": -2,
+                    "Y": 4
+                  },
+                  "To": {
+                    "X": -1,
+                    "Y": 4
+                  },
+                  "Type": 0
+                }
+              ],
+              "DoorLines": null
+            },
+            "RepeatMode": 0,
+            "AllowedTransformations": [
+              0
+            ]
+          },
+          {
+            "Name": "Ver 9",
+            "Outline": {
+              "points": [
+                {
+                  "X": -3,
+                  "Y": 6
+                },
+                {
+                  "X": 0,
+                  "Y": 6
+                },
+                {
+                  "X": 0,
+                  "Y": -2
+                },
+                {
+                  "X": -3,
+                  "Y": -2
+                }
+              ]
+            },
+            "Doors": {
+              "$type": "Edgar.GraphBasedGenerator.Grid2D.ManualDoorModeGrid2D, EdgarSingleFile",
+              "Doors": [
+                {
+                  "From": {
+                    "X": -2,
+                    "Y": -2
+                  },
+                  "To": {
+                    "X": -1,
+                    "Y": -2
+                  },
+                  "Type": 0
+                },
+                {
+                  "From": {
+                    "X": -2,
+                    "Y": 6
+                  },
+                  "To": {
+                    "X": -1,
+                    "Y": 6
+                  },
+                  "Type": 0
+                }
+              ],
+              "DoorLines": null
+            },
+            "RepeatMode": 0,
+            "AllowedTransformations": [
+              0
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "Key": {
+        "Id": 5,
+        "Name": "Corridor"
+      },
+      "Value": {
+        "$ref": "107"
+      }
+    },
+    {
+      "Key": {
+        "Id": 6,
+        "Name": "Corridor"
+      },
+      "Value": {
+        "$ref": "107"
+      }
+    },
+    {
+      "Key": {
+        "Id": 7,
+        "Name": "Secret"
+      },
+      "Value": {
+        "IsCorridor": false,
+        "RoomTemplates": [
+          {
+            "Name": "Secret",
+            "Outline": {
+              "points": [
+                {
+                  "X": -6,
+                  "Y": 2
+                },
+                {
+                  "X": -4,
+                  "Y": 2
+                },
+                {
+                  "X": -4,
+                  "Y": 6
+                },
+                {
+                  "X": 1,
+                  "Y": 6
+                },
+                {
+                  "X": 1,
+                  "Y": 2
+                },
+                {
+                  "X": 3,
+                  "Y": 2
+                },
+                {
+                  "X": 3,
+                  "Y": -10
+                },
+                {
+                  "X": 1,
+                  "Y": -10
+                },
+                {
+                  "X": 1,
+                  "Y": -14
+                },
+                {
+                  "X": -4,
+                  "Y": -14
+                },
+                {
+                  "X": -4,
+                  "Y": -10
+                },
+                {
+                  "X": -6,
+                  "Y": -10
+                }
+              ]
+            },
+            "Doors": {
+              "$type": "Edgar.GraphBasedGenerator.Grid2D.ManualDoorModeGrid2D, EdgarSingleFile",
+              "Doors": [
+                {
+                  "From": {
+                    "X": -2,
+                    "Y": -14
+                  },
+                  "To": {
+                    "X": -1,
+                    "Y": -14
+                  },
+                  "Type": 0
+                },
+                {
+                  "From": {
+                    "X": -2,
+                    "Y": 6
+                  },
+                  "To": {
+                    "X": -1,
+                    "Y": 6
+                  },
+                  "Type": 0
+                }
+              ],
+              "DoorLines": null
+            },
+            "RepeatMode": 0,
+            "AllowedTransformations": [
+              0
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "Key": {
+        "Id": 8,
+        "Name": "Corridor"
+      },
+      "Value": {
+        "$ref": "107"
+      }
+    }
+  ],
+  "passages": [
+    {
+      "Room1": {
+        "Id": 0,
+        "Name": "Entrance"
+      },
+      "Room2": {
+        "Id": 5,
+        "Name": "Corridor"
+      }
+    },
+    {
+      "Room1": {
+        "Id": 1,
+        "Name": "Exit"
+      },
+      "Room2": {
+        "Id": 4,
+        "Name": "Corridor"
+      }
+    },
+    {
+      "Room1": {
+        "Id": 1,
+        "Name": "Exit"
+      },
+      "Room2": {
+        "Id": 8,
+        "Name": "Corridor"
+      }
+    },
+    {
+      "Room1": {
+        "Id": 2,
+        "Name": "Boss"
+      },
+      "Room2": {
+        "Id": 4,
+        "Name": "Corridor"
+      }
+    },
+    {
+      "Room1": {
+        "Id": 2,
+        "Name": "Boss"
+      },
+      "Room2": {
+        "Id": 6,
+        "Name": "Corridor"
+      }
+    },
+    {
+      "Room1": {
+        "Id": 3,
+        "Name": "Shop"
+      },
+      "Room2": {
+        "Id": 5,
+        "Name": "Corridor"
+      }
+    },
+    {
+      "Room1": {
+        "Id": 3,
+        "Name": "Shop"
+      },
+      "Room2": {
+        "Id": 6,
+        "Name": "Corridor"
+      }
+    },
+    {
+      "Room1": {
+        "Id": 7,
+        "Name": "Secret"
+      },
+      "Room2": {
+        "Id": 8,
+        "Name": "Corridor"
+      }
+    }
+  ],
+  "MinimumRoomDistance": 0,
+  "Clusters": null,
+  "Constraints": null,
+  "RoomTemplateRepeatModeDefault": 2,
+  "RoomTemplateRepeatModeOverride": null,
+  "Name": null
+}
