@@ -1,4 +1,5 @@
 using Cysharp.Threading.Tasks;
+using DG.Tweening;
 using Edgar.Unity.Examples.Gungeon;
 using System;
 using UnityEngine;
@@ -45,6 +46,7 @@ public class MonsterDeathBringer : MonsterBase {
     new private void OnEnable() {
         base.OnEnable();
         _spriteRenderer = _model.GetComponent<SpriteRenderer>();
+        Spawn().Forget();
         _animator = _model.GetComponent<Animator>();
         _isNormalAttackReady = true;
         _isSpellAttackReady = true;
@@ -64,7 +66,7 @@ public class MonsterDeathBringer : MonsterBase {
     #region public funcs
     public override void Damaged(int dmg, bool isCrit)//플레이어 공격에 데미지를 입음
     {
-        if (!_isDead) {
+        if (!_isDead && _isSpawnComplete) {
             FloatingDamageManager.Instance.ShowDamage(this.gameObject, dmg, false, isCrit, false);
 
             if (_hp <= dmg) {
@@ -85,7 +87,7 @@ public class MonsterDeathBringer : MonsterBase {
     #region protected funcs
 
     protected override void AttackMove() { //탐색 범위 안에 플레이어가 진입했을 때, 스펠이 돌아있으면 스펠을 사용, 그게 아니라면 근접 범위까지 플레이어에게 접근
-        if (!_isAttacking && !_isStun && !_isDead) {
+        if (!_isAttacking && !_isStun && !_isDead && _isSpawnComplete) {
             double dist = CalculateManhattanDist(transform.position, _playerScript.transform.position);
             float yDiff = transform.position.y - _playerScript.transform.position.y;
 
@@ -159,7 +161,12 @@ public class MonsterDeathBringer : MonsterBase {
         await UniTask.Delay(TimeSpan.FromSeconds(_dieDelay));
         gameObject.SetActive(false);//이후에 오브젝트 풀 쓸거면 변경할 것
     }
-
+    protected override async UniTaskVoid Spawn() {
+        Color originColor = _spriteRenderer.color;
+        _spriteRenderer.color = new Color(originColor.r, originColor.g, originColor.b, 0);
+        await _spriteRenderer.DOFade(1, 1);
+        _isSpawnComplete = true;
+    }
     #endregion //protected funcs
 
 

@@ -10,7 +10,7 @@
     <ProductVersion>10.0.20506</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <RootNamespace></RootNamespace>
-    <ProjectGuid>{D4A49C65-DA9A-24ED-8305-028ED0734987}</ProjectGuid>
+    <ProjectGuid>{5D1EF580-933C-CE30-416B-DD7A92F63421}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <AssemblyName>Edgar.Unity.FogOfWar.URP</AssemblyName>
@@ -929,7 +929,7 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="Edgar.Unity.csproj">
-      <Project>{FA04589C-39F8-3724-17D6-0F85D78DA5A8}</Project>
+      <Project>{97D8BC59-AE07-00BF-6984-2C5F5EC05E4E}</Project>
       <Name>Edgar.Unity</Name>
     </ProjectReference>
   </ItemGroup>

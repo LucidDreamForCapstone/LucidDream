@@ -10,7 +10,7 @@
     <ProductVersion>10.0.20506</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <RootNamespace></RootNamespace>
-    <ProjectGuid>{601742B8-13FB-57B7-7990-24F88F7ED5B5}</ProjectGuid>
+    <ProjectGuid>{66AE8A1F-FE71-EB9E-377B-B050B9B978EA}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <AssemblyName>UniTask.Addressables</AssemblyName>
@@ -969,7 +969,7 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="UniTask.csproj">
-      <Project>{2A862055-8159-7C2C-D85C-B9EC53151D70}</Project>
+      <Project>{DE860022-E730-589D-2EA3-D9B52CAA3E13}</Project>
       <Name>UniTask</Name>
     </ProjectReference>
   </ItemGroup>

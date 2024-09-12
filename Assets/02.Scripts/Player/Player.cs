@@ -449,7 +449,7 @@ public class Player : MonoBehaviour {
             _animator.SetTrigger("Die");
             _armAnimator.SetTrigger("Die");
             await UniTask.Delay(TimeSpan.FromSeconds(2.5f));
-            deathUIController.ShowDeathUI();
+            deathUIController.ShowDeathUI().Forget();
         }
     }
 

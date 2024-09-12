@@ -10,7 +10,7 @@
     <ProductVersion>10.0.20506</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <RootNamespace></RootNamespace>
-    <ProjectGuid>{326697E7-E690-1006-5FE0-1959AE2FC86B}</ProjectGuid>
+    <ProjectGuid>{91E39937-81D6-F21D-2E8E-810928629D8C}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <AssemblyName>Assembly-CSharp</AssemblyName>
@@ -85,9 +85,9 @@
     <Compile Include="Assets\JMO Assets\Cartoon FX (legacy)\Spawn System\CFX_SpawnSystem.cs" />
     <Compile Include="Assets\02.Scripts\Item\Coin.cs" />
     <Compile Include="Assets\02.Scripts\GameManager\GameSceneManager.cs" />
+    <Compile Include="Assets\02.Scripts\Player\PlayerWeaponManager.cs" />
     <Compile Include="Assets\JMO Assets\Cartoon FX (legacy)\Scripts\CFX_LightFlicker.cs" />
     <Compile Include="Assets\02.Scripts\Weapon\WoodenSword.cs" />
-    <Compile Include="Assets\02.Scripts\Player\PlayerWeaponManager.cs" />
     <Compile Include="Assets\02.Scripts\Weapon\AbyssStaff.cs" />
     <Compile Include="Assets\02.Scripts\Item\KeySystem.cs" />
     <Compile Include="Assets\02.Scripts\Etc\SystemManager.cs" />
@@ -1282,43 +1282,43 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="Assembly-CSharp-firstpass.csproj">
-      <Project>{A01EDB37-C462-6D16-A45F-CF1EB814D093}</Project>
+      <Project>{364ED3D9-3A36-8BF1-0941-00CBFCBF80C6}</Project>
       <Name>Assembly-CSharp-firstpass</Name>
     </ProjectReference>
     <ProjectReference Include="UniTask.Addressables.csproj">
-      <Project>{601742B8-13FB-57B7-7990-24F88F7ED5B5}</Project>
+      <Project>{66AE8A1F-FE71-EB9E-377B-B050B9B978EA}</Project>
       <Name>UniTask.Addressables</Name>
     </ProjectReference>
     <ProjectReference Include="Edgar.Unity.Examples.csproj">
-      <Project>{5EEFA2AF-693D-818E-CC99-39E2F05BAF96}</Project>
+      <Project>{5ABECC2A-FFA1-6AD6-3243-3B8206E52ECB}</Project>
       <Name>Edgar.Unity.Examples</Name>
     </ProjectReference>
     <ProjectReference Include="UniTask.csproj">
-      <Project>{2A862055-8159-7C2C-D85C-B9EC53151D70}</Project>
+      <Project>{DE860022-E730-589D-2EA3-D9B52CAA3E13}</Project>
       <Name>UniTask</Name>
     </ProjectReference>
     <ProjectReference Include="UniTask.TextMeshPro.csproj">
-      <Project>{A0228145-8A0A-8A0B-913A-EE8A749AE0A4}</Project>
+      <Project>{CC88EF5D-A142-FA5B-0A32-4ACA59C16D2B}</Project>
       <Name>UniTask.TextMeshPro</Name>
     </ProjectReference>
     <ProjectReference Include="Edgar.Unity.FogOfWar.URP.csproj">
-      <Project>{D4A49C65-DA9A-24ED-8305-028ED0734987}</Project>
+      <Project>{5D1EF580-933C-CE30-416B-DD7A92F63421}</Project>
       <Name>Edgar.Unity.FogOfWar.URP</Name>
     </ProjectReference>
     <ProjectReference Include="UniTask.Linq.csproj">
-      <Project>{B2984D52-237A-F11B-E2FE-81FB1BC2F570}</Project>
+      <Project>{D4203A56-6D9B-0F2F-F57E-80A4128A0247}</Project>
       <Name>UniTask.Linq</Name>
     </ProjectReference>
     <ProjectReference Include="Edgar.Unity.Editor.csproj">
-      <Project>{9AF09DF1-DD81-30F9-38DE-6E583F29D3C2}</Project>
+      <Project>{A1A25200-2719-5242-AF00-FAF26EFB82AF}</Project>
       <Name>Edgar.Unity.Editor</Name>
     </ProjectReference>
     <ProjectReference Include="Edgar.Unity.csproj">
-      <Project>{FA04589C-39F8-3724-17D6-0F85D78DA5A8}</Project>
+      <Project>{97D8BC59-AE07-00BF-6984-2C5F5EC05E4E}</Project>
       <Name>Edgar.Unity</Name>
     </ProjectReference>
     <ProjectReference Include="UniTask.DOTween.csproj">
-      <Project>{22A6B5DB-3327-379F-B2C1-8A23E05B81BB}</Project>
+      <Project>{44C17562-2AB8-7629-D89B-C7A4AB97AEBC}</Project>
       <Name>UniTask.DOTween</Name>
     </ProjectReference>
   </ItemGroup>
