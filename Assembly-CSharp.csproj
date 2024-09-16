@@ -88,6 +88,7 @@
     <Compile Include="Assets\02.Scripts\Player\PlayerWeaponManager.cs" />
     <Compile Include="Assets\JMO Assets\Cartoon FX (legacy)\Scripts\CFX_LightFlicker.cs" />
     <Compile Include="Assets\02.Scripts\Weapon\WoodenSword.cs" />
+    <Compile Include="Assets\02.Scripts\UI\TextBubbleData.cs" />
     <Compile Include="Assets\02.Scripts\Weapon\AbyssStaff.cs" />
     <Compile Include="Assets\02.Scripts\Item\KeySystem.cs" />
     <Compile Include="Assets\02.Scripts\Etc\SystemManager.cs" />
@@ -96,6 +97,7 @@
     <Compile Include="Assets\02.Scripts\Monster\MonsterBase.cs" />
     <Compile Include="Assets\02.Scripts\UI\CardSelectUIController.cs" />
     <Compile Include="Assets\06.Resources\Effect\StateEffect\Demo.cs" />
+    <Compile Include="Assets\02.Scripts\UI\TextBubble.cs" />
     <Compile Include="Assets\JMO Assets\Cartoon FX (legacy)\Demo\Assets\CFX_Demo.cs" />
     <Compile Include="Assets\02.Scripts\Inventory\InventoryManager.cs" />
     <Compile Include="Assets\02.Scripts\Monster\MonsterTest.cs" />
