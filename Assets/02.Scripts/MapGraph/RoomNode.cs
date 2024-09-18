@@ -27,6 +27,38 @@ public class RoomNode : ScriptableObject {
         return node;
     }
 
+    public void UpdateRoomName() {
+        switch (_roomType) {
+            case RoomType.Undefined:
+                _roomName = "Undefined";
+                break;
+            case RoomType.Entrance:
+                _roomName = "Entrance";
+                break;
+            case RoomType.Normal:
+                _roomName = "Normal";
+                break;
+            case RoomType.Boss:
+                _roomName = "Boss";
+                break;
+            case RoomType.Exit:
+                _roomName = "Exit";
+                break;
+            case RoomType.Hub:
+                _roomName = "Hub";
+                break;
+            case RoomType.Reward:
+                _roomName = "Reward";
+                break;
+            case RoomType.Shop:
+                _roomName = "Shop";
+                break;
+            case RoomType.Secret:
+                _roomName = "Secret";
+                break;
+        }
+    }
+
     public void SetLinkState(RoomLinkType linkType, bool isLinked) {
         _isLinked[(int)linkType] = isLinked;
     }

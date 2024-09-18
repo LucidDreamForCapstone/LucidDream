@@ -7,9 +7,11 @@ public class CustomMapEditor : EditorWindow {
     private Vector2 drag;
     private float zoomScale = 1.0f;
     private List<RoomNode> nodes = new List<RoomNode>();
-
-    private RoomNode selectedNode = null;
+    private List<RoomLink> edges = new List<RoomLink>();
+    private RoomNode selectedNode = null;//update by "on the mouse"
+    private RoomNode targetNode = null; //update by "double click"
     private Vector2 nodeDragOffset;
+    private bool isDrawingLine = false;
 
     private double lastClickTime = 0f;
     private const float doubleClickTime = 0.3f;
@@ -25,7 +27,9 @@ public class CustomMapEditor : EditorWindow {
         DrawGrid(100 * zoomScale, 0.5f, Color.white);
         ProcessEvents(Event.current);
         HandleMouseEvents();
+        HandleKeyboardEvents();
         DrawNodes();
+        DrawLineToMouse(Event.current);
 
         if (GUI.changed) {
             Repaint();
@@ -80,21 +84,24 @@ public class CustomMapEditor : EditorWindow {
         }
     }
 
+    // 마우스와 노드 중심을 잇는 선 그리기
+    private void DrawLineToMouse(Event e) {
+        if (isDrawingLine && selectedNode != null) {
+            Vector2 nodeCenter = selectedNode._position * zoomScale + offset + new Vector2(50 * zoomScale, 25 * zoomScale); // 노드의 중심 좌표 계산
+            Vector2 mousePos = e.mousePosition;
+
+            Handles.BeginGUI();
+            Handles.color = Color.red;
+            Handles.DrawLine(nodeCenter, mousePos);
+            Handles.EndGUI();
+        }
+    }
+
     private void HandleMouseEvents() {
         Event e = Event.current;
 
         if (e.type == EventType.MouseDown && e.button == 0) {
-            Vector2 mousePos = (e.mousePosition - offset) / zoomScale;
-
-            // 노드 선택 및 드래그 준비
-            foreach (var node in nodes) {
-                Rect nodeRect = new Rect(node._position.x * zoomScale + offset.x, node._position.y * zoomScale + offset.y, 100 * zoomScale, 50 * zoomScale);
-                if (nodeRect.Contains(e.mousePosition)) {
-                    selectedNode = node;
-                    nodeDragOffset = (Vector2)node._position * zoomScale + offset - e.mousePosition;
-                    break;
-                }
-            }
+            UpdateNodeUnderMouse(e);
 
             // 더블 클릭 감지
             double currentTime = EditorApplication.timeSinceStartup;
@@ -102,6 +109,7 @@ public class CustomMapEditor : EditorWindow {
                 if (selectedNode != null) {
                     // 노드 정보 인스펙터 창에 표시
                     Selection.activeObject = selectedNode;
+                    targetNode = selectedNode;
                 }
                 else {
                     AddNode(e.mousePosition);
@@ -110,12 +118,24 @@ public class CustomMapEditor : EditorWindow {
             lastClickTime = currentTime;
         }
 
+        if (e.type == EventType.MouseDown && e.button == 0 && e.control && targetNode != null) {
+            isDrawingLine = true;
+            Repaint();
+        }
+
+        // Ctrl키를 뗐을 때 선 그리기를 중단
+        if (!e.control && isDrawingLine) {
+            isDrawingLine = false;
+            Repaint();
+        }
+
         // 우클릭 감지 (컨텍스트 메뉴)
         if (e.type == EventType.MouseDown && e.button == 1) {
-            Vector2 mousePos = (e.mousePosition - offset) / zoomScale;
-            foreach (var node in nodes) {
+            int length = nodes.Count;
+            for (int i = 0; i < length; i++) {
+                RoomNode node = nodes[i];
                 Rect nodeRect = new Rect(node._position.x * zoomScale + offset.x, node._position.y * zoomScale + offset.y, 100 * zoomScale, 50 * zoomScale);
-                if (nodeRect.Contains(e.mousePosition)) {
+                if (nodeRect.Contains(e.mousePosition) && targetNode == node) {
                     selectedNode = node;
                     ShowContextMenu();  // 우클릭 시 컨텍스트 메뉴 표시
                     break;
@@ -124,7 +144,7 @@ public class CustomMapEditor : EditorWindow {
         }
 
         // 노드 드래그 처리
-        if (e.type == EventType.MouseDrag && e.button == 0 && selectedNode != null) {
+        if (e.type == EventType.MouseDrag && e.button == 0 && !e.control && selectedNode != null) {
             selectedNode._position = (e.mousePosition + nodeDragOffset - offset) / zoomScale;
             GUI.changed = true;
         }
@@ -139,6 +159,7 @@ public class CustomMapEditor : EditorWindow {
         Vector2 worldPosition = (position - offset) / zoomScale;
         RoomNode newNode = RoomNode.CreateInstance(nodes.Count, worldPosition);
         nodes.Add(newNode);
+        targetNode = newNode;
         Repaint();
     }
     private void ShowContextMenu() {
@@ -151,14 +172,25 @@ public class CustomMapEditor : EditorWindow {
             menu.AddItem(new GUIContent("LinkLeft"), false, FindLinkTarget, RoomLinkType.Left);
         if (!selectedNode.GetLinkState(RoomLinkType.Right))
             menu.AddItem(new GUIContent("LinkRight"), false, FindLinkTarget, RoomLinkType.Right);
-        menu.AddItem(new GUIContent("Delete"), false, DeleteNode);  // "Delete" 메뉴 항목 추가
         menu.ShowAsContext();
     }
 
+    private void HandleKeyboardEvents() {
+        Event e = Event.current;
+
+        if (e.type == EventType.KeyDown && e.keyCode == KeyCode.Delete) {
+            if (targetNode != null) {
+                DeleteNode();
+                targetNode = null;
+                e.Use();
+            }
+        }
+    }
+
     private void DeleteNode() {
-        if (selectedNode != null) {
-            nodes.Remove(selectedNode);
-            selectedNode = null;
+        if (targetNode != null) {
+            nodes.Remove(targetNode);
+            targetNode = null;
             GUI.changed = true;
         }
     }
@@ -169,16 +201,43 @@ public class CustomMapEditor : EditorWindow {
     }
 
     private void DrawNodes() {
-        foreach (var node in nodes) {
+        int length = nodes.Count;
+        for (int i = 0; i < length; i++) {
+            RoomNode node = nodes[i];
             Vector2 nodePos = node._position * zoomScale + offset;
             float nodeWidth = 100 * zoomScale;
             float nodeHeight = 50 * zoomScale;
+
+            // 선택된 노드의 색상 변경
+            if (node == targetNode) {
+                GUI.color = Color.green;
+            }
+            else {
+                GUI.color = Color.white;
+            }
+
+
             GUIStyle style = new GUIStyle(GUI.skin.button) {
                 fontSize = Mathf.RoundToInt(12 * zoomScale),
                 alignment = TextAnchor.MiddleCenter
             };
 
+            node.UpdateRoomName();
             GUI.Label(new Rect(nodePos.x, nodePos.y, nodeWidth, nodeHeight), node._roomName, style);
+        }
+    }
+
+    // 마우스가 있는 위치에 있는 노드를 반환하는 함수
+    private void UpdateNodeUnderMouse(Event e) {
+        int length = nodes.Count;
+        for (int i = 0; i < length; i++) {
+            RoomNode node = nodes[i];
+            Rect nodeRect = new Rect(node._position.x * zoomScale + offset.x, node._position.y * zoomScale + offset.y, 100 * zoomScale, 50 * zoomScale);
+            if (nodeRect.Contains(e.mousePosition)) {
+                selectedNode = node;
+                nodeDragOffset = node._position * zoomScale + offset - e.mousePosition;
+                break;
+            }
         }
     }
 }
