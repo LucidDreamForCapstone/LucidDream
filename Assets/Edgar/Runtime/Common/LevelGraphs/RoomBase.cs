@@ -1,13 +1,11 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 
-namespace Edgar.Unity
-{
+namespace Edgar.Unity {
     /// <summary>
     /// Base class for room in a level graph.
     /// </summary>
-    public abstract class RoomBase : ScriptableObject
-    {
+    public abstract class RoomBase : ScriptableObject {
         /// <summary>
         /// Position of the room in the graph editor.
         /// </summary>
@@ -31,8 +29,7 @@ namespace Edgar.Unity
         /// </summary>
         public abstract string GetDisplayName();
 
-        public override string ToString()
-        {
+        public override string ToString() {
             return GetDisplayName();
         }
 
@@ -40,23 +37,18 @@ namespace Edgar.Unity
         /// Gets the style for the level graph editor.
         /// Override this to change how are room nodes displayed in the editor.
         /// </summary>
-        public virtual RoomEditorStyle GetEditorStyle(bool isFocused)
-        {
-            if (isFocused)
-            {
-                return new RoomEditorStyle()
-                {
+        public virtual RoomEditorStyle GetEditorStyle(bool isFocused) {
+            if (isFocused) {
+                return new RoomEditorStyle() {
                     TextColor = Color.red
                 };
             }
-            else
-            {
+            else {
                 return new RoomEditorStyle();
             }
         }
 
-        protected virtual void OnValidate()
-        {
+        protected virtual void OnValidate() {
             LevelGraph.HasChanges = true;
         }
     }

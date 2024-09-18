@@ -1,9 +1,7 @@
 ﻿using System.Collections;
 
-namespace Edgar.Unity
-{
-    public interface IPipelineTask<TPayload> where TPayload : class
-    {
+namespace Edgar.Unity {
+    public interface IPipelineTask<TPayload> where TPayload : class {
         /// <summary>
         ///     Payload object.
         /// </summary>

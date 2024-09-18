@@ -78,6 +78,25 @@ public enum StateType {
     Rage
 }
 
+public enum RoomType {
+    Undefined,
+    Entrance,
+    Normal,
+    Hub,
+    Reward,
+    Shop,
+    Boss,
+    Exit,
+    Secret
+}
+
+public enum RoomLinkType {
+    Up,
+    Down,
+    Left,
+    Right
+}
+
 #endregion Definations
 
 

@@ -61,6 +61,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\JMO Assets\Cartoon FX (legacy)\Editor\CFX_SpawnSystemEditor.cs" />
+    <Compile Include="Assets\Editor\CustomMapEditor.cs" />
     <Compile Include="Assets\JMO Assets\Cartoon FX (legacy)\Editor\CFX_InspectorHelpEditor.cs" />
   </ItemGroup>
   <ItemGroup>

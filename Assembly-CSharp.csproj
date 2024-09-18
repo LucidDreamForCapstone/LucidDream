@@ -123,6 +123,7 @@
     <Compile Include="Assets\02.Scripts\Etc\ObjectPool.cs" />
     <Compile Include="Assets\02.Scripts\Etc\FloatingText.cs" />
     <Compile Include="Assets\JMO Assets\Cartoon FX (legacy)\Scripts\CFX_AutodestructWhenNoChildren.cs" />
+    <Compile Include="Assets\02.Scripts\MapGraph\RoomNode.cs" />
     <Compile Include="Assets\02.Scripts\UI\MainUIController.cs" />
     <Compile Include="Assets\02.Scripts\Interact\Interactable.cs" />
     <Compile Include="Assets\02.Scripts\Etc\CameraManager.cs" />
@@ -138,6 +139,7 @@
     <Compile Include="Assets\02.Scripts\UI\OptionUIController.cs" />
     <Compile Include="Assets\02.Scripts\Etc\DropableBase.cs" />
     <Compile Include="Assets\JMO Assets\Cartoon FX (legacy)\Demo\Assets\CFX_Demo_RotateCamera.cs" />
+    <Compile Include="Assets\02.Scripts\MapGraph\RoomLink.cs" />
     <Compile Include="Assets\02.Scripts\Interact\Chest_Shop.cs" />
     <Compile Include="Assets\02.Scripts\Item\Dream.cs" />
     <Compile Include="Assets\02.Scripts\UI\CardUI.cs" />

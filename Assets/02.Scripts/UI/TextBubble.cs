@@ -8,10 +8,14 @@ public class TextBubble : MonoBehaviour {
     [SerializeField] AudioClip _textSound;
     [SerializeField] TextMeshProUGUI _textUI;
     [SerializeField] List<TextBubbleData> _wordList;
+    [SerializeField] int _fontSize;
+    [SerializeField] Color _fontColor;
 
     #region mono funcs
     private void Start() {
         _textUI.text = "";
+        _textUI.fontSize = _fontSize;
+        _textUI.color = _fontColor;
         _audioSource = GetComponent<AudioSource>();
         PrintSentence().Forget();
     }
