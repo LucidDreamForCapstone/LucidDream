@@ -24983,6 +24983,14 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 6660471644841417567, guid: e94958180e5464f49a814b9bec5cab78, type: 3}
+      propertyPath: _ghostSr
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 6660471644841417567, guid: e94958180e5464f49a814b9bec5cab78, type: 3}
+      propertyPath: _phantomCoolTime
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7977112887763442605, guid: e94958180e5464f49a814b9bec5cab78, type: 3}
       propertyPath: _inGameUIController
       value: 
@@ -35011,7 +35019,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 7.5
+  orthographic size: 10.73408
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2

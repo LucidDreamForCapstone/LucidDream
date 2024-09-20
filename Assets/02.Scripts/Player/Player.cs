@@ -22,6 +22,10 @@ public class Player : MonoBehaviour {
     [SerializeField] private float _phantomLerpTime;
     [SerializeField] private float _phantomCoolTime;
     [SerializeField] private float _phantomSpeedBonus;
+    [SerializeField] private GameObject _phantomGhostObj;
+    [SerializeField] private Color _phantomGhostColor;
+    [SerializeField] private float _ghostLastTime;
+    [SerializeField] private float _ghostInterval;
     //[SerializeField] private float _rollLastTime;
     //[SerializeField] private float _rollCoolTime;
     //[SerializeField] private float _rollDist;
@@ -62,6 +66,7 @@ public class Player : MonoBehaviour {
     private bool _isCustomInvincible;//특수 함수에 의한 무적 상태
     //private bool _isRollReady;
     private bool _isPhantomReady;
+    private bool _isPhantomActivated;
     private bool _isAttacking;
     private bool _beforeFlipX;
     private bool _isStun;
@@ -98,6 +103,7 @@ public class Player : MonoBehaviour {
         _isDead = false;
         _isInvincible = false;
         _isPhantomReady = true;
+        _isPhantomActivated = false;
         _phantomSpeedRate = 1;
         _isRollInvincible = false;//obsolete
         //_isRollReady = true;
@@ -379,7 +385,8 @@ public class Player : MonoBehaviour {
     private async UniTaskVoid Phantom() {
         if (Input.GetKey(KeyCode.Space) && _isPhantomReady && !_isStun && !_isPause && !_isDead) {
             Debug.Log("Phantom ON");
-            PlaySound(avoidSound);
+            PhantomGhostEffect().Forget();
+            //PlaySound(avoidSound);
             _isPhantomReady = false;
             float timer = 0;
             DOTween.To(() => _phantomSpeedRate, x => _phantomSpeedRate = x, _phantomSpeedBonus * 0.01f, _phantomLerpTime).ToUniTask().Forget();
@@ -390,12 +397,38 @@ public class Player : MonoBehaviour {
             }
             DOTween.To(() => _phantomSpeedRate, x => _phantomSpeedRate = x, 1, _phantomLerpTime).ToUniTask().Forget();
             await TimeScaleManager.Instance.TimeRestoreLerp(_phantomLerpTime);
+            _isPhantomActivated = false;
             Debug.Log("Phantom OFF");
             await UniTask.Delay(TimeSpan.FromSeconds(_phantomCoolTime));
             _isPhantomReady = true;
             Debug.Log("**Phantom Ready**");
         }
     }
+
+    private async UniTaskVoid PhantomGhostEffect() {
+        _isPhantomActivated = true;
+        while (_isPhantomActivated) {
+            SinglePhantomGhost().Forget();
+            await UniTask.Delay(TimeSpan.FromSeconds(_ghostInterval), ignoreTimeScale: true);
+        }
+    }
+
+    private async UniTaskVoid SinglePhantomGhost() {
+        GameObject ghostEffect = ObjectPool.Instance.GetObject(_phantomGhostObj);
+        SpriteRenderer sr = ghostEffect.GetComponent<SpriteRenderer>();
+        sr.color = _phantomGhostColor;
+        sr.sprite = _spriteRenderer.sprite;
+        if (MoveDir.x > 0)
+            sr.flipX = true;
+        else
+            sr.flipX = false;
+
+        ghostEffect.transform.position = transform.position;
+        ghostEffect.SetActive(true);
+        await sr.DOFade(0, _ghostLastTime).SetUpdate(true);
+        ObjectPool.Instance.ReturnObject(ghostEffect);
+    }
+
 
     /*
     private async UniTaskVoid Roll() {

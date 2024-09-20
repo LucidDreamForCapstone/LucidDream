@@ -110,6 +110,10 @@ MonoBehaviour:
   _phantomLerpTime: 0.5
   _phantomCoolTime: 10
   _phantomSpeedBonus: 400
+  _phantomGhostObj: {fileID: 6024089705646008288, guid: 6655b0effe23aca4aa9b651fd6a08362, type: 3}
+  _phantomGhostColor: {r: 0.8862745, g: 0.63529414, b: 1, a: 0.79607844}
+  _ghostLastTime: 1
+  _ghostInterval: 0.1
   _itemSearchRadius: 2
   _itemMagneticSpeed: 5
   _itemLayer:
