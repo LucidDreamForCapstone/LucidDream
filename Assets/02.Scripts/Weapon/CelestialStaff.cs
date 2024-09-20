@@ -1,6 +1,5 @@
 using Cysharp.Threading.Tasks;
 using System;
-using System.Collections;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -101,7 +100,7 @@ public class CelestialStaff : WeaponBase {
         if (_isBasicReady) {
             //_isBasicReady = false; 는 BasicAttackTask 안에 있음
             await BasicAttackTask();
-            await UniTask.Delay(TimeSpan.FromSeconds(_basicCoolTime));
+            await UniTask.Delay(TimeSpan.FromSeconds(_basicCoolTime), ignoreTimeScale: true);
             _isBasicReady = true;
         }
     }
@@ -130,14 +129,7 @@ public class CelestialStaff : WeaponBase {
     }
 
     public override void FeverSkill() {
-        // 플레이어 위치에서 Y축으로 0.7만큼 위에서 이펙트 생성
-        Vector3 effect0Position = _playerScript.transform.position + new Vector3(0, 0.7f, 0);
-        GameObject playerEffect = Instantiate(_feverSkillEffect0, effect0Position, Quaternion.identity);
-        // 플레이어 오브젝트의 자식으로 설정
-        playerEffect.transform.SetParent(_playerScript.transform);
-        // 일정 시간 후 이펙트 제거 (예: 2초)
-        Destroy(playerEffect, 0.5f);
-
+        FeverSkillEffect().Forget();
         // 주변 몬스터 탐지
         Collider2D[] possibleTargets = Physics2D.OverlapCircleAll(_playerScript.transform.position, _feverRange, _monsterLayer);
         int i, length = possibleTargets.Length;
@@ -151,7 +143,7 @@ public class CelestialStaff : WeaponBase {
                     _playerScript.NormalMagicalAttack(targetMonster, 2);
 
                     // 0.3초 대기 후 적 위치에 이펙트 생성
-                    StartCoroutine(SpawnDelayedEffect(targetMonster));
+                    SpawnDelayedEffect(targetMonster).Forget();
                 }
             }
         }
@@ -169,7 +161,7 @@ public class CelestialStaff : WeaponBase {
     private async UniTask BasicAttackTask() {
         float timer = 0;
         while (Input.GetKey(KeyCode.Q) && !_playerScript.CheckStun() && !_playerScript.CheckPause()) {
-            timer += Time.deltaTime;
+            timer += Time.unscaledDeltaTime;
             if (timer > _chargeInterval * (_playerScript.GetChargetCount() + 1)) {
                 if (_isBasicReady)
                     _isBasicReady = false;
@@ -218,15 +210,26 @@ public class CelestialStaff : WeaponBase {
             PlayerDataManager.Instance.HealAbs(_healAmount);
     }
 
-    private IEnumerator SpawnDelayedEffect(MonsterBase targetMonster) {
-        // 0.3초 대기
-        yield return new WaitForSeconds(0.3f);
+    private async UniTaskVoid FeverSkillEffect() {
+        // 플레이어 위치에서 Y축으로 0.7만큼 위에서 이펙트 생성
+        Vector3 effect0Position = _playerScript.transform.position + new Vector3(0, 0.7f, 0);
+        GameObject playerEffect = Instantiate(_feverSkillEffect0, effect0Position, Quaternion.identity);
+        // 플레이어 오브젝트의 자식으로 설정
+        playerEffect.transform.SetParent(_playerScript.transform);
+        // 일정 시간 후 이펙트 제거 (예: 2초)
+        await UniTask.Delay(TimeSpan.FromSeconds(0.5f), ignoreTimeScale: true);
+        Destroy(playerEffect);
+    }
 
+    private async UniTaskVoid SpawnDelayedEffect(MonsterBase targetMonster) {
+        // 0.3초 대기
+        await UniTask.Delay(TimeSpan.FromSeconds(0.3f));
         // 적 위치에 이펙트 생성 (_feverSkillEffect1)
         GameObject monsterEffect = Instantiate(_feverSkillEffect1, targetMonster.transform.position, Quaternion.identity);
 
         // 일정 시간 후 이펙트 제거 (예: 0.5초)
-        Destroy(monsterEffect, 0.5f);
+        await UniTask.Delay(TimeSpan.FromSeconds(0.5f));
+        Destroy(monsterEffect);
     }
     #endregion //private funcs
 }

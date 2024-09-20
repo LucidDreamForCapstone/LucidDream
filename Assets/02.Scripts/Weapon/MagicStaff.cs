@@ -69,7 +69,7 @@ public class MagicStaff : WeaponBase {
         if (_isBasicReady) {
             //_isBasicReady = false; 는 BasicAttackTask 안에 있음
             await BasicAttackTask();
-            await UniTask.Delay(TimeSpan.FromSeconds(_basicCoolTime));
+            await UniTask.Delay(TimeSpan.FromSeconds(_basicCoolTime), ignoreTimeScale: true);
             _isBasicReady = true;
         }
     }
@@ -106,7 +106,7 @@ public class MagicStaff : WeaponBase {
     private async UniTask BasicAttackTask() {
         float timer = 0;
         while (Input.GetKey(KeyCode.Q) && !_playerScript.CheckStun() && !_playerScript.CheckPause()) {
-            timer += Time.deltaTime;
+            timer += Time.unscaledDeltaTime;
             if (timer > _chargeInterval * (_playerScript.GetChargetCount() + 1)) {
                 if (_isBasicReady)
                     _isBasicReady = false;
@@ -123,7 +123,7 @@ public class MagicStaff : WeaponBase {
     }
     private async UniTaskVoid FeverTask() {
         PlayerDataManager.Instance.SetApPlusRate(PlayerDataManager.Instance.Status._apPlusRate + _feverApPlusRate);
-        await UniTask.Delay(TimeSpan.FromSeconds(_feverLastTime));
+        await UniTask.Delay(TimeSpan.FromSeconds(_feverLastTime), ignoreTimeScale: true);
         PlayerDataManager.Instance.SetApPlusRate(PlayerDataManager.Instance.Status._apPlusRate - _feverApPlusRate);
     }
 

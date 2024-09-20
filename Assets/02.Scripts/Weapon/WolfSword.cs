@@ -256,7 +256,7 @@ public class WolfSword : WeaponBase {
         }
         basicSkillEffect.transform.position = _playerScript.transform.position + new Vector3(Mathf.Cos(Mathf.Deg2Rad * skillAngle), Mathf.Sin(Mathf.Deg2Rad * skillAngle)) * offset;
         basicSkillEffect.SetActive(true);
-        await UniTask.Delay(TimeSpan.FromSeconds(0.25f));
+        await UniTask.Delay(TimeSpan.FromSeconds(0.25f), ignoreTimeScale: true);
         basicSkillEffect.transform.localRotation = Quaternion.identity;
         basicSkillEffect.transform.SetParent(null);
         ObjectPool.Instance.ReturnObject(basicSkillEffect);
@@ -269,7 +269,7 @@ public class WolfSword : WeaponBase {
             sr.flipX = true;
         skillEffect.transform.position = _playerScript.transform.position + Vector3.up * offsetY;
         Debug.Log(skillEffect);
-        await UniTask.Delay(TimeSpan.FromSeconds(1.2));
+        await UniTask.Delay(TimeSpan.FromSeconds(1.2), ignoreTimeScale: true);
         Destroy(skillEffect);
     }
 
@@ -278,7 +278,7 @@ public class WolfSword : WeaponBase {
         skillEffect.transform.right = lookAt;
         skillEffect.transform.position = _playerScript.transform.position;
         Debug.Log(skillEffect);
-        await UniTask.Delay(TimeSpan.FromSeconds(0.6f));
+        await UniTask.Delay(TimeSpan.FromSeconds(0.6f), ignoreTimeScale: true);
         Destroy(skillEffect);
     }
 

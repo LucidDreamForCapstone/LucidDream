@@ -86,8 +86,8 @@ public class CustomMapEditor : EditorWindow {
 
     // 마우스와 노드 중심을 잇는 선 그리기
     private void DrawLineToMouse(Event e) {
-        if (isDrawingLine && selectedNode != null) {
-            Vector2 nodeCenter = selectedNode._position * zoomScale + offset + new Vector2(50 * zoomScale, 25 * zoomScale); // 노드의 중심 좌표 계산
+        if (isDrawingLine) {
+            Vector2 nodeCenter = targetNode._position * zoomScale + offset + new Vector2(50 * zoomScale, 25 * zoomScale); // 노드의 중심 좌표 계산
             Vector2 mousePos = e.mousePosition;
 
             Handles.BeginGUI();
@@ -144,15 +144,17 @@ public class CustomMapEditor : EditorWindow {
         }
 
         // 노드 드래그 처리
-        if (e.type == EventType.MouseDrag && e.button == 0 && !e.control && selectedNode != null) {
+        if (e.type == EventType.MouseDrag && e.button == 0 && !isDrawingLine && selectedNode != null) {
             selectedNode._position = (e.mousePosition + nodeDragOffset - offset) / zoomScale;
             GUI.changed = true;
         }
 
+        /*
         // 마우스 버튼을 놓으면 선택 해제
         if (e.type == EventType.MouseUp && e.button == 0) {
             selectedNode = null;
         }
+        */
     }
 
     private void AddNode(Vector2 position) {

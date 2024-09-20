@@ -65,6 +65,7 @@
     <Compile Include="Assets\02.Scripts\Etc\StateEffectManager.cs" />
     <Compile Include="Assets\02.Scripts\ShopItem\ShopItem_Guard.cs" />
     <Compile Include="Assets\02.Scripts\Weapon\CelestialStaff.cs" />
+    <Compile Include="Assets\02.Scripts\Etc\TimeScaleManager.cs" />
     <Compile Include="Assets\02.Scripts\Etc\VignetteController.cs" />
     <Compile Include="Assets\02.Scripts\Etc\SkillToolTip.cs" />
     <Compile Include="Assets\02.Scripts\Monster\MonsterDemon.cs" />

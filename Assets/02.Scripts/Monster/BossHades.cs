@@ -144,7 +144,7 @@ public class BossHades : MonsterBase {
 
     private void Start() {
         _cts = new CancellationTokenSource();
-        _animator.updateMode = AnimatorUpdateMode.UnscaledTime;
+        //_animator.updateMode = AnimatorUpdateMode.UnscaledTime;
         _playerLayer = LayerMask.GetMask("Player");
         _enemyLayer = LayerMask.GetMask("Enemy", "CollidableEnemy");
         _hadesCollider = GetComponent<Collider2D>();

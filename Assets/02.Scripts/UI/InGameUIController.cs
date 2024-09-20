@@ -247,7 +247,7 @@ public class InGameUIController : MonoBehaviour {
             ShowCardSelect(CardManage.Instance.DrawCards(), _levelUpCount);
         }
         else {
-            Time.timeScale = 1f;
+            TimeScaleManager.Instance.TimeRestore();
             _cardUIController.SetHide();
         }
     }

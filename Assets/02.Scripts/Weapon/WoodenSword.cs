@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-public class WoodenSword : WeaponBase { //����� �⺻�����̹Ƿ� ���� �ڵ� �����δ� �ܺ������� ����Ǿ ���� �� ����
+public class WoodenSword : WeaponBase {
 
     #region serialized field
 
@@ -128,7 +128,7 @@ public class WoodenSword : WeaponBase { //����� �⺻������
         }
         basicSkillEffect.transform.position = _playerScript.transform.position + new Vector3(Mathf.Cos(Mathf.Deg2Rad * skillAngle), Mathf.Sin(Mathf.Deg2Rad * skillAngle)) * offset;
         basicSkillEffect.SetActive(true);
-        await UniTask.Delay(TimeSpan.FromSeconds(0.25f));
+        await UniTask.Delay(TimeSpan.FromSeconds(0.25f), ignoreTimeScale: true);
         basicSkillEffect.transform.localRotation = Quaternion.identity;
         basicSkillEffect.transform.SetParent(null);
         ObjectPool.Instance.ReturnObject(basicSkillEffect);

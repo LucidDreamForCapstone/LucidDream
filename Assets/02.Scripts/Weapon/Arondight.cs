@@ -206,7 +206,7 @@ public class Arondight : WeaponBase {
         int currentDef = PlayerDataManager.Instance.Status._def;
         int defPlus = (int)(currentDef * _defenseUpRate * 0.01f);
         PlayerDataManager.Instance.SetDef(currentDef + defPlus);
-        await UniTask.Delay(TimeSpan.FromSeconds(_lastTime1));
+        await UniTask.Delay(TimeSpan.FromSeconds(_lastTime1), ignoreTimeScale: true);
         currentDef = PlayerDataManager.Instance.Status._def;
         PlayerDataManager.Instance.SetDef(currentDef - defPlus);
     }
@@ -236,7 +236,7 @@ public class Arondight : WeaponBase {
         }
         basicSkillEffect.transform.position = _playerScript.transform.position + new Vector3(Mathf.Cos(Mathf.Deg2Rad * skillAngle), Mathf.Sin(Mathf.Deg2Rad * skillAngle)) * offset;
         basicSkillEffect.SetActive(true);
-        await UniTask.Delay(TimeSpan.FromSeconds(0.25f));
+        await UniTask.Delay(TimeSpan.FromSeconds(0.25f), ignoreTimeScale: true);
         basicSkillEffect.transform.localRotation = Quaternion.identity;
         basicSkillEffect.transform.SetParent(null);
         ObjectPool.Instance.ReturnObject(basicSkillEffect);

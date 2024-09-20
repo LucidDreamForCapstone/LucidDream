@@ -120,7 +120,7 @@ public class IronSword : WeaponBase {
 
     private async UniTaskVoid FeverTask() {
         PlayerDataManager.Instance.SetAdPlusRate(PlayerDataManager.Instance.Status._adPlusRate + _feverAdPlusRate);
-        await UniTask.Delay(TimeSpan.FromSeconds(_feverLastTime));
+        await UniTask.Delay(TimeSpan.FromSeconds(_feverLastTime), ignoreTimeScale: true);
         PlayerDataManager.Instance.SetAdPlusRate(PlayerDataManager.Instance.Status._adPlusRate - _feverAdPlusRate);
     }
 
@@ -139,7 +139,7 @@ public class IronSword : WeaponBase {
         }
         basicSkillEffect.transform.position = _playerScript.transform.position + new Vector3(Mathf.Cos(Mathf.Deg2Rad * skillAngle), Mathf.Sin(Mathf.Deg2Rad * skillAngle)) * offset;
         basicSkillEffect.SetActive(true);
-        await UniTask.Delay(TimeSpan.FromSeconds(0.25f));
+        await UniTask.Delay(TimeSpan.FromSeconds(0.25f), ignoreTimeScale: true);
         basicSkillEffect.transform.localRotation = Quaternion.identity;
         basicSkillEffect.transform.SetParent(null);
         ObjectPool.Instance.ReturnObject(basicSkillEffect);

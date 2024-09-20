@@ -17,9 +17,14 @@ public class Player : MonoBehaviour {
     #region serialized field
 
     [SerializeField] private float _invincibleLastTime;
-    [SerializeField] private float _rollLastTime;
-    [SerializeField] private float _rollCoolTime;
-    [SerializeField] private float _rollDist;
+    [SerializeField] private float _phantomLastTime; //ingameTime
+    [SerializeField] private float _phantomTimeScale; // 0 ~ 1
+    [SerializeField] private float _phantomLerpTime;
+    [SerializeField] private float _phantomCoolTime;
+    [SerializeField] private float _phantomSpeedBonus;
+    //[SerializeField] private float _rollLastTime;
+    //[SerializeField] private float _rollCoolTime;
+    //[SerializeField] private float _rollDist;
     [SerializeField] private float _itemSearchRadius;
     [SerializeField] private float _itemMagneticSpeed;
     [SerializeField] private LayerMask _itemLayer;
@@ -53,9 +58,10 @@ public class Player : MonoBehaviour {
     #region private variable
     private bool _isDead;
     private bool _isInvincible;//피격 후 무적 상태
-    private bool _isRollInvincible;//구르기 중 무적 상태
+    private bool _isRollInvincible;//obsolete
     private bool _isCustomInvincible;//특수 함수에 의한 무적 상태
-    private bool _isRollReady;
+    //private bool _isRollReady;
+    private bool _isPhantomReady;
     private bool _isAttacking;
     private bool _beforeFlipX;
     private bool _isStun;
@@ -63,6 +69,7 @@ public class Player : MonoBehaviour {
     private float _stunTime;
     private float _slowTime;
     private float _slowRate;
+    private float _phantomSpeedRate;
     private List<GameObject> _magneticList = new List<GameObject>();
     private int _chargeCount;
     private InGameUIController _controller;
@@ -85,11 +92,15 @@ public class Player : MonoBehaviour {
     #region mono funcs
 
     private void Start() {
+        _animator.updateMode = AnimatorUpdateMode.UnscaledTime;
+        _armAnimator.updateMode = AnimatorUpdateMode.UnscaledTime;
         MoveDir = Vector2.down;
         _isDead = false;
         _isInvincible = false;
-        _isRollInvincible = false;
-        _isRollReady = true;
+        _isPhantomReady = true;
+        _phantomSpeedRate = 1;
+        _isRollInvincible = false;//obsolete
+        //_isRollReady = true;
         _isAttacking = false;
         _beforeFlipX = false;
         _isStun = false;
@@ -105,7 +116,8 @@ public class Player : MonoBehaviour {
     }
 
     private void Update() {
-        Roll().Forget();
+        //Roll().Forget();
+        Phantom().Forget();
         SearchNearItems();
         ItemMagnetic();
         StunState();
@@ -253,7 +265,7 @@ public class Player : MonoBehaviour {
 
     public async UniTaskVoid AttackNow(float attackDelay) {
         _isAttacking = true;
-        await UniTask.Delay(TimeSpan.FromSeconds(attackDelay));
+        await UniTask.Delay(TimeSpan.FromSeconds(attackDelay), ignoreTimeScale: true);
         _isAttacking = false;
     }
 
@@ -301,10 +313,10 @@ public class Player : MonoBehaviour {
 
     public void ChargeGaugeUp() {
         if (_chargeCount < 5) {
-            _chargeGauge[_chargeCount++].DOColor(_chargeColor, 0.1f);
+            _chargeGauge[_chargeCount++].DOColor(_chargeColor, 0.1f).SetUpdate(true);
             if (_chargeCount == 5) {
                 for (int i = 0; i < 5; i++)
-                    _chargeGauge[i].DOColor(_chargeMaxColor, 0.1f);
+                    _chargeGauge[i].DOColor(_chargeMaxColor, 0.1f).SetUpdate(true);
             }
 
         }
@@ -312,7 +324,7 @@ public class Player : MonoBehaviour {
 
     public void ResetChargeGauge() {
         for (int i = 0; i < 5; i++) {
-            _chargeGauge[i].DOColor(_chargeOriginColor, 1);
+            _chargeGauge[i].DOColor(_chargeOriginColor, 1).SetUpdate(true);
             _chargeCount = 0;
         }
     }
@@ -342,22 +354,21 @@ public class Player : MonoBehaviour {
     #region private funcs
 
     private void Move() {
-        if (!_isRollInvincible && !_isAttacking && !_isStun && !_isPause && !_isDead) {
+        if (!_isRollInvincible && !_isAttacking && !_isStun && !_isPause && !_isDead && TimeScaleManager.IsTimeFlow) {
             Vector2 moveVec = Vector2.zero;
             float horizontal = Input.GetAxisRaw("Horizontal");
             float vertical = Input.GetAxisRaw("Vertical");
 
             PlayerMoveAnimation(horizontal, vertical);
 
-            if (horizontal == 0 && vertical == 0) {
-                moveVec = Vector2.zero;
-            }
-            else {
-                moveVec = new Vector2(horizontal, vertical);
+            moveVec = new Vector2(horizontal, vertical);
+
+            if (horizontal != 0 || vertical != 0) { //Prevent Update of MoveDir when player stopped
                 MoveDir = moveVec.normalized;
             }
 
-            _rigid.velocity = moveVec.normalized * PlayerDataManager.Instance.GetFinalMoveSpeed() * (100 - _slowRate) * 0.01f;
+            _rigid.velocity = moveVec.normalized * PlayerDataManager.Instance.GetFinalMoveSpeed() * (100 - _slowRate) * _phantomSpeedRate * 0.01f;
+            //_rigid.MovePosition((Vector2)transform.position + moveVec.normalized * PlayerDataManager.Instance.GetFinalMoveSpeed() * (100 - _slowRate) * Time.unscaledDeltaTime * 0.01f);
         }
         else {
             _rigid.velocity = Vector2.zero;
@@ -365,6 +376,28 @@ public class Player : MonoBehaviour {
         }
     }
 
+    private async UniTaskVoid Phantom() {
+        if (Input.GetKey(KeyCode.Space) && _isPhantomReady && !_isStun && !_isPause && !_isDead) {
+            Debug.Log("Phantom ON");
+            PlaySound(avoidSound);
+            _isPhantomReady = false;
+            float timer = 0;
+            DOTween.To(() => _phantomSpeedRate, x => _phantomSpeedRate = x, _phantomSpeedBonus * 0.01f, _phantomLerpTime).ToUniTask().Forget();
+            await TimeScaleManager.Instance.TimeSlowLerp(_phantomTimeScale, _phantomLerpTime);
+            while (!Input.GetKey(KeyCode.Space) && timer < _phantomLastTime) {
+                timer += Time.deltaTime;
+                await UniTask.NextFrame();
+            }
+            DOTween.To(() => _phantomSpeedRate, x => _phantomSpeedRate = x, 1, _phantomLerpTime).ToUniTask().Forget();
+            await TimeScaleManager.Instance.TimeRestoreLerp(_phantomLerpTime);
+            Debug.Log("Phantom OFF");
+            await UniTask.Delay(TimeSpan.FromSeconds(_phantomCoolTime));
+            _isPhantomReady = true;
+            Debug.Log("**Phantom Ready**");
+        }
+    }
+
+    /*
     private async UniTaskVoid Roll() {
         if (Input.GetKeyDown(KeyCode.Space) && _isRollReady && !_isStun && !_isPause && !_isDead && !CheckWall()) {
             //Debug.Log("구른다");
@@ -381,6 +414,7 @@ public class Player : MonoBehaviour {
             //Debug.Log("구르기 쿨 돌았음");
         }
     }
+    */
 
     private UniTask RollMove(Rigidbody2D rigidbody, Vector2 endValue, float duration) {
         var tcs = new UniTaskCompletionSource();
@@ -500,11 +534,13 @@ public class Player : MonoBehaviour {
         _rightArmRenderer.sortingOrder = layerN;
     }
 
+    /*
     private bool CheckWall() {
         if (Physics2D.Raycast(transform.position, MoveDir, _rollDist - 1, _wallLayer))
             return true;
         return false;
     }
+    */
 
     private void StunState() {
         if (_stunTime > 0) {

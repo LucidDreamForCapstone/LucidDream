@@ -60,7 +60,7 @@ public class InteractManager : MonoBehaviour {
     public async UniTaskVoid InteractCoolTime() {
         if (_interactReady) {
             _interactReady = false;
-            await UniTask.Delay(TimeSpan.FromSeconds(_interactCoolTime));
+            await UniTask.Delay(TimeSpan.FromSeconds(_interactCoolTime), ignoreTimeScale: true);
             _interactReady = true;
         }
     }

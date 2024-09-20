@@ -102,7 +102,7 @@ public abstract class WeaponBase : ItemBase {
         if (_isBasicReady) {
             BasicAttackAnimation();
             _isBasicReady = false;
-            await UniTask.Delay(TimeSpan.FromSeconds(_basicCoolTime));
+            await UniTask.Delay(TimeSpan.FromSeconds(_basicCoolTime), ignoreTimeScale: true);
             _isBasicReady = true;
         }
     }
@@ -113,7 +113,7 @@ public abstract class WeaponBase : ItemBase {
             Skill1Animation();
             inGameUIController.UseSkill(1);
 
-            await UniTask.Delay(TimeSpan.FromSeconds(_skill1CoolTime));
+            await UniTask.Delay(TimeSpan.FromSeconds(_skill1CoolTime), ignoreTimeScale: true);
             _isSkill1Ready = true;
         }
     }
@@ -123,7 +123,7 @@ public abstract class WeaponBase : ItemBase {
             _isSkill2Ready = false;
             Skill2Animation();
             inGameUIController.UseSkill(2);
-            await UniTask.Delay(TimeSpan.FromSeconds(_skill2CoolTime));
+            await UniTask.Delay(TimeSpan.FromSeconds(_skill2CoolTime), ignoreTimeScale: true);
             _isSkill2Ready = true;
         }
     }

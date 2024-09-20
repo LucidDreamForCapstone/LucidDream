@@ -38,8 +38,8 @@ public class FloatingText : MonoBehaviour {
     }
 
     void Update() {
-        transform.Translate(new Vector3(0, 100 * Time.deltaTime, 0));
-        _lastTime -= Time.deltaTime;
+        transform.Translate(new Vector3(0, 100 * Time.unscaledDeltaTime, 0));
+        _lastTime -= Time.unscaledDeltaTime;
         if (_lastTime <= 0) {
             Destroy(gameObject);
             //ObjectPool.Instance.ReturnObject(gameObject);
