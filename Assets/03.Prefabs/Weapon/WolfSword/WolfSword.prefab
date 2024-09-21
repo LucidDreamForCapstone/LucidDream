@@ -278,7 +278,7 @@ MonoBehaviour:
   _feverSkillEffect1: {fileID: 0}
   _feverRange: 2.5
   _isBuffTypeFeverSkill: 0
-  nomalattackSound: {fileID: 8300000, guid: 0f53d7b1fe7ba1d4980596750d545da5, type: 3}
+  _normalAttackSound: {fileID: 8300000, guid: 0f53d7b1fe7ba1d4980596750d545da5, type: 3}
   _basicRange: 3
   _basicAngle: 120
   _range1: 5

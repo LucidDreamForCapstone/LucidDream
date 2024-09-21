@@ -67,7 +67,7 @@ public class CelestialStaff : WeaponBase {
     protected override void BasicAttackAnimation() {
         _playerScript.AttackNow(_basicDelay).Forget();
         _playerScript.ArmTrigger("Staff");
-        PlaySound(nomalattackSound);
+        PlaySoundDelay(_normalAttackSound, 0.2f).Forget();
     }
 
     protected override void Skill1Animation() {
@@ -223,12 +223,12 @@ public class CelestialStaff : WeaponBase {
 
     private async UniTaskVoid SpawnDelayedEffect(MonsterBase targetMonster) {
         // 0.3초 대기
-        await UniTask.Delay(TimeSpan.FromSeconds(0.3f));
+        await UniTask.Delay(TimeSpan.FromSeconds(0.3f), ignoreTimeScale: true);
         // 적 위치에 이펙트 생성 (_feverSkillEffect1)
         GameObject monsterEffect = Instantiate(_feverSkillEffect1, targetMonster.transform.position, Quaternion.identity);
 
         // 일정 시간 후 이펙트 제거 (예: 0.5초)
-        await UniTask.Delay(TimeSpan.FromSeconds(0.5f));
+        await UniTask.Delay(TimeSpan.FromSeconds(0.5f), ignoreTimeScale: true);
         Destroy(monsterEffect);
     }
     #endregion //private funcs

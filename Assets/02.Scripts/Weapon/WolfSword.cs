@@ -59,7 +59,7 @@ public class WolfSword : WeaponBase {
     protected override void BasicAttackAnimation() {
         _playerScript.AttackNow(_basicDelay).Forget();
         _playerScript.ArmTrigger("Sword");
-        PlaySound(nomalattackSound);
+        PlaySound(_normalAttackSound);
     }
 
     protected override void Skill1Animation() {
@@ -194,13 +194,7 @@ public class WolfSword : WeaponBase {
             }
             // 대상에게 피지컬 공격
             _playerScript.PhysicalAttack(target.GetComponent<MonsterBase>(), 4.3f);
-
-            // 대상 위치에 이펙트 생성
-            Vector3 effectPosition = target.transform.position; // 대상의 위치
-            GameObject feverSkillEffect = Instantiate(_feverSkillEffect0, effectPosition, Quaternion.identity);
-
-            // 이펙트가 일정 시간 후 사라지도록 설정 (예: 1초 후)
-            Destroy(feverSkillEffect, 0.8f);
+            FeverSkillEffect(target.transform.position).Forget();
         }
     }
 
@@ -280,6 +274,14 @@ public class WolfSword : WeaponBase {
         Debug.Log(skillEffect);
         await UniTask.Delay(TimeSpan.FromSeconds(0.6f), ignoreTimeScale: true);
         Destroy(skillEffect);
+    }
+
+    private async UniTaskVoid FeverSkillEffect(Vector3 pos) {
+        // 대상 위치에 이펙트 생성
+        //Vector3 effectPosition = target.transform.position; // 대상의 위치
+        GameObject feverSkillEffect = Instantiate(_feverSkillEffect0, pos, Quaternion.identity);
+        await UniTask.Delay(TimeSpan.FromSeconds(0.8f), ignoreTimeScale: true);
+        Destroy(feverSkillEffect);
     }
 
     #endregion

@@ -101,6 +101,8 @@ public class Player : MonoBehaviour {
     private void Start() {
         _animator.updateMode = AnimatorUpdateMode.UnscaledTime;
         _armAnimator.updateMode = AnimatorUpdateMode.UnscaledTime;
+        TimeScaleManager.Instance.AddAnimator(_animator);
+        TimeScaleManager.Instance.AddAnimator(_armAnimator);
         MoveDir = Vector2.down;
         _isDead = false;
         _isInvincible = false;
@@ -369,7 +371,7 @@ public class Player : MonoBehaviour {
     #region private funcs
 
     private void Move() {
-        if (!_isRollInvincible && !_isAttacking && !_isStun && !_isPause && !_isDead && TimeScaleManager.IsTimeFlow) {
+        if (!_isRollInvincible && !_isAttacking && !_isStun && !_isPause && !_isDead) {
             Vector2 moveVec = Vector2.zero;
             float horizontal = Input.GetAxisRaw("Horizontal");
             float vertical = Input.GetAxisRaw("Vertical");
@@ -400,12 +402,14 @@ public class Player : MonoBehaviour {
             float timer = 0;
             DOTween.To(() => _phantomSpeedRate, x => _phantomSpeedRate = x, _phantomSpeedBonus * 0.01f, _phantomLerpTime).ToUniTask().Forget();
             _phantomVolumeAnimator.gameObject.SetActive(true);
+            SoundManager.Instance.SetSFXPitchLerp(_phantomTimeScale, _phantomLerpTime).Forget();
             await TimeScaleManager.Instance.TimeSlowLerp(_phantomTimeScale, _phantomLerpTime);
             while (!Input.GetKey(KeyCode.Space) && timer < _phantomLastTime && !_phantomForceCancelTrigger) {
                 timer += Time.deltaTime;
                 await UniTask.NextFrame();
             }
             DOTween.To(() => _phantomSpeedRate, x => _phantomSpeedRate = x, 1, _phantomLerpTime).ToUniTask().Forget();
+            SoundManager.Instance.SetSFXPitchLerp(1, _phantomLerpTime).Forget();
             _phantomVolumeAnimator.SetTrigger("End");
             await TimeScaleManager.Instance.TimeRestoreLerp(_phantomLerpTime);
             _phantomVolumeAnimator.gameObject.SetActive(false);
@@ -607,16 +611,17 @@ public class Player : MonoBehaviour {
             _slowTime = 0;
         }
     }
+
     private void PlaySound(AudioClip clip) {
         if (clip != null) {
-            SoundManager.Instance.PlaySFX(clip.name);
+            SoundManager.Instance.PlaySFX(clip.name, true);
         }
     }
 
     private async UniTaskVoid PlaySoundDelay(AudioClip clip, float delay) {
         if (clip != null) {
-            await UniTask.Delay(TimeSpan.FromSeconds(delay));
-            SoundManager.Instance.PlaySFX(clip.name);
+            await UniTask.Delay(TimeSpan.FromSeconds(delay), ignoreTimeScale: true);
+            SoundManager.Instance.PlaySFX(clip.name, true);
         }
     }
     #endregion //private funcs

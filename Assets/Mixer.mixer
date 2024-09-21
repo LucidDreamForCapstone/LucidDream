@@ -1,5 +1,19 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!244 &-5609473812149880769
+AudioMixerEffectController:
+  m_ObjectHideFlags: 3
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: 
+  m_EffectID: d157c8471d1e9944a9fbed35536986b5
+  m_EffectName: Attenuation
+  m_MixLevel: 3f5b391d6eb07dc4da124d14b1a094a3
+  m_Parameters: []
+  m_SendTarget: {fileID: 0}
+  m_EnableWetMix: 0
+  m_Bypass: 0
 --- !u!244 &-3366501688856500042
 AudioMixerEffectController:
   m_ObjectHideFlags: 3
@@ -23,7 +37,8 @@ AudioMixerGroupController:
   m_Name: SFX
   m_AudioMixer: {fileID: 24100000}
   m_GroupID: 6033f370b3b38d94982e64a527e18302
-  m_Children: []
+  m_Children:
+  - {fileID: 7070421915843813067}
   m_Volume: 2407d5f079741034eb505f9b4351f62e
   m_Pitch: e05a541288f6f354fa14aca0139c56f7
   m_Send: 00000000000000000000000000000000
@@ -50,16 +65,19 @@ AudioMixerController:
   m_UpdateMode: 0
   m_ExposedParameters:
   - guid: b73b375aaee451941ab2dea9dfe47b54
-    name: MyExposedParam 1
+    name: BGM
   - guid: 65925f9cbda7076498c1a6c970033c23
-    name: MyExposedParam
+    name: Master
   - guid: 2407d5f079741034eb505f9b4351f62e
-    name: MyExposedParam 2
+    name: SFX
+  - guid: 80d790c67ddb09545a59d9e6e06447ab
+    name: SFXpitch
   m_AudioMixerGroupViews:
   - guids:
     - 228d1ee172169144ea67e48b9cf8d6dd
     - bc890e37da00b78489b315b39b2ea127
     - 6033f370b3b38d94982e64a527e18302
+    - d4522c4d03050784f9ab2dde520f7e59
     name: View
   m_CurrentViewIndex: 0
   m_TargetSnapshot: {fileID: 24500006}
@@ -107,7 +125,8 @@ AudioMixerSnapshotController:
   m_Name: Snapshot
   m_AudioMixer: {fileID: 24100000}
   m_SnapshotID: 6ca467cac9c00464e84f48ca81e8d63b
-  m_FloatValues: {}
+  m_FloatValues:
+    65925f9cbda7076498c1a6c970033c23: -0.08374829
   m_TransitionOverrides: {}
 --- !u!244 &3449202883049454317
 AudioMixerEffectController:
@@ -138,6 +157,25 @@ AudioMixerGroupController:
   m_Send: 00000000000000000000000000000000
   m_Effects:
   - {fileID: 3449202883049454317}
+  m_UserColorIndex: 0
+  m_Mute: 0
+  m_Solo: 0
+  m_BypassEffects: 0
+--- !u!243 &7070421915843813067
+AudioMixerGroupController:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: SFX_TIMEAFFECTED
+  m_AudioMixer: {fileID: 24100000}
+  m_GroupID: d4522c4d03050784f9ab2dde520f7e59
+  m_Children: []
+  m_Volume: 11c12c9d4747672468f3e384c3883bfc
+  m_Pitch: 80d790c67ddb09545a59d9e6e06447ab
+  m_Send: 00000000000000000000000000000000
+  m_Effects:
+  - {fileID: -5609473812149880769}
   m_UserColorIndex: 0
   m_Mute: 0
   m_Solo: 0

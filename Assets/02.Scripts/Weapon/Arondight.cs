@@ -1,6 +1,5 @@
 using Cysharp.Threading.Tasks;
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -62,7 +61,7 @@ public class Arondight : WeaponBase {
         _playerScript.AttackNow(_basicDelay).Forget();
         _playerScript.ArmTrigger("Sword");
         //BasicAttack();
-        PlaySound(nomalattackSound);
+        PlaySound(_normalAttackSound);
     }
 
     protected override void Skill1Animation() {
@@ -79,7 +78,7 @@ public class Arondight : WeaponBase {
     protected override void FeverSkillAnimation() {
         _playerScript.AttackNow(_feverDelay).Forget();
         PlaySound(feverSound);
-        StartCoroutine(DelayedSoundEffect(feverSound2, 0.7f));
+        DelayedSoundEffect(feverSound2, 0.7f).Forget();
         FeverSkill();
     }
 
@@ -186,10 +185,8 @@ public class Arondight : WeaponBase {
 
             // Fever1 스킬 실행 (즉시 실행하고 절반의 대미지 적용)
             _playerScript.PhysicalAttack(target, 1); // 절반 대미지
-            SpawnFeverEffect1(target);
-
-            // 0.7초 후 Fever2 스킬 실행 (코루틴을 사용하여 딜레이)
-            StartCoroutine(DelayedFeverEffect2(target));
+            FeverEffect(target).Forget();
+            DelayedFeverEffect(target).Forget();
         }
     }
 
@@ -243,32 +240,27 @@ public class Arondight : WeaponBase {
     }
 
     // Fever1 스킬 이펙트 생성
-    private void SpawnFeverEffect1(MonsterBase target) {
+    private async UniTaskVoid FeverEffect(MonsterBase target) {
         // 타겟 위치에 Fever1 스킬 이펙트 생성
         GameObject feverEffect1 = Instantiate(_feverSkillEffect0, target.transform.position, Quaternion.identity);
-
-        // 일정 시간 후 Fever1 스킬 이펙트 제거
-        Destroy(feverEffect1, 1.0f); // 1초 후 삭제 (원하는 시간에 맞게 수정 가능)
+        await UniTask.Delay(TimeSpan.FromSeconds(1f), ignoreTimeScale: true);
+        Destroy(feverEffect1); // 1초 후 삭제 (원하는 시간에 맞게 수정 가능)
     }
 
     // Fever2 스킬 이펙트 생성
-    private IEnumerator DelayedFeverEffect2(MonsterBase target) {
-        // 0.7초 대기
-        yield return new WaitForSeconds(0.7f);
-
+    private async UniTaskVoid DelayedFeverEffect(MonsterBase target) {
+        await UniTask.Delay(TimeSpan.FromSeconds(0.7f), ignoreTimeScale: true);
         // 타겟 위치에 Fever2 스킬 이펙트 생성
         GameObject feverEffect2 = Instantiate(_feverSkillEffect1, target.transform.position, Quaternion.identity);
-
         // 나머지 대미지 적용 (전체 대미지의 나머지 절반)
         _playerScript.PhysicalAttack(target, 1); // 나머지 절반 대미지
-
+        await UniTask.Delay(TimeSpan.FromSeconds(1), ignoreTimeScale: true);
         // 일정 시간 후 Fever2 스킬 이펙트 제거
-        Destroy(feverEffect2, 1.0f); // 1초 후 삭제 (원하는 시간에 맞게 수정 가능)
+        Destroy(feverEffect2); // 1초 후 삭제 (원하는 시간에 맞게 수정 가능)
     }
 
-    private IEnumerator DelayedSoundEffect(AudioClip clip, float delay) {
-        // 0.7초 대기
-        yield return new WaitForSeconds(delay);
+    private async UniTaskVoid DelayedSoundEffect(AudioClip clip, float delay) {
+        await UniTask.Delay(TimeSpan.FromSeconds(delay), ignoreTimeScale: true);
         PlaySound(clip);
     }
     #endregion //private funcs

@@ -39,7 +39,7 @@ public class WoodenSword : WeaponBase {
     protected override void BasicAttackAnimation() {
         _playerScript.AttackNow(_basicDelay).Forget();
         _playerScript.ArmTrigger("Sword");
-        PlaySound(nomalattackSound);
+        PlaySound(_normalAttackSound);
     }
 
     protected override void Skill1Animation() {

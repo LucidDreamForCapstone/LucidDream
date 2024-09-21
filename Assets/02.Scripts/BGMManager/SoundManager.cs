@@ -1,13 +1,14 @@
-using System.Collections.Generic;
+using Cysharp.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.Audio;
 
-public class SoundManager : MonoBehaviour
-{
+public class SoundManager : MonoBehaviour {
     #region private variable
 
     private static SoundManager _instance;
-    [SerializeField] private AudioSource sfxSource; // SFX 재생을 위한 AudioSource
+    //[SerializeField] private AudioSource bgmSource;
+    [SerializeField] private AudioSource sfxSource_timeAffected; // SFX 재생을 위한 AudioSource
+    [SerializeField] private AudioSource sfxSource_timeIgnore; // SFX 재생을 위한 AudioSource (시간 영향 X)
     [SerializeField] private AudioMixer m_AudioMixer;
 
     #endregion // private variable
@@ -20,26 +21,16 @@ public class SoundManager : MonoBehaviour
 
     #region mono funcs
 
-    private void Awake()
-    {
-        if (_instance != null && _instance != this)
-        {
+    private void Awake() {
+        if (_instance != null && _instance != this) {
             Destroy(this.gameObject);
             return;
         }
         _instance = this;
         DontDestroyOnLoad(this.gameObject);
-
-        // Ensure sfxSource is assigned
-        if (sfxSource == null)
-        {
-            sfxSource = gameObject.AddComponent<AudioSource>();
-            sfxSource.outputAudioMixerGroup = m_AudioMixer.FindMatchingGroups("SFX")[0];
-        }
     }
 
-    void Start()
-    {
+    void Start() {
         SetVolume();
     }
 
@@ -47,44 +38,71 @@ public class SoundManager : MonoBehaviour
 
     #region public funcs
 
-    public void PlaySFX(string clipName)
-    {
+    public void PlaySFX(string clipName, bool isTimeIgnore = false) {
         // Ensure the SFX folder exists within the Resources folder.
         AudioClip clip = Resources.Load<AudioClip>($"SFX/{clipName}");
-        if (clip != null)
-        {
-            sfxSource.PlayOneShot(clip);
+        if (clip != null) {
+            if (!isTimeIgnore)
+                sfxSource_timeAffected.PlayOneShot(clip);
+            else
+                sfxSource_timeIgnore.PlayOneShot(clip);
         }
-        else
-        {
+        else {
             Debug.LogWarning($"SFX '{clipName}' not found in Resources/SFX/");
         }
     }
 
-    public void SetMasterVolume(float volume)
-    {
+
+
+    public void SetMasterVolume(float volume) {
         m_AudioMixer.SetFloat("Master", Mathf.Log10(volume) * 20);
     }
 
-    public void SetMusicVolume(float volume)
-    {
+    public void SetMusicVolume(float volume) {
         m_AudioMixer.SetFloat("BGM", Mathf.Log10(volume) * 20);
     }
 
-    public void SetSFXVolume(float volume)
-    {
+    public void SetSFXVolume(float volume) {
         m_AudioMixer.SetFloat("SFX", Mathf.Log10(volume) * 20);
+    }
+
+    public void SetSFXPitch(float pitch) {
+        m_AudioMixer.SetFloat("SFXpitch", pitch);
+    }
+
+    public async UniTaskVoid SetSFXPitchLerp(float pitch, float lerpTime) {
+        float t, newPitch, timer = 0;
+        m_AudioMixer.GetFloat("SFXpitch", out float startPitch);
+        while (timer < lerpTime) {
+            timer += Time.unscaledDeltaTime;
+            t = timer / lerpTime;
+            newPitch = Mathf.Lerp(startPitch, pitch, t);
+
+            // Audio Mixer에 새로운 Pitch 값 설정
+            m_AudioMixer.SetFloat("SFXpitch", newPitch);
+            await UniTask.NextFrame();
+        }
+    }
+
+    public void PauseSFX() {
+        sfxSource_timeAffected.Pause();
+        sfxSource_timeIgnore.Pause();
+    }
+    public void UnPauseSFX() {
+        sfxSource_timeAffected.UnPause();
+        sfxSource_timeIgnore.UnPause();
     }
 
     #endregion // public funcs
 
     #region private funcs
 
-    private void SetVolume()
-    {
-        m_AudioMixer.SetFloat("Master", Mathf.Log10(PlayerPrefsManager.Instance.GetMasterVolume()) * 20);
-        m_AudioMixer.SetFloat("BGM", Mathf.Log10(PlayerPrefsManager.Instance.GetBGMVolume()) * 20);
-        m_AudioMixer.SetFloat("SFX", Mathf.Log10(PlayerPrefsManager.Instance.GetSFXVolume()) * 20);
+    private void SetVolume() {
+        //m_AudioMixer.SetFloat("Master", Mathf.Log10(PlayerPrefsManager.Instance.GetMasterVolume()) * 20);
+        //m_AudioMixer.SetFloat("BGM", Mathf.Log10(PlayerPrefsManager.Instance.GetBGMVolume()) * 20);
+        //m_AudioMixer.SetFloat("SFX", Mathf.Log10(PlayerPrefsManager.Instance.GetSFXVolume()) * 20);
+        m_AudioMixer.SetFloat("Master", -0.08f); //Temp setting. Use upper code when save implementation is done.
+        m_AudioMixer.SetFloat("SFXpitch", 1);
     }
 
     #endregion // private funcs

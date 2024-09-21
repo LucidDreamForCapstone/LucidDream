@@ -73,7 +73,7 @@ public class AbyssStaff : WeaponBase {
 
     protected override void FeverSkillAnimation() {
         _playerScript.AttackNow(_feverDelay).Forget();
-        PlaySound(fever_Sound);
+        PlaySound(fever_Sound, false);
         FeverSkill();
     }
 

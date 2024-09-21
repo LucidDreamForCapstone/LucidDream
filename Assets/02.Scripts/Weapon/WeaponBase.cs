@@ -50,7 +50,7 @@ public abstract class WeaponBase : ItemBase {
 
     // 피버 스킬이 공격형인지 버프형인지 구분하는 플래그
     [SerializeField] protected bool _isBuffTypeFeverSkill;
-    [SerializeField] protected AudioClip nomalattackSound;     // 노말 어택 사운드
+    [SerializeField] protected AudioClip _normalAttackSound;     // 노말 어택 사운드
 
     #endregion // serialized field
 
@@ -292,10 +292,17 @@ public abstract class WeaponBase : ItemBase {
             inGameUIController.ResetFeverFill();  // Fever 게이지를 0으로 만듦
         }
     }
-    protected void PlaySound(AudioClip clip) {
+    protected void PlaySound(AudioClip clip, bool timeIgnore = true) {
         if (clip != null) {
-            SoundManager.Instance.PlaySFX(clip.name);
+            SoundManager.Instance.PlaySFX(clip.name, timeIgnore);
         }
     }
+    protected async UniTaskVoid PlaySoundDelay(AudioClip clip, float delay, bool timeIgnore = true) {
+        if (clip != null) {
+            await UniTask.Delay(TimeSpan.FromSeconds(delay), ignoreTimeScale: timeIgnore);
+            SoundManager.Instance.PlaySFX(clip.name, timeIgnore);
+        }
+    }
+
     #endregion //private funcs
 }
