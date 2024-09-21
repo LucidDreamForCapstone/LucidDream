@@ -1108,24 +1108,8 @@ PrefabInstance:
       value: HadesVolume
       objectReference: {fileID: 0}
     - target: {fileID: 2659935419491640126, guid: 4c948757fdebdb84aaccda0e023add1b, type: 3}
-      propertyPath: m_Layer
-      value: 12
-      objectReference: {fileID: 0}
-    - target: {fileID: 2659935419491640126, guid: 4c948757fdebdb84aaccda0e023add1b, type: 3}
       propertyPath: m_IsActive
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5647460778412183819, guid: 4c948757fdebdb84aaccda0e023add1b, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0.8595102
-      objectReference: {fileID: 0}
-    - target: {fileID: 5647460778412183819, guid: 4c948757fdebdb84aaccda0e023add1b, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0.12517853
-      objectReference: {fileID: 0}
-    - target: {fileID: 5647460778412183819, guid: 4c948757fdebdb84aaccda0e023add1b, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 4.170829
       objectReference: {fileID: 0}
     - target: {fileID: 5647460778412183819, guid: 4c948757fdebdb84aaccda0e023add1b, type: 3}
       propertyPath: m_LocalRotation.w

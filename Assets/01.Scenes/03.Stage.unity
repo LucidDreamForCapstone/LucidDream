@@ -24988,7 +24988,15 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 0}
     - target: {fileID: 6660471644841417567, guid: e94958180e5464f49a814b9bec5cab78, type: 3}
+      propertyPath: _phantomVolume
+      value: 
+      objectReference: {fileID: 1743802284}
+    - target: {fileID: 6660471644841417567, guid: e94958180e5464f49a814b9bec5cab78, type: 3}
       propertyPath: _phantomCoolTime
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6970874412136125351, guid: e94958180e5464f49a814b9bec5cab78, type: 3}
+      propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7977112887763442605, guid: e94958180e5464f49a814b9bec5cab78, type: 3}
@@ -35019,7 +35027,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 10.73408
+  orthographic size: 7.5
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -70997,6 +71005,11 @@ Tilemap:
     e31: 0
     e32: 0
     e33: 1
+--- !u!1 &1743802284 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6970874412136125351, guid: e94958180e5464f49a814b9bec5cab78, type: 3}
+  m_PrefabInstance: {fileID: 470268040}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1792140634
 GameObject:
   m_ObjectHideFlags: 0
@@ -81562,6 +81575,14 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3882298257011612751, guid: 02681350ffb15644288910306960a1e2, type: 3}
       propertyPath: m_Color.a
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8068953131395654308, guid: 02681350ffb15644288910306960a1e2, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8305105721574729252, guid: 02681350ffb15644288910306960a1e2, type: 3}
+      propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8712043765198850960, guid: 02681350ffb15644288910306960a1e2, type: 3}

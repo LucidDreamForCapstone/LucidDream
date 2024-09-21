@@ -23,6 +23,7 @@ public class Player : MonoBehaviour {
     [SerializeField] private float _phantomCoolTime;
     [SerializeField] private float _phantomSpeedBonus;
     [SerializeField] private GameObject _phantomGhostObj;
+    [SerializeField] private Animator _phantomVolumeAnimator;
     [SerializeField] private Color _phantomGhostColor;
     [SerializeField] private float _ghostLastTime;
     [SerializeField] private float _ghostInterval;
@@ -67,6 +68,7 @@ public class Player : MonoBehaviour {
     //private bool _isRollReady;
     private bool _isPhantomReady;
     private bool _isPhantomActivated;
+    private bool _phantomForceCancelTrigger;
     private bool _isAttacking;
     private bool _beforeFlipX;
     private bool _isStun;
@@ -102,8 +104,10 @@ public class Player : MonoBehaviour {
         MoveDir = Vector2.down;
         _isDead = false;
         _isInvincible = false;
+        _phantomVolumeAnimator.gameObject.SetActive(false);
         _isPhantomReady = true;
         _isPhantomActivated = false;
+        _phantomForceCancelTrigger = false;
         _phantomSpeedRate = 1;
         _isRollInvincible = false;//obsolete
         //_isRollReady = true;
@@ -351,6 +355,11 @@ public class Player : MonoBehaviour {
         _isCustomInvincible = false;
     }
 
+    public void PhantomForceCancel() {
+        if (_isPhantomActivated)
+            _phantomForceCancelTrigger = true;
+    }
+
     #endregion //public funcs
 
 
@@ -390,14 +399,18 @@ public class Player : MonoBehaviour {
             _isPhantomReady = false;
             float timer = 0;
             DOTween.To(() => _phantomSpeedRate, x => _phantomSpeedRate = x, _phantomSpeedBonus * 0.01f, _phantomLerpTime).ToUniTask().Forget();
+            _phantomVolumeAnimator.gameObject.SetActive(true);
             await TimeScaleManager.Instance.TimeSlowLerp(_phantomTimeScale, _phantomLerpTime);
-            while (!Input.GetKey(KeyCode.Space) && timer < _phantomLastTime) {
+            while (!Input.GetKey(KeyCode.Space) && timer < _phantomLastTime && !_phantomForceCancelTrigger) {
                 timer += Time.deltaTime;
                 await UniTask.NextFrame();
             }
             DOTween.To(() => _phantomSpeedRate, x => _phantomSpeedRate = x, 1, _phantomLerpTime).ToUniTask().Forget();
+            _phantomVolumeAnimator.SetTrigger("End");
             await TimeScaleManager.Instance.TimeRestoreLerp(_phantomLerpTime);
+            _phantomVolumeAnimator.gameObject.SetActive(false);
             _isPhantomActivated = false;
+            _phantomForceCancelTrigger = false;
             Debug.Log("Phantom OFF");
             await UniTask.Delay(TimeSpan.FromSeconds(_phantomCoolTime));
             _isPhantomReady = true;
