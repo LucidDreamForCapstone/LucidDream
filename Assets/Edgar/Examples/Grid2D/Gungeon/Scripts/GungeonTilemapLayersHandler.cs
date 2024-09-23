@@ -18,6 +18,8 @@ namespace Edgar.Unity.Examples.Gungeon {
             AddCompositeCollider(wallsTilemapObject);
 
             var floorTilemapObject = CreateTilemapGameObject("Floor", gameObject, 1);
+            int floorLayerIndex = LayerMask.NameToLayer("Floor");
+            floorTilemapObject.layer = floorLayerIndex;
             AddCompositeCollider(floorTilemapObject, true);
 
             var collideableTilemapObject = CreateTilemapGameObject("Collideable", gameObject, 2);
