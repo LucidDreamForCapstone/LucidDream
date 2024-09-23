@@ -1,5 +1,35 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!114 &-8515576749050994883
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6c2ed32ab27de784d95435e68f0cbec3, type: 3}
+  m_Name: GlitchRenderPassFeature
+  m_EditorClassIdentifier: 
+  m_Active: 1
+  settings:
+    glitchMaterial: {fileID: 2100000, guid: 09b6e6b12e3d3b84797770b7bc600fc2, type: 2}
+--- !u!114 &-3387552538375420614
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 71900b89caf13fc44849494b9a86fe5c, type: 3}
+  m_Name: GlitchRenderPassFeature
+  m_EditorClassIdentifier: 
+  m_Active: 1
+  settings:
+    glitchMaterial: {fileID: 2100000, guid: 8c01a7604c53e0449b1d59fba6a61e86, type: 2}
 --- !u!114 &-2284918250225069946
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -43,7 +73,8 @@ MonoBehaviour:
     hdrDebugViewPS: {fileID: 4800000, guid: 573620ae32aec764abd4d728906d2587, type: 3}
   m_RendererFeatures:
   - {fileID: -2284918250225069946}
-  m_RendererFeatureMap: 8610871af5564ae0
+  - {fileID: -3387552538375420614}
+  m_RendererFeatureMap: 8610871af5564ae03a052914eafefcd0
   m_UseNativeRenderPass: 0
   m_TransparencySortMode: 0
   m_TransparencySortAxis: {x: 0, y: 1, z: 0}

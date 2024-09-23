@@ -1,4 +1,4 @@
-﻿using Cysharp.Threading.Tasks;
+using Cysharp.Threading.Tasks;
 using DG.Tweening;
 using Edgar.Unity.Examples.Gungeon;
 using System;
@@ -53,7 +53,7 @@ public class Player : MonoBehaviour {
     [SerializeField] protected AudioClip dyingSound1;
     [SerializeField] protected AudioClip dyingSound2;
     [SerializeField] private AudioClip dyingEffectSound;
-    [SerializeField] private DeathUIController deathUIController; // DeathUIController 참조
+    [SerializeField] private DeathUIController deathUIController; // DeathUIController ����
     #endregion // serialized field 
 
 
@@ -198,7 +198,7 @@ public class Player : MonoBehaviour {
         monster.Damaged((int)(dmg * multiplier), isCrit);
     }
 
-    // 씬을 04.Dungeon으로 다시 로드하는 함수
+    // ���� 04.Dungeon���� �ٽ� �ε��ϴ� �Լ�
     public void ReturnToDungeon() {
         if (GungeonGameManager.Instance != null) {
             GungeonGameManager.Instance.SetIsGenerating(true);
@@ -248,18 +248,18 @@ public class Player : MonoBehaviour {
         int firstLevel = level;
         int levelExp = PlayerDataManager.Instance.Status.GetMaxExp();
         if (levelExp == -1) {
-            Debug.Log("잘못된 플레이어 레벨임");
+            Debug.Log("�߸��� �÷��̾� ������");
             return;
         }
 
         PlayerDataManager.Instance.SetExp(currentExp + gainedExp);
 
         if (level == PlayerDataManager.Instance.Status._maxLevel) {
-            Debug.Log("최대 레벨이므로 경험치를 획득할 수 없습니다.");
+            Debug.Log("�ִ� �����̹Ƿ� ����ġ�� ȹ���� �� �����ϴ�.");
         }
         else {
             while (PlayerDataManager.Instance.Status._exp >= levelExp) {
-                Debug.Log(level + "->" + (level + 1) + "로 레벨업");
+                Debug.Log(level + "->" + (level + 1) + "�� ������");
                 PlayerDataManager.Instance.SetLevel(++level);
                 PlayerDataManager.Instance.SetExp(PlayerDataManager.Instance.Status._exp - levelExp);
                 PlayerDataManager.Instance.SetMaxFeverGauge();
@@ -450,18 +450,18 @@ public class Player : MonoBehaviour {
     /*
     private async UniTaskVoid Roll() {
         if (Input.GetKeyDown(KeyCode.Space) && _isRollReady && !_isStun && !_isPause && !_isDead && !CheckWall()) {
-            //Debug.Log("구른다");
+            //Debug.Log("������");
             PlaySound(avoidSound);
             _isRollInvincible = true;
             _isRollReady = false;
             Vector3 startPos = transform.position;
             Vector3 moveVec = MoveDir * _rollDist;
             await RollMove(_rigid, startPos + moveVec, _rollLastTime);
-            //Debug.Log("구르기 완");
+            //Debug.Log("������ ��");
             _isRollInvincible = false;
             await UniTask.Delay(TimeSpan.FromSeconds(_rollCoolTime));
             _isRollReady = true;
-            //Debug.Log("구르기 쿨 돌았음");
+            //Debug.Log("������ �� ������");
         }
     }
     */
@@ -501,26 +501,26 @@ public class Player : MonoBehaviour {
     }
 
     private async UniTaskVoid Die() {
-        // Guard 아이템이 인벤토리에 있는지 확인
+        // Guard �������� �κ��丮�� �ִ��� Ȯ��
         if (InventoryManager.Instance.HasItem(ItemType.Guard)) {
-            // 체력 30% 회복
+            // ü�� 30% ȸ��
             PlaySound(GuardSound);
             PlayerDataManager.Instance.HealByMaxPercent(30);
-            // Guard 아이템 발동 이펙트 생성
+            // Guard ������ �ߵ� ����Ʈ ����
             if (guardEffectPrefab != null) {
                 Vector3 effect0Position = this.transform.position + new Vector3(0, 0.7f, 0);
-                // 이펙트 오브젝트 생성
+                // ����Ʈ ������Ʈ ����
                 GameObject effectInstance = Instantiate(guardEffectPrefab, effect0Position, Quaternion.identity);
 
-                // 이펙트를 플레이어의 자식 오브젝트로 설정
+                // ����Ʈ�� �÷��̾��� �ڽ� ������Ʈ�� ����
                 effectInstance.transform.SetParent(this.transform);
             }
             _controller.offGuard();
-            // Guard 아이템 인벤토리에서 제거
+            // Guard ������ �κ��丮���� ����
             InventoryManager.Instance.RemoveItem(ItemType.Guard);
         }
         else {
-            Debug.Log("플레이어 사망");
+            Debug.Log("�÷��̾� ���");
             _isDead = true;
             AudioClip selectedDyingClip = Random.Range(0, 2) == 0 ? dyingSound1 : dyingSound2;
             PlaySoundDelay(selectedDyingClip, 1.4f).Forget();
@@ -533,20 +533,20 @@ public class Player : MonoBehaviour {
             _animator.SetTrigger("Die");
             _armAnimator.SetTrigger("Die");
             await UniTask.Delay(TimeSpan.FromSeconds(2.5f));
-            deathUIController.ShowDeathUI().Forget();
+            deathUIController.ShowDeathUI();
         }
     }
 
     private async UniTaskVoid Invincibility() {
         _isInvincible = true;
-        //Debug.Log("무적 상태 돌입");
+        //Debug.Log("���� ���� ����");
         _spriteRenderer.DOColor(_invincibleColor, 0.1f).ToUniTask().Forget();
         _leftArmRenderer.color = _invincibleColor;
         _rightArmRenderer.color = _invincibleColor;
         PlayerWeaponManager.Instance.GetEquippedWeapon().SetWeaponColor(_invincibleColor);
         await UniTask.Delay(TimeSpan.FromSeconds(_invincibleLastTime));
         _isInvincible = false;
-        //Debug.Log("무적 상태 해제");
+        //Debug.Log("���� ���� ����");
         PlayerWeaponManager.Instance.GetEquippedWeapon().SetWeaponColor(Color.white);
         _rightArmRenderer.color = Color.white;
         _leftArmRenderer.color = Color.white;

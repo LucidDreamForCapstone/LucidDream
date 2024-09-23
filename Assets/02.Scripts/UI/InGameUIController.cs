@@ -1,3 +1,5 @@
+using Cysharp.Threading.Tasks;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
@@ -32,16 +34,16 @@ public class InGameUIController : MonoBehaviour {
     [SerializeField] private GameObject playerStatusUI;
     [SerializeField] private GameObject _showGuard;
 
-    [SerializeField] private Image[] skillImages = new Image[4];  // 4°³ÀÇ ½ºÅ³ ½½·Ô ÀÌ¹ÌÁö
-    [SerializeField] private Image[] standSkillInven = new Image[4];   // 4°³ÀÇ ³ë¸» ½ºÅ³ ÀÎº¥ ÀÌ¹ÌÁö.
-    [SerializeField] private Image[] standSkillInform = new Image[4];   // 4°³ÀÇ ³ë¸» ½ºÅ³ ¼³¸í ÀÌ¹ÌÁö.
-    [SerializeField] private TMP_Text[] skillTexts = new TMP_Text[4]; // 4°³ÀÇ ½ºÅ³ ¼³¸í ÅØ½ºÆ®
+    [SerializeField] private Image[] skillImages = new Image[4];  // 4ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Å³ ï¿½ï¿½ï¿½ï¿½ ï¿½Ì¹ï¿½ï¿½ï¿½
+    [SerializeField] private Image[] standSkillInven = new Image[4];   // 4ï¿½ï¿½ï¿½ï¿½ ï¿½ë¸» ï¿½ï¿½Å³ ï¿½Îºï¿½ ï¿½Ì¹ï¿½ï¿½ï¿½.
+    [SerializeField] private Image[] standSkillInform = new Image[4];   // 4ï¿½ï¿½ï¿½ï¿½ ï¿½ë¸» ï¿½ï¿½Å³ ï¿½ï¿½ï¿½ï¿½ ï¿½Ì¹ï¿½ï¿½ï¿½.
+    [SerializeField] private TMP_Text[] skillTexts = new TMP_Text[4]; // 4ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Å³ ï¿½ï¿½ï¿½ï¿½ ï¿½Ø½ï¿½Æ®
 
-    [SerializeField] private Image feverFillImage; // fever °ÔÀÌÁö Fill Image
+    [SerializeField] private Image feverFillImage; // fever ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ Fill Image
 
     [SerializeField] private Image[] skillCooldownImages = new Image[4];
     [SerializeField] private Image[] skillCooldownUnderlay = new Image[4];
-    [SerializeField] private TMP_Text notificationText; // "¹üÀ§ ³»¿¡ ÀûÀÌ ¾ø½À´Ï´Ù."¸¦ Ç¥½ÃÇÒ UI ÅØ½ºÆ®
+    [SerializeField] private TMP_Text notificationText; // "ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï´ï¿½."ï¿½ï¿½ Ç¥ï¿½ï¿½ï¿½ï¿½ UI ï¿½Ø½ï¿½Æ®
 
     [SerializeField] private Sprite lockedSkillImage;
 
@@ -54,9 +56,9 @@ public class InGameUIController : MonoBehaviour {
     #region private variables
 
     private int _levelUpCount = 0;
-    //private bool[] skillLocks = new bool[4];  // °¢ ½ºÅ³ Àá±è »óÅÂ¸¦ ÀúÀå
-    private float[] skillCooldownTimes = new float[4];  // ½ºÅ³º° Äð´Ù¿î ½Ã°£
-    private float[] skillMaxCooldowns = new float[4];   // ½ºÅ³º° ÃÖ´ë ÄðÅ¸ÀÓ ÀúÀå.
+    //private bool[] skillLocks = new bool[4];  // ï¿½ï¿½ ï¿½ï¿½Å³ ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Â¸ï¿½ ï¿½ï¿½ï¿½ï¿½
+    private float[] skillCooldownTimes = new float[4];  // ï¿½ï¿½Å³ï¿½ï¿½ ï¿½ï¿½Ù¿ï¿½ ï¿½Ã°ï¿½
+    private float[] skillMaxCooldowns = new float[4];   // ï¿½ï¿½Å³ï¿½ï¿½ ï¿½Ö´ï¿½ ï¿½ï¿½Å¸ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½.
     private Coroutine[] skillCoroutines = new Coroutine[4];
     private float[] remainingCooldownTimes = new float[4];
     private Coroutine fadeCoroutine;
@@ -74,7 +76,7 @@ public class InGameUIController : MonoBehaviour {
             //SetHP(PlayerDataManager.Instance.Status._hp, PlayerDataManager.Instance.Status._maxHp);
             SetCoin(0);
             SetLevel(1);
-            SetFever(0, 100); // ÇÇ¹ö°ÔÀÌÁö ÀÏ´Ü 0/100À¸·Î ¸¸µé±â
+            SetFever(0, 100); // ï¿½Ç¹ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ï´ï¿½ 0/100ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½
         });
         InitializeCardUI();
         inventoryManager = FindObjectOfType<InventoryManager>();
@@ -82,21 +84,21 @@ public class InGameUIController : MonoBehaviour {
 
     public void Update() {
 
-        // Tab Å°°¡ ´­¸®´Â µ¿¾È ÇÃ·¹ÀÌ¾î ½ºÅÈ UI¸¦ º¸ÀÌ°Ô ÇÔ
+        // Tab Å°ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ã·ï¿½ï¿½Ì¾ï¿½ ï¿½ï¿½ï¿½ï¿½ UIï¿½ï¿½ ï¿½ï¿½ï¿½Ì°ï¿½ ï¿½ï¿½
         if (Input.GetKey(KeyCode.Tab)) {
-            // Tab Å°¸¦ ´©¸£°í ÀÖÀ» ¶§ ÇÃ·¹ÀÌ¾î ½ºÅÈÀ» °»½ÅÇÏ°í UI¸¦ È°¼ºÈ­
+            // Tab Å°ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½Ã·ï¿½ï¿½Ì¾ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï°ï¿½ UIï¿½ï¿½ È°ï¿½ï¿½È­
             playerStatusUI.SetActive(true);
             SetPlayerStatus(
-                PlayerDataManager.Instance.GetFinalAd(),               // ÃÖÁ¾ AD
-                PlayerDataManager.Instance.GetFinalAp(),               // ÃÖÁ¾ AP
-                PlayerDataManager.Instance.Status._def,                // ¹æ¾î·Â (Á÷Á¢ »ç¿ë)
-                PlayerDataManager.Instance.GetFinalMoveSpeed(),        // ÃÖÁ¾ ÀÌµ¿ ¼Óµµ
-                PlayerDataManager.Instance.GetFinalCritChance(),       // ÃÖÁ¾ Ä¡¸íÅ¸ È®·ü
-                PlayerDataManager.Instance.GetFinalCritDamage()        // ÃÖÁ¾ Ä¡¸íÅ¸ µ¥¹ÌÁö
+                PlayerDataManager.Instance.GetFinalAd(),               // ï¿½ï¿½ï¿½ï¿½ AD
+                PlayerDataManager.Instance.GetFinalAp(),               // ï¿½ï¿½ï¿½ï¿½ AP
+                PlayerDataManager.Instance.Status._def,                // ï¿½ï¿½ï¿½ï¿½ (ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½)
+                PlayerDataManager.Instance.GetFinalMoveSpeed(),        // ï¿½ï¿½ï¿½ï¿½ ï¿½Ìµï¿½ ï¿½Óµï¿½
+                PlayerDataManager.Instance.GetFinalCritChance(),       // ï¿½ï¿½ï¿½ï¿½ Ä¡ï¿½ï¿½Å¸ È®ï¿½ï¿½
+                PlayerDataManager.Instance.GetFinalCritDamage()        // ï¿½ï¿½ï¿½ï¿½ Ä¡ï¿½ï¿½Å¸ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
             );
         }
         else if (Input.GetKeyUp(KeyCode.Tab)) {
-            // Tab Å°¸¦ ¶¼¸é UI¸¦ ¼û±è
+            // Tab Å°ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ UIï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
             playerStatusUI.SetActive(false);
         }
     }
@@ -123,7 +125,7 @@ public class InGameUIController : MonoBehaviour {
 
     public void SetFever(int currFever, int maxFever) {
         _feverSlider.value = (float)currFever / (float)maxFever;
-        feverFillImage.fillAmount = _feverSlider.value;  // Fill Amount ¾÷µ¥ÀÌÆ®
+        feverFillImage.fillAmount = _feverSlider.value;  // Fill Amount ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ®
     }
 
     public void SetDream(int dream) {
@@ -137,13 +139,13 @@ public class InGameUIController : MonoBehaviour {
         _texts[(int)TextType.PlayerStatus].text = statusText;
     }
 
-    public void ShowCardSelect(List<Card> cards, int levelUpCount) { // Ä«µå ¼±ÅÃ UI È£Ãâ ÇÔ¼ö
+    public void ShowCardSelect(List<Card> cards, int levelUpCount) { // Ä«ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ UI È£ï¿½ï¿½ ï¿½Ô¼ï¿½
         _levelUpCount = levelUpCount;
         _cardUIController.SetShow(cards);
         --_levelUpCount;
     }
     public void ResetFeverFill() {
-        feverFillImage.fillAmount = 0;  // Fill Amount¸¦ 0À¸·Î ¼³Á¤
+        feverFillImage.fillAmount = 0;  // Fill Amountï¿½ï¿½ 0ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
     }
     public void ClearSkillUI() {
         for (int i = 0; i < skillImages.Length; i++) {
@@ -171,11 +173,11 @@ public class InGameUIController : MonoBehaviour {
             }
             else {
                 skillCooldownUnderlay[i].sprite = newUnderlay[i];
-                // °¢ ½ºÅ³ ¾ÆÀÌÄÜ°ú ¼³¸íÀ» ¾÷µ¥ÀÌÆ®
+                // ï¿½ï¿½ ï¿½ï¿½Å³ ï¿½ï¿½ï¿½ï¿½ï¿½Ü°ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ®
                 skillTooltip.SetSkillLocked(skillLocks[i]);
                 skillImages[i].sprite = newSkillIcons[i];
                 standSkillInform[i].sprite = newSkillInform[i];
-                skillTexts[i].text = newSkillDescriptions[i]; // ÅØ½ºÆ® ¾÷µ¥ÀÌÆ®
+                skillTexts[i].text = newSkillDescriptions[i]; // ï¿½Ø½ï¿½Æ® ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ®
                 skillTooltip = skillImages[i].GetComponent<SkillTooltip>();
                 skillTooltip.SetSkillDescription(newSkillDescriptions[i]);
             }
@@ -202,21 +204,21 @@ public class InGameUIController : MonoBehaviour {
     #endregion
 
     public float GetRemainingCooldown(int skillIndex) {
-        // skillIndex´Â ½ºÅ³ÀÇ ÀÎµ¦½º. ¿¹: 0 = ±âº» °ø°Ý, 1 = ½ºÅ³ 1, 2 = ½ºÅ³ 2, 3 = ÇÇ¹ö ½ºÅ³ µî.
+        // skillIndexï¿½ï¿½ ï¿½ï¿½Å³ï¿½ï¿½ ï¿½Îµï¿½ï¿½ï¿½. ï¿½ï¿½: 0 = ï¿½âº» ï¿½ï¿½ï¿½ï¿½, 1 = ï¿½ï¿½Å³ 1, 2 = ï¿½ï¿½Å³ 2, 3 = ï¿½Ç¹ï¿½ ï¿½ï¿½Å³ ï¿½ï¿½.
 
-        // À¯È¿ÇÑ ÀÎµ¦½ºÀÎÁö Ã¼Å©
+        // ï¿½ï¿½È¿ï¿½ï¿½ ï¿½Îµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ Ã¼Å©
         if (skillIndex >= 0 && skillIndex < remainingCooldownTimes.Length) {
-            // ÇØ´ç ½ºÅ³ÀÇ ³²Àº ÄðÅ¸ÀÓÀ» ¹ÝÈ¯
+            // ï¿½Ø´ï¿½ ï¿½ï¿½Å³ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Å¸ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½È¯
             return remainingCooldownTimes[skillIndex];
         }
 
-        // À¯È¿ÇÏÁö ¾ÊÀº ÀÎµ¦½ºÀÏ °æ¿ì 0À» ¹ÝÈ¯
+        // ï¿½ï¿½È¿ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Îµï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ 0ï¿½ï¿½ ï¿½ï¿½È¯
         return 0f;
     }
-    // ¹®±¸ Ç¥½Ã ¸Þ¼­µå
+    // ï¿½ï¿½ï¿½ï¿½ Ç¥ï¿½ï¿½ ï¿½Þ¼ï¿½ï¿½ï¿½
     public void ShowNotification(string message, float duration) {
         if (fadeCoroutine != null) {
-            StopCoroutine(fadeCoroutine); // ÀÌÀü ÄÚ·çÆ¾ÀÌ ÀÖÀ¸¸é ¸ØÃã
+            StopCoroutine(fadeCoroutine); // ï¿½ï¿½ï¿½ï¿½ ï¿½Ú·ï¿½Æ¾ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
         }
 
         fadeCoroutine = StartCoroutine(ShowNotificationRoutine(message, duration));
@@ -240,7 +242,8 @@ public class InGameUIController : MonoBehaviour {
     }
 
 
-    private void OnClick_Card(Card card) {
+    private async void OnClick_Card(Card card) {
+        Debug.Log("Ä«ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ñ´ï¿½");
         CardManage.Instance.ApplyCard(card);
 
         if (1 <= _levelUpCount) {
@@ -253,65 +256,70 @@ public class InGameUIController : MonoBehaviour {
     }
 
 
-    // ½ºÅ³ ÄðÅ¸ÀÓ UI ¾÷µ¥ÀÌÆ® ·çÆ¾
+    // ï¿½ï¿½Å³ ï¿½ï¿½Å¸ï¿½ï¿½ UI ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ® ï¿½ï¿½Æ¾
     private IEnumerator SkillCooldownRoutine(int skillIndex, float remainingCooldown) {
-        float elapsedTime = 0f;  // °æ°ú ½Ã°£ ÃÊ±âÈ­
+        float elapsedTime = 0f;  // ï¿½ï¿½ï¿½ ï¿½Ã°ï¿½ ï¿½Ê±ï¿½È­
 
-        // ÃÊ±â ½ºÅ³ ¾ÆÀÌÄÜÀÇ fillAmount¸¦ 0À¸·Î ¼³Á¤ÇÏ¿© ºñ¾îÀÖ´Â »óÅÂ·Î ½ÃÀÛ
+        // ï¿½Ê±ï¿½ ï¿½ï¿½Å³ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ fillAmountï¿½ï¿½ 0ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï¿ï¿½ ï¿½ï¿½ï¿½ï¿½Ö´ï¿½ ï¿½ï¿½ï¿½Â·ï¿½ ï¿½ï¿½ï¿½ï¿½
         skillCooldownImages[skillIndex].fillAmount = 0f;
 
         while (elapsedTime < remainingCooldown) {
-            elapsedTime += Time.deltaTime;  // °æ°ú ½Ã°£ Áõ°¡
-            float fillAmount = Mathf.Lerp(0f, 1f, elapsedTime / remainingCooldown);  // Á¡ÁøÀûÀ¸·Î 1·Î Áõ°¡
-            skillCooldownImages[skillIndex].fillAmount = fillAmount;  // ½ºÅ³ ¾ÆÀÌÄÜÀÇ fillAmount¸¦ ¾÷µ¥ÀÌÆ®
+            elapsedTime += Time.deltaTime;  // ï¿½ï¿½ï¿½ ï¿½Ã°ï¿½ ï¿½ï¿½ï¿½ï¿½
+            float fillAmount = Mathf.Lerp(0f, 1f, elapsedTime / remainingCooldown);  // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ 1ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
+            skillCooldownImages[skillIndex].fillAmount = fillAmount;  // ï¿½ï¿½Å³ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ fillAmountï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ®
 
-            // ³²Àº ÄðÅ¸ÀÓ °è»ê
+            // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Å¸ï¿½ï¿½ ï¿½ï¿½ï¿½
             remainingCooldownTimes[skillIndex] = remainingCooldown - elapsedTime;
 
-            yield return null;  // ÇÑ ÇÁ·¹ÀÓ ´ë±â
+            yield return null;  // ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½
         }
 
-        // ÄðÅ¸ÀÓÀÌ ³¡³ª¸é ³²Àº ÄðÅ¸ÀÓÀ» 0À¸·Î ¼³Á¤
+        // ï¿½ï¿½Å¸ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Å¸ï¿½ï¿½ï¿½ï¿½ 0ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
         remainingCooldownTimes[skillIndex] = 0f;
         skillCooldownImages[skillIndex].fillAmount = 1f;
     }
 
 
     private IEnumerator ShowNotificationRoutine(string message, float displayDuration) {
-        // ÅØ½ºÆ® ¼³Á¤ ¹× ÃÊ±â ¾ËÆÄ°ª ¼³Á¤ (Åõ¸í)
+        // ï¿½Ø½ï¿½Æ® ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½Ê±ï¿½ ï¿½ï¿½ï¿½Ä°ï¿½ ï¿½ï¿½ï¿½ï¿½ (ï¿½ï¿½ï¿½ï¿½)
         notificationText.text = message;
         Color color = notificationText.color;
         color.a = 0f;
         notificationText.color = color;
 
         // Fade in (0 -> 1)
-        float fadeInDuration = 0.2f; // fade in ½Ã°£
+        float fadeInDuration = 0.2f; // fade in ï¿½Ã°ï¿½
         for (float t = 0; t < fadeInDuration; t += Time.deltaTime) {
             color.a = Mathf.Lerp(0f, 1f, t / fadeInDuration);
             notificationText.color = color;
             yield return null;
         }
 
-        // ¾ËÆÄ°ªÀ» 1·Î °íÁ¤
+        // ï¿½ï¿½ï¿½Ä°ï¿½ï¿½ï¿½ 1ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
         color.a = 1f;
         notificationText.color = color;
 
-        // ÁöÁ¤µÈ ½Ã°£ µ¿¾È ÅØ½ºÆ® Ç¥½Ã
+        // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ã°ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ø½ï¿½Æ® Ç¥ï¿½ï¿½
         yield return new WaitForSeconds(displayDuration);
 
         // Fade out (1 -> 0)
-        float fadeOutDuration = 0.2f; // fade out ½Ã°£
+        float fadeOutDuration = 0.2f; // fade out ï¿½Ã°ï¿½
         for (float t = 0; t < fadeOutDuration; t += Time.deltaTime) {
             color.a = Mathf.Lerp(1f, 0f, t / fadeOutDuration);
             notificationText.color = color;
             yield return null;
         }
 
-        // ¾ËÆÄ°ªÀ» 0À¸·Î °íÁ¤ (ÅØ½ºÆ® ¼û±è)
+        // ï¿½ï¿½ï¿½Ä°ï¿½ï¿½ï¿½ 0ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ (ï¿½Ø½ï¿½Æ® ï¿½ï¿½ï¿½ï¿½)
         color.a = 0f;
         notificationText.color = color;
 
-        fadeCoroutine = null; // ÄÚ·çÆ¾ Á¾·á ÈÄ null·Î ¼³Á¤
+        fadeCoroutine = null; // ï¿½Ú·ï¿½Æ¾ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ nullï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
     }
+
+    private async UniTask WaitTime(float waitTime) {
+        await UniTask.Delay(TimeSpan.FromSeconds(waitTime), ignoreTimeScale: true);
+    }
+
     #endregion // private funcs
 }

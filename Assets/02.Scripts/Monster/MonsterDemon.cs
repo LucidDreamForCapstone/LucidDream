@@ -33,7 +33,6 @@ public class MonsterDemon : MonsterBase {
 
     new private void OnEnable() {
         base.OnEnable();
-        Spawn().Forget();
         _isFiring = false;
         _isFireReady = true;
         _fireDelay = 0.5f;
@@ -52,7 +51,7 @@ public class MonsterDemon : MonsterBase {
 
     protected override void AttackMove() {
         double dist = CalculateManhattanDist(transform.position, _playerScript.transform.position);
-        if (!_isFiring && !_isDead && !_isStun && _isSpawnComplete && dist < _searchRange) {
+        if (!_isFiring && !_isDead && !_isStun && dist < _searchRange) {
             Vector2 moveVec = _playerScript.transform.position - transform.position;
 
             if (moveVec.x < 0)

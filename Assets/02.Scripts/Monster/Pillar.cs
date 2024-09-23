@@ -10,7 +10,9 @@ public class Pillar : MonsterBase {
 
     new private void OnEnable() {
         base.OnEnable();
-        Spawn().Forget();
+        Color32 startColor = new Color32(255, 255, 255, 0);
+        _spriteRenderer.color = startColor;
+        _spriteRenderer.DOColor(Color.white, 1.5f);
     }
 
     private void Update() {
