@@ -912,6 +912,38 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4645033308570180254, guid: bd8e2cae69c02d544accfc903dd465af, type: 3}
+      propertyPath: _status._ad
+      value: 1200
+      objectReference: {fileID: 0}
+    - target: {fileID: 4645033308570180254, guid: bd8e2cae69c02d544accfc903dd465af, type: 3}
+      propertyPath: _status._hp
+      value: 1200
+      objectReference: {fileID: 0}
+    - target: {fileID: 4645033308570180254, guid: bd8e2cae69c02d544accfc903dd465af, type: 3}
+      propertyPath: _status._def
+      value: 40
+      objectReference: {fileID: 0}
+    - target: {fileID: 4645033308570180254, guid: bd8e2cae69c02d544accfc903dd465af, type: 3}
+      propertyPath: _status._coin
+      value: 350
+      objectReference: {fileID: 0}
+    - target: {fileID: 4645033308570180254, guid: bd8e2cae69c02d544accfc903dd465af, type: 3}
+      propertyPath: _status._maxHp
+      value: 1200
+      objectReference: {fileID: 0}
+    - target: {fileID: 4645033308570180254, guid: bd8e2cae69c02d544accfc903dd465af, type: 3}
+      propertyPath: _status._moveSpeed
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 4645033308570180254, guid: bd8e2cae69c02d544accfc903dd465af, type: 3}
+      propertyPath: _status._critChance
+      value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 4645033308570180254, guid: bd8e2cae69c02d544accfc903dd465af, type: 3}
+      propertyPath: _status._critDamage
+      value: 500
+      objectReference: {fileID: 0}
     - target: {fileID: 6019060939435797515, guid: bd8e2cae69c02d544accfc903dd465af, type: 3}
       propertyPath: m_Name
       value: GameManager

@@ -10,7 +10,7 @@
     <ProductVersion>10.0.20506</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <RootNamespace></RootNamespace>
-    <ProjectGuid>{839865B6-0F01-4FE8-1988-CF98E6C8B61E}</ProjectGuid>
+    <ProjectGuid>{364ED3D9-3A36-8BF1-0941-00CBFCBF80C6}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <AssemblyName>Assembly-CSharp-firstpass</AssemblyName>
@@ -1170,39 +1170,39 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="UniTask.Addressables.csproj">
-      <Project>{CA376459-7CA3-031C-DC38-8E77F73372AA}</Project>
+      <Project>{66AE8A1F-FE71-EB9E-377B-B050B9B978EA}</Project>
       <Name>UniTask.Addressables</Name>
     </ProjectReference>
     <ProjectReference Include="Edgar.Unity.Examples.csproj">
-      <Project>{6A917ABA-1111-60E6-B71F-D0CC8A0321B5}</Project>
+      <Project>{5ABECC2A-FFA1-6AD6-3243-3B8206E52ECB}</Project>
       <Name>Edgar.Unity.Examples</Name>
     </ProjectReference>
     <ProjectReference Include="UniTask.csproj">
-      <Project>{8781DA5A-928A-C6BC-9805-48075D619B6A}</Project>
+      <Project>{DE860022-E730-589D-2EA3-D9B52CAA3E13}</Project>
       <Name>UniTask</Name>
     </ProjectReference>
     <ProjectReference Include="UniTask.TextMeshPro.csproj">
-      <Project>{DF9030BD-EFF5-681B-B07C-B02B7149217A}</Project>
+      <Project>{CC88EF5D-A142-FA5B-0A32-4ACA59C16D2B}</Project>
       <Name>UniTask.TextMeshPro</Name>
     </ProjectReference>
     <ProjectReference Include="Edgar.Unity.FogOfWar.URP.csproj">
-      <Project>{A40A386D-6751-D89B-1876-81BD793F6E79}</Project>
+      <Project>{5D1EF580-933C-CE30-416B-DD7A92F63421}</Project>
       <Name>Edgar.Unity.FogOfWar.URP</Name>
     </ProjectReference>
     <ProjectReference Include="UniTask.Linq.csproj">
-      <Project>{530A31FD-D193-5E54-3AB0-635BA160ECF3}</Project>
+      <Project>{D4203A56-6D9B-0F2F-F57E-80A4128A0247}</Project>
       <Name>UniTask.Linq</Name>
     </ProjectReference>
     <ProjectReference Include="Edgar.Unity.Editor.csproj">
-      <Project>{C83F321B-1ACC-4041-7F2D-08E42582C468}</Project>
+      <Project>{A1A25200-2719-5242-AF00-FAF26EFB82AF}</Project>
       <Name>Edgar.Unity.Editor</Name>
     </ProjectReference>
     <ProjectReference Include="Edgar.Unity.csproj">
-      <Project>{6FD54C53-FFF2-1EFD-22AC-285637F5FBC7}</Project>
+      <Project>{97D8BC59-AE07-00BF-6984-2C5F5EC05E4E}</Project>
       <Name>Edgar.Unity</Name>
     </ProjectReference>
     <ProjectReference Include="UniTask.DOTween.csproj">
-      <Project>{4C69F461-E9E1-3F9F-1B72-0A573679DC42}</Project>
+      <Project>{44C17562-2AB8-7629-D89B-C7A4AB97AEBC}</Project>
       <Name>UniTask.DOTween</Name>
     </ProjectReference>
   </ItemGroup>

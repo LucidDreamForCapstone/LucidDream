@@ -10,7 +10,7 @@
     <ProductVersion>10.0.20506</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <RootNamespace></RootNamespace>
-    <ProjectGuid>{6FD54C53-FFF2-1EFD-22AC-285637F5FBC7}</ProjectGuid>
+    <ProjectGuid>{97D8BC59-AE07-00BF-6984-2C5F5EC05E4E}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <AssemblyName>Edgar.Unity</AssemblyName>

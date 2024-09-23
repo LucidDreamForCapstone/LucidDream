@@ -10,7 +10,7 @@
     <ProductVersion>10.0.20506</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <RootNamespace></RootNamespace>
-    <ProjectGuid>{7198FD21-8A2F-9727-D0A9-F827ACB72291}</ProjectGuid>
+    <ProjectGuid>{91E39937-81D6-F21D-2E8E-810928629D8C}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <AssemblyName>Assembly-CSharp</AssemblyName>
@@ -75,6 +75,7 @@
     <Compile Include="Assets\02.Scripts\UI\UIBase.cs" />
     <Compile Include="Assets\02.Scripts\Player\PlayerDeathUI.cs" />
     <Compile Include="Assets\02.Scripts\Item\ItemData.cs" />
+    <Compile Include="Assets\02.Scripts\BGMManager\SoundManager.cs" />
     <Compile Include="Assets\02.Scripts\Monster\MonsterBody.cs" />
     <Compile Include="Assets\02.Scripts\ShopItem\ShopItemBase.cs" />
     <Compile Include="Assets\02.Scripts\Monster\MonsterStoneGolem.cs" />
@@ -88,7 +89,6 @@
     <Compile Include="Assets\JMO Assets\Cartoon FX (legacy)\Scripts\CFX_LightFlicker.cs" />
     <Compile Include="Assets\02.Scripts\Weapon\WoodenSword.cs" />
     <Compile Include="Assets\02.Scripts\Weapon\AbyssStaff.cs" />
-    <Compile Include="Assets\02.Scripts\BGMMAnager\LobbyManager.cs" />
     <Compile Include="Assets\02.Scripts\Item\KeySystem.cs" />
     <Compile Include="Assets\02.Scripts\Etc\SystemManager.cs" />
     <Compile Include="Assets\02.Scripts\Etc\WarpPoint_Dungeon.cs" />
@@ -117,6 +117,7 @@
     <Compile Include="Assets\02.Scripts\Monster\LaserData.cs" />
     <Compile Include="Assets\02.Scripts\Etc\Common.cs" />
     <Compile Include="Assets\02.Scripts\Monster\BossHades.cs" />
+    <Compile Include="Assets\07.Shader\Glitch\CustomRenderPassFeature.cs" />
     <Compile Include="Assets\JMO Assets\Cartoon FX (legacy)\Demo\Assets\CFX_Demo_New.cs" />
     <Compile Include="Assets\02.Scripts\Etc\ObjectPool.cs" />
     <Compile Include="Assets\02.Scripts\Etc\FloatingText.cs" />
@@ -125,10 +126,11 @@
     <Compile Include="Assets\02.Scripts\Interact\Interactable.cs" />
     <Compile Include="Assets\02.Scripts\Etc\CameraManager.cs" />
     <Compile Include="Assets\JMO Assets\Cartoon FX (legacy)\Demo\Assets\CFX_Demo_RandomDir.cs" />
-    <Compile Include="Assets\02.Scripts\BGMMAnager\SoundManager.cs" />
     <Compile Include="Assets\02.Scripts\Weapon\WolfSword.cs" />
     <Compile Include="Assets\02.Scripts\CardManager\CardManage.cs" />
+    <Compile Include="Assets\02.Scripts\BGMManager\BGMManger.cs" />
     <Compile Include="Assets\02.Scripts\Monster\HadesSoundControl.cs" />
+    <Compile Include="Assets\07.Shader\Glitch\Glith.cs" />
     <Compile Include="Assets\02.Scripts\Weapon\WeaponText.cs" />
     <Compile Include="Assets\02.Scripts\Player\PlayerStatus.cs" />
     <Compile Include="Assets\02.Scripts\Weapon\Arondight.cs" />
@@ -138,7 +140,6 @@
     <Compile Include="Assets\JMO Assets\Cartoon FX (legacy)\Demo\Assets\CFX_Demo_RotateCamera.cs" />
     <Compile Include="Assets\02.Scripts\Interact\Chest_Shop.cs" />
     <Compile Include="Assets\02.Scripts\Item\Dream.cs" />
-    <Compile Include="Assets\02.Scripts\BGMMAnager\BGMManger.cs" />
     <Compile Include="Assets\02.Scripts\UI\CardUI.cs" />
     <Compile Include="Assets\JMO Assets\Cartoon FX (legacy)\Scripts\CFX_AutoDestructShuriken.cs" />
     <Compile Include="Assets\02.Scripts\Interact\Chest.cs" />
@@ -148,8 +149,10 @@
     <Compile Include="Assets\02.Scripts\Monster\Pillar.cs" />
     <Compile Include="Assets\02.Scripts\Bullet\ExplosiveBullet.cs" />
     <Compile Include="Assets\02.Scripts\UI\StageSelectController.cs" />
+    <Compile Include="Assets\02.Scripts\BGMManager\LobbyManager.cs" />
     <Compile Include="Assets\JMO Assets\Cartoon FX (legacy)\Demo\Assets\CFX_Demo_Translate.cs" />
     <Compile Include="Assets\JMO Assets\Cartoon FX (legacy)\Scripts\CFX2_AutoRotate.cs" />
+    <Compile Include="Assets\07.Shader\Glitch\GlitchRenderPassFeature.cs" />
     <Compile Include="Assets\JMO Assets\Cartoon FX (legacy)\Demo\Assets\CFX_AutoStopLoopedEffect.cs" />
     <Compile Include="Assets\JMO Assets\Cartoon FX (legacy)\Demo\Assets\CFX2_Demo.cs" />
     <Compile Include="Assets\02.Scripts\Monster\Laser.cs" />
@@ -171,6 +174,7 @@
     <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF SSD.shader" />
     <None Include="Assets\JMO Assets\Cartoon FX (legacy)\CartoonFX3 Readme.txt" />
     <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Surface-Mobile.shader" />
+    <None Include="Assets\07.Shader" />
     <None Include="Assets\JMO Assets\Cartoon FX (legacy)\Shaders\CFXM_MobileParticleAlphaBlend_Alpha8.shader" />
     <None Include="Assets\JMO Assets\Cartoon FX (legacy)\CartoonFX Readme.txt" />
     <None Include="Assets\JMO Assets\Cartoon FX (legacy)\Shaders\CFX4 Hidden.shader" />
@@ -186,6 +190,7 @@
     <None Include="Assets\TextMesh Pro\Resources\LineBreaking Following Characters.txt" />
     <None Include="Assets\JMO Assets\Cartoon FX (legacy)\Shaders\CFX4 Particle AlphaBlend+Add VColor.shader" />
     <None Include="Assets\JMO Assets\Cartoon FX (legacy)\Shaders\CFX2 Particle Alpha Blend Tint.shader" />
+    <None Include="Assets\07.Shader\Glitch\Glitch.Shader" />
     <None Include="Assets\JMO Assets\Cartoon FX (legacy)\Shaders\CFXM_MobileParticleAdd_Alpha8.shader" />
     <None Include="Assets\JMO Assets\Cartoon FX (legacy)\Shaders\CFX3 Invert.shader" />
     <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Mobile Masking.shader" />
@@ -1283,43 +1288,43 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="Assembly-CSharp-firstpass.csproj">
-      <Project>{839865B6-0F01-4FE8-1988-CF98E6C8B61E}</Project>
+      <Project>{364ED3D9-3A36-8BF1-0941-00CBFCBF80C6}</Project>
       <Name>Assembly-CSharp-firstpass</Name>
     </ProjectReference>
     <ProjectReference Include="UniTask.Addressables.csproj">
-      <Project>{CA376459-7CA3-031C-DC38-8E77F73372AA}</Project>
+      <Project>{66AE8A1F-FE71-EB9E-377B-B050B9B978EA}</Project>
       <Name>UniTask.Addressables</Name>
     </ProjectReference>
     <ProjectReference Include="Edgar.Unity.Examples.csproj">
-      <Project>{6A917ABA-1111-60E6-B71F-D0CC8A0321B5}</Project>
+      <Project>{5ABECC2A-FFA1-6AD6-3243-3B8206E52ECB}</Project>
       <Name>Edgar.Unity.Examples</Name>
     </ProjectReference>
     <ProjectReference Include="UniTask.csproj">
-      <Project>{8781DA5A-928A-C6BC-9805-48075D619B6A}</Project>
+      <Project>{DE860022-E730-589D-2EA3-D9B52CAA3E13}</Project>
       <Name>UniTask</Name>
     </ProjectReference>
     <ProjectReference Include="UniTask.TextMeshPro.csproj">
-      <Project>{DF9030BD-EFF5-681B-B07C-B02B7149217A}</Project>
+      <Project>{CC88EF5D-A142-FA5B-0A32-4ACA59C16D2B}</Project>
       <Name>UniTask.TextMeshPro</Name>
     </ProjectReference>
     <ProjectReference Include="Edgar.Unity.FogOfWar.URP.csproj">
-      <Project>{A40A386D-6751-D89B-1876-81BD793F6E79}</Project>
+      <Project>{5D1EF580-933C-CE30-416B-DD7A92F63421}</Project>
       <Name>Edgar.Unity.FogOfWar.URP</Name>
     </ProjectReference>
     <ProjectReference Include="UniTask.Linq.csproj">
-      <Project>{530A31FD-D193-5E54-3AB0-635BA160ECF3}</Project>
+      <Project>{D4203A56-6D9B-0F2F-F57E-80A4128A0247}</Project>
       <Name>UniTask.Linq</Name>
     </ProjectReference>
     <ProjectReference Include="Edgar.Unity.Editor.csproj">
-      <Project>{C83F321B-1ACC-4041-7F2D-08E42582C468}</Project>
+      <Project>{A1A25200-2719-5242-AF00-FAF26EFB82AF}</Project>
       <Name>Edgar.Unity.Editor</Name>
     </ProjectReference>
     <ProjectReference Include="Edgar.Unity.csproj">
-      <Project>{6FD54C53-FFF2-1EFD-22AC-285637F5FBC7}</Project>
+      <Project>{97D8BC59-AE07-00BF-6984-2C5F5EC05E4E}</Project>
       <Name>Edgar.Unity</Name>
     </ProjectReference>
     <ProjectReference Include="UniTask.DOTween.csproj">
-      <Project>{4C69F461-E9E1-3F9F-1B72-0A573679DC42}</Project>
+      <Project>{44C17562-2AB8-7629-D89B-C7A4AB97AEBC}</Project>
       <Name>UniTask.DOTween</Name>
     </ProjectReference>
   </ItemGroup>

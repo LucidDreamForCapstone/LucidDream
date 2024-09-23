@@ -152,7 +152,7 @@ MonoBehaviour:
   _damagedColor:
     serializedVersion: 2
     rgba: 4283322111
-  _exp: 100
+  _exp: 3
   _feverAmount: 40
   _searchRange: 10
   _attackRange: 4
