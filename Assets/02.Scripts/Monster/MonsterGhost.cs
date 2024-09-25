@@ -1,4 +1,4 @@
-using Cysharp.Threading.Tasks;
+ï»¿using Cysharp.Threading.Tasks;
 using System;
 using UnityEngine;
 
@@ -30,6 +30,7 @@ public class MonsterGhost : MonsterBase {
 
     new private void OnEnable() {
         base.OnEnable();
+        Spawn().Forget();
         _isAttackReady = true;
         _isAttacking = false;
         _attackDelay = 0.5f;
@@ -47,16 +48,16 @@ public class MonsterGhost : MonsterBase {
     #region protected funcs
 
     protected override void AttackMove() {
-        if (!_isAttacking && !_isDead && !_isStun) {
+        if (!_isAttacking && !_isDead && !_isStun && _isSpawnComplete) {
             double dist = CalculateManhattanDist(transform.position, _playerScript.transform.position);
 
-            if (dist < _attackRange) {//ÇÃ·¹ÀÌ¾î¸¦ ÇâÇØ °ø°Ý
+            if (dist < _attackRange) {//ï¿½Ã·ï¿½ï¿½Ì¾î¸¦ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
                 if (_isAttackReady)
                     AttackTask().Forget();
 
                 _rigid.velocity = Vector2.zero;
             }
-            else if (dist < _searchRange) { //ÇÃ·¹ÀÌ¾î¸¦ ¹ß°ß ÈÄ Á¢±Ù
+            else if (dist < _searchRange) { //ï¿½Ã·ï¿½ï¿½Ì¾î¸¦ ï¿½ß°ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
                 Vector2 moveVec = _playerScript.transform.position - transform.position;
 
                 if (moveVec.x < 0)
@@ -67,7 +68,7 @@ public class MonsterGhost : MonsterBase {
                 _rigid.velocity = moveVec.normalized * _moveSpeed;
                 _animator.SetBool("Run", true);
             }
-            else { //ÇÃ·¹ÀÌ¾î¸¦ ¹ß°ßÇÏÁö ¸øÇÑ »óÅÂ
+            else { //ï¿½Ã·ï¿½ï¿½Ì¾î¸¦ ï¿½ß°ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
                 _rigid.velocity = Vector2.zero;
                 _animator.SetBool("Run", false);
             }
@@ -94,7 +95,7 @@ public class MonsterGhost : MonsterBase {
         _isAttacking = true;
         _animator.SetTrigger("Attack");
         PlaySound(attackSound);
-        await UniTask.Delay(TimeSpan.FromSeconds(0.3f));//¾Ö´Ï¸ÞÀÌ¼Ç µô·¹ÀÌ
+        await UniTask.Delay(TimeSpan.FromSeconds(0.3f));//ï¿½Ö´Ï¸ï¿½ï¿½Ì¼ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
         if (CalculateManhattanDist(transform.position, _playerScript.transform.position) < _attackRange && !_isDead)
             _playerScript.Damaged(_damage);
         await UniTask.Delay(TimeSpan.FromSeconds(_attackDelay));
@@ -107,5 +108,3 @@ public class MonsterGhost : MonsterBase {
 
     #endregion //private funcs
 }
-
-
