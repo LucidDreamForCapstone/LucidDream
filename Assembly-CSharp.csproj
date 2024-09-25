@@ -77,7 +77,6 @@
     <Compile Include="Assets\02.Scripts\UI\UIBase.cs" />
     <Compile Include="Assets\02.Scripts\Player\PlayerDeathUI.cs" />
     <Compile Include="Assets\02.Scripts\Item\ItemData.cs" />
-    <Compile Include="Assets\02.Scripts\BGMManager\SoundManager.cs" />
     <Compile Include="Assets\02.Scripts\Monster\MonsterBody.cs" />
     <Compile Include="Assets\02.Scripts\ShopItem\ShopItemBase.cs" />
     <Compile Include="Assets\02.Scripts\Monster\MonsterStoneGolem.cs" />
@@ -115,8 +114,8 @@
     <Compile Include="Assets\02.Scripts\Weapon\MagicStaff.cs" />
     <Compile Include="Assets\02.Scripts\Player\PlayerDataManager.cs" />
     <Compile Include="Assets\02.Scripts\Player\PlayerPrefsManager.cs" />
-    <Compile Include="Assets\02.Scripts\Camera\MiniMapCamera.cs" />
     <Compile Include="Assets\02.Scripts\Item\GuardEffect.cs" />
+    <Compile Include="Assets\02.Scripts\Sound\BGMManger.cs" />
     <Compile Include="Assets\JMO Assets\Cartoon FX (legacy)\Scripts\CFX_LightIntensityFade.cs" />
     <Compile Include="Assets\02.Scripts\Monster\MonsterDeathBringer.cs" />
     <Compile Include="Assets\02.Scripts\Monster\LaserData.cs" />
@@ -125,6 +124,7 @@
     <Compile Include="Assets\07.Shader\Glitch\CustomRenderPassFeature.cs" />
     <Compile Include="Assets\JMO Assets\Cartoon FX (legacy)\Demo\Assets\CFX_Demo_New.cs" />
     <Compile Include="Assets\02.Scripts\Etc\ObjectPool.cs" />
+    <Compile Include="Assets\02.Scripts\Sound\LobbyManager.cs" />
     <Compile Include="Assets\02.Scripts\Etc\FloatingText.cs" />
     <Compile Include="Assets\JMO Assets\Cartoon FX (legacy)\Scripts\CFX_AutodestructWhenNoChildren.cs" />
     <Compile Include="Assets\02.Scripts\MapGraph\RoomNode.cs" />
@@ -133,7 +133,6 @@
     <Compile Include="Assets\JMO Assets\Cartoon FX (legacy)\Demo\Assets\CFX_Demo_RandomDir.cs" />
     <Compile Include="Assets\02.Scripts\Weapon\WolfSword.cs" />
     <Compile Include="Assets\02.Scripts\CardManager\CardManage.cs" />
-    <Compile Include="Assets\02.Scripts\BGMManager\BGMManger.cs" />
     <Compile Include="Assets\02.Scripts\Monster\HadesSoundControl.cs" />
     <Compile Include="Assets\07.Shader\Glitch\Glith.cs" />
     <Compile Include="Assets\02.Scripts\Weapon\WeaponText.cs" />
@@ -155,7 +154,7 @@
     <Compile Include="Assets\02.Scripts\Monster\Pillar.cs" />
     <Compile Include="Assets\02.Scripts\Bullet\ExplosiveBullet.cs" />
     <Compile Include="Assets\02.Scripts\UI\StageSelectController.cs" />
-    <Compile Include="Assets\02.Scripts\BGMManager\LobbyManager.cs" />
+    <Compile Include="Assets\02.Scripts\Sound\SoundManager.cs" />
     <Compile Include="Assets\JMO Assets\Cartoon FX (legacy)\Demo\Assets\CFX_Demo_Translate.cs" />
     <Compile Include="Assets\JMO Assets\Cartoon FX (legacy)\Scripts\CFX2_AutoRotate.cs" />
     <Compile Include="Assets\07.Shader\Glitch\GlitchRenderPassFeature.cs" />

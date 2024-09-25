@@ -55,15 +55,15 @@ public class SoundManager : MonoBehaviour {
 
 
     public void SetMasterVolume(float volume) {
-        m_AudioMixer.SetFloat("Master", Mathf.Log10(volume) * 20);
+        m_AudioMixer.SetFloat("Master", volume);
     }
 
-    public void SetMusicVolume(float volume) {
-        m_AudioMixer.SetFloat("BGM", Mathf.Log10(volume) * 20);
+    public void SetBGMVolume(float volume) {
+        m_AudioMixer.SetFloat("BGM", volume);
     }
 
     public void SetSFXVolume(float volume) {
-        m_AudioMixer.SetFloat("SFX", Mathf.Log10(volume) * 20);
+        m_AudioMixer.SetFloat("SFX", volume);
     }
 
     public void SetSFXPitch(float pitch) {
