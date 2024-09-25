@@ -27,6 +27,7 @@ public class MonsterStoneGolem : MonsterBase {
 
     new private void OnEnable() {
         base.OnEnable();
+        Spawn().Forget();
         _isShieldReady = true;
         Shield().Forget();
     }

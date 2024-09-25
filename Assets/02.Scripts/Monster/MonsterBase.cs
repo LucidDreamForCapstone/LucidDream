@@ -1,4 +1,5 @@
 using Cysharp.Threading.Tasks;
+using DG.Tweening;
 using Edgar.Unity.Examples.Gungeon;
 using System;
 using UnityEngine;
@@ -34,7 +35,7 @@ public abstract class MonsterBase : DropableBase {
     protected Rigidbody2D _rigid;
     protected static float _colorChanageLastTime = 0.3f;
     protected bool _isColorChanged;
-
+    protected bool _isSpawnComplete;
     #endregion //protected variable
 
 
@@ -58,6 +59,7 @@ public abstract class MonsterBase : DropableBase {
         _rigid = GetComponent<Rigidbody2D>();
         _spriteRenderer = GetComponent<SpriteRenderer>();
         _animator = GetComponent<Animator>();
+        _isSpawnComplete = false;
     }
 
     #endregion // mono funcs
@@ -69,7 +71,7 @@ public abstract class MonsterBase : DropableBase {
     #region public funcs
 
     virtual public void Damaged(int dmg, bool isCrit) {
-        if (!_isDead) {
+        if (!_isDead && _isSpawnComplete) {
             FloatingDamageManager.Instance.ShowDamage(this.gameObject, dmg, false, isCrit, false);
 
             if (_hp <= dmg) {
@@ -79,8 +81,6 @@ public abstract class MonsterBase : DropableBase {
                 ChangeColor().Forget();
                 _animator.SetTrigger("Damaged");
                 _hp -= dmg;
-                //Debug.Log("���Ͱ� �������� ����");
-                // �ǰ� ���� ���
                 PlayRandomSound();
             }
         }
@@ -89,7 +89,7 @@ public abstract class MonsterBase : DropableBase {
     public int GetDef() { return _def; }
 
     public void BodyDamage(Collider2D collision) {
-        if (collision.CompareTag("Player") && !_isDead)
+        if (collision.CompareTag("Player") && !_isDead && _isSpawnComplete)
             _playerScript.Damaged(_bodyDamage);
     }
 
@@ -159,7 +159,6 @@ public abstract class MonsterBase : DropableBase {
         }
     }
 
-    // ���� �ǰ� ���� ���
     protected void PlayRandomSound() {
         if (_hitSound != null && _hitSound.Length > 0) {
             int randomIndex = UnityEngine.Random.Range(0, _hitSound.Length);
@@ -167,6 +166,12 @@ public abstract class MonsterBase : DropableBase {
         }
     }
 
-    #endregion //protected funcs
+    virtual protected async UniTaskVoid Spawn() {
+        Color originColor = _spriteRenderer.color;
+        _spriteRenderer.color = new Color(originColor.r, originColor.g, originColor.b, 0);
+        await _spriteRenderer.DOFade(1, 1);
+        _isSpawnComplete = true;
+    }
 
+    #endregion //protected funcs
 }

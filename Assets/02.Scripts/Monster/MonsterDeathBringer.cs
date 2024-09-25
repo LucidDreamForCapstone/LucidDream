@@ -1,4 +1,5 @@
-using Cysharp.Threading.Tasks;
+ï»¿using Cysharp.Threading.Tasks;
+using DG.Tweening;
 using Edgar.Unity.Examples.Gungeon;
 using System;
 using UnityEngine;
@@ -9,8 +10,8 @@ public class MonsterDeathBringer : MonsterBase {
     [SerializeField] private float _yDiffOffset;
     [SerializeField] private LayerMask _playerLayer;
     [SerializeField] private float _searchRange;
-    [SerializeField] private float _normalAttackRange;//±âº» °ø°ÝÀ» ½ÃÀüÇÏ´Â °Å¸® ¹üÀ§
-    [SerializeField] private Vector2 _normalAttackArea;//±âº» °ø°ÝÀÇ ½ÇÁ¦ °ø°Ý ¹üÀ§
+    [SerializeField] private float _normalAttackRange;//ï¿½âº» ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï´ï¿½ ï¿½Å¸ï¿½ ï¿½ï¿½ï¿½ï¿½
+    [SerializeField] private Vector2 _normalAttackArea;//ï¿½âº» ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
     [SerializeField] private float _normalAttackCooltime;
     [SerializeField] private GameObject _spellCastObj;
     [SerializeField] private Vector2 _spellAttackArea;
@@ -45,6 +46,7 @@ public class MonsterDeathBringer : MonsterBase {
     new private void OnEnable() {
         base.OnEnable();
         _spriteRenderer = _model.GetComponent<SpriteRenderer>();
+        Spawn().Forget();
         _animator = _model.GetComponent<Animator>();
         _isNormalAttackReady = true;
         _isSpellAttackReady = true;
@@ -62,9 +64,9 @@ public class MonsterDeathBringer : MonsterBase {
 
 
     #region public funcs
-    public override void Damaged(int dmg, bool isCrit)//ÇÃ·¹ÀÌ¾î °ø°Ý¿¡ µ¥¹ÌÁö¸¦ ÀÔÀ½
+    public override void Damaged(int dmg, bool isCrit)//ï¿½Ã·ï¿½ï¿½Ì¾ï¿½ ï¿½ï¿½ï¿½Ý¿ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
     {
-        if (!_isDead) {
+        if (!_isDead && _isSpawnComplete) {
             FloatingDamageManager.Instance.ShowDamage(this.gameObject, dmg, false, isCrit, false);
 
             if (_hp <= dmg) {
@@ -84,12 +86,12 @@ public class MonsterDeathBringer : MonsterBase {
 
     #region protected funcs
 
-    protected override void AttackMove() { //Å½»ö ¹üÀ§ ¾È¿¡ ÇÃ·¹ÀÌ¾î°¡ ÁøÀÔÇßÀ» ¶§, ½ºÆçÀÌ µ¹¾ÆÀÖÀ¸¸é ½ºÆçÀ» »ç¿ë, ±×°Ô ¾Æ´Ï¶ó¸é ±ÙÁ¢ ¹üÀ§±îÁö ÇÃ·¹ÀÌ¾î¿¡°Ô Á¢±Ù
-        if (!_isAttacking && !_isStun && !_isDead) {
+    protected override void AttackMove() { //Å½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½È¿ï¿½ ï¿½Ã·ï¿½ï¿½Ì¾î°¡ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½, ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½, ï¿½×°ï¿½ ï¿½Æ´Ï¶ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ã·ï¿½ï¿½Ì¾î¿¡ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
+        if (!_isAttacking && !_isStun && !_isDead && _isSpawnComplete) {
             double dist = CalculateManhattanDist(transform.position, _playerScript.transform.position);
             float yDiff = transform.position.y - _playerScript.transform.position.y;
 
-            if (dist < _normalAttackRange && yDiff < _yDiffOffset) {//ÇÃ·¹ÀÌ¾î¸¦ ÇâÇØ °ø°Ý
+            if (dist < _normalAttackRange && yDiff < _yDiffOffset) {//ï¿½Ã·ï¿½ï¿½Ì¾î¸¦ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
                 _rigid.velocity = Vector2.zero;
                 _animator.SetBool("Walk", false);
 
@@ -98,7 +100,7 @@ public class MonsterDeathBringer : MonsterBase {
                 }
 
             }
-            else if (dist < _searchRange) { //ÇÃ·¹ÀÌ¾î¸¦ ¹ß°ß ÈÄ Á¢±Ù
+            else if (dist < _searchRange) { //ï¿½Ã·ï¿½ï¿½Ì¾î¸¦ ï¿½ß°ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
                 if (_isSpellAttackReady) {
                     _rigid.velocity = Vector2.zero;
                     SpellAttackTask().Forget();
@@ -123,7 +125,7 @@ public class MonsterDeathBringer : MonsterBase {
                     _animator.SetBool("Walk", true);
                 }
             }
-            else { //ÇÃ·¹ÀÌ¾î¸¦ ¹ß°ßÇÏÁö ¸øÇÑ »óÅÂ
+            else { //ï¿½Ã·ï¿½ï¿½Ì¾î¸¦ ï¿½ß°ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
                 _rigid.velocity = Vector2.zero;
                 _animator.SetBool("Walk", false);
             }
@@ -148,18 +150,23 @@ public class MonsterDeathBringer : MonsterBase {
     protected override async UniTaskVoid Die() {
 
         _isDead = true;
-        //Debug.Log("¸ó½ºÅÍ »ç¸Á");
+        //Debug.Log("ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½");
         _hp = 0;
         gameObject.layer = LayerMask.NameToLayer("DeadEnemy");
         _animator.SetTrigger("Die");
         DropItems();
         _playerScript.GetExp(_exp);
         PlayerDataManager.Instance.SetFeverGauge(PlayerDataManager.Instance.Status._feverGauge + _feverAmount);
-        GetComponent<GungeonEnemy>().RoomManager.OnEnemyKilled(gameObject);//´øÀü asset°ú ¿¬°á
+        GetComponent<GungeonEnemy>().RoomManager.OnEnemyKilled(gameObject);//ï¿½ï¿½ï¿½ï¿½ assetï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
         await UniTask.Delay(TimeSpan.FromSeconds(_dieDelay));
-        gameObject.SetActive(false);//ÀÌÈÄ¿¡ ¿ÀºêÁ§Æ® Ç® ¾µ°Å¸é º¯°æÇÒ °Í
+        gameObject.SetActive(false);//ï¿½ï¿½ï¿½Ä¿ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ® Ç® ï¿½ï¿½ï¿½Å¸ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½
     }
-
+    protected override async UniTaskVoid Spawn() {
+        Color originColor = _spriteRenderer.color;
+        _spriteRenderer.color = new Color(originColor.r, originColor.g, originColor.b, 0);
+        await _spriteRenderer.DOFade(1, 1);
+        _isSpawnComplete = true;
+    }
     #endregion //protected funcs
 
 
@@ -178,7 +185,7 @@ public class MonsterDeathBringer : MonsterBase {
         _isAttacking = true;
         PlaySound(basicAttack);
         _animator.SetTrigger("NormalAttack");
-        await UniTask.Delay(TimeSpan.FromSeconds(0.3f));//¾Ö´Ï¸ÞÀÌ¼Ç µô·¹ÀÌ
+        await UniTask.Delay(TimeSpan.FromSeconds(0.3f));//ï¿½Ö´Ï¸ï¿½ï¿½Ì¼ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
         Vector3 dir;
         if (!_spriteRenderer.flipX)
             dir = Vector3.left;
@@ -203,19 +210,19 @@ public class MonsterDeathBringer : MonsterBase {
         _animator.SetTrigger("SpellAttack");
         await UniTask.Delay(TimeSpan.FromSeconds(0.4f));
         PlaySound(attack_Thunder_Sound);
-        await UniTask.Delay(TimeSpan.FromSeconds(0.9f));//¾Ö´Ï¸ÞÀÌ¼Ç µô·¹ÀÌ
+        await UniTask.Delay(TimeSpan.FromSeconds(0.9f));//ï¿½Ö´Ï¸ï¿½ï¿½Ì¼ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
         if (!_isDead) {
             GameObject spellCast = ObjectPool.Instance.GetObject(_spellCastObj);
             Vector3 offset = Vector3.right * 0.6f;
             Vector3 playerPos = _playerScript.transform.position;
             spellCast.transform.position = playerPos + Vector3.up * 5 + offset;
             spellCast.SetActive(true);
-            await UniTask.Delay(TimeSpan.FromSeconds(0.7f));//Ä³½ºÆ® ¾Ö´Ï¸ÞÀÌ¼Ç µô·¹ÀÌ
+            await UniTask.Delay(TimeSpan.FromSeconds(0.7f));//Ä³ï¿½ï¿½Æ® ï¿½Ö´Ï¸ï¿½ï¿½Ì¼ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
             if (Physics2D.OverlapBox(playerPos, _spellAttackArea, 0, _playerLayer)) {
                 _playerScript.Damaged(_spellAttackDamage);
                 _playerScript.Stun(_spellAttackStunTime);
             }
-            await UniTask.Delay(TimeSpan.FromSeconds(1));//Ä³½ºÆ® ¾Ö´Ï¸ÞÀÌ¼Ç µô·¹ÀÌ
+            await UniTask.Delay(TimeSpan.FromSeconds(1));//Ä³ï¿½ï¿½Æ® ï¿½Ö´Ï¸ï¿½ï¿½Ì¼ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
             ObjectPool.Instance.ReturnObject(spellCast);
         }
 
