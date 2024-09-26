@@ -1,4 +1,3 @@
-using System.Collections.Generic;
 using UnityEngine;
 
 public class RoomNode : ScriptableObject {
@@ -8,20 +7,16 @@ public class RoomNode : ScriptableObject {
     [HideInInspector] public int ID;
     [HideInInspector] public Vector2 _position;
     [HideInInspector] public string _roomName;
-    private List<bool> _isLinked = new List<bool>();
+    public bool _leftLinked = false;
+    public bool _rightLinked = false;
+    public bool _upLinked = false;
+    public bool _downLinked = false;
 
-    private void Awake() {
-        for (int i = 0; i < 4; i++)
-            _isLinked.Add(false);
-    }
-
-    public static RoomNode CreateInstance(int id, Vector2 pos) {
+    public static RoomNode Create(int id, Vector2 pos) {
         RoomNode node = CreateInstance<RoomNode>();
         node.ID = id;
         node._position = pos;
         node._roomName = "Node " + id;
-
-        // 이름 설정 (중요)
         node.name = "Node " + id;
 
         return node;
@@ -60,10 +55,38 @@ public class RoomNode : ScriptableObject {
     }
 
     public void SetLinkState(RoomLinkType linkType, bool isLinked) {
-        _isLinked[(int)linkType] = isLinked;
+        switch (linkType) {
+            case RoomLinkType.Left:
+                _leftLinked = isLinked;
+                break;
+            case RoomLinkType.Right:
+                _rightLinked = isLinked;
+                break;
+            case RoomLinkType.Up:
+                _upLinked = isLinked;
+                break;
+            case RoomLinkType.Down:
+                _downLinked = isLinked;
+                break;
+        }
     }
 
     public bool GetLinkState(RoomLinkType linkType) {
-        return _isLinked[(int)linkType];
+        bool state = false;
+        switch (linkType) {
+            case RoomLinkType.Left:
+                state = _leftLinked;
+                break;
+            case RoomLinkType.Right:
+                state = _rightLinked;
+                break;
+            case RoomLinkType.Up:
+                state = _upLinked;
+                break;
+            case RoomLinkType.Down:
+                state = _downLinked;
+                break;
+        }
+        return state;
     }
 }
