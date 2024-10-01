@@ -94,7 +94,13 @@ public enum RoomLinkType {
     Up,
     Down,
     Left,
-    Right
+    Right,
+    Unknown
+}
+
+public enum RoomLinkDir {
+    Horizontal,
+    Vertical
 }
 
 #endregion Definations
