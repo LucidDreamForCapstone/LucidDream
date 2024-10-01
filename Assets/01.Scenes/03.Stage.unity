@@ -41126,7 +41126,7 @@ MonoBehaviour:
     rgba: 3204413900
   _phantomLastTime: 6
   _ghostLastTime: 1
-  _ghostInterval: 0.05
+  _ghostInterval: 0.1
   _ghostCoolTime: 1
 --- !u!1 &946289457
 GameObject:
@@ -76523,7 +76523,8 @@ PrefabInstance:
       propertyPath: m_Name
       value: GameManager
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 1025049740304376378, guid: bd8e2cae69c02d544accfc903dd465af, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
