@@ -10,7 +10,7 @@
     <ProductVersion>10.0.20506</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <RootNamespace></RootNamespace>
-    <ProjectGuid>{89037FDE-277B-89D2-6D90-721A3D43A7BF}</ProjectGuid>
+    <ProjectGuid>{A1A25200-2719-5242-AF00-FAF26EFB82AF}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <AssemblyName>Edgar.Unity.Editor</AssemblyName>
@@ -1049,7 +1049,7 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="Edgar.Unity.csproj">
-      <Project>{1A3250CF-B506-E3EC-B973-F77AD1D8CE1B}</Project>
+      <Project>{97D8BC59-AE07-00BF-6984-2C5F5EC05E4E}</Project>
       <Name>Edgar.Unity</Name>
     </ProjectReference>
   </ItemGroup>
