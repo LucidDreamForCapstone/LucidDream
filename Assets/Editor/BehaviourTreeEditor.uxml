@@ -1,0 +1,16 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <Style src="project://database/Assets/Editor/BehaviourTreeEditor.uss?fileID=7433441132597879392&amp;guid=0801ac9aca574874ea711600bbf5773f&amp;type=3#BehaviourTreeEditor" />
+    <uie:Toolbar>
+        <uie:ToolbarMenu tabindex="-1" parse-escape-sequences="true" display-tooltip-when-elided="true" text="Assets " />
+    </uie:Toolbar>
+    <SplitView fixed-pane-initial-dimension="300" style="width: auto; flex-direction: row; align-items: auto;">
+        <ui:VisualElement name="left-panel" style="flex-grow: 1; align-self: auto;">
+            <ui:Label tabindex="-1" text="Inspector" parse-escape-sequences="true" display-tooltip-when-elided="true" style="background-color: rgb(37, 37, 37); color: rgb(255, 255, 255); margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 0; font-size: 14%; padding-left: 4px;" />
+            <InspectorView style="flex-grow: 1; background-color: rgb(60, 60, 60);" />
+        </ui:VisualElement>
+        <ui:VisualElement name="right-panel" style="flex-grow: 1; align-self: auto;">
+            <ui:Label tabindex="-1" text="Tree View" parse-escape-sequences="true" display-tooltip-when-elided="true" style="background-color: rgb(37, 37, 37); color: rgb(255, 255, 255); margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 0; font-size: 14px; padding-left: 4px;" />
+            <BehaviourTreeView style="flex-grow: 1;" />
+        </ui:VisualElement>
+    </SplitView>
+</ui:UXML>
