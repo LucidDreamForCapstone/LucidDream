@@ -1,3 +1,10 @@
+using UnityEngine;
 public abstract class DecoratorNode : Node {
-    public Node _child;
+    [HideInInspector] public Node _child;
+
+    public override Node Clone() {
+        DecoratorNode node = Instantiate(this);
+        node._child = _child.Clone();
+        return node;
+    }
 }

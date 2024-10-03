@@ -7,10 +7,11 @@ public abstract class Node : ScriptableObject {
         Success
     }
 
-    public State _state = State.Running;
-    public bool _started = false;
-    public string _guid;
-    public Vector2 _position;
+    [HideInInspector] public State _state = State.Running;
+    [HideInInspector] public bool _started = false;
+    [HideInInspector] public string _guid;
+    [HideInInspector] public Vector2 _position;
+    [HideInInspector] public CompositeNode _parent; //Only For Tracing In Editor
 
     public State Update() {
         if (!_started) {
@@ -26,6 +27,10 @@ public abstract class Node : ScriptableObject {
         }
 
         return _state;
+    }
+
+    public virtual Node Clone() {
+        return Instantiate(this);
     }
 
     protected abstract void OnStart();

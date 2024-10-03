@@ -1,9 +1,11 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEditor;
 using UnityEditor.Experimental.GraphView;
 using UnityEngine.UIElements;
 public class BehaviourTreeView : GraphView {
+    public Action<NodeView> OnNodeSelected;
     public new class UxmlFactory : UxmlFactory<BehaviourTreeView, GraphView.UxmlTraits> { }
     BehaviourTree _tree;
     public BehaviourTreeView() {
@@ -27,6 +29,12 @@ public class BehaviourTreeView : GraphView {
         graphViewChanged -= OnGraphViewChanged;
         DeleteElements(graphElements);
         graphViewChanged += OnGraphViewChanged;
+
+        if (tree._rootNode == null) {
+            tree._rootNode = tree.CreateNode(typeof(RootNode)) as RootNode;
+            EditorUtility.SetDirty(tree);
+            AssetDatabase.SaveAssets();
+        }
 
         // Creates node view
         tree._nodes.ForEach(n => CreateNodeView(n));
@@ -75,6 +83,16 @@ public class BehaviourTreeView : GraphView {
             });
         }
 
+        if (graphViewChange.movedElements != null) {
+            graphViewChange.movedElements.ForEach(n => {
+                NodeView nodeView = n as NodeView;
+                if (nodeView != null && nodeView._node._parent != null) {
+                    CompositeNode compositeNode = nodeView._node._parent;
+                    compositeNode.SortChild();
+                }
+            });
+        }
+
         return graphViewChange;
     }
 
@@ -103,6 +121,7 @@ public class BehaviourTreeView : GraphView {
         }
     }
 
+
     void CreateNode(System.Type type) {
         Node node = _tree.CreateNode(type);
         CreateNodeView(node);
@@ -110,6 +129,7 @@ public class BehaviourTreeView : GraphView {
 
     void CreateNodeView(Node node) {
         NodeView nodeView = new NodeView(node);
+        nodeView.OnNodeSelected = OnNodeSelected;
         AddElement(nodeView);
     }
 }
