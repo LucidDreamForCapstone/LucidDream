@@ -6,7 +6,7 @@ using UnityEngine.UIElements;
 public class BehaviourTreeEditor : EditorWindow {
     BehaviourTreeView _treeView;
     InspectorView _inspectorView;
-    public static Vector2 MousePosition { get; private set; }
+    Vector2 _mousePos;
 
     [MenuItem("BehaviourTreeEditor/Editor ...")]
     public static void OpenWindow() {
@@ -21,6 +21,11 @@ public class BehaviourTreeEditor : EditorWindow {
             return true;
         }
         return false;
+    }
+
+    private void OnGUI() {
+        _mousePos = Event.current.mousePosition;
+        _treeView._worldMousePos = _mousePos;
     }
 
     public void CreateGUI() {
@@ -67,10 +72,12 @@ public class BehaviourTreeEditor : EditorWindow {
     private void OnEnable() {
         EditorApplication.playModeStateChanged -= OnPlayModeStateChanged;
         EditorApplication.playModeStateChanged += OnPlayModeStateChanged;
+        EditorApplication.update += OnEditorUpdate;
     }
 
     private void OnDisable() {
         EditorApplication.playModeStateChanged -= OnPlayModeStateChanged;
+        EditorApplication.update -= OnEditorUpdate;
     }
 
     private void OnPlayModeStateChanged(PlayModeStateChange obj) {
@@ -86,6 +93,9 @@ public class BehaviourTreeEditor : EditorWindow {
             case PlayModeStateChange.ExitingPlayMode:
                 break;
         }
+    }
+    private void OnEditorUpdate() {
+        Repaint();
     }
 
     void OnNodeSelectionChanged(NodeView node) {

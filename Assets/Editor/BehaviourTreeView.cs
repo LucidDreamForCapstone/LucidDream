@@ -3,9 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEditor;
 using UnityEditor.Experimental.GraphView;
+using UnityEngine;
 using UnityEngine.UIElements;
 public class BehaviourTreeView : GraphView {
     public Action<NodeView> OnNodeSelected;
+    public Vector2 _worldMousePos;
     public new class UxmlFactory : UxmlFactory<BehaviourTreeView, GraphView.UxmlTraits> { }
     BehaviourTree _tree;
     public BehaviourTreeView() {
@@ -18,7 +20,6 @@ public class BehaviourTreeView : GraphView {
 
         var styleSheet = AssetDatabase.LoadAssetAtPath<StyleSheet>("Assets/Editor/BehaviourTreeEditor.uss");
         styleSheets.Add(styleSheet);
-
         Undo.undoRedoPerformed += OnUndoRedo;
     }
 
@@ -127,9 +128,11 @@ public class BehaviourTreeView : GraphView {
         }
     }
 
-
     void CreateNode(Type type) {
         Node node = _tree.CreateNode(type);
+        Vector2 localMousePos = contentViewContainer.WorldToLocal(_worldMousePos);
+        Vector2 offset = new Vector2(71, 24) * -1;
+        node._position = localMousePos + offset;
         CreateNodeView(node);
     }
 
