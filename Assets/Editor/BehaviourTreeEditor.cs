@@ -1,14 +1,26 @@
 using UnityEditor;
+using UnityEditor.Callbacks;
 using UnityEngine;
 using UnityEngine.UIElements;
 
 public class BehaviourTreeEditor : EditorWindow {
     BehaviourTreeView _treeView;
     InspectorView _inspectorView;
+    public static Vector2 MousePosition { get; private set; }
+
     [MenuItem("BehaviourTreeEditor/Editor ...")]
     public static void OpenWindow() {
         BehaviourTreeEditor wnd = GetWindow<BehaviourTreeEditor>();
         wnd.titleContent = new GUIContent("BehaviourTreeEditor");
+    }
+
+    [OnOpenAsset]
+    public static bool OnOpenAsset(int instanceId, int line) {
+        if (Selection.activeObject is BehaviourTree) {
+            OpenWindow();
+            return true;
+        }
+        return false;
     }
 
     public void CreateGUI() {
@@ -31,12 +43,56 @@ public class BehaviourTreeEditor : EditorWindow {
 
     private void OnSelectionChange() {
         BehaviourTree tree = Selection.activeObject as BehaviourTree;
-        if (tree && AssetDatabase.CanOpenAssetInEditor(tree.GetInstanceID())) {
-            _treeView.PopulateView(tree);
+        if (!tree) {
+            if (Selection.activeGameObject) {
+                BehaviourTreeRunner runner = Selection.activeGameObject.GetComponent<BehaviourTreeRunner>();
+                if (runner) {
+                    tree = runner._tree;
+                }
+            }
+        }
+
+        if (Application.isPlaying) {
+            if (tree) {
+                _treeView.PopulateView(tree);
+            }
+        }
+        else {
+            if (tree && AssetDatabase.CanOpenAssetInEditor(tree.GetInstanceID())) {
+                _treeView.PopulateView(tree);
+            }
+        }
+    }
+
+    private void OnEnable() {
+        EditorApplication.playModeStateChanged -= OnPlayModeStateChanged;
+        EditorApplication.playModeStateChanged += OnPlayModeStateChanged;
+    }
+
+    private void OnDisable() {
+        EditorApplication.playModeStateChanged -= OnPlayModeStateChanged;
+    }
+
+    private void OnPlayModeStateChanged(PlayModeStateChange obj) {
+        switch (obj) {
+            case PlayModeStateChange.EnteredEditMode:
+                OnSelectionChange();
+                break;
+            case PlayModeStateChange.ExitingEditMode:
+                break;
+            case PlayModeStateChange.EnteredPlayMode:
+                OnSelectionChange();
+                break;
+            case PlayModeStateChange.ExitingPlayMode:
+                break;
         }
     }
 
     void OnNodeSelectionChanged(NodeView node) {
         _inspectorView.UpdateSelection(node);
+    }
+
+    private void OnInspectorUpdate() {
+        _treeView?.UpdateNodeStates();
     }
 }

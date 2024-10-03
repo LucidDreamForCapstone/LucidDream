@@ -1,5 +1,7 @@
+using UnityEngine;
+
 public class RootNode : Node {
-    public Node _child;
+    [HideInInspector] public Node _child;
 
     protected override void OnStart() {
 

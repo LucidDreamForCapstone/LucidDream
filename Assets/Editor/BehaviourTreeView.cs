@@ -10,12 +10,21 @@ public class BehaviourTreeView : GraphView {
     BehaviourTree _tree;
     public BehaviourTreeView() {
         Insert(0, new GridBackground());
+
         this.AddManipulator(new ContentZoomer());
         this.AddManipulator(new ContentDragger());
         this.AddManipulator(new SelectionDragger());
         this.AddManipulator(new RectangleSelector());
+
         var styleSheet = AssetDatabase.LoadAssetAtPath<StyleSheet>("Assets/Editor/BehaviourTreeEditor.uss");
         styleSheets.Add(styleSheet);
+
+        Undo.undoRedoPerformed += OnUndoRedo;
+    }
+
+    private void OnUndoRedo() {
+        PopulateView(_tree);
+        AssetDatabase.SaveAssets();
     }
 
     NodeView FindNodeView(Node node) {
@@ -84,12 +93,9 @@ public class BehaviourTreeView : GraphView {
         }
 
         if (graphViewChange.movedElements != null) {
-            graphViewChange.movedElements.ForEach(n => {
-                NodeView nodeView = n as NodeView;
-                if (nodeView != null && nodeView._node._parent != null) {
-                    CompositeNode compositeNode = nodeView._node._parent;
-                    compositeNode.SortChild();
-                }
+            nodes.ForEach((n) => {
+                NodeView view = n as NodeView;
+                view.SortChildren();
             });
         }
 
@@ -122,7 +128,7 @@ public class BehaviourTreeView : GraphView {
     }
 
 
-    void CreateNode(System.Type type) {
+    void CreateNode(Type type) {
         Node node = _tree.CreateNode(type);
         CreateNodeView(node);
     }
@@ -131,5 +137,12 @@ public class BehaviourTreeView : GraphView {
         NodeView nodeView = new NodeView(node);
         nodeView.OnNodeSelected = OnNodeSelected;
         AddElement(nodeView);
+    }
+
+    public void UpdateNodeStates() {
+        nodes.ForEach(n => {
+            NodeView view = n as NodeView;
+            view.UpdateState();
+        });
     }
 }
