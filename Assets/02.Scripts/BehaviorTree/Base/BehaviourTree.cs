@@ -7,9 +7,11 @@ public class BehaviourTree : ScriptableObject {
     public Node _rootNode;
     public Node.State _treeState = Node.State.Running;
     public List<Node> _nodes = new List<Node>();
+    [HideInInspector] public MonsterBase _monster;
 
     public Node.State Update() {
         if (_rootNode._state == Node.State.Running) {
+            _rootNode._monster = _monster;
             _treeState = _rootNode.Update();
         }
         return _treeState;

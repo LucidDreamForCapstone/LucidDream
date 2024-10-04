@@ -88,7 +88,7 @@ MonoBehaviour:
   _state: 0
   _started: 0
   _guid: c3bfb33df05dd744fba989fe76955b11
-  _position: {x: 3.041726, y: 142}
+  _position: {x: 8, y: 142}
   description: 
   _children:
   - {fileID: 2773492782424458284}

@@ -50,9 +50,10 @@ public class BehaviourTreeEditor : EditorWindow {
         BehaviourTree tree = Selection.activeObject as BehaviourTree;
         if (!tree) {
             if (Selection.activeGameObject) {
-                BehaviourTreeRunner runner = Selection.activeGameObject.GetComponent<BehaviourTreeRunner>();
-                if (runner) {
-                    tree = runner._tree;
+                //BehaviourTreeRunner runner = Selection.activeGameObject.GetComponent<BehaviourTreeRunner>();
+                MonsterBase monsterBase = Selection.activeGameObject.GetComponent<MonsterBase>();
+                if (monsterBase) {
+                    tree = monsterBase._tree;
                 }
             }
         }

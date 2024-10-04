@@ -11,6 +11,7 @@ public abstract class Node : ScriptableObject {
     [HideInInspector] public bool _started = false;
     [HideInInspector] public string _guid;
     [HideInInspector] public Vector2 _position;
+    [HideInInspector] public MonsterBase _monster;
     [TextArea] public string description;
 
     public State Update() {

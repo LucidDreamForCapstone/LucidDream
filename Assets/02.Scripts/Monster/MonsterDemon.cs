@@ -5,7 +5,6 @@ using UnityEngine;
 public class MonsterDemon : MonsterBase {
 
     #region serialize field
-
     [SerializeField] private GameObject _fireballObj;
     [SerializeField] private float _fireSpeed;
     [SerializeField] private float _fireLastTime;
@@ -37,16 +36,20 @@ public class MonsterDemon : MonsterBase {
         _isFiring = false;
         _isFireReady = true;
         _fireDelay = 0.5f;
+        _tree._monster = this;
+        _tree = _tree.Clone();
     }
 
     private void Update() {
-        AttackMove();
+        //AttackMove();
+        _tree.Update();
     }
 
-    #endregion //mono funcs
+    #endregion //mono func
 
-
-
+    public override async UniTaskVoid Attack() {
+        await FireTask();
+    }
 
     #region protected funcs
 
@@ -78,14 +81,16 @@ public class MonsterDemon : MonsterBase {
 
     #region private funcs
 
-    private async UniTaskVoid FireTask() {
+    private async UniTask FireTask() {
         _isFireReady = false;
         Fire().Forget();
         await UniTask.Delay(TimeSpan.FromSeconds(_fireCoolTime));
         _isFireReady = true;
+        _attackState = AttackState.Ready;
     }
 
     private async UniTaskVoid Fire() {
+        _attackState = AttackState.Attacking;
         _isFiring = true;
         _animator.SetTrigger("Attack");
         PlaySound(attackSound);
@@ -101,6 +106,7 @@ public class MonsterDemon : MonsterBase {
         fireBall.SetActive(true);
         await UniTask.Delay(TimeSpan.FromSeconds(_fireDelay));
         _isFiring = false;
+        _attackState = AttackState.CoolTime;
     }
 
     private double CalculateManhattanDist(Vector2 a, Vector2 b) {

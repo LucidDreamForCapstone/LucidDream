@@ -1,0 +1,140 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &-8295658953558107018
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: afacca1ef8694fc4bb1fec6462892942, type: 3}
+  m_Name: CheckAliveNode
+  m_EditorClassIdentifier: 
+  _state: 0
+  _started: 0
+  _guid: 4d55086187b21b24abe301507801422c
+  _position: {x: -1.3224783, y: 118.06251}
+  _monster: {fileID: 0}
+  description: "\uC0B4\uC544\uC788\uB294\uC9C0 \uD655\uC778"
+  _child: {fileID: -411789758512353388}
+--- !u!114 &-3699830525692386767
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 093cd8d816d210b44920b5751941126e, type: 3}
+  m_Name: RootNode
+  m_EditorClassIdentifier: 
+  _state: 0
+  _started: 0
+  _guid: 6c1c1af342b094247b8c899857396537
+  _position: {x: 1.0000494, y: -61.81892}
+  _monster: {fileID: 0}
+  description: 
+  _child: {fileID: 2243459100195138746}
+--- !u!114 &-411789758512353388
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 35450fc7e0a3c964a8b3854ac071ae72, type: 3}
+  m_Name: SequencerNode
+  m_EditorClassIdentifier: 
+  _state: 0
+  _started: 0
+  _guid: 035ad37a1b8d2c5478a8a0d4081bad69
+  _position: {x: -1.2999947, y: 216.15002}
+  _monster: {fileID: 0}
+  description: 
+  _children:
+  - {fileID: 8547737648492330729}
+  - {fileID: 7658399597160659817}
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 559105020eb6f984abcd7f4a3c4d8317, type: 3}
+  m_Name: MonsterTestTree
+  m_EditorClassIdentifier: 
+  _rootNode: {fileID: -3699830525692386767}
+  _treeState: 0
+  _nodes:
+  - {fileID: -3699830525692386767}
+  - {fileID: -411789758512353388}
+  - {fileID: 2243459100195138746}
+  - {fileID: 8547737648492330729}
+  - {fileID: 7658399597160659817}
+  - {fileID: -8295658953558107018}
+  _monster: {fileID: 0}
+--- !u!114 &2243459100195138746
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 73f5672ca30b3ed4e8976069b72aeb1c, type: 3}
+  m_Name: RepeatNode
+  m_EditorClassIdentifier: 
+  _state: 0
+  _started: 0
+  _guid: 79feea8bc9048124191e338ce7da3095
+  _position: {x: 0.35502383, y: 22.417501}
+  _monster: {fileID: 0}
+  description: "\uBB34\uD55C\uBC18\uBCF5"
+  _child: {fileID: -8295658953558107018}
+--- !u!114 &7658399597160659817
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c5f7284dc31f37546ad47c44e1eaf1e4, type: 3}
+  m_Name: AttackNode
+  m_EditorClassIdentifier: 
+  _state: 0
+  _started: 0
+  _guid: ee39b96046f85544096d8f42f3181933
+  _position: {x: 100, y: 343.28003}
+  _monster: {fileID: 0}
+  description: "\uACF5\uACA9"
+--- !u!114 &8547737648492330729
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 860adcbe085500441b7ed39c3e791152, type: 3}
+  m_Name: ChaseNode
+  m_EditorClassIdentifier: 
+  _state: 0
+  _started: 0
+  _guid: 2c770592e44cb96408a336362a919de5
+  _position: {x: -107.450005, y: 345.95004}
+  _monster: {fileID: 0}
+  description: "\uD50C\uB808\uC774\uC5B4 \uCD94\uC801"
+  _searchDist: 10
+  _attackDist: 6

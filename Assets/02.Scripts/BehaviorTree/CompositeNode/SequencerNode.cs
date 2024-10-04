@@ -3,6 +3,10 @@ public class SequencerNode : CompositeNode {
     int _current;
     protected override void OnStart() {
         _current = 0;
+        int length = _children.Count;
+        for (int i = 0; i < length; i++) {
+            _children[i]._monster = _monster;
+        }
     }
 
     protected override void OnStop() {

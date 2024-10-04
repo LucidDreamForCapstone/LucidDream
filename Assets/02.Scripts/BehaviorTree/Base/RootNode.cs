@@ -4,7 +4,7 @@ public class RootNode : Node {
     [HideInInspector] public Node _child;
 
     protected override void OnStart() {
-
+        _child._monster = _monster;
     }
 
     protected override void OnStop() {

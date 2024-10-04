@@ -5,6 +5,17 @@ using System;
 using UnityEngine;
 
 public abstract class MonsterBase : DropableBase {
+    public enum AttackState {
+        Ready,
+        Attacking,
+        CoolTime
+    }
+
+    public BehaviourTree _tree;
+    public bool _flipFlag;
+    public AttackState _attackState;
+
+
     #region serialized field
 
     [SerializeField] bool _isBoss;
@@ -19,20 +30,20 @@ public abstract class MonsterBase : DropableBase {
     #region protected variable
 
     [SerializeField] protected int _def;//����
-    [SerializeField] protected int _damage;//������
-    [SerializeField] protected float _moveSpeed;//���ǵ�
+    [SerializeField] public int _damage;//������
+    [SerializeField] public float _moveSpeed;//���ǵ�
     [SerializeField] protected int _maxHp;//�ִ�HP
     [SerializeField] protected float _dieDelay;
     [SerializeField] protected Color32 _damagedColor;
     [SerializeField] protected int _exp;//����ġ
     [SerializeField] protected int _feverAmount;//�ǹ������� ��·�
     protected int _hp;//����HP
-    protected SpriteRenderer _spriteRenderer;
+    public SpriteRenderer _spriteRenderer;
     protected Animator _animator;
-    protected bool _isDead;
+    public bool _isDead;
     protected bool _isStun;
-    protected Player _playerScript;
-    protected Rigidbody2D _rigid;
+    public Player _playerScript;
+    public Rigidbody2D _rigid;
     protected static float _colorChanageLastTime = 0.3f;
     protected bool _isColorChanged;
     protected bool _isSpawnComplete;
@@ -110,6 +121,12 @@ public abstract class MonsterBase : DropableBase {
 
     public bool CheckBoss() { return _isBoss; }
     public bool CheckDead() { return _isDead; }
+
+    public virtual async UniTaskVoid Attack() {
+
+    }
+
+    //public abstract void Move();
 
     #endregion //public funcs
 

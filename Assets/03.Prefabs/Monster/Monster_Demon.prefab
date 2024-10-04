@@ -231,6 +231,9 @@ MonoBehaviour:
     _dropChance: 20
   - _item: {fileID: 1291977212005651459, guid: 652f72c4454773c44a4173eacf164980, type: 3}
     _dropChance: 45
+  _tree: {fileID: 11400000, guid: 7650c874b7023374688591967e122d53, type: 2}
+  _flipFlag: 0
+  _attackState: 0
   _isBoss: 0
   _bodyDamage: 10
   _hitSound: []
@@ -245,6 +248,9 @@ MonoBehaviour:
     rgba: 4283322111
   _exp: 3
   _feverAmount: 40
+  _spriteRenderer: {fileID: 0}
+  _playerScript: {fileID: 0}
+  _rigid: {fileID: 0}
   _fireballObj: {fileID: 5669199885704005852, guid: f1986fb65ce9a034299b160d450281f8, type: 3}
   _fireSpeed: 5
   _fireLastTime: 3
