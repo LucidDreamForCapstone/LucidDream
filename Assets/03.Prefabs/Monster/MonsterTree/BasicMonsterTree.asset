@@ -34,7 +34,7 @@ MonoBehaviour:
   _state: 0
   _started: 0
   _guid: 6c1c1af342b094247b8c899857396537
-  _position: {x: 1.0000494, y: -61.81892}
+  _position: {x: 0, y: -182}
   _monster: {fileID: 0}
   description: 
   _child: {fileID: 2243459100195138746}
@@ -69,10 +69,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 559105020eb6f984abcd7f4a3c4d8317, type: 3}
-  m_Name: MonsterTestTree
+  m_Name: BasicMonsterTree
   m_EditorClassIdentifier: 
   _rootNode: {fileID: -3699830525692386767}
-  _treeState: 0
   _nodes:
   - {fileID: -3699830525692386767}
   - {fileID: -411789758512353388}
@@ -80,6 +79,8 @@ MonoBehaviour:
   - {fileID: 8547737648492330729}
   - {fileID: 7658399597160659817}
   - {fileID: -8295658953558107018}
+  - {fileID: 9162166643402282701}
+  _treeState: 0
   _monster: {fileID: 0}
 --- !u!114 &2243459100195138746
 MonoBehaviour:
@@ -96,10 +97,10 @@ MonoBehaviour:
   _state: 0
   _started: 0
   _guid: 79feea8bc9048124191e338ce7da3095
-  _position: {x: 0.35502383, y: 22.417501}
+  _position: {x: 0, y: -85}
   _monster: {fileID: 0}
   description: "\uBB34\uD55C\uBC18\uBCF5"
-  _child: {fileID: -8295658953558107018}
+  _child: {fileID: 9162166643402282701}
 --- !u!114 &7658399597160659817
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -133,8 +134,27 @@ MonoBehaviour:
   _state: 0
   _started: 0
   _guid: 2c770592e44cb96408a336362a919de5
-  _position: {x: -107.450005, y: 345.95004}
+  _position: {x: -112, y: 348}
   _monster: {fileID: 0}
   description: "\uD50C\uB808\uC774\uC5B4 \uCD94\uC801"
   _searchDist: 10
   _attackDist: 6
+--- !u!114 &9162166643402282701
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 92a8f6256dd48ed48a2e722788b28600, type: 3}
+  m_Name: CheckSpawnNode
+  m_EditorClassIdentifier: 
+  _state: 0
+  _started: 0
+  _guid: d07a5c2f2c6ac5b428d2151cf599bb42
+  _position: {x: -1, y: 16}
+  _monster: {fileID: 0}
+  description: "\uC2A4\uD3F0\uB418\uC5C8\uB294\uC9C0 \uD655\uC778"
+  _child: {fileID: -8295658953558107018}

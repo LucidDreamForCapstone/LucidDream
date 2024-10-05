@@ -5,8 +5,8 @@ using UnityEngine;
 [CreateAssetMenu()]
 public class BehaviourTree : ScriptableObject {
     public Node _rootNode;
-    public Node.State _treeState = Node.State.Running;
     public List<Node> _nodes = new List<Node>();
+    [HideInInspector] public Node.State _treeState = Node.State.Running;
     [HideInInspector] public MonsterBase _monster;
 
     public Node.State Update() {

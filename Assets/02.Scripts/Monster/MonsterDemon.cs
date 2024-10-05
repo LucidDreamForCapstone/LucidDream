@@ -8,8 +8,8 @@ public class MonsterDemon : MonsterBase {
     [SerializeField] private GameObject _fireballObj;
     [SerializeField] private float _fireSpeed;
     [SerializeField] private float _fireLastTime;
-    [SerializeField] private float _searchRange;
-    [SerializeField] private float _attackRange;
+    //[SerializeField] private float _searchRange;
+    //[SerializeField] private float _attackRange;
     [SerializeField] private float _fireCoolTime;
     [SerializeField] private AudioClip attackSound;
 
@@ -36,13 +36,6 @@ public class MonsterDemon : MonsterBase {
         _isFiring = false;
         _isFireReady = true;
         _fireDelay = 0.5f;
-        _tree._monster = this;
-        _tree = _tree.Clone();
-    }
-
-    private void Update() {
-        //AttackMove();
-        _tree.Update();
     }
 
     #endregion //mono func
@@ -54,6 +47,7 @@ public class MonsterDemon : MonsterBase {
     #region protected funcs
 
     protected override void AttackMove() {
+        /*
         double dist = CalculateManhattanDist(transform.position, _playerScript.transform.position);
         if (!_isFiring && !_isDead && !_isStun && _isSpawnComplete && dist < _searchRange) {
             Vector2 moveVec = _playerScript.transform.position - transform.position;
@@ -72,6 +66,7 @@ public class MonsterDemon : MonsterBase {
         }
         else
             _rigid.velocity = Vector2.zero;
+        */
     }
 
     #endregion //protected funcs

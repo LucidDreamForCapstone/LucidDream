@@ -12,41 +12,42 @@ public abstract class MonsterBase : DropableBase {
     }
 
     public BehaviourTree _tree;
-    public bool _flipFlag;
-    public AttackState _attackState;
-
+    public bool _isRightDefault;
+    [HideInInspector] public AttackState _attackState;
+    public float _searchDist;
+    public float _attackDist;
+    [HideInInspector] public bool _isDead;
+    [HideInInspector] public bool _isSpawnComplete;
+    [HideInInspector] public Player _playerScript;
+    [HideInInspector] public Rigidbody2D _rigid;
+    public SpriteRenderer _spriteRenderer; //manual put
+    public Animator _animator;//manual put
 
     #region serialized field
-
+    [SerializeField] bool _useTree;
     [SerializeField] bool _isBoss;
-    [SerializeField] int _bodyDamage;//���ڵ�
+    [SerializeField] int _bodyDamage;
 
     [Header("Monster Sound")]
-    [SerializeField] private AudioClip[] _hitSound;     // �ǰ� ����
-    [SerializeField] protected AudioClip _deathSound;   // ��� ����
+    [SerializeField] private AudioClip[] _hitSound;
+    [SerializeField] protected AudioClip _deathSound;
     #endregion // serialized field
 
 
     #region protected variable
 
-    [SerializeField] protected int _def;//����
-    [SerializeField] public int _damage;//������
-    [SerializeField] public float _moveSpeed;//���ǵ�
-    [SerializeField] protected int _maxHp;//�ִ�HP
+    [SerializeField] protected int _def;
+    [SerializeField] public int _damage;
+    [SerializeField] public float _moveSpeed;
+    [SerializeField] protected int _maxHp;
     [SerializeField] protected float _dieDelay;
     [SerializeField] protected Color32 _damagedColor;
-    [SerializeField] protected int _exp;//����ġ
-    [SerializeField] protected int _feverAmount;//�ǹ������� ��·�
-    protected int _hp;//����HP
-    public SpriteRenderer _spriteRenderer;
-    protected Animator _animator;
-    public bool _isDead;
+    [SerializeField] protected int _exp;
+    [SerializeField] protected int _feverAmount;
+    protected int _hp;
     protected bool _isStun;
-    public Player _playerScript;
-    public Rigidbody2D _rigid;
     protected static float _colorChanageLastTime = 0.3f;
     protected bool _isColorChanged;
-    protected bool _isSpawnComplete;
     #endregion //protected variable
 
 
@@ -68,9 +69,17 @@ public abstract class MonsterBase : DropableBase {
         _isColorChanged = false;
         _playerScript = GameObject.Find("Player").GetComponent<Player>();
         _rigid = GetComponent<Rigidbody2D>();
-        _spriteRenderer = GetComponent<SpriteRenderer>();
-        _animator = GetComponent<Animator>();
         _isSpawnComplete = false;
+        if (_useTree) {
+            _tree._monster = this;
+            _tree = _tree.Clone();
+        }
+    }
+
+    private void Update() {
+        if (_useTree) {
+            _tree.Update();
+        }
     }
 
     #endregion // mono funcs
@@ -122,8 +131,8 @@ public abstract class MonsterBase : DropableBase {
     public bool CheckBoss() { return _isBoss; }
     public bool CheckDead() { return _isDead; }
 
-    public virtual async UniTaskVoid Attack() {
-
+    public virtual async UniTaskVoid Attack() { //after need to change to abstract function
+        await UniTask.NextFrame();
     }
 
     //public abstract void Move();

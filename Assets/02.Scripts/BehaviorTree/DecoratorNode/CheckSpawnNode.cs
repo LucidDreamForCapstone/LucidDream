@@ -1,6 +1,4 @@
-using UnityEngine;
-
-public class CheckAliveNode : DecoratorNode {
+public class CheckSpawnNode : DecoratorNode {
     protected override void OnStart() {
         _child._monster = _monster;
     }
@@ -10,8 +8,7 @@ public class CheckAliveNode : DecoratorNode {
     }
 
     protected override State OnUpdate() {
-        if (_monster._isDead) {
-            _monster._rigid.velocity = Vector2.zero;
+        if (!_monster._isSpawnComplete) {
             return State.Failure;
         }
         else {

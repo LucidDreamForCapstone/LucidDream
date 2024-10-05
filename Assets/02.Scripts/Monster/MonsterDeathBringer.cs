@@ -33,8 +33,6 @@ public class MonsterDeathBringer : MonsterBase {
     private bool _isAttacking;
     private float _normalAttackDelay;
     private float _spellAttackDelay;
-    new private SpriteRenderer _spriteRenderer;
-    new private Animator _animator;
     #endregion //private variable
 
 
@@ -45,9 +43,7 @@ public class MonsterDeathBringer : MonsterBase {
     }
     new private void OnEnable() {
         base.OnEnable();
-        _spriteRenderer = _model.GetComponent<SpriteRenderer>();
         Spawn().Forget();
-        _animator = _model.GetComponent<Animator>();
         _isNormalAttackReady = true;
         _isSpellAttackReady = true;
         _isAttacking = false;
