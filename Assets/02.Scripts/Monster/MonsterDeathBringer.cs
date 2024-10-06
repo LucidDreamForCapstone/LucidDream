@@ -4,12 +4,9 @@ using System;
 using UnityEngine;
 
 public class MonsterDeathBringer : MonsterBase {
+
     #region serialize field
-    [SerializeField] GameObject _model;
-    [SerializeField] private float _yDiffOffset;
     [SerializeField] private LayerMask _playerLayer;
-    [SerializeField] private float _searchRange;
-    [SerializeField] private float _normalAttackRange;
     [SerializeField] private Vector2 _normalAttackArea;
     [SerializeField] private float _normalAttackCooltime;
     [SerializeField] private GameObject _spellCastObj;

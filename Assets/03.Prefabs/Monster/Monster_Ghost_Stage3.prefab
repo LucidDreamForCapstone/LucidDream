@@ -229,12 +229,10 @@ MonoBehaviour:
     _dropChance: 50
   - _item: {fileID: 1291977212005651459, guid: 652f72c4454773c44a4173eacf164980, type: 3}
     _dropChance: 50
-  _tree: {fileID: 11400000, guid: 7650c874b7023374688591967e122d53, type: 2}
+  _tree: {fileID: 11400000, guid: 0234ff4085160ec44a2471d598a979a6, type: 2}
   _isRightDefault: 0
-  _attackStateList: 
   _patternNum: 1
-  _searchDist: 10
-  _attackDist: 3
+  _attackStateList: 
   _isDead: 0
   _isSpawnComplete: 0
   _playerScript: {fileID: 0}
@@ -246,6 +244,8 @@ MonoBehaviour:
   _bodyDamage: 10
   _hitSound: []
   _deathSound: {fileID: 0}
+  _searchDist: 10
+  _attackDist: 3
   _def: 50
   _damage: 100
   _moveSpeed: 6

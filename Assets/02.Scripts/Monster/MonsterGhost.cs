@@ -6,8 +6,6 @@ public class MonsterGhost : MonsterBase {
 
     #region serialize field
 
-    //[SerializeField] private float _searchRange;
-    //[SerializeField] private float _attackRange;
     [SerializeField] private float _attackCooltime;
     [SerializeField] private AudioClip attackSound;
 

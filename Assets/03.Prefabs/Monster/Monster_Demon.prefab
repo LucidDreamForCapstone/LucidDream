@@ -233,10 +233,10 @@ MonoBehaviour:
     _dropChance: 45
   _tree: {fileID: 11400000, guid: 7650c874b7023374688591967e122d53, type: 2}
   _isRightDefault: 1
-  _attackStateList: 
   _patternNum: 1
   _searchDist: 10
   _attackDist: 6
+  _attackStateList: 
   _isDead: 0
   _isSpawnComplete: 0
   _playerScript: {fileID: 0}

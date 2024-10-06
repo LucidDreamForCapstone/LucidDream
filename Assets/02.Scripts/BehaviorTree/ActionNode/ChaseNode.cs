@@ -2,7 +2,8 @@ using UnityEngine;
 
 public class ChaseNode : ActionNode {
     //Player _player;
-
+    public float _searchDist;
+    public float _attackDist;
     protected override void OnStart() {
         //_player = PlayerDataManager.Instance.Player;
     }
@@ -29,10 +30,10 @@ public class ChaseNode : ActionNode {
         else
             _monster._spriteRenderer.flipX = !_monster._isRightDefault;
 
-        if (!CheckDist(monsterPos, playerPos, _monster._searchDist)) {
+        if (!CheckDist(monsterPos, playerPos, _searchDist)) {
             return State.Failure;
         }
-        else if (CheckDist(monsterPos, playerPos, _monster._attackDist)) {
+        else if (CheckDist(monsterPos, playerPos, _attackDist)) {
             return State.Success;
         }
         return State.Running;

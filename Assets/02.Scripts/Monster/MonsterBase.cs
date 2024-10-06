@@ -15,8 +15,6 @@ public abstract class MonsterBase : DropableBase {
     public BehaviourTree _tree;
     public bool _isRightDefault;
     public int _patternNum;
-    public float _searchDist;
-    public float _attackDist;
     [HideInInspector] public List<Func<UniTaskVoid>> _attackFuncList = new List<Func<UniTaskVoid>>();
     [HideInInspector] public List<AttackState> _attackStateList = new List<AttackState>();
     [HideInInspector] public bool _isDead;
@@ -38,7 +36,10 @@ public abstract class MonsterBase : DropableBase {
 
 
     #region protected variable
-
+    [Header("Dist must set in Tree")]
+    [SerializeField] protected float _searchDist;
+    [SerializeField] protected float _attackDist;
+    [Header("")]
     [SerializeField] protected int _def;
     [SerializeField] public int _damage;
     [SerializeField] public float _moveSpeed;
