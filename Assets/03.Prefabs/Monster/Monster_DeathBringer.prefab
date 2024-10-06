@@ -72,17 +72,19 @@ MonoBehaviour:
     _dropChance: 100
   - _item: {fileID: 1291977212005651459, guid: 652f72c4454773c44a4173eacf164980, type: 3}
     _dropChance: 70
-  _tree: {fileID: 0}
-  _flipFlag: 0
-  _attackState: 0
-  _searchDist: 0
-  _attackDist: 0
+  _tree: {fileID: 11400000, guid: 575ebb6e5250c214ea01825344157e82, type: 2}
+  _isRightDefault: 0
+  _patternNum: 2
+  _searchDist: 12
+  _attackDist: 6
+  _attackStateList: 
   _isDead: 0
   _isSpawnComplete: 0
   _playerScript: {fileID: 0}
   _rigid: {fileID: 0}
   _spriteRenderer: {fileID: 8192752556484128015}
   _animator: {fileID: 8052256820782048620}
+  _useTree: 1
   _isBoss: 0
   _bodyDamage: 40
   _hitSound: []

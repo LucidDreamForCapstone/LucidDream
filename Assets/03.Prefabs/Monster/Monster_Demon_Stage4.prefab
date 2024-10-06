@@ -63,7 +63,8 @@ MonoBehaviour:
     _dropChance: 10
   _tree: {fileID: 11400000, guid: 7650c874b7023374688591967e122d53, type: 2}
   _isRightDefault: 1
-  _attackState: 0
+  _attackStateList: 
+  _patternNum: 1
   _searchDist: 10
   _attackDist: 6
   _isDead: 0
@@ -72,6 +73,7 @@ MonoBehaviour:
   _rigid: {fileID: 0}
   _spriteRenderer: {fileID: 6488319569655740254}
   _animator: {fileID: 4973221796549229737}
+  _useTree: 1
   _isBoss: 0
   _bodyDamage: 10
   _hitSound: []

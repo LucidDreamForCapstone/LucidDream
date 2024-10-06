@@ -1,5 +1,4 @@
 ﻿using Cysharp.Threading.Tasks;
-using DG.Tweening;
 using Edgar.Unity.Examples.Gungeon;
 using System;
 using UnityEngine;
@@ -10,8 +9,8 @@ public class MonsterDeathBringer : MonsterBase {
     [SerializeField] private float _yDiffOffset;
     [SerializeField] private LayerMask _playerLayer;
     [SerializeField] private float _searchRange;
-    [SerializeField] private float _normalAttackRange;//�⺻ ������ �����ϴ� �Ÿ� ����
-    [SerializeField] private Vector2 _normalAttackArea;//�⺻ ������ ���� ���� ����
+    [SerializeField] private float _normalAttackRange;
+    [SerializeField] private Vector2 _normalAttackArea;
     [SerializeField] private float _normalAttackCooltime;
     [SerializeField] private GameObject _spellCastObj;
     [SerializeField] private Vector2 _spellAttackArea;
@@ -38,12 +37,10 @@ public class MonsterDeathBringer : MonsterBase {
 
     #region mono funcs 
 
-    private void Start() {
-        AudioSource audioSource = GetComponent<AudioSource>();
-    }
     new private void OnEnable() {
         base.OnEnable();
-        Spawn().Forget();
+        _attackFuncList.Add(NormalAttackTask);
+        _attackFuncList.Add(SpellAttackTask);
         _isNormalAttackReady = true;
         _isSpellAttackReady = true;
         _isAttacking = false;
@@ -51,17 +48,13 @@ public class MonsterDeathBringer : MonsterBase {
         _spellAttackDelay = 0f;
     }
 
-    private void Update() {
-        AttackMove();
-    }
-
     #endregion //mono funcs
 
 
 
     #region public funcs
-    public override void Damaged(int dmg, bool isCrit)//�÷��̾� ���ݿ� �������� ����
-    {
+
+    public override void Damaged(int dmg, bool isCrit) {
         if (!_isDead && _isSpawnComplete) {
             FloatingDamageManager.Instance.ShowDamage(this.gameObject, dmg, false, isCrit, false);
 
@@ -81,13 +74,13 @@ public class MonsterDeathBringer : MonsterBase {
 
 
     #region protected funcs
-
-    protected override void AttackMove() { //Ž�� ���� �ȿ� �÷��̾ �������� ��, ������ ���������� ������ ���, �װ� �ƴ϶�� ���� �������� �÷��̾�� ����
+    protected override void AttackMove() {
+        /*
         if (!_isAttacking && !_isStun && !_isDead && _isSpawnComplete) {
             double dist = CalculateManhattanDist(transform.position, _playerScript.transform.position);
             float yDiff = transform.position.y - _playerScript.transform.position.y;
 
-            if (dist < _normalAttackRange && yDiff < _yDiffOffset) {//�÷��̾ ���� ����
+            if (dist < _normalAttackRange && yDiff < _yDiffOffset) {
                 _rigid.velocity = Vector2.zero;
                 _animator.SetBool("Walk", false);
 
@@ -96,7 +89,7 @@ public class MonsterDeathBringer : MonsterBase {
                 }
 
             }
-            else if (dist < _searchRange) { //�÷��̾ �߰� �� ����
+            else if (dist < _searchRange) {
                 if (_isSpellAttackReady) {
                     _rigid.velocity = Vector2.zero;
                     SpellAttackTask().Forget();
@@ -121,7 +114,7 @@ public class MonsterDeathBringer : MonsterBase {
                     _animator.SetBool("Walk", true);
                 }
             }
-            else { //�÷��̾ �߰����� ���� ����
+            else {
                 _rigid.velocity = Vector2.zero;
                 _animator.SetBool("Walk", false);
             }
@@ -130,39 +123,22 @@ public class MonsterDeathBringer : MonsterBase {
             _rigid.velocity = Vector2.zero;
             _animator.SetBool("Walk", false);
         }
-    }
-
-    protected override async UniTaskVoid ChangeColor() {
-        if (!_isColorChanged) {
-            _isColorChanged = true;
-            Color32 originColor = _spriteRenderer.color;
-            _spriteRenderer.color = _damagedColor;
-            await UniTask.Delay(TimeSpan.FromSeconds(_colorChanageLastTime));
-            _spriteRenderer.color = originColor;
-            _isColorChanged = false;
-        }
+        */
     }
 
     protected override async UniTaskVoid Die() {
-
         _isDead = true;
-        //Debug.Log("���� ���");
         _hp = 0;
         gameObject.layer = LayerMask.NameToLayer("DeadEnemy");
         _animator.SetTrigger("Die");
         DropItems();
         _playerScript.GetExp(_exp);
         PlayerDataManager.Instance.SetFeverGauge(PlayerDataManager.Instance.Status._feverGauge + _feverAmount);
-        GetComponent<GungeonEnemy>().RoomManager.OnEnemyKilled(gameObject);//���� asset�� ����
+        GetComponent<GungeonEnemy>().RoomManager.OnEnemyKilled(gameObject);
         await UniTask.Delay(TimeSpan.FromSeconds(_dieDelay));
-        gameObject.SetActive(false);//���Ŀ� ������Ʈ Ǯ ���Ÿ� ������ ��
+        gameObject.SetActive(false);
     }
-    protected override async UniTaskVoid Spawn() {
-        Color originColor = _spriteRenderer.color;
-        _spriteRenderer.color = new Color(originColor.r, originColor.g, originColor.b, 0);
-        await _spriteRenderer.DOFade(1, 1);
-        _isSpawnComplete = true;
-    }
+
     #endregion //protected funcs
 
 
@@ -175,13 +151,15 @@ public class MonsterDeathBringer : MonsterBase {
         NormalAttack().Forget();
         await UniTask.Delay(TimeSpan.FromSeconds(_normalAttackCooltime));
         _isNormalAttackReady = true;
+        _attackStateList[0] = AttackState.Ready;
     }
 
     private async UniTaskVoid NormalAttack() {
+        _attackStateList[0] = AttackState.Attacking;
         _isAttacking = true;
         PlaySound(basicAttack);
         _animator.SetTrigger("NormalAttack");
-        await UniTask.Delay(TimeSpan.FromSeconds(0.3f));//�ִϸ��̼� ������
+        await UniTask.Delay(TimeSpan.FromSeconds(0.3f));
         Vector3 dir;
         if (!_spriteRenderer.flipX)
             dir = Vector3.left;
@@ -192,6 +170,7 @@ public class MonsterDeathBringer : MonsterBase {
             _playerScript.Damaged(_damage);
         await UniTask.Delay(TimeSpan.FromSeconds(_normalAttackDelay));
         _isAttacking = false;
+        _attackStateList[0] = AttackState.CoolTime;
     }
 
     private async UniTaskVoid SpellAttackTask() {
@@ -199,35 +178,34 @@ public class MonsterDeathBringer : MonsterBase {
         SpellAttack().Forget();
         await UniTask.Delay(TimeSpan.FromSeconds(_spellAttackCooltime));
         _isSpellAttackReady = true;
+        _attackStateList[1] = AttackState.Ready;
     }
 
     private async UniTaskVoid SpellAttack() {
+        _attackStateList[1] = AttackState.Attacking;
         _isAttacking = true;
         _animator.SetTrigger("SpellAttack");
         await UniTask.Delay(TimeSpan.FromSeconds(0.4f));
         PlaySound(attack_Thunder_Sound);
-        await UniTask.Delay(TimeSpan.FromSeconds(0.9f));//�ִϸ��̼� ������
+        await UniTask.Delay(TimeSpan.FromSeconds(0.9f));
         if (!_isDead) {
             GameObject spellCast = ObjectPool.Instance.GetObject(_spellCastObj);
             Vector3 offset = Vector3.right * 0.6f;
             Vector3 playerPos = _playerScript.transform.position;
             spellCast.transform.position = playerPos + Vector3.up * 5 + offset;
             spellCast.SetActive(true);
-            await UniTask.Delay(TimeSpan.FromSeconds(0.7f));//ĳ��Ʈ �ִϸ��̼� ������
+            await UniTask.Delay(TimeSpan.FromSeconds(0.7f));
             if (Physics2D.OverlapBox(playerPos, _spellAttackArea, 0, _playerLayer)) {
                 _playerScript.Damaged(_spellAttackDamage);
                 _playerScript.Stun(_spellAttackStunTime);
             }
-            await UniTask.Delay(TimeSpan.FromSeconds(1));//ĳ��Ʈ �ִϸ��̼� ������
+            await UniTask.Delay(TimeSpan.FromSeconds(1));
             ObjectPool.Instance.ReturnObject(spellCast);
         }
 
         await UniTask.Delay(TimeSpan.FromSeconds(_spellAttackDelay));
         _isAttacking = false;
-    }
-
-    private double CalculateManhattanDist(Vector2 a, Vector2 b) {
-        return Mathf.Abs(a.x - b.x) + Mathf.Abs(a.y - b.y);
+        _attackStateList[1] = AttackState.CoolTime;
     }
 
     #endregion //private funcs

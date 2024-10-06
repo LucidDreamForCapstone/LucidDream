@@ -1,4 +1,5 @@
 public class AttackNode : ActionNode {
+    public int attackIndex;
     protected override void OnStart() {
 
     }
@@ -8,9 +9,9 @@ public class AttackNode : ActionNode {
     }
 
     protected override State OnUpdate() {
-        switch (_monster._attackState) {
+        switch (_monster._attackStateList[attackIndex]) {
             case MonsterBase.AttackState.Ready:
-                _monster.Attack().Forget();
+                _monster._attackFuncList[attackIndex]?.Invoke().Forget();
                 return State.Running;
             case MonsterBase.AttackState.Attacking:
                 return State.Running;

@@ -30,7 +30,7 @@ public class MonsterGhost : MonsterBase {
 
     new private void OnEnable() {
         base.OnEnable();
-        Spawn().Forget();
+        _attackFuncList.Add(ScratchTask);
         _isAttackReady = true;
         _isAttacking = false;
         _attackDelay = 0.5f;
@@ -39,9 +39,6 @@ public class MonsterGhost : MonsterBase {
     #endregion //mono funcs
 
 
-    public override async UniTaskVoid Attack() {
-        await ScratchTask();
-    }
 
 
     #region protected funcs
@@ -85,16 +82,16 @@ public class MonsterGhost : MonsterBase {
 
     #region private funcs
 
-    private async UniTask ScratchTask() {
+    private async UniTaskVoid ScratchTask() {
         _isAttackReady = false;
         Scratch().Forget();
         await UniTask.Delay(TimeSpan.FromSeconds(_attackCooltime));
         _isAttackReady = true;
-        _attackState = AttackState.Ready;
+        _attackStateList[0] = AttackState.Ready;
     }
 
     private async UniTaskVoid Scratch() {
-        _attackState = AttackState.Attacking;
+        _attackStateList[0] = AttackState.Attacking;
         _isAttacking = true;
         _animator.SetTrigger("Attack");
         PlaySound(attackSound);
@@ -103,11 +100,7 @@ public class MonsterGhost : MonsterBase {
             _playerScript.Damaged(_damage);
         await UniTask.Delay(TimeSpan.FromSeconds(_attackDelay));
         _isAttacking = false;
-        _attackState = AttackState.CoolTime;
-    }
-
-    private float GetDistSquare(Vector2 a, Vector2 b) {
-        return (a - b).sqrMagnitude;
+        _attackStateList[0] = AttackState.CoolTime;
     }
 
     #endregion //private funcs

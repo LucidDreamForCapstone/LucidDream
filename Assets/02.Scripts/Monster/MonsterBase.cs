@@ -2,6 +2,7 @@ using Cysharp.Threading.Tasks;
 using DG.Tweening;
 using Edgar.Unity.Examples.Gungeon;
 using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 public abstract class MonsterBase : DropableBase {
@@ -13,9 +14,11 @@ public abstract class MonsterBase : DropableBase {
 
     public BehaviourTree _tree;
     public bool _isRightDefault;
-    [HideInInspector] public AttackState _attackState;
+    public int _patternNum;
     public float _searchDist;
     public float _attackDist;
+    [HideInInspector] public List<Func<UniTaskVoid>> _attackFuncList = new List<Func<UniTaskVoid>>();
+    [HideInInspector] public List<AttackState> _attackStateList = new List<AttackState>();
     [HideInInspector] public bool _isDead;
     [HideInInspector] public bool _isSpawnComplete;
     [HideInInspector] public Player _playerScript;
@@ -53,13 +56,6 @@ public abstract class MonsterBase : DropableBase {
 
 
 
-    #region private variable
-
-    #endregion // private variable
-
-
-
-
     #region mono funcs
 
     protected void OnEnable() {
@@ -71,9 +67,14 @@ public abstract class MonsterBase : DropableBase {
         _rigid = GetComponent<Rigidbody2D>();
         _isSpawnComplete = false;
         if (_useTree) {
+            for (int i = 0; i < _patternNum; i++) {
+                _attackStateList.Add(AttackState.Ready);
+            }
             _tree._monster = this;
             _tree = _tree.Clone();
         }
+        if (!_isBoss)
+            Spawn().Forget();
     }
 
     private void Update() {
@@ -131,10 +132,6 @@ public abstract class MonsterBase : DropableBase {
     public bool CheckBoss() { return _isBoss; }
     public bool CheckDead() { return _isDead; }
 
-    public virtual async UniTaskVoid Attack() { //after need to change to abstract function
-        await UniTask.NextFrame();
-    }
-
     //public abstract void Move();
 
     #endregion //public funcs
@@ -147,8 +144,7 @@ public abstract class MonsterBase : DropableBase {
 
     protected abstract void AttackMove();
 
-    virtual protected async UniTaskVoid ChangeColor()//�ǰ� �� ���� ������ ���� �� ����
-    {
+    virtual protected async UniTaskVoid ChangeColor() {
         if (!_isColorChanged) {
             _isColorChanged = true;
             Color32 originColor = _spriteRenderer.color;
@@ -197,6 +193,10 @@ public abstract class MonsterBase : DropableBase {
         _spriteRenderer.color = new Color(originColor.r, originColor.g, originColor.b, 0);
         await _spriteRenderer.DOFade(1, 1);
         _isSpawnComplete = true;
+    }
+
+    protected float GetDistSquare(Vector2 a, Vector2 b) {
+        return (a - b).sqrMagnitude;
     }
 
     #endregion //protected funcs

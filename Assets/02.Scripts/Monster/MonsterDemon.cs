@@ -32,7 +32,7 @@ public class MonsterDemon : MonsterBase {
 
     new private void OnEnable() {
         base.OnEnable();
-        Spawn().Forget();
+        _attackFuncList.Add(FireTask);
         _isFiring = false;
         _isFireReady = true;
         _fireDelay = 0.5f;
@@ -40,9 +40,8 @@ public class MonsterDemon : MonsterBase {
 
     #endregion //mono func
 
-    public override async UniTaskVoid Attack() {
-        await FireTask();
-    }
+
+
 
     #region protected funcs
 
@@ -76,16 +75,16 @@ public class MonsterDemon : MonsterBase {
 
     #region private funcs
 
-    private async UniTask FireTask() {
+    private async UniTaskVoid FireTask() {
         _isFireReady = false;
         Fire().Forget();
         await UniTask.Delay(TimeSpan.FromSeconds(_fireCoolTime));
         _isFireReady = true;
-        _attackState = AttackState.Ready;
+        _attackStateList[0] = AttackState.Ready;
     }
 
     private async UniTaskVoid Fire() {
-        _attackState = AttackState.Attacking;
+        _attackStateList[0] = AttackState.Attacking;
         _isFiring = true;
         _animator.SetTrigger("Attack");
         PlaySound(attackSound);
@@ -101,7 +100,7 @@ public class MonsterDemon : MonsterBase {
         fireBall.SetActive(true);
         await UniTask.Delay(TimeSpan.FromSeconds(_fireDelay));
         _isFiring = false;
-        _attackState = AttackState.CoolTime;
+        _attackStateList[0] = AttackState.CoolTime;
     }
 
     private double CalculateManhattanDist(Vector2 a, Vector2 b) {
