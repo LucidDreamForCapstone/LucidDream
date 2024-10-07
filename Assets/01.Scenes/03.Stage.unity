@@ -41228,6 +41228,7 @@ MonoBehaviour:
   _patternNum: 0
   _attackStateList: 
   _isDead: 0
+  _isStun: 0
   _isSpawnComplete: 0
   _playerScript: {fileID: 0}
   _rigid: {fileID: 0}
@@ -56427,6 +56428,14 @@ PrefabInstance:
     - target: {fileID: 1213858276333295106, guid: c77b21b20c9cd8c44afd60d44b4954f6, type: 3}
       propertyPath: m_IsActive
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3348039780658177386, guid: c77b21b20c9cd8c44afd60d44b4954f6, type: 3}
+      propertyPath: dropTable.Array.data[5]._dropChance
+      value: 89
+      objectReference: {fileID: 0}
+    - target: {fileID: 3348039780658177386, guid: c77b21b20c9cd8c44afd60d44b4954f6, type: 3}
+      propertyPath: dropTable.Array.data[9]._dropChance
+      value: 90
       objectReference: {fileID: 0}
     - target: {fileID: 4151153953099191616, guid: c77b21b20c9cd8c44afd60d44b4954f6, type: 3}
       propertyPath: m_LocalPosition.x

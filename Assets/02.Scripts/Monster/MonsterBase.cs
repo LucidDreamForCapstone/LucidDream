@@ -18,6 +18,7 @@ public abstract class MonsterBase : DropableBase {
     [HideInInspector] public List<Func<UniTaskVoid>> _attackFuncList = new List<Func<UniTaskVoid>>();
     [HideInInspector] public List<AttackState> _attackStateList = new List<AttackState>();
     [HideInInspector] public bool _isDead;
+    [HideInInspector] public bool _isStun;
     [HideInInspector] public bool _isSpawnComplete;
     [HideInInspector] public Player _playerScript;
     [HideInInspector] public Rigidbody2D _rigid;
@@ -49,7 +50,6 @@ public abstract class MonsterBase : DropableBase {
     [SerializeField] protected int _exp;
     [SerializeField] protected int _feverAmount;
     protected int _hp;
-    protected bool _isStun;
     protected static float _colorChanageLastTime = 0.3f;
     protected bool _isColorChanged;
     #endregion //protected variable

@@ -15,10 +15,10 @@ MonoBehaviour:
   _state: 0
   _started: 0
   _guid: 9e29915b51dd7d54b9bcf1c74afe440e
-  _position: {x: 0, y: 289}
+  _position: {x: 1.1500096, y: 225.75006}
   _monster: {fileID: 0}
   description: "\uC0B4\uC544\uC788\uB294\uC9C0 \uD655\uC778"
-  _child: {fileID: -6187105008728002340}
+  _child: {fileID: -3861657734866573520}
 --- !u!114 &-8466104972120574059
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -34,7 +34,7 @@ MonoBehaviour:
   _state: 0
   _started: 0
   _guid: 0c303f5db9811fc44bdfab6d1a237208
-  _position: {x: 2.1499922, y: 91.55002}
+  _position: {x: 0.8500033, y: 19.549997}
   _monster: {fileID: 0}
   description: "\uBB34\uD55C\uBC18\uBCF5"
   _child: {fileID: 1554511675279496677}
@@ -53,7 +53,7 @@ MonoBehaviour:
   _state: 0
   _started: 0
   _guid: 193c6e082f5000941807d80f69d360f0
-  _position: {x: -242.0041, y: 662.745}
+  _position: {x: -243.52089, y: 670.6044}
   _monster: {fileID: 0}
   description: "\uD50C\uB808\uC774\uC5B4 \uCD94\uC801"
   _searchDist: 12
@@ -73,12 +73,31 @@ MonoBehaviour:
   _state: 0
   _started: 0
   _guid: 19ed2d8b903d87d42a94a41c8d24ab35
-  _position: {x: 2.3000293, y: 395.30005}
+  _position: {x: 2.0000215, y: 410.50006}
   _monster: {fileID: 0}
   description: 
   _children:
   - {fileID: 6008246629431492256}
   - {fileID: 4119556812844261288}
+--- !u!114 &-3861657734866573520
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ed697174e863c894bb85be6a083c137d, type: 3}
+  m_Name: CheckStunNode
+  m_EditorClassIdentifier: 
+  _state: 0
+  _started: 0
+  _guid: 4d46a84fc00909140a970c2b590f5efb
+  _position: {x: 0.40002626, y: 317.75}
+  _monster: {fileID: 0}
+  description: "\uC2A4\uD134 \uC0C1\uD0DC\uC778\uC9C0 \uD655\uC778"
+  _child: {fileID: -6187105008728002340}
 --- !u!114 &-3447444879605730920
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -94,7 +113,7 @@ MonoBehaviour:
   _state: 0
   _started: 0
   _guid: 5e58590c91a820147a12d34d827b9cdd
-  _position: {x: 83.74888, y: 664.494}
+  _position: {x: 79.43738, y: 668.5626}
   _monster: {fileID: 0}
   description: "\uD50C\uB808\uC774\uC5B4 \uCD94\uC801"
   _searchDist: 12
@@ -124,6 +143,7 @@ MonoBehaviour:
   - {fileID: 633675846968698808}
   - {fileID: 6008246629431492256}
   - {fileID: -6230346757239489692}
+  - {fileID: -3861657734866573520}
   _treeState: 0
   _monster: {fileID: 0}
 --- !u!114 &633675846968698808
@@ -141,7 +161,7 @@ MonoBehaviour:
   _state: 0
   _started: 0
   _guid: b926a16381ff9504ebc3d9fe81108a18
-  _position: {x: 270.74084, y: 659.745}
+  _position: {x: 267.9582, y: 667.6044}
   _monster: {fileID: 0}
   description: "\uC77C\uBC18\uACF5\uACA9"
   attackIndex: 0
@@ -160,7 +180,7 @@ MonoBehaviour:
   _state: 0
   _started: 0
   _guid: 19fa7f815cb36994296f862cbe226815
-  _position: {x: 0.65002316, y: 191.75}
+  _position: {x: 2.1500003, y: 122.862015}
   _monster: {fileID: 0}
   description: "\uC2A4\uD3F0\uB418\uC5C8\uB294\uC9C0 \uD655\uC778"
   _child: {fileID: -8844796979171841212}
@@ -179,7 +199,7 @@ MonoBehaviour:
   _state: 0
   _started: 0
   _guid: 09aea01ae00aca048b39486413a1f4e3
-  _position: {x: 170.50195, y: 533.24695}
+  _position: {x: 169.47914, y: 542.12524}
   _monster: {fileID: 0}
   description: 
   _children:
@@ -200,7 +220,7 @@ MonoBehaviour:
   _state: 0
   _started: 0
   _guid: ef3ad759974d08f4bbd78600327367a8
-  _position: {x: -161.46222, y: 529.24695}
+  _position: {x: -157.95831, y: 542.68787}
   _monster: {fileID: 0}
   description: 
   _children:
@@ -221,7 +241,7 @@ MonoBehaviour:
   _state: 0
   _started: 0
   _guid: 81b8b3cc5c82cae4f8cc1ae5a7876c82
-  _position: {x: 0, y: 0}
+  _position: {x: 1.2999942, y: -75.98404}
   _monster: {fileID: 0}
   description: 
   _child: {fileID: -8466104972120574059}
