@@ -133,6 +133,10 @@ public abstract class MonsterBase : DropableBase {
     public bool CheckBoss() { return _isBoss; }
     public bool CheckDead() { return _isDead; }
 
+    public float GetHpPercent() {
+        return (float)_hp / (float)_maxHp;
+    }
+
     //public abstract void Move();
 
     #endregion //public funcs
