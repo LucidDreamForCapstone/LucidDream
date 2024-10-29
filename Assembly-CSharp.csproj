@@ -89,6 +89,7 @@
     <Compile Include="Assets\02.Scripts\Player\PlayerWeaponManager.cs" />
     <Compile Include="Assets\JMO Assets\Cartoon FX (legacy)\Scripts\CFX_LightFlicker.cs" />
     <Compile Include="Assets\02.Scripts\Weapon\WoodenSword.cs" />
+    <Compile Include="Assets\07.Shader\Glitch\GlitchRenderPass.cs" />
     <Compile Include="Assets\02.Scripts\UI\TextBubbleData.cs" />
     <Compile Include="Assets\02.Scripts\Weapon\AbyssStaff.cs" />
     <Compile Include="Assets\02.Scripts\Item\KeySystem.cs" />
@@ -101,8 +102,10 @@
     <Compile Include="Assets\02.Scripts\UI\TextBubble.cs" />
     <Compile Include="Assets\JMO Assets\Cartoon FX (legacy)\Demo\Assets\CFX_Demo.cs" />
     <Compile Include="Assets\02.Scripts\Inventory\InventoryManager.cs" />
+    <Compile Include="Assets\07.Shader\Glitch\GlitchController.cs" />
     <Compile Include="Assets\02.Scripts\Monster\MonsterTest.cs" />
     <Compile Include="Assets\02.Scripts\Weapon\WeaponBasicData.cs" />
+    <Compile Include="Assets\02.Scripts\Player\Player_2.cs" />
     <Compile Include="Assets\02.Scripts\Weapon\WeaponBase.cs" />
     <Compile Include="Assets\02.Scripts\ShopItem\ShopItem_Potion.cs" />
     <Compile Include="Assets\02.Scripts\Weapon\NoWeapon.cs" />
@@ -117,8 +120,10 @@
     <Compile Include="Assets\02.Scripts\Item\GuardEffect.cs" />
     <Compile Include="Assets\JMO Assets\Cartoon FX (legacy)\Scripts\CFX_LightIntensityFade.cs" />
     <Compile Include="Assets\02.Scripts\Monster\MonsterDeathBringer.cs" />
+    <Compile Include="Assets\07.Shader\Glitch\GlitchEffect.cs" />
     <Compile Include="Assets\02.Scripts\Monster\LaserData.cs" />
     <Compile Include="Assets\02.Scripts\Etc\Common.cs" />
+    <Compile Include="Assets\PSM.cs" />
     <Compile Include="Assets\02.Scripts\Monster\BossHades.cs" />
     <Compile Include="Assets\07.Shader\Glitch\CustomRenderPassFeature.cs" />
     <Compile Include="Assets\JMO Assets\Cartoon FX (legacy)\Demo\Assets\CFX_Demo_New.cs" />

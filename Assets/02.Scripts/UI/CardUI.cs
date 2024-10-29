@@ -33,6 +33,9 @@ public class CardUI : UIBase {
         SetBGImage();
         SetDesc();
 
+        // Card init
+        InitCard();
+
         // Show the card with Fade In effect
         FadeInCard();
         base.SetShow();
@@ -137,6 +140,10 @@ public class CardUI : UIBase {
         transform.DOScale(1f, 0.3f).SetUpdate(true);
         _cardImage?.DOFade(1f, 0.3f).SetUpdate(true);
         _cardDescription?.DOFade(1f, 0.3f).SetUpdate(true);
+    }
+
+    private void InitCard() {
+        transform.localScale = Vector3.one; //set normal
     }
     #endregion // private funcs
 }
