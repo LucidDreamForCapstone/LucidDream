@@ -86,8 +86,7 @@ public abstract class ShopItemBase : MonoBehaviour, Interactable {
         _animator = GetComponent<Animator>();
     }
 
-    private void OnCollisionStay2D(Collision2D collision)
-    {
+    private void OnCollisionStay2D(Collision2D collision) {
         if (collision.gameObject.CompareTag("Player")) {
             OpenShopItem();
         }
@@ -102,7 +101,6 @@ public abstract class ShopItemBase : MonoBehaviour, Interactable {
     #endregion
 
     #region Public Methods
-
     public string GetName() { return _name; }
 
     public bool IsInteractBlock() {
@@ -117,14 +115,11 @@ public abstract class ShopItemBase : MonoBehaviour, Interactable {
 
     #region Private Methods
 
-    private void OpenShopItem()
-    {
-        if (!_isUsed && InteractManager.Instance.CheckInteractable(this))
-        {
+    private void OpenShopItem() {
+        if (!_isUsed && InteractManager.Instance.CheckInteractable(this)) {
             Debug.Log("Player attempted to buy an item.");
             Debug.Log($"Current Coins: {PlayerDataManager.Instance.Status._coin}, Item Price: {_price}");
-            if (Input.GetKey(KeyCode.G))
-            {
+            if (Input.GetKey(KeyCode.G)) {
                 InteractManager.Instance.InteractCoolTime().Forget();
 
                 if (!CanPurchase()) // 아이템 구매 가능 여부 확인
@@ -133,14 +128,12 @@ public abstract class ShopItemBase : MonoBehaviour, Interactable {
                     return; // 구매 중단
                 }
 
-                if (PlayerDataManager.Instance.BuyItem(_price))
-                {
+                if (PlayerDataManager.Instance.BuyItem(_price)) {
                     Debug.Log("Item purchased successfully.");
                     ItemEffect();
                     _isUsed = true;
                 }
-                else
-                {
+                else {
                     Debug.Log("Not enough coins.");
                     inGameUIController.ShowNotification("코인이 부족합니다.", 1f); // 2초 동안 문구 표시
                 }

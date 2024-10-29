@@ -14,6 +14,7 @@ public class KeySystem : MonoBehaviour, Interactable {
         }
     }
 
+
     public bool IsInteractBlock() {
         return false;
         //상호작용을 막아야하는 상황이 오면 여기다가 그 조건을 넣을 것

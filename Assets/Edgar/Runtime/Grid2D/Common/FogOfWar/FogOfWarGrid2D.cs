@@ -6,8 +6,7 @@ using System.Linq;
 using UnityEngine;
 using Debug = UnityEngine.Debug;
 
-namespace Edgar.Unity
-{
+namespace Edgar.Unity {
     /// <summary>
     /// The main class of the Fog of War feature. (PRO version only)
     /// </summary>
@@ -16,8 +15,7 @@ namespace Edgar.Unity
     /// See online documentation for information on how to use this feature.
     /// </remarks>
     [AddComponentMenu("Edgar/Grid2D/Fog Of War (Grid2D)")]
-    public class FogOfWarGrid2D : MonoBehaviour
-    {
+    public class FogOfWarGrid2D : MonoBehaviour {
         public FogOfWarColorMode ColorMode = FogOfWarColorMode.CameraColor;
 
         /// <summary>
@@ -128,14 +126,11 @@ namespace Edgar.Unity
 
         public static FogOfWarGrid2D Instance { get; protected set; }
 
-        protected void Awake()
-        {
-            if (Instance == null)
-            {
+        protected void Awake() {
+            if (Instance == null) {
                 Instance = this;
             }
-            else if (Instance != this)
-            {
+            else if (Instance != this) {
                 Debug.LogError($"There should be only a single instance of the {nameof(FogOfWarGrid2D)} component.");
             }
         }
@@ -148,8 +143,7 @@ namespace Edgar.Unity
         /// Call this method when saving the game and then use RevealRooms() when loading the game.
         /// </remarks>
         /// <returns></returns>
-        public IReadOnlyList<RoomInstanceGrid2D> GetRevealedRooms()
-        {
+        public IReadOnlyList<RoomInstanceGrid2D> GetRevealedRooms() {
             return RevealedRooms;
         }
 
@@ -162,8 +156,7 @@ namespace Edgar.Unity
         /// </remarks>
         /// <param name="generatedLevelRoot">Root game object of the generated level.</param>
         /// <param name="waveOrigin">Origin of the fog reveal animation if the Wave mode is used.</param>
-        public void Setup(GameObject generatedLevelRoot, Transform waveOrigin = null)
-        {
+        public void Setup(GameObject generatedLevelRoot, Transform waveOrigin = null) {
             if (generatedLevelRoot == null) throw new ArgumentNullException(nameof(generatedLevelRoot));
 
             StopAllCoroutines();
@@ -179,39 +172,31 @@ namespace Edgar.Unity
             stepsSinceSetup = 0;
         }
 
-        private void Update()
-        {
+        private void Update() {
             CheckTransitionMode();
 
-            if (visionGrid != null && visionGrid.HasChanges())
-            {
+            if (visionGrid != null && visionGrid.HasChanges()) {
                 visionTextures = visionGrid.GetVisionTextures();
                 visionGrid.ResetHasChanges();
             }
 
-            if (visionGrid != null)
-            {
+            if (visionGrid != null) {
                 stepsSinceSetup++;
 
-                if (stepsSinceSetup % 5000 == 10 && !materialRetrieved)
-                {
+                if (stepsSinceSetup % 5000 == 10 && !materialRetrieved) {
                     Debug.LogWarning("The Fog of War feature is enabled but the shader was not yet applied. It seems like you are using URP or LWRP and did not add the custom render feature. Please visit the documentation to see which additional steps are needed to enable this feature in URP and LWRP.");
                 }
             }
         }
 
-        private void CheckTransitionMode()
-        {
-            if (material != null && (lastTransitionMode == null || lastTransitionMode.Value != TransitionMode))
-            {
+        private void CheckTransitionMode() {
+            if (material != null && (lastTransitionMode == null || lastTransitionMode.Value != TransitionMode)) {
                 lastTransitionMode = TransitionMode;
 
-                if (TransitionMode == FogOfWarTransitionMode.Custom)
-                {
+                if (TransitionMode == FogOfWarTransitionMode.Custom) {
                     Shader.EnableKeyword("FOG_CUSTOM_MODE");
                 }
-                else
-                {
+                else {
                     Shader.DisableKeyword("FOG_CUSTOM_MODE");
                 }
             }
@@ -223,9 +208,8 @@ namespace Edgar.Unity
         /// <param name="room">Room to be revealed.</param>
         /// <param name="waveOrigin">Origin of the wave if the WaveMode is used. If provided, it overrides the waveOrigin given to the Setup() method.</param>
         /// <param name="revealImmediately">Whether to reveal the room immediately without any animation.</param>
-        public void RevealRoom(RoomInstanceGrid2D room, Vector3? waveOrigin = null, bool revealImmediately = false)
-        {
-            RevealRooms(new List<RoomInstanceGrid2D>() {room}, waveOrigin, revealImmediately);
+        public void RevealRoom(RoomInstanceGrid2D room, Vector3? waveOrigin = null, bool revealImmediately = false) {
+            RevealRooms(new List<RoomInstanceGrid2D>() { room }, waveOrigin, revealImmediately);
         }
 
         /// <summary>
@@ -234,16 +218,14 @@ namespace Edgar.Unity
         /// <param name="room">Room to be revealed.</param>
         /// <param name="waveOrigin">Origin of the wave if the WaveMode is used. If provided, it overrides the waveOrigin given to the Setup() method.</param>
         /// <param name="revealImmediately">Whether to reveal the room immediately without any animation.</param>
-        public void RevealRoomAndNeighbors(RoomInstanceGrid2D room, Vector3? waveOrigin = null, bool revealImmediately = false)
-        {
+        public void RevealRoomAndNeighbors(RoomInstanceGrid2D room, Vector3? waveOrigin = null, bool revealImmediately = false) {
             // Compute which rooms should be revealed
             var roomsToExplore = new List<RoomInstanceGrid2D>()
             {
                 room
             };
 
-            foreach (var roomToExplore in room.Doors.Select(x => x.ConnectedRoomInstance))
-            {
+            foreach (var roomToExplore in room.Doors.Select(x => x.ConnectedRoomInstance)) {
                 roomsToExplore.Add(roomToExplore);
             }
 
@@ -256,62 +238,52 @@ namespace Edgar.Unity
         /// <param name="rooms">Rooms to be revealed.</param>
         /// <param name="waveOrigin">Origin of the wave if the WaveMode is used. If provided, it overrides the waveOrigin given to the Setup() method.</param>
         /// <param name="revealImmediately">Whether to reveal the rooms immediately without any animation.</param>
-        public void RevealRooms(List<RoomInstanceGrid2D> rooms, Vector3? waveOrigin = null, bool revealImmediately = false)
-        {
-            if (Mode == FogOfWarMode.Wave && waveOrigin == null && WaveOrigin == null)
-            {
+        public void RevealRooms(List<RoomInstanceGrid2D> rooms, Vector3? waveOrigin = null, bool revealImmediately = false) {
+            if (Mode == FogOfWarMode.Wave && waveOrigin == null && WaveOrigin == null) {
                 throw new ArgumentException($"When the {FogOfWarMode.Wave} mode is used, either the {nameof(waveOrigin)} that is passed to this method or that is used in the Setup() method must not be null.");
             }
 
             var playerPosition = Mode == FogOfWarMode.Wave
                 ? waveOrigin ?? WaveOrigin.transform.position
                 : Vector3.zero;
-            
+
             StartCoroutine(RevealRoomCoroutine(rooms, playerPosition, revealImmediately));
         }
+
 
         /// <summary>
         /// Reloads the component, taking already revealed rooms and revealing them again.
         /// </summary>
         /// <param name="revealImmediately">Whether to reveal the rooms immediately without any animation.</param>
-        public void Reload(bool revealImmediately = false)
-        {
+        public void Reload(bool revealImmediately = false) {
             var rooms = RevealedRooms.ToList();
             Setup(GeneratedLevelRoot, WaveOrigin);
             RevealRooms(rooms, revealImmediately: revealImmediately);
         }
-        private List<Vector2Int> GetAdjacentTiles(Vector2Int point, int distance)
-        {
+        private List<Vector2Int> GetAdjacentTiles(Vector2Int point, int distance) {
             var adjacentTiles = new List<Vector2Int>();
 
-            for (int dx = -distance; dx <= distance; dx++)
-            {
-                for (int dy = -distance; dy <= distance; dy++)
-                {
+            for (int dx = -distance; dx <= distance; dx++) {
+                for (int dy = -distance; dy <= distance; dy++) {
                     if (dx == 0 && dy == 0) continue; // Skip the original point
-                    adjacentTiles.Add(new Vector2Int(point.x + dx-1, point.y + dy));
+                    adjacentTiles.Add(new Vector2Int(point.x + dx - 1, point.y + dy));
                 }
             }
 
             return adjacentTiles;
         }
-        private Dictionary<Vector2Int, TileInfo> GetTilesToReveal(List<RoomInstanceGrid2D> roomsToReveal)
-        {
+        private Dictionary<Vector2Int, TileInfo> GetTilesToReveal(List<RoomInstanceGrid2D> roomsToReveal) {
             var tiles = new Dictionary<Vector2Int, TileInfo>();
             var revealedFogValue = 1f;
 
             // Go through the rooms and set the target fog value
 
-            foreach (var room in roomsToReveal)
-            {
-                foreach (var point in GetPolygonPoints(room.OutlinePolygon))
-                {
+            foreach (var room in roomsToReveal) {
+                foreach (var point in GetPolygonPoints(room.OutlinePolygon)) {
                     tiles[point] = new TileInfo(revealedFogValue, false);
                     // Add adjacent tiles
-                    foreach (var adjacent in GetAdjacentTiles(point,2))
-                    {
-                        if (!tiles.ContainsKey(adjacent))
-                        {
+                    foreach (var adjacent in GetAdjacentTiles(point, 2)) {
+                        if (!tiles.ContainsKey(adjacent)) {
                             tiles[adjacent] = new TileInfo(revealedFogValue, false);
                         }
                     }
@@ -325,40 +297,34 @@ namespace Edgar.Unity
             //
             // The solution to this problem is to add an additional row of tiles next to the outline tiles. These tiles will be
             // hidden in the fog but we will treat them as if we wanted to reveal them to trick the interpolation mechanism.
-            if (TransitionMode == FogOfWarTransitionMode.Smooth || TransitionMode == FogOfWarTransitionMode.Custom)
-            {
+            if (TransitionMode == FogOfWarTransitionMode.Smooth || TransitionMode == FogOfWarTransitionMode.Custom) {
                 var extendedOutline = GetExtendedOutline(new HashSet<Vector2Int>(tiles.Keys));
                 var interpolationHelperPoints = extendedOutline.Where(x => visionGrid.GetTile(x).IsRevealed == false).ToList();
 
-                foreach (var point in interpolationHelperPoints)
-                {
+                foreach (var point in interpolationHelperPoints) {
                     tiles.Add(point, new TileInfo(revealedFogValue, true));
                 }
             }
 
             // If we want to also reveal parts of neighboring corridors, this is the place to compute which tiles should be revealed
-            if (RevealCorridors && RevealCorridorsTiles > 0)
-            {
-                foreach (var room in roomsToReveal)
-                {
-                    foreach (var door in room.Doors)
-                    {
+            if (RevealCorridors && RevealCorridorsTiles > 0) {
+                foreach (var room in roomsToReveal) {
+                    foreach (var door in room.Doors) {
                         var neighbor = door.ConnectedRoomInstance;
 
                         // We only need corridors that should not be completely revealed
-                        if (!neighbor.IsCorridor || roomsToReveal.Contains(neighbor))
-                        {
+                        if (!neighbor.IsCorridor || roomsToReveal.Contains(neighbor)) {
                             continue;
                         }
 
                         var neighborOutline = GetPolygonPoints(neighbor.OutlinePolygon);
 
                         var doorPointRaw = door.DoorLine.GetPoints().First();
-                        var doorPoint = (Vector2Int) (doorPointRaw + room.Position);
+                        var doorPoint = (Vector2Int)(doorPointRaw + room.Position);
 
                         // Based on whether the door is horizontal or vertical, we will compute the distance of corridor tiles from the door tile
                         var getDistance = door.IsHorizontal
-                            ? (Func<Vector2Int, float>) (x => Mathf.Abs(x.y - doorPoint.y))
+                            ? (Func<Vector2Int, float>)(x => Mathf.Abs(x.y - doorPoint.y))
                             : x => Mathf.Abs(x.x - doorPoint.x);
 
                         // Using the getDistance() function compute whit corridor tiles should be revealed
@@ -373,25 +339,21 @@ namespace Edgar.Unity
                                 .ToList()
                             : new List<Vector2Int>();
 
-                        if (closeTiles.Count == 0)
-                        {
+                        if (closeTiles.Count == 0) {
                             continue;
                         }
 
                         var maxDistance = closeTiles.Union(extendedCloseTiles).Max(getDistance);
 
-                        foreach (var closeTile in closeTiles.Union(extendedCloseTiles))
-                        {
+                        foreach (var closeTile in closeTiles.Union(extendedCloseTiles)) {
                             var distance = getDistance(closeTile);
 
-                            if (TransitionMode == FogOfWarTransitionMode.Smooth || TransitionMode == FogOfWarTransitionMode.Custom)
-                            {
+                            if (TransitionMode == FogOfWarTransitionMode.Smooth || TransitionMode == FogOfWarTransitionMode.Custom) {
                                 distance += 0.5f;
                             }
 
                             // Some of the extendedCloseTiles may be closer than that
-                            if (distance < 1)
-                            {
+                            if (distance < 1) {
                                 continue;
                             }
 
@@ -401,14 +363,12 @@ namespace Edgar.Unity
 
                             var targetFogValue = RevealCorridorsGradually ? Mathf.Lerp(0.7f, minimumFogValue, ratio) : revealedFogValue;
 
-                            if (RevealCorridorsTiles == 1 && TransitionMode == FogOfWarTransitionMode.TileBased && RevealCorridorsGradually)
-                            {
+                            if (RevealCorridorsTiles == 1 && TransitionMode == FogOfWarTransitionMode.TileBased && RevealCorridorsGradually) {
                                 targetFogValue = 0.5f;
                             }
 
                             // Do not override existing tiles
-                            if (tiles.TryGetValue(closeTile, out var existingTile) && !existingTile.IsInterpolationHelper)
-                            {
+                            if (tiles.TryGetValue(closeTile, out var existingTile) && !existingTile.IsInterpolationHelper) {
                                 continue;
                             }
 
@@ -421,15 +381,12 @@ namespace Edgar.Unity
             return tiles;
         }
 
-            private IEnumerator RevealRoomCoroutine(List<RoomInstanceGrid2D> rooms, Vector2 playerPosition, bool revealImmediately = false)
-        {
-            if (GeneratedLevelRoot != null)
-            {
+        private IEnumerator RevealRoomCoroutine(List<RoomInstanceGrid2D> rooms, Vector2 playerPosition, bool revealImmediately = false) {
+            if (GeneratedLevelRoot != null) {
                 var tilemapsRoot = GeneratedLevelRoot.gameObject.transform.Find("Tilemaps");
 
-                if (tilemapsRoot != null)
-                {
-                    playerPosition -= (Vector2) tilemapsRoot.position;
+                if (tilemapsRoot != null) {
+                    playerPosition -= (Vector2)tilemapsRoot.position;
                 }
             }
 
@@ -441,8 +398,7 @@ namespace Edgar.Unity
                 .Where(x => !RevealedRooms.Contains(x))
                 .ToList();
 
-            if (notYetRevealedRooms.Count == 0)
-            {
+            if (notYetRevealedRooms.Count == 0) {
                 yield break;
             }
 
@@ -457,14 +413,12 @@ namespace Edgar.Unity
 
             // Get the initial values of points that should be revealed
             var initialValues = new Dictionary<Vector2Int, FogOfWarVisionGrid.TileInfo>();
-            foreach (var point in points.Keys)
-            {
+            foreach (var point in points.Keys) {
                 initialValues[point] = visionGrid.GetTile(point);
             }
 
             // Lock all the points to this coroutine id
-            foreach (var point in points.Keys)
-            {
+            foreach (var point in points.Keys) {
                 tilesLocks[point] = coroutineId;
             }
 
@@ -472,20 +426,17 @@ namespace Edgar.Unity
             var stopwatch = new Stopwatch();
             stopwatch.Start();
 
-            while (true)
-            {
+            while (true) {
                 var allRevealed = true;
                 var time = stopwatch.ElapsedMilliseconds / 1000f;
 
-                foreach (var pair in points)
-                {
+                foreach (var pair in points) {
                     var point = pair.Key;
                     var tileInfo = pair.Value;
                     var targetFogValue = tileInfo.TargetFogValue;
 
                     // Check that the point is locked by this coroutine to prevent multiple coroutines changing the same tile
-                    if (!tilesLocks.TryGetValue(point, out var lockValue) || lockValue != coroutineId)
-                    {
+                    if (!tilesLocks.TryGetValue(point, out var lockValue) || lockValue != coroutineId) {
                         continue;
                     }
 
@@ -497,45 +448,36 @@ namespace Edgar.Unity
                     var distanceVector = point - playerPosition;
                     var distance = distanceVector.magnitude;
 
-                    if (revealImmediately)
-                    {
+                    if (revealImmediately) {
                         fogValue = targetFogValue;
                     }
-                    else if (Mode == FogOfWarMode.Wave)
-                    {
+                    else if (Mode == FogOfWarMode.Wave) {
                         var timeToReveal = distance / WaveSpeed;
                         var timeHidden = WaveRevealThreshold * timeToReveal;
 
                         // If the time should be completely hidden
-                        if (time < timeHidden)
-                        {
+                        if (time < timeHidden) {
                             fogValue = initialFogValue;
                         }
                         // Else if we should gradually reveal the tile
-                        else
-                        {
+                        else {
                             fogValue = Mathf.Lerp(initialFogValue, targetFogValue, (time - timeHidden) / (timeToReveal - timeHidden));
                             fogValue = Mathf.Clamp(fogValue, initialFogValue, targetFogValue);
                         }
                     }
-                    else if (Mode == FogOfWarMode.FadeIn)
-                    {
-                        if (FadeInDuration == 0)
-                        {
+                    else if (Mode == FogOfWarMode.FadeIn) {
+                        if (FadeInDuration == 0) {
                             fogValue = targetFogValue;
                         }
-                        else
-                        {
+                        else {
                             fogValue = Mathf.Lerp(initialFogValue, targetFogValue, time / FadeInDuration);
                         }
                     }
-                    else
-                    {
+                    else {
                         throw new ArgumentOutOfRangeException(nameof(Mode));
                     }
 
-                    if (TransitionMode == FogOfWarTransitionMode.Smooth || TransitionMode == FogOfWarTransitionMode.Custom)
-                    {
+                    if (TransitionMode == FogOfWarTransitionMode.Smooth || TransitionMode == FogOfWarTransitionMode.Custom) {
                         visionGrid.SetTile(point, new FogOfWarVisionGrid.TileInfo(
                             isInterpolated: !tileInfo.IsInterpolationHelper,
                             value: tileInfo.IsInterpolationHelper ? initialFogValue : targetFogValue,
@@ -543,8 +485,7 @@ namespace Edgar.Unity
                             isRevealed: !tileInfo.IsInterpolationHelper
                         ));
                     }
-                    else
-                    {
+                    else {
                         visionGrid.SetTile(point, new FogOfWarVisionGrid.TileInfo(
                             isInterpolated: false,
                             value: fogValue,
@@ -553,17 +494,14 @@ namespace Edgar.Unity
                         ));
                     }
 
-                    if (Math.Abs(fogValue - targetFogValue) > float.Epsilon)
-                    {
+                    if (Math.Abs(fogValue - targetFogValue) > float.Epsilon) {
                         allRevealed = false;
                     }
                 }
 
-                if (allRevealed)
-                {
+                if (allRevealed) {
                     // Release all points that were locked by this coroutine
-                    foreach (var lockPair in tilesLocks.Where(x => x.Value == coroutineId).ToList())
-                    {
+                    foreach (var lockPair in tilesLocks.Where(x => x.Value == coroutineId).ToList()) {
                         tilesLocks.Remove(lockPair.Key);
                     }
 
@@ -574,32 +512,25 @@ namespace Edgar.Unity
             }
         }
 
-        private HashSet<Vector2Int> GetPolygonPoints(Polygon2D polygon)
-        {
+        private HashSet<Vector2Int> GetPolygonPoints(Polygon2D polygon) {
             var points = new HashSet<Vector2Int>();
 
-            foreach (var point in polygon.GetAllPoints())
-            {
+            foreach (var point in polygon.GetAllPoints()) {
                 points.Add(point);
             }
 
             return points;
         }
 
-        private HashSet<Vector2Int> GetExtendedOutline(HashSet<Vector2Int> points)
-        {
+        private HashSet<Vector2Int> GetExtendedOutline(HashSet<Vector2Int> points) {
             var extendedPoints = new HashSet<Vector2Int>();
 
-            foreach (var point in points)
-            {
-                for (int i = -1; i <=1; i++)
-                {
-                    for (int j = -1; j <= 1; j++)
-                    {
+            foreach (var point in points) {
+                for (int i = -1; i <= 1; i++) {
+                    for (int j = -1; j <= 1; j++) {
                         var newPoint = point + new Vector2Int(i, j);
 
-                        if (!points.Contains(newPoint))
-                        {
+                        if (!points.Contains(newPoint)) {
                             extendedPoints.Add(newPoint);
                         }
                     }
@@ -617,22 +548,18 @@ namespace Edgar.Unity
         /// This method is usually called internally by the tool so you do not have to call it manually.
         /// </remarks>
         /// <returns></returns>
-        public Material GetMaterial(Camera camera, string shaderName = "Edgar/FogOfWar")
-        {
-            if (material == null)
-            {
+        public Material GetMaterial(Camera camera, string shaderName = "Edgar/FogOfWar") {
+            if (material == null) {
                 material = new Material(Shader.Find(shaderName));
             }
-            
-            if (visionTextures == null)
-            {
+
+            if (visionTextures == null) {
                 return null;
             }
 
             materialRetrieved = true;
 
-            if (camera == null)
-            {
+            if (camera == null) {
                 Debug.LogError($"The {nameof(FogOfWarGrid2D)} component must be attached to the game object that holds the main camera of the game.");
                 throw new ArgumentException();
             }
@@ -640,13 +567,11 @@ namespace Edgar.Unity
             var viewMat = camera.worldToCameraMatrix;
             var projMat = GL.GetGPUProjectionMatrix(camera.projectionMatrix, false);
             var viewProjMat = (projMat * viewMat);
-            var offset = (Vector3) (Vector3Int) visionTextures.Offset;
+            var offset = (Vector3)(Vector3Int)visionTextures.Offset;
             offset -= new Vector3(1, 1);
 
-            if (GeneratedLevelRoot != null)
-            {
-                if (tilemapsRoot != null)
-                {
+            if (GeneratedLevelRoot != null) {
+                if (tilemapsRoot != null) {
                     var cellSize = grid.cellSize + grid.cellGap;
                     offset.Scale(cellSize);
                     offset += tilemapsRoot.position;
@@ -656,11 +581,10 @@ namespace Edgar.Unity
             }
 
             var fogColor = ColorMode == FogOfWarColorMode.CameraColor ? camera.backgroundColor : FogColor;
-            if (QualitySettings.activeColorSpace == ColorSpace.Linear)
-            {
+            if (QualitySettings.activeColorSpace == ColorSpace.Linear) {
                 fogColor = fogColor.linear;
             }
-            
+
             material.SetMatrix(ViewProjInv, viewProjMat.inverse);
             material.SetTexture(VisionTex, visionTextures.Texture);
             material.SetTexture(VisionTex2, visionTextures.TextureInterpolated);
@@ -674,15 +598,12 @@ namespace Edgar.Unity
             return material;
         }
 
-        private void OnRenderImage(RenderTexture source, RenderTexture destination)
-        {
+        private void OnRenderImage(RenderTexture source, RenderTexture destination) {
             OnRenderImage(source, destination, GetComponent<Camera>());
         }
 
-        internal void OnRenderImage(RenderTexture source, RenderTexture destination, Camera camera)
-        {
-            if (visionTextures == null)
-            {
+        internal void OnRenderImage(RenderTexture source, RenderTexture destination, Camera camera) {
+            if (visionTextures == null) {
                 Graphics.Blit(source, destination);
                 return;
             }
@@ -690,8 +611,7 @@ namespace Edgar.Unity
             Graphics.Blit(source, destination, GetMaterial(camera));
         }
 
-        private void OnValidate()
-        {
+        private void OnValidate() {
             WaveSpeed = Mathf.Max(0.001f, WaveSpeed);
             RevealCorridorsTiles = Math.Max(0, RevealCorridorsTiles);
             FadeInDuration = Math.Max(0, FadeInDuration);
@@ -699,14 +619,12 @@ namespace Edgar.Unity
             FogSmoothness = Mathf.Clamp(FogSmoothness, 1, 1000);
         }
 
-        private class TileInfo
-        {
+        private class TileInfo {
             public float TargetFogValue { get; }
 
             public bool IsInterpolationHelper { get; }
 
-            public TileInfo(float targetFogValue, bool isInterpolationHelper)
-            {
+            public TileInfo(float targetFogValue, bool isInterpolationHelper) {
                 IsInterpolationHelper = isInterpolationHelper;
                 TargetFogValue = targetFogValue;
             }

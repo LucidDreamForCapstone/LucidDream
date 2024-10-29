@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 4821109661397732342}
   - component: {fileID: 4821109661397732343}
   - component: {fileID: 4821109661397732340}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: Collideable
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -242,7 +242,7 @@ GameObject:
   - component: {fileID: 4821109661579016672}
   - component: {fileID: 4821109661579016674}
   - component: {fileID: 4821109661579016675}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: Other 3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -362,7 +362,7 @@ GameObject:
   - component: {fileID: 4821109661651752016}
   - component: {fileID: 4821109661651752018}
   - component: {fileID: 4821109661651752019}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: Other 1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -485,7 +485,7 @@ GameObject:
   - component: {fileID: 4576113808786582886}
   - component: {fileID: 5898947774692211747}
   - component: {fileID: 5798814893086139932}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: Floor
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3593,7 +3593,7 @@ GameObject:
   - component: {fileID: 4821109662442035246}
   - component: {fileID: 4821109662442035240}
   - component: {fileID: 4821109662442035241}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: Other 2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3713,7 +3713,7 @@ GameObject:
   - component: {fileID: 4821109662598609101}
   - component: {fileID: 4821109662598609100}
   - component: {fileID: 5932508868676898281}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: Hub 3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3803,7 +3803,7 @@ GameObject:
   - component: {fileID: 4821109662851113883}
   - component: {fileID: 4821109662851113880}
   - component: {fileID: 4821109662851113881}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: Walls
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4920,7 +4920,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1773292309295251722}
   - component: {fileID: 7681790676323849940}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: Tilemaps
   m_TagString: Untagged
   m_Icon: {fileID: 0}

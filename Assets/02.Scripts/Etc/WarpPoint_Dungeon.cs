@@ -6,7 +6,6 @@ public class WarpPoint_Dungeon : MonoBehaviour, Interactable {
     void Start() {
 
     }
-
     private void OnTriggerEnter2D(Collider2D collision) {
         if (collision.gameObject.CompareTag("Player") && InteractManager.Instance.CheckInteractable(this)) {
             if (GungeonGameManager.Instance != null) {

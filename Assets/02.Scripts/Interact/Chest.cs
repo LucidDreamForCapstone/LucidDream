@@ -63,10 +63,8 @@ public class Chest : DropableBase {
             }
         }
     }
-    protected void PlaySound(AudioClip clip)
-    {
-        if (clip != null)
-        {
+    protected void PlaySound(AudioClip clip) {
+        if (clip != null) {
             SoundManager.Instance.PlaySFX(clip.name);
         }
     }

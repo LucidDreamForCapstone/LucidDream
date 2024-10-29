@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 7812615690212546259}
   - component: {fileID: 2890539163330626608}
   - component: {fileID: 6161851107212713623}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: Other 3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -130,7 +130,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2917428496956492101}
   - component: {fileID: 7899481546879771085}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: Tilemaps
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -181,7 +181,7 @@ GameObject:
   - component: {fileID: 9137518441034156936}
   - component: {fileID: 4914018122186106579}
   - component: {fileID: 6344977697683465934}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: Other 2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -301,7 +301,7 @@ GameObject:
   - component: {fileID: 642587084378741563}
   - component: {fileID: 7616979170313558003}
   - component: {fileID: 785899810798707322}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: Ver 9
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -408,7 +408,7 @@ GameObject:
   - component: {fileID: 6003755393067006788}
   - component: {fileID: 5913065181357065415}
   - component: {fileID: 8819678018358049259}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: Walls
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -908,7 +908,7 @@ GameObject:
   - component: {fileID: 4767068113551424341}
   - component: {fileID: 8760048980940868490}
   - component: {fileID: 3423221054226498058}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: Other 1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1031,7 +1031,7 @@ GameObject:
   - component: {fileID: 6047009888416650461}
   - component: {fileID: 7877922879094096275}
   - component: {fileID: 1222781016895390768}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: Collideable
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1262,7 +1262,7 @@ GameObject:
   - component: {fileID: 7889409124533604211}
   - component: {fileID: 3409563802940899068}
   - component: {fileID: 6577841957681049456}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: Floor
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1717,6 +1717,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 642587084378741563}
     m_Modifications:
+    - target: {fileID: 4178142836940467452, guid: 68c4675110e404b47b1805488bf70676, type: 3}
+      propertyPath: m_Layer
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 5545272875860728089, guid: 68c4675110e404b47b1805488bf70676, type: 3}
+      propertyPath: m_Layer
+      value: 15
+      objectReference: {fileID: 0}
     - target: {fileID: 6971467118305346248, guid: 68c4675110e404b47b1805488bf70676, type: 3}
       propertyPath: m_RootOrder
       value: 0
@@ -1764,6 +1772,10 @@ PrefabInstance:
     - target: {fileID: 6971467118305346249, guid: 68c4675110e404b47b1805488bf70676, type: 3}
       propertyPath: m_Name
       value: Door
+      objectReference: {fileID: 0}
+    - target: {fileID: 6971467118305346249, guid: 68c4675110e404b47b1805488bf70676, type: 3}
+      propertyPath: m_Layer
+      value: 15
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 3810039389074379646}
   - component: {fileID: 7456428070293867427}
   - component: {fileID: 4386502743896802375}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: Other 2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -134,7 +134,7 @@ GameObject:
   - component: {fileID: 6415113090388313150}
   - component: {fileID: 6221602741906694873}
   - component: {fileID: 1580032281255210058}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: Walls
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1470,7 +1470,7 @@ GameObject:
   - component: {fileID: 6269983338422837208}
   - component: {fileID: 2005110797203578691}
   - component: {fileID: 2115750605893283244}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: Reward
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1574,7 +1574,7 @@ GameObject:
   - component: {fileID: 7333196280924570757}
   - component: {fileID: 8989965380039325609}
   - component: {fileID: 2031262955840035914}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: Other 1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1693,7 +1693,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6849820161258872357}
   - component: {fileID: 3482836794974649690}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: Tilemaps
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1747,7 +1747,7 @@ GameObject:
   - component: {fileID: 6157413038557933120}
   - component: {fileID: 2732377277242756871}
   - component: {fileID: 7199499936521951647}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: Floor
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4175,7 +4175,7 @@ GameObject:
   - component: {fileID: 4010832751002624365}
   - component: {fileID: 4362626290089771721}
   - component: {fileID: 6447352806372099004}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: Other 3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4298,7 +4298,7 @@ GameObject:
   - component: {fileID: 7035504532515377231}
   - component: {fileID: 189365569006960924}
   - component: {fileID: 2995697277286272792}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: Collideable
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4550,6 +4550,10 @@ PrefabInstance:
     - target: {fileID: 1213858276333295106, guid: c77b21b20c9cd8c44afd60d44b4954f6, type: 3}
       propertyPath: m_Name
       value: Chest
+      objectReference: {fileID: 0}
+    - target: {fileID: 1213858276333295106, guid: c77b21b20c9cd8c44afd60d44b4954f6, type: 3}
+      propertyPath: m_Layer
+      value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 4151153953099191616, guid: c77b21b20c9cd8c44afd60d44b4954f6, type: 3}
       propertyPath: m_LocalPosition.x

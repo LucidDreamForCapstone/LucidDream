@@ -3,14 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-namespace Edgar.Unity
-{
+namespace Edgar.Unity {
     /// <summary>
     ///     Class that holds information about a laid out room.
     /// </summary>
     [Serializable]
-    public class RoomInstanceGrid2D
-    {
+    public class RoomInstanceGrid2D {
         /// <summary>
         ///     The room associated with this room instance.
         /// </summary>
@@ -111,8 +109,7 @@ namespace Edgar.Unity
         [SerializeField]
         private Polygon2D outlinePolygon;
 
-        public RoomInstanceGrid2D(RoomBase room, bool isCorridor, ConnectionBase connection, GameObject roomTemplatePrefab, GameObject roomTemplateInstance, Vector3Int position, Polygon2D outlinePolygon)
-        {
+        public RoomInstanceGrid2D(RoomBase room, bool isCorridor, ConnectionBase connection, GameObject roomTemplatePrefab, GameObject roomTemplateInstance, Vector3Int position, Polygon2D outlinePolygon) {
             this.room = room;
             this.connection = connection;
             this.roomTemplatePrefab = roomTemplatePrefab;
@@ -126,10 +123,9 @@ namespace Edgar.Unity
         /// Sets the doors of the room instance.
         /// Should not be called directly.
         /// </summary>
-        internal void SetDoors(List<DoorLineInfoGrid2D> doorLines)
-        {
+        internal void SetDoors(List<DoorLineInfoGrid2D> doorLines) {
             this.doors = doorLines.SelectMany(x => x.UsedDoors).ToList();
             this.doorLines = doorLines;
         }
     }
-}  
+}
