@@ -5,11 +5,12 @@ using UnityEngine;
 public class MonsterDemon : MonsterBase {
 
     #region serialize field
+
     [SerializeField] private GameObject _fireballObj;
     [SerializeField] private float _fireSpeed;
     [SerializeField] private float _fireLastTime;
-    //[SerializeField] private float _searchRange;
-    //[SerializeField] private float _attackRange;
+    [SerializeField] private float _searchRange;
+    [SerializeField] private float _attackRange;
     [SerializeField] private float _fireCoolTime;
     [SerializeField] private AudioClip attackSound;
 
@@ -32,13 +33,16 @@ public class MonsterDemon : MonsterBase {
 
     new private void OnEnable() {
         base.OnEnable();
-        _attackFuncList.Add(FireTask);
         _isFiring = false;
         _isFireReady = true;
         _fireDelay = 0.5f;
     }
 
-    #endregion //mono func
+    private void Update() {
+        AttackMove();
+    }
+
+    #endregion //mono funcs
 
 
 
@@ -46,9 +50,8 @@ public class MonsterDemon : MonsterBase {
     #region protected funcs
 
     protected override void AttackMove() {
-        /*
         double dist = CalculateManhattanDist(transform.position, _playerScript.transform.position);
-        if (!_isFiring && !_isDead && !_isStun && _isSpawnComplete && dist < _searchRange) {
+        if (!_isFiring && !_isDead && !_isStun && dist < _searchRange) {
             Vector2 moveVec = _playerScript.transform.position - transform.position;
 
             if (moveVec.x < 0)
@@ -65,7 +68,6 @@ public class MonsterDemon : MonsterBase {
         }
         else
             _rigid.velocity = Vector2.zero;
-        */
     }
 
     #endregion //protected funcs
@@ -80,11 +82,9 @@ public class MonsterDemon : MonsterBase {
         Fire().Forget();
         await UniTask.Delay(TimeSpan.FromSeconds(_fireCoolTime));
         _isFireReady = true;
-        _attackStateList[0] = AttackState.Ready;
     }
 
     private async UniTaskVoid Fire() {
-        _attackStateList[0] = AttackState.Attacking;
         _isFiring = true;
         _animator.SetTrigger("Attack");
         PlaySound(attackSound);
@@ -100,7 +100,6 @@ public class MonsterDemon : MonsterBase {
         fireBall.SetActive(true);
         await UniTask.Delay(TimeSpan.FromSeconds(_fireDelay));
         _isFiring = false;
-        _attackStateList[0] = AttackState.CoolTime;
     }
 
     private double CalculateManhattanDist(Vector2 a, Vector2 b) {

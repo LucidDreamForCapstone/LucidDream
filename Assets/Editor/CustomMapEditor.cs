@@ -3,36 +3,22 @@ using UnityEditor;
 using UnityEngine;
 
 public class CustomMapEditor : EditorWindow {
-    private Vector2 worldOffset;
-    private Vector2 worldDrag;
+    private Vector2 offset;
+    private Vector2 drag;
     private float zoomScale = 1.0f;
     private List<RoomNode> nodes = new List<RoomNode>();
     private List<RoomLink> edges = new List<RoomLink>();
     private RoomNode selectedNode = null;//update by "on the mouse"
     private RoomNode targetNode = null; //update by "double click"
+    private Vector2 nodeDragOffset;
     private bool isDrawingLine = false;
-    private bool isDragging = false;
+
     private double lastClickTime = 0f;
     private const float doubleClickTime = 0.3f;
 
     [MenuItem("Window/Custom Map Graph")]
     public static void ShowWindow() {
         GetWindow<CustomMapEditor>("Custom Map Graph");
-    }
-
-    private void OnEnable() {
-        // 매 프레임 업데이트를 위한 이벤트 등록
-        EditorApplication.update += OnEditorUpdate;
-    }
-
-    private void OnDisable() {
-        // 창이 닫힐 때 업데이트 이벤트를 제거
-        EditorApplication.update -= OnEditorUpdate;
-    }
-
-    private void OnEditorUpdate() {
-        // Repaint를 호출하여 OnGUI를 강제로 호출
-        Repaint();
     }
 
     private void OnGUI() {
@@ -43,7 +29,6 @@ public class CustomMapEditor : EditorWindow {
         HandleMouseEvents();
         HandleKeyboardEvents();
         DrawNodes();
-        DrawLinks();
         DrawLineToMouse(Event.current);
 
         if (GUI.changed) {
@@ -59,9 +44,9 @@ public class CustomMapEditor : EditorWindow {
         Color originalColor = Handles.color;
         Handles.color = new Color(gridColor.r, gridColor.g, gridColor.b, gridOpacity);
 
-        worldOffset += worldDrag * 0.5f;
+        offset += drag * 0.5f;
 
-        Vector3 newOffset = new Vector3(worldOffset.x % gridSpacing, worldOffset.y % gridSpacing, 0);
+        Vector3 newOffset = new Vector3(offset.x % gridSpacing, offset.y % gridSpacing, 0);
 
         for (int i = 0; i < widthDivs; i++) {
             Handles.DrawLine(new Vector3(gridSpacing * i, -gridSpacing) + newOffset,
@@ -78,7 +63,7 @@ public class CustomMapEditor : EditorWindow {
     }
 
     private void ProcessEvents(Event e) {
-        worldDrag = Vector2.zero;
+        drag = Vector2.zero;
 
         if (e.type == EventType.MouseDrag && e.button == 2) {
             OnDrag(e.delta);
@@ -86,7 +71,7 @@ public class CustomMapEditor : EditorWindow {
     }
 
     private void OnDrag(Vector2 delta) {
-        worldDrag = delta;
+        drag = delta;
         GUI.changed = true;
     }
 
@@ -94,7 +79,7 @@ public class CustomMapEditor : EditorWindow {
         if (e.type == EventType.ScrollWheel) {
             float zoomDelta = -e.delta.y * 0.05f;
             zoomScale += zoomDelta;
-            zoomScale = Mathf.Clamp(zoomScale, 0.5f, 1.5f);
+            zoomScale = Mathf.Clamp(zoomScale, 0.5f, 3f);
             e.Use();
         }
     }
@@ -102,7 +87,7 @@ public class CustomMapEditor : EditorWindow {
     // 마우스와 노드 중심을 잇는 선 그리기
     private void DrawLineToMouse(Event e) {
         if (isDrawingLine) {
-            Vector2 nodeCenter = targetNode._position * zoomScale + worldOffset + new Vector2(50 * zoomScale, 25 * zoomScale); // 노드의 중심 좌표 계산
+            Vector2 nodeCenter = targetNode._position * zoomScale + offset + new Vector2(50 * zoomScale, 25 * zoomScale); // 노드의 중심 좌표 계산
             Vector2 mousePos = e.mousePosition;
 
             Handles.BeginGUI();
@@ -114,9 +99,10 @@ public class CustomMapEditor : EditorWindow {
 
     private void HandleMouseEvents() {
         Event e = Event.current;
-        UpdateNodeUnderMouse(e);
 
         if (e.type == EventType.MouseDown && e.button == 0) {
+            UpdateNodeUnderMouse(e);
+
             // 더블 클릭 감지
             double currentTime = EditorApplication.timeSinceStartup;
             if (currentTime - lastClickTime < doubleClickTime) {
@@ -134,45 +120,60 @@ public class CustomMapEditor : EditorWindow {
 
         if (e.type == EventType.MouseDown && e.button == 0 && e.control && targetNode != null) {
             isDrawingLine = true;
+            Repaint();
         }
 
         // Ctrl키를 뗐을 때 선 그리기를 중단
         if (!e.control && isDrawingLine) {
-            if (selectedNode != null && selectedNode != targetNode) {
-                ShowLinkMenu();
-            }
             isDrawingLine = false;
+            Repaint();
+        }
+
+        // 우클릭 감지 (컨텍스트 메뉴)
+        if (e.type == EventType.MouseDown && e.button == 1) {
+            int length = nodes.Count;
+            for (int i = 0; i < length; i++) {
+                RoomNode node = nodes[i];
+                Rect nodeRect = new Rect(node._position.x * zoomScale + offset.x, node._position.y * zoomScale + offset.y, 100 * zoomScale, 50 * zoomScale);
+                if (nodeRect.Contains(e.mousePosition) && targetNode == node) {
+                    selectedNode = node;
+                    ShowContextMenu();  // 우클릭 시 컨텍스트 메뉴 표시
+                    break;
+                }
+            }
         }
 
         // 노드 드래그 처리
         if (e.type == EventType.MouseDrag && e.button == 0 && !isDrawingLine && selectedNode != null) {
-            isDragging = true;
-            Vector2 nodeDragOffset = new Vector2(50, 25) * zoomScale;
-            selectedNode._position = (e.mousePosition - worldOffset) / zoomScale - nodeDragOffset;
+            selectedNode._position = (e.mousePosition + nodeDragOffset - offset) / zoomScale;
+            GUI.changed = true;
         }
 
+        /*
         // 마우스 버튼을 놓으면 선택 해제
         if (e.type == EventType.MouseUp && e.button == 0) {
-            isDragging = false;
+            selectedNode = null;
         }
+        */
     }
 
     private void AddNode(Vector2 position) {
-        Vector2 worldPosition = (position - worldOffset) / zoomScale;
-        RoomNode newNode = RoomNode.Create(nodes.Count, worldPosition);
+        Vector2 worldPosition = (position - offset) / zoomScale;
+        RoomNode newNode = RoomNode.CreateInstance(nodes.Count, worldPosition);
         nodes.Add(newNode);
         targetNode = newNode;
+        Repaint();
     }
-    private void ShowLinkMenu() {//그냥 기울기에 따라 알아서 연결해주는게 더 빠르겠노
+    private void ShowContextMenu() {
         GenericMenu menu = new GenericMenu();
         if (!selectedNode.GetLinkState(RoomLinkType.Up))
-            menu.AddItem(new GUIContent("LinkUp"), false, AddLink, RoomLinkType.Up);
+            menu.AddItem(new GUIContent("LinkUp"), false, FindLinkTarget, RoomLinkType.Up);
         if (!selectedNode.GetLinkState(RoomLinkType.Down))
-            menu.AddItem(new GUIContent("LinkDown"), false, AddLink, RoomLinkType.Down);
+            menu.AddItem(new GUIContent("LinkDown"), false, FindLinkTarget, RoomLinkType.Down);
         if (!selectedNode.GetLinkState(RoomLinkType.Left))
-            menu.AddItem(new GUIContent("LinkLeft"), false, AddLink, RoomLinkType.Left);
+            menu.AddItem(new GUIContent("LinkLeft"), false, FindLinkTarget, RoomLinkType.Left);
         if (!selectedNode.GetLinkState(RoomLinkType.Right))
-            menu.AddItem(new GUIContent("LinkRight"), false, AddLink, RoomLinkType.Right);
+            menu.AddItem(new GUIContent("LinkRight"), false, FindLinkTarget, RoomLinkType.Right);
         menu.ShowAsContext();
     }
 
@@ -196,21 +197,22 @@ public class CustomMapEditor : EditorWindow {
         }
     }
 
+    private void FindLinkTarget(object linkType) {
+        RoomLinkType roomLinkType = (RoomLinkType)linkType;
+
+    }
 
     private void DrawNodes() {
         int length = nodes.Count;
         for (int i = 0; i < length; i++) {
             RoomNode node = nodes[i];
-            Vector2 nodePos = node._position * zoomScale + worldOffset;
+            Vector2 nodePos = node._position * zoomScale + offset;
             float nodeWidth = 100 * zoomScale;
             float nodeHeight = 50 * zoomScale;
 
             // 선택된 노드의 색상 변경
             if (node == targetNode) {
                 GUI.color = Color.green;
-            }
-            else if (isDrawingLine && node == selectedNode) {
-                GUI.color = Color.red;
             }
             else {
                 GUI.color = Color.white;
@@ -230,38 +232,14 @@ public class CustomMapEditor : EditorWindow {
     // 마우스가 있는 위치에 있는 노드를 반환하는 함수
     private void UpdateNodeUnderMouse(Event e) {
         int length = nodes.Count;
-        bool found = false;
         for (int i = 0; i < length; i++) {
             RoomNode node = nodes[i];
-            Rect nodeRect = new Rect(node._position.x * zoomScale + worldOffset.x, node._position.y * zoomScale + worldOffset.y, 100 * zoomScale, 50 * zoomScale);
+            Rect nodeRect = new Rect(node._position.x * zoomScale + offset.x, node._position.y * zoomScale + offset.y, 100 * zoomScale, 50 * zoomScale);
             if (nodeRect.Contains(e.mousePosition)) {
-                if (!isDragging)
-                    selectedNode = node;
-                found = true;
+                selectedNode = node;
+                nodeDragOffset = node._position * zoomScale + offset - e.mousePosition;
                 break;
             }
-        }
-        if (!found) {
-            selectedNode = null;
-        }
-    }
-
-    private void AddLink(object linkDir) {
-        RoomLink newLink = RoomLink.Create(edges.Count, (RoomLinkDir)linkDir);
-        newLink.SetLink(targetNode, selectedNode);
-        edges.Add(newLink);
-    }
-
-    private void DrawLinks() {
-        int length = edges.Count;
-        for (int i = 0; i < length; i++) {
-            RoomLink link = edges[i];
-            Vector2 hostCenter = link._room1._position * zoomScale + worldOffset + new Vector2(50 * zoomScale, 25 * zoomScale);
-            Vector2 targetCenter = link._room2._position * zoomScale + worldOffset + new Vector2(50 * zoomScale, 25 * zoomScale);
-            Handles.BeginGUI();
-            Handles.color = Color.green;
-            Handles.DrawLine(hostCenter, targetCenter);
-            Handles.EndGUI();
         }
     }
 }

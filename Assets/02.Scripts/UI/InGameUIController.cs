@@ -242,7 +242,8 @@ public class InGameUIController : MonoBehaviour {
     }
 
 
-    private void OnClick_Card(Card card) {
+    private async void OnClick_Card(Card card) {
+        Debug.Log("ī�� �����Ѵ�");
         CardManage.Instance.ApplyCard(card);
 
         if (1 <= _levelUpCount) {

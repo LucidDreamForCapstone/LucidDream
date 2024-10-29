@@ -124,7 +124,7 @@ public class BossHades : MonsterBase {
     SpriteRenderer _warningEffectSpriteRenderer5;
     static int _pillarCnt;
     int _originDef;
-    //bool _isSleep;
+    bool _isSleep;
     bool _HalfTrigger;
     bool _isSpikeAroundReady;
     bool _isLaserReady;
@@ -148,7 +148,7 @@ public class BossHades : MonsterBase {
         _playerLayer = LayerMask.GetMask("Player");
         _enemyLayer = LayerMask.GetMask("Enemy", "CollidableEnemy");
         _hadesCollider = GetComponent<Collider2D>();
-        //_isSleep = true;
+        _isSleep = true;
         _HalfTrigger = true;
         _isSpikeAroundReady = false;
         _isLaserReady = false;
@@ -184,7 +184,7 @@ public class BossHades : MonsterBase {
 
     public override void Damaged(int dmg, bool isCrit)//플레이어 공격에 데미지를 입음
     {
-        if (!_isSpawnComplete) {
+        if (_isSleep) {
             PlaySound(audioSource_awakeSound);
             _animator.SetTrigger("Awake");
             CameraManager.Instance.CameraFocus(_cameraTarget, 9, 4).Forget();
@@ -259,16 +259,9 @@ public class BossHades : MonsterBase {
 
 
     #region private funcs
-    private async UniTaskVoid InitializePatterns(CancellationToken cancellationToken) {
-        await UniTask.WaitUntil(() => _isSpawnComplete);
-
-        InitialPillarTimer(cancellationToken).Forget();
-        InitialLaserTimer(cancellationToken).Forget();
-        InitialSpikeAroundTimer(cancellationToken).Forget();
-    }
 
     private async UniTaskVoid RandomPattern(CancellationToken cancellationToken) {
-        await UniTask.WaitUntil(() => _isSpawnComplete);
+        await UniTask.WaitUntil(() => !_isSleep);
 
         InitialPillarTimer(cancellationToken).Forget();
         InitialLaserTimer(cancellationToken).Forget();
@@ -888,7 +881,7 @@ public class BossHades : MonsterBase {
 
 
 
-    private void HadesAwake() { _isSpawnComplete = true; }
+    private void HadesAwake() { _isSleep = false; }
 
     private void UpdateHpSlider() {
         float hp = _hp;

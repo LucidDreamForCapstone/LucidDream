@@ -1,4 +1,4 @@
-ï»¿using Cysharp.Threading.Tasks;
+using Cysharp.Threading.Tasks;
 using System;
 using UnityEngine;
 
@@ -6,6 +6,8 @@ public class MonsterGhost : MonsterBase {
 
     #region serialize field
 
+    [SerializeField] private float _searchRange;
+    [SerializeField] private float _attackRange;
     [SerializeField] private float _attackCooltime;
     [SerializeField] private AudioClip attackSound;
 
@@ -28,10 +30,13 @@ public class MonsterGhost : MonsterBase {
 
     new private void OnEnable() {
         base.OnEnable();
-        _attackFuncList.Add(ScratchTask);
         _isAttackReady = true;
         _isAttacking = false;
         _attackDelay = 0.5f;
+    }
+
+    private void Update() {
+        AttackMove();
     }
 
     #endregion //mono funcs
@@ -42,17 +47,16 @@ public class MonsterGhost : MonsterBase {
     #region protected funcs
 
     protected override void AttackMove() {
-        /*
-        if (!_isAttacking && !_isDead && !_isStun && _isSpawnComplete) {
+        if (!_isAttacking && !_isDead && !_isStun) {
             double dist = CalculateManhattanDist(transform.position, _playerScript.transform.position);
 
-            if (dist < _attackRange) {
+            if (dist < _attackRange) {//ÇÃ·¹ÀÌ¾î¸¦ ÇâÇØ °ø°Ý
                 if (_isAttackReady)
                     AttackTask().Forget();
 
                 _rigid.velocity = Vector2.zero;
             }
-            else if (dist < _searchRange) {
+            else if (dist < _searchRange) { //ÇÃ·¹ÀÌ¾î¸¦ ¹ß°ß ÈÄ Á¢±Ù
                 Vector2 moveVec = _playerScript.transform.position - transform.position;
 
                 if (moveVec.x < 0)
@@ -63,14 +67,13 @@ public class MonsterGhost : MonsterBase {
                 _rigid.velocity = moveVec.normalized * _moveSpeed;
                 _animator.SetBool("Run", true);
             }
-            else {
+            else { //ÇÃ·¹ÀÌ¾î¸¦ ¹ß°ßÇÏÁö ¸øÇÑ »óÅÂ
                 _rigid.velocity = Vector2.zero;
                 _animator.SetBool("Run", false);
             }
         }
         else
             _rigid.velocity = Vector2.zero;
-        */
     }
 
     #endregion //protected funcs
@@ -80,26 +83,29 @@ public class MonsterGhost : MonsterBase {
 
     #region private funcs
 
-    private async UniTaskVoid ScratchTask() {
+    private async UniTaskVoid AttackTask() {
         _isAttackReady = false;
-        Scratch().Forget();
+        Attack().Forget();
         await UniTask.Delay(TimeSpan.FromSeconds(_attackCooltime));
         _isAttackReady = true;
-        _attackStateList[0] = AttackState.Ready;
     }
 
-    private async UniTaskVoid Scratch() {
-        _attackStateList[0] = AttackState.Attacking;
+    private async UniTaskVoid Attack() {
         _isAttacking = true;
         _animator.SetTrigger("Attack");
         PlaySound(attackSound);
-        await UniTask.Delay(TimeSpan.FromSeconds(0.3f));//ï¿½Ö´Ï¸ï¿½ï¿½Ì¼ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
-        if (GetDistSquare(transform.position, _playerScript.transform.position) < _attackDist * _attackDist && !_isDead)
+        await UniTask.Delay(TimeSpan.FromSeconds(0.3f));//¾Ö´Ï¸ÞÀÌ¼Ç µô·¹ÀÌ
+        if (CalculateManhattanDist(transform.position, _playerScript.transform.position) < _attackRange && !_isDead)
             _playerScript.Damaged(_damage);
         await UniTask.Delay(TimeSpan.FromSeconds(_attackDelay));
         _isAttacking = false;
-        _attackStateList[0] = AttackState.CoolTime;
+    }
+
+    private double CalculateManhattanDist(Vector2 a, Vector2 b) {
+        return Mathf.Abs(a.x - b.x) + Mathf.Abs(a.y - b.y);
     }
 
     #endregion //private funcs
 }
+
+

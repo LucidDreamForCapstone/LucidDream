@@ -501,18 +501,26 @@ public class Player : MonoBehaviour {
     }
 
     private async UniTaskVoid Die() {
+        // Guard �������� �κ��丮�� �ִ��� Ȯ��
         if (InventoryManager.Instance.HasItem(ItemType.Guard)) {
+            // ü�� 30% ȸ��
             PlaySound(GuardSound);
             PlayerDataManager.Instance.HealByMaxPercent(30);
+            // Guard ������ �ߵ� ����Ʈ ����
             if (guardEffectPrefab != null) {
                 Vector3 effect0Position = this.transform.position + new Vector3(0, 0.7f, 0);
+                // ����Ʈ ������Ʈ ����
                 GameObject effectInstance = Instantiate(guardEffectPrefab, effect0Position, Quaternion.identity);
+
+                // ����Ʈ�� �÷��̾��� �ڽ� ������Ʈ�� ����
                 effectInstance.transform.SetParent(this.transform);
             }
             _controller.offGuard();
+            // Guard ������ �κ��丮���� ����
             InventoryManager.Instance.RemoveItem(ItemType.Guard);
         }
         else {
+            Debug.Log("�÷��̾� ���");
             _isDead = true;
             AudioClip selectedDyingClip = Random.Range(0, 2) == 0 ? dyingSound1 : dyingSound2;
             PlaySoundDelay(selectedDyingClip, 1.4f).Forget();
@@ -525,18 +533,20 @@ public class Player : MonoBehaviour {
             _animator.SetTrigger("Die");
             _armAnimator.SetTrigger("Die");
             await UniTask.Delay(TimeSpan.FromSeconds(2.5f));
-            deathUIController.ShowDeathUI().Forget();
+            deathUIController.ShowDeathUI();
         }
     }
 
     private async UniTaskVoid Invincibility() {
         _isInvincible = true;
+        //Debug.Log("���� ���� ����");
         _spriteRenderer.DOColor(_invincibleColor, 0.1f).ToUniTask().Forget();
         _leftArmRenderer.color = _invincibleColor;
         _rightArmRenderer.color = _invincibleColor;
         PlayerWeaponManager.Instance.GetEquippedWeapon().SetWeaponColor(_invincibleColor);
         await UniTask.Delay(TimeSpan.FromSeconds(_invincibleLastTime));
         _isInvincible = false;
+        //Debug.Log("���� ���� ����");
         PlayerWeaponManager.Instance.GetEquippedWeapon().SetWeaponColor(Color.white);
         _rightArmRenderer.color = Color.white;
         _leftArmRenderer.color = Color.white;
