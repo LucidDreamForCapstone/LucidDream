@@ -124,6 +124,7 @@
     <Compile Include="Assets\02.Scripts\BehaviorTree\ActionNode\DebugLogNode.cs" />
     <Compile Include="Assets\02.Scripts\Weapon\WeaponBase.cs" />
     <Compile Include="Assets\02.Scripts\ShopItem\ShopItem_Potion.cs" />
+    <Compile Include="Assets\02.Scripts\Monster\BossBondrewd.cs" />
     <Compile Include="Assets\02.Scripts\Weapon\NoWeapon.cs" />
     <Compile Include="Assets\02.Scripts\Etc\ObjectPoolData.cs" />
     <Compile Include="Assets\02.Scripts\Monster\MonsterGhost.cs" />
@@ -175,6 +176,7 @@
     <Compile Include="Assets\02.Scripts\Interact\Chest_Shop.cs" />
     <Compile Include="Assets\02.Scripts\BehaviorTree\Base\BehaviourTree.cs" />
     <Compile Include="Assets\02.Scripts\Item\Dream.cs" />
+    <Compile Include="Assets\02.Scripts\BehaviorTree\DecoratorNode\CheckDistNode.cs" />
     <Compile Include="Assets\02.Scripts\UI\CardUI.cs" />
     <Compile Include="Assets\JMO Assets\Cartoon FX (legacy)\Scripts\CFX_AutoDestructShuriken.cs" />
     <Compile Include="Assets\02.Scripts\Interact\Chest.cs" />
