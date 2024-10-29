@@ -75,7 +75,7 @@ MonoBehaviour:
   _state: 0
   _started: 0
   _guid: d09e0a1201ae17146b4adff01d338c13
-  _position: {x: 252.59999, y: 754.8501}
+  _position: {x: 267.9392, y: 753.3132}
   _monster: {fileID: 0}
   description: 
   attackIndex: 0
@@ -94,7 +94,7 @@ MonoBehaviour:
   _state: 0
   _started: 0
   _guid: ca10d3c070e153944a16eb93e91f216e
-  _position: {x: 0, y: 0}
+  _position: {x: 607.2501, y: 875.75006}
   _monster: {fileID: 0}
   description: 
   attackIndex: 0
@@ -113,10 +113,13 @@ MonoBehaviour:
   _state: 0
   _started: 0
   _guid: 34ab86cf4a84f0e458c84f5e9f427c6f
-  _position: {x: 446.60013, y: 747.5}
+  _position: {x: 447, y: 742.25006}
   _monster: {fileID: 0}
   description: 
-  _children: []
+  _children:
+  - {fileID: 2542196629317034728}
+  - {fileID: 5188330183022475589}
+  - {fileID: -3712361551501216535}
 --- !u!114 &-2314734240056812923
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -220,7 +223,7 @@ MonoBehaviour:
   _state: 0
   _started: 0
   _guid: adf5b8c4b041d8e43a94fd328d3524a2
-  _position: {x: 339.35004, y: 882.19214}
+  _position: {x: 292.20013, y: 879.6001}
   _monster: {fileID: 0}
   description: 
   attackIndex: 0
@@ -300,7 +303,7 @@ MonoBehaviour:
   _state: 0
   _started: 0
   _guid: c1e0355fafdae5a41974f3a1a51738c0
-  _position: {x: 499.40002, y: 883.70013}
+  _position: {x: 446.2501, y: 890.95013}
   _monster: {fileID: 0}
   description: 
   attackIndex: 0
