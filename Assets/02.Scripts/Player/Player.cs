@@ -36,7 +36,7 @@ public class Player : MonoBehaviour {
     [SerializeField] private LayerMask _wallLayer;
     [SerializeField] private Color32 _originColor;
     [SerializeField] private Color32 _invincibleColor;
-    [SerializeField] private Rigidbody2D _rigid;
+    [SerializeField] protected Rigidbody2D _rigid;
     [SerializeField] private SpriteRenderer _spriteRenderer;
     [SerializeField] private Animator _animator;
     [SerializeField] private Animator _armAnimator;
@@ -61,22 +61,22 @@ public class Player : MonoBehaviour {
 
 
     #region private variable
-    private bool _isDead;
+    protected bool _isDead;
     private bool _isInvincible;//피격 후 무적 상태
-    private bool _isRollInvincible;//obsolete
+    protected bool _isRollInvincible;//obsolete
     private bool _isCustomInvincible;//특수 함수에 의한 무적 상태
     //private bool _isRollReady;
     private bool _isPhantomReady;
     private bool _isPhantomActivated;
     private bool _phantomForceCancelTrigger;
-    private bool _isAttacking;
+    protected bool _isAttacking;
     private bool _beforeFlipX;
-    private bool _isStun;
-    private bool _isPause;
+    protected bool _isStun;
+    protected bool _isPause;
     private float _stunTime;
     private float _slowTime;
-    private float _slowRate;
-    private float _phantomSpeedRate;
+    protected float _slowRate;
+    protected float _phantomSpeedRate;
     private List<GameObject> _magneticList = new List<GameObject>();
     private int _chargeCount;
     private InGameUIController _controller;
@@ -88,7 +88,7 @@ public class Player : MonoBehaviour {
 
     #region property
 
-    public Vector2 MoveDir { get; private set; }
+    public Vector2 MoveDir { get; protected set; }
 
     #endregion //property
 
@@ -98,7 +98,7 @@ public class Player : MonoBehaviour {
 
     #region mono funcs
 
-    private void Start() {
+    protected void Start() {
         _animator.updateMode = AnimatorUpdateMode.UnscaledTime;
         _armAnimator.updateMode = AnimatorUpdateMode.UnscaledTime;
         TimeScaleManager.Instance.AddAnimator(_animator);
@@ -127,7 +127,7 @@ public class Player : MonoBehaviour {
         ArmMoveAnimation();
     }
 
-    private void Update() {
+    protected void Update() {
         //Roll().Forget();
         Phantom().Forget();
         SearchNearItems();
@@ -475,7 +475,7 @@ public class Player : MonoBehaviour {
         return tcs.Task;
     }
 
-    private void PlayerMoveAnimation(float horizontal, float vertical) {
+    protected void PlayerMoveAnimation(float horizontal, float vertical) {
         if (horizontal > 0)
             _beforeFlipX = true;
         else if (horizontal < 0)
@@ -486,7 +486,7 @@ public class Player : MonoBehaviour {
         _animator.SetInteger("vertical", (int)vertical);
     }
 
-    private void ArmMoveAnimation() {
+    protected void ArmMoveAnimation() {
         _armAnimator.SetFloat("Horizontal", MoveDir.x);
         _armAnimator.SetFloat("Vertical", MoveDir.y);
 

@@ -12,11 +12,25 @@ EditorUserSettings:
       value: 5b05040204020b5a0b5d5d2415740f44124f4b79287073337b714d60e0b76469
       flags: 0
 <<<<<<< HEAD
+<<<<<<< HEAD
     RecentlyUsedSceneGuid-3:
+=======
+    RecentlyUsedSceneGuid-2:
+>>>>>>> origin/KoJungJun
       value: 55535703040c0f02095b5d7514215b444f4e4d7b797e22657a7b4965b6e4616b
       flags: 0
-    RecentlyUsedSceneGuid-4:
+    RecentlyUsedSceneGuid-3:
       value: 0005035152060b02540c547b40250c4441154f7c7f7f2032797c486be3b7656a
+      flags: 0
+    RecentlyUsedSceneGuid-4:
+<<<<<<< HEAD
+      value: 0005035152060b02540c547b40250c4441154f7c7f7f2032797c486be3b7656a
+=======
+      value: 5b05505006035a0e540c5e7611700f4440154d2b7d2b743679714d30b4b86c3d
+      flags: 0
+    RecentlyUsedSceneGuid-5:
+      value: 0608555000535d595b0b0f75157a0b4447161a7c7d2b7767782b1860e4b5306d
+>>>>>>> origin/KoJungJun
       flags: 0
     RecentlyUsedSceneGuid-5:
       value: 020557515c575a5f0c5c0f7044275b44414f1d2f7d2c7765797d1b61e7e2306a
@@ -47,8 +61,12 @@ EditorUserSettings:
       value: 0005035152060b02540c547b40250c4441154f7c7f7f2032797c486be3b7656a
       flags: 0
     RecentlyUsedSceneGuid-8:
+<<<<<<< HEAD
       value: 0608555000535d595b0b0f75157a0b4447161a7c7d2b7767782b1860e4b5306d
 >>>>>>> sihun
+=======
+      value: 020557515c575a5f0c5c0f7044275b44414f1d2f7d2c7765797d1b61e7e2306a
+>>>>>>> origin/KoJungJun
       flags: 0
     RecentlyUsedSceneGuid-9:
       value: 020557515c575a5f0c5c0f7044275b44414f1d2f7d2c7765797d1b61e7e2306a
