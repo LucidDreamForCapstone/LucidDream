@@ -1,0 +1,266 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &-8844796979171841212
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: afacca1ef8694fc4bb1fec6462892942, type: 3}
+  m_Name: CheckAliveNode
+  m_EditorClassIdentifier: 
+  _state: 0
+  _started: 0
+  _guid: 9e29915b51dd7d54b9bcf1c74afe440e
+  _position: {x: 1.1500096, y: 225.75006}
+  _monster: {fileID: 0}
+  description: "\uC0B4\uC544\uC788\uB294\uC9C0 \uD655\uC778"
+  _child: {fileID: -3861657734866573520}
+--- !u!114 &-8466104972120574059
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 73f5672ca30b3ed4e8976069b72aeb1c, type: 3}
+  m_Name: RepeatNode
+  m_EditorClassIdentifier: 
+  _state: 0
+  _started: 0
+  _guid: 0c303f5db9811fc44bdfab6d1a237208
+  _position: {x: 0.8500033, y: 19.549997}
+  _monster: {fileID: 0}
+  description: "\uBB34\uD55C\uBC18\uBCF5"
+  _child: {fileID: 1554511675279496677}
+--- !u!114 &-6230346757239489692
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 860adcbe085500441b7ed39c3e791152, type: 3}
+  m_Name: ChaseNode
+  m_EditorClassIdentifier: 
+  _state: 0
+  _started: 0
+  _guid: 193c6e082f5000941807d80f69d360f0
+  _position: {x: -218, y: 662}
+  _monster: {fileID: 0}
+  description: "\uD50C\uB808\uC774\uC5B4 \uCD94\uC801"
+  _searchDist: 12
+  _attackDist: 11
+--- !u!114 &-6187105008728002340
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 157bea0c91599c04d8bf7004211686bf, type: 3}
+  m_Name: SelectorNode
+  m_EditorClassIdentifier: 
+  _state: 0
+  _started: 0
+  _guid: 19ed2d8b903d87d42a94a41c8d24ab35
+  _position: {x: 2.0000215, y: 410.50006}
+  _monster: {fileID: 0}
+  description: 
+  _children:
+  - {fileID: -4945180641818591514}
+  - {fileID: 4119556812844261288}
+--- !u!114 &-4945180641818591514
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 35450fc7e0a3c964a8b3854ac071ae72, type: 3}
+  m_Name: SequencerNode
+  m_EditorClassIdentifier: 
+  _state: 0
+  _started: 0
+  _guid: 320b858fd51c40b448c42b19e35ec0a2
+  _position: {x: -142.19998, y: 530.5501}
+  _monster: {fileID: 0}
+  description: 
+  _children:
+  - {fileID: -6230346757239489692}
+  - {fileID: 7052206481669155029}
+--- !u!114 &-3861657734866573520
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ed697174e863c894bb85be6a083c137d, type: 3}
+  m_Name: CheckStunNode
+  m_EditorClassIdentifier: 
+  _state: 0
+  _started: 0
+  _guid: 4d46a84fc00909140a970c2b590f5efb
+  _position: {x: 0.40002626, y: 317.75}
+  _monster: {fileID: 0}
+  description: "\uC2A4\uD134 \uC0C1\uD0DC\uC778\uC9C0 \uD655\uC778"
+  _child: {fileID: -6187105008728002340}
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 559105020eb6f984abcd7f4a3c4d8317, type: 3}
+  m_Name: DeathBringerTree
+  m_EditorClassIdentifier: 
+  _rootNode: {fileID: 6165308931858370620}
+  _nodes:
+  - {fileID: 6165308931858370620}
+  - {fileID: -8466104972120574059}
+  - {fileID: 1554511675279496677}
+  - {fileID: -8844796979171841212}
+  - {fileID: -6187105008728002340}
+  - {fileID: 7052206481669155029}
+  - {fileID: 4119556812844261288}
+  - {fileID: 633675846968698808}
+  - {fileID: -6230346757239489692}
+  - {fileID: -3861657734866573520}
+  - {fileID: 5024567495937209240}
+  - {fileID: -4945180641818591514}
+  _treeState: 0
+  _monster: {fileID: 0}
+--- !u!114 &633675846968698808
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c5f7284dc31f37546ad47c44e1eaf1e4, type: 3}
+  m_Name: AttackNode
+  m_EditorClassIdentifier: 
+  _state: 0
+  _started: 0
+  _guid: b926a16381ff9504ebc3d9fe81108a18
+  _position: {x: 262.70996, y: 657.42}
+  _monster: {fileID: 0}
+  description: "\uC77C\uBC18\uACF5\uACA9"
+  attackIndex: 0
+--- !u!114 &1554511675279496677
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 92a8f6256dd48ed48a2e722788b28600, type: 3}
+  m_Name: CheckSpawnNode
+  m_EditorClassIdentifier: 
+  _state: 0
+  _started: 0
+  _guid: 19fa7f815cb36994296f862cbe226815
+  _position: {x: 2.1500003, y: 122.862015}
+  _monster: {fileID: 0}
+  description: "\uC2A4\uD3F0\uB418\uC5C8\uB294\uC9C0 \uD655\uC778"
+  _child: {fileID: -8844796979171841212}
+--- !u!114 &4119556812844261288
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 35450fc7e0a3c964a8b3854ac071ae72, type: 3}
+  m_Name: SequencerNode
+  m_EditorClassIdentifier: 
+  _state: 0
+  _started: 0
+  _guid: 09aea01ae00aca048b39486413a1f4e3
+  _position: {x: 162, y: 532}
+  _monster: {fileID: 0}
+  description: 
+  _children:
+  - {fileID: 5024567495937209240}
+  - {fileID: 633675846968698808}
+--- !u!114 &5024567495937209240
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 860adcbe085500441b7ed39c3e791152, type: 3}
+  m_Name: ChaseNode
+  m_EditorClassIdentifier: 
+  _state: 0
+  _started: 0
+  _guid: 67ce28e448f33dd4aa3497401ecbc879
+  _position: {x: 92.25752, y: 658.065}
+  _monster: {fileID: 0}
+  description: "\uD50C\uB808\uC774\uC5B4 \uCD94\uC801"
+  _searchDist: 11
+  _attackDist: 6
+--- !u!114 &6165308931858370620
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 093cd8d816d210b44920b5751941126e, type: 3}
+  m_Name: RootNode
+  m_EditorClassIdentifier: 
+  _state: 0
+  _started: 0
+  _guid: 81b8b3cc5c82cae4f8cc1ae5a7876c82
+  _position: {x: 1.2999942, y: -75.98404}
+  _monster: {fileID: 0}
+  description: 
+  _child: {fileID: -8466104972120574059}
+--- !u!114 &7052206481669155029
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c5f7284dc31f37546ad47c44e1eaf1e4, type: 3}
+  m_Name: AttackNode
+  m_EditorClassIdentifier: 
+  _state: 0
+  _started: 0
+  _guid: 3e8be9269a5a96742b4813ab282e1fff
+  _position: {x: -63, y: 661}
+  _monster: {fileID: 0}
+  description: "\uC2A4\uD3A0\uACF5\uACA9"
+  attackIndex: 1

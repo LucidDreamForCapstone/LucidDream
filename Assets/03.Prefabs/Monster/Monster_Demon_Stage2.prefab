@@ -231,6 +231,19 @@ MonoBehaviour:
     _dropChance: 10
   - _item: {fileID: 1291977212005651459, guid: 652f72c4454773c44a4173eacf164980, type: 3}
     _dropChance: 50
+  _tree: {fileID: 11400000, guid: 7650c874b7023374688591967e122d53, type: 2}
+  _isRightDefault: 1
+  _attackStateList: 
+  _patternNum: 1
+  _searchDist: 10
+  _attackDist: 6
+  _isDead: 0
+  _isSpawnComplete: 0
+  _playerScript: {fileID: 0}
+  _rigid: {fileID: 0}
+  _spriteRenderer: {fileID: 9134952307102283645}
+  _animator: {fileID: 8054834874418358497}
+  _useTree: 1
   _isBoss: 0
   _bodyDamage: 40
   _hitSound: []
@@ -248,8 +261,6 @@ MonoBehaviour:
   _fireballObj: {fileID: 5669199885704005852, guid: f1986fb65ce9a034299b160d450281f8, type: 3}
   _fireSpeed: 5
   _fireLastTime: 3
-  _searchRange: 12
-  _attackRange: 6
   _fireCoolTime: 3
   attackSound: {fileID: 8300000, guid: 6132931502972354da6f7b7635acc582, type: 3}
 --- !u!212 &9134952307102283645

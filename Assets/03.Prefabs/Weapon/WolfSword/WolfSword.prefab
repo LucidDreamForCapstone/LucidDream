@@ -235,7 +235,7 @@ MonoBehaviour:
     _weaponCritChance: 15
     _weaponCritDamage: 30
   _basicCoolTime: 1.5
-  _basicDelay: 0.2
+  _basicDelay: 0.3
   _skill1CoolTime: 10
   _delay1: 0.4
   _skill2CoolTime: 7

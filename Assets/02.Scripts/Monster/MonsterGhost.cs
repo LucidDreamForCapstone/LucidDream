@@ -6,8 +6,6 @@ public class MonsterGhost : MonsterBase {
 
     #region serialize field
 
-    [SerializeField] private float _searchRange;
-    [SerializeField] private float _attackRange;
     [SerializeField] private float _attackCooltime;
     [SerializeField] private AudioClip attackSound;
 
@@ -30,14 +28,10 @@ public class MonsterGhost : MonsterBase {
 
     new private void OnEnable() {
         base.OnEnable();
-        Spawn().Forget();
+        _attackFuncList.Add(ScratchTask);
         _isAttackReady = true;
         _isAttacking = false;
         _attackDelay = 0.5f;
-    }
-
-    private void Update() {
-        AttackMove();
     }
 
     #endregion //mono funcs
@@ -48,16 +42,17 @@ public class MonsterGhost : MonsterBase {
     #region protected funcs
 
     protected override void AttackMove() {
+        /*
         if (!_isAttacking && !_isDead && !_isStun && _isSpawnComplete) {
             double dist = CalculateManhattanDist(transform.position, _playerScript.transform.position);
 
-            if (dist < _attackRange) {//�÷��̾ ���� ����
+            if (dist < _attackRange) {
                 if (_isAttackReady)
                     AttackTask().Forget();
 
                 _rigid.velocity = Vector2.zero;
             }
-            else if (dist < _searchRange) { //�÷��̾ �߰� �� ����
+            else if (dist < _searchRange) {
                 Vector2 moveVec = _playerScript.transform.position - transform.position;
 
                 if (moveVec.x < 0)
@@ -68,13 +63,14 @@ public class MonsterGhost : MonsterBase {
                 _rigid.velocity = moveVec.normalized * _moveSpeed;
                 _animator.SetBool("Run", true);
             }
-            else { //�÷��̾ �߰����� ���� ����
+            else {
                 _rigid.velocity = Vector2.zero;
                 _animator.SetBool("Run", false);
             }
         }
         else
             _rigid.velocity = Vector2.zero;
+        */
     }
 
     #endregion //protected funcs
@@ -84,26 +80,25 @@ public class MonsterGhost : MonsterBase {
 
     #region private funcs
 
-    private async UniTaskVoid AttackTask() {
+    private async UniTaskVoid ScratchTask() {
         _isAttackReady = false;
-        Attack().Forget();
+        Scratch().Forget();
         await UniTask.Delay(TimeSpan.FromSeconds(_attackCooltime));
         _isAttackReady = true;
+        _attackStateList[0] = AttackState.Ready;
     }
 
-    private async UniTaskVoid Attack() {
+    private async UniTaskVoid Scratch() {
+        _attackStateList[0] = AttackState.Attacking;
         _isAttacking = true;
         _animator.SetTrigger("Attack");
         PlaySound(attackSound);
         await UniTask.Delay(TimeSpan.FromSeconds(0.3f));//�ִϸ��̼� ������
-        if (CalculateManhattanDist(transform.position, _playerScript.transform.position) < _attackRange && !_isDead)
+        if (GetDistSquare(transform.position, _playerScript.transform.position) < _attackDist * _attackDist && !_isDead)
             _playerScript.Damaged(_damage);
         await UniTask.Delay(TimeSpan.FromSeconds(_attackDelay));
         _isAttacking = false;
-    }
-
-    private double CalculateManhattanDist(Vector2 a, Vector2 b) {
-        return Mathf.Abs(a.x - b.x) + Mathf.Abs(a.y - b.y);
+        _attackStateList[0] = AttackState.CoolTime;
     }
 
     #endregion //private funcs

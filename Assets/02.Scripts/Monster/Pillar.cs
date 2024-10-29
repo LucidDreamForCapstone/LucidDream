@@ -8,11 +8,6 @@ public class Pillar : MonsterBase {
 
     #region mono funcs
 
-    new private void OnEnable() {
-        base.OnEnable();
-        Spawn().Forget();
-    }
-
     private void Update() {
         ChangeLayer();
         UpdatePillarState();

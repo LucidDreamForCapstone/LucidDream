@@ -91,6 +91,19 @@ MonoBehaviour:
     _dropChance: 100
   - _item: {fileID: 3579808356831541882, guid: 05b74ee39875fc14aae218c401ebe8f6, type: 3}
     _dropChance: 100
+  _tree: {fileID: 0}
+  _isRightDefault: 0
+  _attackStateList: 
+  _patternNum: 0
+  _searchDist: 0
+  _attackDist: 0
+  _isDead: 0
+  _isSpawnComplete: 0
+  _playerScript: {fileID: 0}
+  _rigid: {fileID: 0}
+  _spriteRenderer: {fileID: 0}
+  _animator: {fileID: 8105634427388154863}
+  _useTree: 0
   _isBoss: 1
   _bodyDamage: 250
   _hitSound: []
