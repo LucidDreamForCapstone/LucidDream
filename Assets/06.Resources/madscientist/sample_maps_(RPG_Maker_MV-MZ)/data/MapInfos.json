@@ -1,0 +1,8 @@
+[
+null,
+{"id":1,"expanded":false,"name":"machine lab","order":1,"parentId":0,"scrollX":811,"scrollY":499},
+{"id":2,"expanded":false,"name":"door to boss","order":5,"parentId":0,"scrollX":577.5,"scrollY":429},
+{"id":3,"expanded":false,"name":"full lab","order":4,"parentId":0,"scrollX":1515,"scrollY":494},
+{"id":4,"expanded":false,"name":"laboratory","order":2,"parentId":0,"scrollX":811,"scrollY":499},
+{"id":5,"expanded":false,"name":"hallway","order":3,"parentId":0,"scrollX":819,"scrollY":461}
+]

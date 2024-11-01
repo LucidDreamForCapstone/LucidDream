@@ -1,0 +1,7 @@
+fx2_impact_shock_small_black/frame0000.png = 0 0 70 25
+fx2_impact_shock_small_black/frame0001.png = 70 0 70 25
+fx2_impact_shock_small_black/frame0002.png = 140 0 70 25
+fx2_impact_shock_small_black/frame0003.png = 210 0 70 25
+fx2_impact_shock_small_black/frame0004.png = 280 0 70 25
+fx2_impact_shock_small_black/frame0005.png = 350 0 70 25
+fx2_impact_shock_small_black/frame0006.png = 420 0 70 25

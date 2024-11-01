@@ -1,0 +1,8 @@
+fx3_impact_hit_small_green/frame0000.png = 0 0 48 28
+fx3_impact_hit_small_green/frame0001.png = 48 0 48 28
+fx3_impact_hit_small_green/frame0002.png = 96 0 48 28
+fx3_impact_hit_small_green/frame0003.png = 144 0 48 28
+fx3_impact_hit_small_green/frame0004.png = 192 0 48 28
+fx3_impact_hit_small_green/frame0005.png = 240 0 48 28
+fx3_impact_hit_small_green/frame0006.png = 288 0 48 28
+fx3_impact_hit_small_green/frame0007.png = 336 0 48 28

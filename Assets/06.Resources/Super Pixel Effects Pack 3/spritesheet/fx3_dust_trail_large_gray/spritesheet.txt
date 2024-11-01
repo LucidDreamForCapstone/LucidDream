@@ -1,0 +1,10 @@
+fx3_dust_trail_large_gray/frame0000.png = 0 0 64 32
+fx3_dust_trail_large_gray/frame0001.png = 64 0 64 32
+fx3_dust_trail_large_gray/frame0002.png = 128 0 64 32
+fx3_dust_trail_large_gray/frame0003.png = 192 0 64 32
+fx3_dust_trail_large_gray/frame0004.png = 256 0 64 32
+fx3_dust_trail_large_gray/frame0005.png = 320 0 64 32
+fx3_dust_trail_large_gray/frame0006.png = 384 0 64 32
+fx3_dust_trail_large_gray/frame0007.png = 448 0 64 32
+fx3_dust_trail_large_gray/frame0008.png = 512 0 64 32
+fx3_dust_trail_large_gray/frame0009.png = 576 0 64 32

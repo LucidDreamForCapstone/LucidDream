@@ -1,0 +1,980 @@
+fileFormatVersion: 2
+guid: 4a2ac5a81328662449640f068493b78e
+ScriptedImporter:
+  internalIDToNameTable: []
+  externalObjects: {}
+  serializedVersion: 2
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+  script: {fileID: 11500000, guid: 62a9f0aa5b59740cfbadc7e5f9823bb0, type: 3}
+  textureImporterSettings:
+    alphaSource: 1
+    mipMapMode: 0
+    enableMipMap: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+    convertToNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+    swizzle: 50462976
+    isReadable: 0
+    streamingMipmaps: 0
+    streamingMipmapsPriority: 0
+    vTOnly: 0
+    ignoreMipmapLimit: 0
+    nPOTScale: 1
+    sRGBTexture: 1
+    spriteMode: 2
+    spriteExtrude: 1
+    spriteMeshType: 1
+    alignment: 0
+    spritePivot: {x: 0.5, y: 0.5}
+    spritePixelsToUnits: 100
+    spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+    spriteGenerateFallbackPhysicsShape: 0
+    generateCubemap: 6
+    cubemapConvolution: 0
+    seamlessCubemap: 0
+    alphaIsTransparency: 1
+    spriteTessellationDetail: -1
+    textureType: 8
+    textureShape: 1
+    singleChannelComponent: 0
+    flipbookRows: 0
+    flipbookColumns: 0
+    ignorePngGamma: 0
+    cookieMode: 0
+    filterMode: 0
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+    normalMap: 0
+    textureFormat: 0
+    maxTextureSize: 0
+    lightmap: 0
+    compressionQuality: 0
+    linearTexture: 0
+    grayScaleToAlpha: 0
+    rGBM: 0
+    cubemapConvolutionSteps: 0
+    cubemapConvolutionExponent: 0
+    maxTextureSizeSet: 0
+    compressionQualitySet: 0
+    textureFormatSet: 0
+    applyGammaDecoding: 0
+  previousAsepriteImporterSettings:
+    fileImportMode: 1
+    importHiddenLayers: 0
+    layerImportMode: 1
+    defaultPivotSpace: 0
+    defaultPivotAlignment: 7
+    customPivotPosition: {x: 0.5, y: 0.5}
+    mosaicPadding: 4
+    spritePadding: 0
+    generateModelPrefab: 1
+    generateAnimationClips: 1
+    addSortingGroup: 1
+    addShadowCasters: 0
+  asepriteImporterSettings:
+    fileImportMode: 1
+    importHiddenLayers: 0
+    layerImportMode: 1
+    defaultPivotSpace: 0
+    defaultPivotAlignment: 7
+    customPivotPosition: {x: 0.5, y: 0.5}
+    mosaicPadding: 4
+    spritePadding: 0
+    generateModelPrefab: 1
+    generateAnimationClips: 1
+    addSortingGroup: 1
+    addShadowCasters: 0
+  importFileNodeState: 1
+  platformSettingsDirtyTick: 0
+  textureAssetName: 
+  singleSpriteImportData:
+  - name: 
+    originalName: 
+    pivot: {x: 0, y: 0}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 0
+      y: 0
+      width: 0
+      height: 0
+    spriteID: 
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 0, y: 0}
+  animatedSpriteImportData:
+  - name: Mecha_Frame_0
+    originalName: 
+    pivot: {x: 0.98717946, y: 0}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 130
+      y: 116
+      width: 117
+      height: 104
+    spriteID: aea4b07fb6a32854ca9bdbc31f9762ca
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 130, y: 116}
+  - name: Mecha_Frame_1
+    originalName: 
+    pivot: {x: 0.98717946, y: 0}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 255
+      y: 116
+      width: 117
+      height: 104
+    spriteID: 48f8fa014213eb649a6711fc8ba66b45
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 255, y: 116}
+  - name: Mecha_Frame_2
+    originalName: 
+    pivot: {x: 0.98717946, y: 0}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 380
+      y: 116
+      width: 117
+      height: 104
+    spriteID: 8664dbf4498c87945ae30da8938b8db3
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 380, y: 116}
+  - name: Mecha_Frame_3
+    originalName: 
+    pivot: {x: 0.98717946, y: 0}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 505
+      y: 116
+      width: 117
+      height: 104
+    spriteID: 5cd4afe30c722464ba6207fcecf78107
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 505, y: 116}
+  - name: Mecha_Frame_4
+    originalName: 
+    pivot: {x: 0.98717946, y: 0}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 630
+      y: 116
+      width: 117
+      height: 104
+    spriteID: c27a8a3658c5f6343b2a325afef57b2c
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 630, y: 116}
+  - name: Mecha_Frame_5
+    originalName: 
+    pivot: {x: 0.98717946, y: 0}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 755
+      y: 116
+      width: 117
+      height: 104
+    spriteID: 9cac0c247c6eaeb48a4b7f3ad50a904e
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 755, y: 116}
+  - name: Mecha_Frame_6
+    originalName: 
+    pivot: {x: 0.9788135, y: 0}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 746
+      y: 4
+      width: 118
+      height: 104
+    spriteID: e171fe967f55efe4380735808642fab5
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 746, y: 4}
+  - name: Mecha_Frame_7
+    originalName: 
+    pivot: {x: 0.9788135, y: 0}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 872
+      y: 4
+      width: 118
+      height: 104
+    spriteID: dcc5bff85c518974e894ab3366b036fb
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 872, y: 4}
+  - name: Mecha_Frame_8
+    originalName: 
+    pivot: {x: 0.9788135, y: 0}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 4
+      y: 116
+      width: 118
+      height: 104
+    spriteID: 777800ca59c04f549bb4feca606db65c
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 4, y: 116}
+  - name: Mecha_Frame_9
+    originalName: 
+    pivot: {x: 0.98717946, y: 0}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 880
+      y: 116
+      width: 117
+      height: 104
+    spriteID: a87831d4cc136af48bd93e6708b15cc8
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 880, y: 116}
+  - name: Mecha_Frame_10
+    originalName: 
+    pivot: {x: 0.98717946, y: 0}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 4
+      y: 228
+      width: 117
+      height: 104
+    spriteID: 058a421096d57494f9938575597d6958
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 4, y: 228}
+  - name: Mecha_Frame_11
+    originalName: 
+    pivot: {x: 0.98717946, y: 0}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 129
+      y: 228
+      width: 117
+      height: 104
+    spriteID: dd1ecb93c1f3ff542bd057a3dbbfa200
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 129, y: 228}
+  - name: Mecha_Frame_12
+    originalName: 
+    pivot: {x: 0.98717946, y: 0}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 254
+      y: 228
+      width: 117
+      height: 104
+    spriteID: b26e92b85a6352344ae3677a514b1624
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 254, y: 228}
+  - name: Mecha_Frame_13
+    originalName: 
+    pivot: {x: 0.63114756, y: 0}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 4
+      y: 4
+      width: 183
+      height: 104
+    spriteID: c281b759bb12a0c4da845ab5a1fa8bb4
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 4, y: 4}
+  - name: Mecha_Frame_14
+    originalName: 
+    pivot: {x: 0.6754386, y: 0}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 567
+      y: 4
+      width: 171
+      height: 104
+    spriteID: a981060bb87f46a4e998e587ebea1fda
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 567, y: 4}
+  - name: Mecha_Frame_15
+    originalName: 
+    pivot: {x: 0.63114756, y: 0}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 195
+      y: 4
+      width: 183
+      height: 104
+    spriteID: c987f7a668b82ee43a8b626ec71ec9cc
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 195, y: 4}
+  - name: Mecha_Frame_16
+    originalName: 
+    pivot: {x: 0.66763, y: 0}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 386
+      y: 4
+      width: 173
+      height: 104
+    spriteID: 0dd1cce475fb3af41903e4c13fe65887
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 386, y: 4}
+  - name: Mecha_Frame_17
+    originalName: 
+    pivot: {x: 0.98717946, y: 0}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 379
+      y: 228
+      width: 117
+      height: 104
+    spriteID: 7f3e1ff2be36a2443a344dabb198e2e7
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 379, y: 228}
+  - name: Mecha_Frame_18
+    originalName: 
+    pivot: {x: 0.98717946, y: 0}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 504
+      y: 228
+      width: 117
+      height: 104
+    spriteID: 9cab2669ac0545342be93b542f3dd5c3
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 504, y: 228}
+  - name: Mecha_Frame_19
+    originalName: 
+    pivot: {x: 0.98717946, y: 0}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 629
+      y: 228
+      width: 117
+      height: 104
+    spriteID: cec96d5a751b6024d8350e8a0e62a47d
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 629, y: 228}
+  - name: Mecha_Frame_20
+    originalName: 
+    pivot: {x: 0.98717946, y: 0}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 754
+      y: 228
+      width: 117
+      height: 104
+    spriteID: 86661a5692b5cff4e8fe1dd6b3916a5e
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 754, y: 228}
+  - name: Mecha_Frame_21
+    originalName: 
+    pivot: {x: 0.98717946, y: 0}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 879
+      y: 228
+      width: 117
+      height: 104
+    spriteID: cb3861e1d8d4c4941bf949c9549de2f8
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 879, y: 228}
+  - name: Mecha_Frame_22
+    originalName: 
+    pivot: {x: 0.98717946, y: 0}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 4
+      y: 340
+      width: 117
+      height: 104
+    spriteID: c1faa3c889c941e429227f360261fa24
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 4, y: 340}
+  - name: Mecha_Frame_23
+    originalName: 
+    pivot: {x: 0.98717946, y: 0}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 129
+      y: 340
+      width: 117
+      height: 104
+    spriteID: da11b228c77375443b5850bb710a1aeb
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 129, y: 340}
+  - name: Mecha_Frame_24
+    originalName: 
+    pivot: {x: 0.98717946, y: 0}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 254
+      y: 340
+      width: 117
+      height: 104
+    spriteID: e765d7492991c174984cb0a2a87781da
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 254, y: 340}
+  - name: Mecha_Frame_25
+    originalName: 
+    pivot: {x: 0.98717946, y: 0}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 379
+      y: 340
+      width: 117
+      height: 104
+    spriteID: b4bb941569b7dbc48b74995d28a16742
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 379, y: 340}
+  - name: Mecha_Frame_26
+    originalName: 
+    pivot: {x: 0.98717946, y: 0}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 504
+      y: 340
+      width: 117
+      height: 104
+    spriteID: d24f1212e1e77fb4d87612cf03200190
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 504, y: 340}
+  - name: Mecha_Frame_27
+    originalName: 
+    pivot: {x: 0.98717946, y: 0}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 629
+      y: 340
+      width: 117
+      height: 104
+    spriteID: 93327ef34d87f1443b9b6e0008857336
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 629, y: 340}
+  - name: Mecha_Frame_28
+    originalName: 
+    pivot: {x: 0.98717946, y: 0}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 754
+      y: 340
+      width: 117
+      height: 104
+    spriteID: ba9a09f82aac8d04abb0d56af93302b2
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 754, y: 340}
+  spriteSheetImportData: []
+  asepriteLayers:
+  - layerIndex: 0
+    guid: -1280087126
+    name: Mecha
+    layerFlags: 0
+    layerType: 0
+    blendMode: 0
+    cells:
+    - name: Mecha_Frame_0
+      frameIndex: 0
+      additiveSortOrder: 0
+      cellRect:
+        x: -48
+        y: 0
+        width: 117
+        height: 104
+      spriteId: aea4b07fb6a32854ca9bdbc31f9762ca
+    - name: Mecha_Frame_1
+      frameIndex: 1
+      additiveSortOrder: 0
+      cellRect:
+        x: -48
+        y: 0
+        width: 117
+        height: 104
+      spriteId: 48f8fa014213eb649a6711fc8ba66b45
+    - name: Mecha_Frame_2
+      frameIndex: 2
+      additiveSortOrder: 0
+      cellRect:
+        x: -48
+        y: 0
+        width: 117
+        height: 104
+      spriteId: 8664dbf4498c87945ae30da8938b8db3
+    - name: Mecha_Frame_3
+      frameIndex: 3
+      additiveSortOrder: 0
+      cellRect:
+        x: -48
+        y: 0
+        width: 117
+        height: 104
+      spriteId: 5cd4afe30c722464ba6207fcecf78107
+    - name: Mecha_Frame_4
+      frameIndex: 4
+      additiveSortOrder: 0
+      cellRect:
+        x: -48
+        y: 0
+        width: 117
+        height: 104
+      spriteId: c27a8a3658c5f6343b2a325afef57b2c
+    - name: Mecha_Frame_5
+      frameIndex: 5
+      additiveSortOrder: 0
+      cellRect:
+        x: -48
+        y: 0
+        width: 117
+        height: 104
+      spriteId: 9cac0c247c6eaeb48a4b7f3ad50a904e
+    - name: Mecha_Frame_6
+      frameIndex: 6
+      additiveSortOrder: 0
+      cellRect:
+        x: -48
+        y: 0
+        width: 118
+        height: 104
+      spriteId: e171fe967f55efe4380735808642fab5
+    - name: Mecha_Frame_7
+      frameIndex: 7
+      additiveSortOrder: 0
+      cellRect:
+        x: -48
+        y: 0
+        width: 118
+        height: 104
+      spriteId: dcc5bff85c518974e894ab3366b036fb
+    - name: Mecha_Frame_8
+      frameIndex: 8
+      additiveSortOrder: 0
+      cellRect:
+        x: -48
+        y: 0
+        width: 118
+        height: 104
+      spriteId: 777800ca59c04f549bb4feca606db65c
+    - name: Mecha_Frame_9
+      frameIndex: 9
+      additiveSortOrder: 0
+      cellRect:
+        x: -48
+        y: 0
+        width: 117
+        height: 104
+      spriteId: a87831d4cc136af48bd93e6708b15cc8
+    - name: Mecha_Frame_10
+      frameIndex: 10
+      additiveSortOrder: 0
+      cellRect:
+        x: -48
+        y: 0
+        width: 117
+        height: 104
+      spriteId: 058a421096d57494f9938575597d6958
+    - name: Mecha_Frame_11
+      frameIndex: 11
+      additiveSortOrder: 0
+      cellRect:
+        x: -48
+        y: 0
+        width: 117
+        height: 104
+      spriteId: dd1ecb93c1f3ff542bd057a3dbbfa200
+    - name: Mecha_Frame_12
+      frameIndex: 12
+      additiveSortOrder: 0
+      cellRect:
+        x: -48
+        y: 0
+        width: 117
+        height: 104
+      spriteId: b26e92b85a6352344ae3677a514b1624
+    - name: Mecha_Frame_13
+      frameIndex: 13
+      additiveSortOrder: 0
+      cellRect:
+        x: -48
+        y: 0
+        width: 183
+        height: 104
+      spriteId: c281b759bb12a0c4da845ab5a1fa8bb4
+    - name: Mecha_Frame_14
+      frameIndex: 14
+      additiveSortOrder: 0
+      cellRect:
+        x: -48
+        y: 0
+        width: 171
+        height: 104
+      spriteId: a981060bb87f46a4e998e587ebea1fda
+    - name: Mecha_Frame_15
+      frameIndex: 15
+      additiveSortOrder: 0
+      cellRect:
+        x: -48
+        y: 0
+        width: 183
+        height: 104
+      spriteId: c987f7a668b82ee43a8b626ec71ec9cc
+    - name: Mecha_Frame_16
+      frameIndex: 16
+      additiveSortOrder: 0
+      cellRect:
+        x: -48
+        y: 0
+        width: 173
+        height: 104
+      spriteId: 0dd1cce475fb3af41903e4c13fe65887
+    - name: Mecha_Frame_17
+      frameIndex: 17
+      additiveSortOrder: 0
+      cellRect:
+        x: -48
+        y: 0
+        width: 117
+        height: 104
+      spriteId: 7f3e1ff2be36a2443a344dabb198e2e7
+    - name: Mecha_Frame_18
+      frameIndex: 18
+      additiveSortOrder: 0
+      cellRect:
+        x: -48
+        y: 0
+        width: 117
+        height: 104
+      spriteId: 9cab2669ac0545342be93b542f3dd5c3
+    - name: Mecha_Frame_19
+      frameIndex: 19
+      additiveSortOrder: 0
+      cellRect:
+        x: -48
+        y: 0
+        width: 117
+        height: 104
+      spriteId: cec96d5a751b6024d8350e8a0e62a47d
+    - name: Mecha_Frame_20
+      frameIndex: 20
+      additiveSortOrder: 0
+      cellRect:
+        x: -48
+        y: 0
+        width: 117
+        height: 104
+      spriteId: 86661a5692b5cff4e8fe1dd6b3916a5e
+    - name: Mecha_Frame_21
+      frameIndex: 21
+      additiveSortOrder: 0
+      cellRect:
+        x: -48
+        y: 0
+        width: 117
+        height: 104
+      spriteId: cb3861e1d8d4c4941bf949c9549de2f8
+    - name: Mecha_Frame_22
+      frameIndex: 22
+      additiveSortOrder: 0
+      cellRect:
+        x: -48
+        y: 0
+        width: 117
+        height: 104
+      spriteId: c1faa3c889c941e429227f360261fa24
+    - name: Mecha_Frame_23
+      frameIndex: 23
+      additiveSortOrder: 0
+      cellRect:
+        x: -48
+        y: 0
+        width: 117
+        height: 104
+      spriteId: da11b228c77375443b5850bb710a1aeb
+    - name: Mecha_Frame_24
+      frameIndex: 24
+      additiveSortOrder: 0
+      cellRect:
+        x: -48
+        y: 0
+        width: 117
+        height: 104
+      spriteId: e765d7492991c174984cb0a2a87781da
+    - name: Mecha_Frame_25
+      frameIndex: 25
+      additiveSortOrder: 0
+      cellRect:
+        x: -48
+        y: 0
+        width: 117
+        height: 104
+      spriteId: b4bb941569b7dbc48b74995d28a16742
+    - name: Mecha_Frame_26
+      frameIndex: 26
+      additiveSortOrder: 0
+      cellRect:
+        x: -48
+        y: 0
+        width: 117
+        height: 104
+      spriteId: d24f1212e1e77fb4d87612cf03200190
+    - name: Mecha_Frame_27
+      frameIndex: 27
+      additiveSortOrder: 0
+      cellRect:
+        x: -48
+        y: 0
+        width: 117
+        height: 104
+      spriteId: 93327ef34d87f1443b9b6e0008857336
+    - name: Mecha_Frame_28
+      frameIndex: 28
+      additiveSortOrder: 0
+      cellRect:
+        x: -48
+        y: 0
+        width: 117
+        height: 104
+      spriteId: ba9a09f82aac8d04abb0d56af93302b2
+    linkedCells: []
+    parentIndex: -1
+  platformSettings: []
+  generatePhysicsShape: 0
+  secondarySpriteTextures: []
+  spritePackingTag: 
+  canvasSize: {x: 135, y: 60}

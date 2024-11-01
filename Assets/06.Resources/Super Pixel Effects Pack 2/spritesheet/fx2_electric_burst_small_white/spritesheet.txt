@@ -1,0 +1,15 @@
+fx2_electric_burst_small_white/frame0000.png = 0 0 37 37
+fx2_electric_burst_small_white/frame0001.png = 37 0 37 37
+fx2_electric_burst_small_white/frame0002.png = 74 0 37 37
+fx2_electric_burst_small_white/frame0003.png = 111 0 37 37
+fx2_electric_burst_small_white/frame0004.png = 148 0 37 37
+fx2_electric_burst_small_white/frame0005.png = 185 0 37 37
+fx2_electric_burst_small_white/frame0006.png = 222 0 37 37
+fx2_electric_burst_small_white/frame0007.png = 259 0 37 37
+fx2_electric_burst_small_white/frame0008.png = 296 0 37 37
+fx2_electric_burst_small_white/frame0009.png = 333 0 37 37
+fx2_electric_burst_small_white/frame0010.png = 370 0 37 37
+fx2_electric_burst_small_white/frame0011.png = 407 0 37 37
+fx2_electric_burst_small_white/frame0012.png = 444 0 37 37
+fx2_electric_burst_small_white/frame0013.png = 481 0 37 37
+fx2_electric_burst_small_white/frame0014.png = 518 0 37 37

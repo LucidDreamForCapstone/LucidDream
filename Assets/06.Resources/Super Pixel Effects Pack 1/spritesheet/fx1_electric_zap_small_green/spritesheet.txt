@@ -1,0 +1,6 @@
+fx1_electric_zap_small_green/frame0000.png = 0 0 36 36
+fx1_electric_zap_small_green/frame0001.png = 36 0 36 36
+fx1_electric_zap_small_green/frame0002.png = 72 0 36 36
+fx1_electric_zap_small_green/frame0003.png = 108 0 36 36
+fx1_electric_zap_small_green/frame0004.png = 144 0 36 36
+fx1_electric_zap_small_green/frame0005.png = 180 0 36 36

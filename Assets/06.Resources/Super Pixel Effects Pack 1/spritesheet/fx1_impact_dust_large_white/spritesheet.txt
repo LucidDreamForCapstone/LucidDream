@@ -1,0 +1,13 @@
+fx1_impact_dust_large_white/frame0000.png = 0 0 104 24
+fx1_impact_dust_large_white/frame0001.png = 104 0 104 24
+fx1_impact_dust_large_white/frame0002.png = 208 0 104 24
+fx1_impact_dust_large_white/frame0003.png = 312 0 104 24
+fx1_impact_dust_large_white/frame0004.png = 416 0 104 24
+fx1_impact_dust_large_white/frame0005.png = 520 0 104 24
+fx1_impact_dust_large_white/frame0006.png = 624 0 104 24
+fx1_impact_dust_large_white/frame0007.png = 728 0 104 24
+fx1_impact_dust_large_white/frame0008.png = 832 0 104 24
+fx1_impact_dust_large_white/frame0009.png = 936 0 104 24
+fx1_impact_dust_large_white/frame0010.png = 1040 0 104 24
+fx1_impact_dust_large_white/frame0011.png = 1144 0 104 24
+fx1_impact_dust_large_white/frame0012.png = 1248 0 104 24
