@@ -1,0 +1,12 @@
+fx1_magic_puff_large_green/frame0000.png = 0 0 48 80
+fx1_magic_puff_large_green/frame0001.png = 48 0 48 80
+fx1_magic_puff_large_green/frame0002.png = 96 0 48 80
+fx1_magic_puff_large_green/frame0003.png = 144 0 48 80
+fx1_magic_puff_large_green/frame0004.png = 192 0 48 80
+fx1_magic_puff_large_green/frame0005.png = 240 0 48 80
+fx1_magic_puff_large_green/frame0006.png = 288 0 48 80
+fx1_magic_puff_large_green/frame0007.png = 336 0 48 80
+fx1_magic_puff_large_green/frame0008.png = 384 0 48 80
+fx1_magic_puff_large_green/frame0009.png = 432 0 48 80
+fx1_magic_puff_large_green/frame0010.png = 480 0 48 80
+fx1_magic_puff_large_green/frame0011.png = 528 0 48 80

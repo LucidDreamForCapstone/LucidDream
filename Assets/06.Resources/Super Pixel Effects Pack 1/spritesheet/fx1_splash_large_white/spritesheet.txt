@@ -1,0 +1,11 @@
+fx1_splash_large_white/frame0000.png = 0 0 76 68
+fx1_splash_large_white/frame0001.png = 76 0 76 68
+fx1_splash_large_white/frame0002.png = 152 0 76 68
+fx1_splash_large_white/frame0003.png = 228 0 76 68
+fx1_splash_large_white/frame0004.png = 304 0 76 68
+fx1_splash_large_white/frame0005.png = 380 0 76 68
+fx1_splash_large_white/frame0006.png = 456 0 76 68
+fx1_splash_large_white/frame0007.png = 532 0 76 68
+fx1_splash_large_white/frame0008.png = 608 0 76 68
+fx1_splash_large_white/frame0009.png = 684 0 76 68
+fx1_splash_large_white/frame0010.png = 760 0 76 68

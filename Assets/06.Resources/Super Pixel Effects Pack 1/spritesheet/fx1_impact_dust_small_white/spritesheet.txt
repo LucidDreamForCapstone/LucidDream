@@ -1,0 +1,10 @@
+fx1_impact_dust_small_white/frame0000.png = 0 0 52 12
+fx1_impact_dust_small_white/frame0001.png = 52 0 52 12
+fx1_impact_dust_small_white/frame0002.png = 104 0 52 12
+fx1_impact_dust_small_white/frame0003.png = 156 0 52 12
+fx1_impact_dust_small_white/frame0004.png = 208 0 52 12
+fx1_impact_dust_small_white/frame0005.png = 260 0 52 12
+fx1_impact_dust_small_white/frame0006.png = 312 0 52 12
+fx1_impact_dust_small_white/frame0007.png = 364 0 52 12
+fx1_impact_dust_small_white/frame0008.png = 416 0 52 12
+fx1_impact_dust_small_white/frame0009.png = 468 0 52 12

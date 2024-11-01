@@ -1,0 +1,11 @@
+fx1_splash_small_yellow/frame0000.png = 0 0 36 34
+fx1_splash_small_yellow/frame0001.png = 36 0 36 34
+fx1_splash_small_yellow/frame0002.png = 72 0 36 34
+fx1_splash_small_yellow/frame0003.png = 108 0 36 34
+fx1_splash_small_yellow/frame0004.png = 144 0 36 34
+fx1_splash_small_yellow/frame0005.png = 180 0 36 34
+fx1_splash_small_yellow/frame0006.png = 216 0 36 34
+fx1_splash_small_yellow/frame0007.png = 252 0 36 34
+fx1_splash_small_yellow/frame0008.png = 288 0 36 34
+fx1_splash_small_yellow/frame0009.png = 324 0 36 34
+fx1_splash_small_yellow/frame0010.png = 360 0 36 34

@@ -1,0 +1,9 @@
+fx2_bubble_small_yellow_pop/frame0000.png = 0 0 48 48
+fx2_bubble_small_yellow_pop/frame0001.png = 48 0 48 48
+fx2_bubble_small_yellow_pop/frame0002.png = 96 0 48 48
+fx2_bubble_small_yellow_pop/frame0003.png = 144 0 48 48
+fx2_bubble_small_yellow_pop/frame0004.png = 192 0 48 48
+fx2_bubble_small_yellow_pop/frame0005.png = 240 0 48 48
+fx2_bubble_small_yellow_pop/frame0006.png = 288 0 48 48
+fx2_bubble_small_yellow_pop/frame0007.png = 336 0 48 48
+fx2_bubble_small_yellow_pop/frame0008.png = 384 0 48 48
