@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 6091263304860775588}
   - component: {fileID: 3257977271562002988}
   - component: {fileID: 8300931487860043844}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: Other 2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -134,7 +134,7 @@ GameObject:
   - component: {fileID: 3344594850630159001}
   - component: {fileID: 792401621923455206}
   - component: {fileID: 1239901491771206988}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: Floor
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -690,7 +690,7 @@ GameObject:
   - component: {fileID: 3631127907212197550}
   - component: {fileID: 7872013766755920719}
   - component: {fileID: 6532903579376553739}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: WarpPoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -783,7 +783,7 @@ GameObject:
   - component: {fileID: 1550574049381041780}
   - component: {fileID: 3892834423195255080}
   - component: {fileID: 1566185078147607045}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: Walls
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1387,7 +1387,7 @@ GameObject:
   - component: {fileID: 3853091051726409700}
   - component: {fileID: 4885944979086144128}
   - component: {fileID: 1583014716710542053}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: Exit
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1510,7 +1510,7 @@ GameObject:
   - component: {fileID: 2864498671349426890}
   - component: {fileID: 984214549137859242}
   - component: {fileID: 2034189572344022131}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: Collideable
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1738,7 +1738,7 @@ GameObject:
   - component: {fileID: 8269866613849061621}
   - component: {fileID: 8560312745300532056}
   - component: {fileID: 5386393919174465761}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: Other 3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1857,7 +1857,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5455200096964694132}
   - component: {fileID: 2387450148811890949}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: Tilemaps
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1908,7 +1908,7 @@ GameObject:
   - component: {fileID: 8093858196860634599}
   - component: {fileID: 7839730270724671190}
   - component: {fileID: 3319259413768992614}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: Other 1
   m_TagString: Untagged
   m_Icon: {fileID: 0}

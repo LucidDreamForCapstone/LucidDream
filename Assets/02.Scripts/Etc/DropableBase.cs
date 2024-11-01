@@ -23,6 +23,9 @@ public abstract class DropableBase : MonoBehaviour, Interactable {
         return "";
     }
 
+    public Transform GetTransform() {
+        return transform;
+    }
     #endregion
 
 

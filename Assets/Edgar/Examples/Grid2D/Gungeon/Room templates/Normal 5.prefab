@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 501253688935000858}
   - component: {fileID: 7896432668644271445}
   - component: {fileID: 8069363645431795301}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: Collideable
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -241,7 +241,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4327673265888388373}
   - component: {fileID: 6410734662174637721}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: Tilemaps
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -295,7 +295,7 @@ GameObject:
   - component: {fileID: 4244433699988835920}
   - component: {fileID: 729923512809760580}
   - component: {fileID: 5643915801837263504}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: Walls
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2215,7 +2215,7 @@ GameObject:
   - component: {fileID: 6115265824022867909}
   - component: {fileID: 5631075332785029863}
   - component: {fileID: 627256369012602508}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: Other 1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2335,7 +2335,7 @@ GameObject:
   - component: {fileID: 4030066777712267398}
   - component: {fileID: 2701336713482541298}
   - component: {fileID: 7137401718288660811}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: Other 2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2455,7 +2455,7 @@ GameObject:
   - component: {fileID: 2535771750900771380}
   - component: {fileID: 3636628910241777870}
   - component: {fileID: 4864536261665781562}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: Other 3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2578,7 +2578,7 @@ GameObject:
   - component: {fileID: 5319831973755722078}
   - component: {fileID: 949993968650140485}
   - component: {fileID: 7427842719109556556}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: Floor
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -7102,7 +7102,7 @@ GameObject:
   - component: {fileID: 8848430764566133249}
   - component: {fileID: 6633834245565902194}
   - component: {fileID: 5614920229741387241}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: Normal 5
   m_TagString: Untagged
   m_Icon: {fileID: 0}

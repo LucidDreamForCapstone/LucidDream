@@ -14,7 +14,6 @@ public abstract class ItemBase : MonoBehaviour, Interactable {
 
 
     #region public funcs
-
     public void Drop() {
         _isGround = false;
         float duration = 1.5f;

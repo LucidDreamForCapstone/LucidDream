@@ -10,7 +10,7 @@
     <ProductVersion>10.0.20506</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <RootNamespace></RootNamespace>
-    <ProjectGuid>{91E39937-81D6-F21D-2E8E-810928629D8C}</ProjectGuid>
+    <ProjectGuid>{8658752C-9674-D1B2-3749-809B6F28D237}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <AssemblyName>Assembly-CSharp</AssemblyName>
@@ -75,6 +75,10 @@
     <Compile Include="Assets\JMO Assets\Cartoon FX (legacy)\Demo\Assets\CFX_Demo_RandomDirectionTranslate.cs" />
     <Compile Include="Assets\02.Scripts\Player\Player.cs" />
     <Compile Include="Assets\02.Scripts\UI\Inven\InventoryManager.cs" />
+<<<<<<< HEAD
+=======
+    <Compile Include="Assets\Player2_InteractManager.cs" />
+>>>>>>> Kojungjun_new
     <Compile Include="Assets\02.Scripts\Etc\FloatingDamageManager.cs" />
     <Compile Include="Assets\JMO Assets\Cartoon FX (legacy)\Scripts\CFX_ShurikenThreadFix.cs" />
     <Compile Include="Assets\02.Scripts\UI\UIBase.cs" />
@@ -112,11 +116,15 @@
     <Compile Include="Assets\02.Scripts\GameManager\GameManager.cs" />
     <Compile Include="Assets\02.Scripts\BehaviorTree\DecoratorNode\CheckHp.cs" />
     <Compile Include="Assets\02.Scripts\Monster\MonsterBase.cs" />
+    <Compile Include="Assets\GlitchController.cs" />
     <Compile Include="Assets\02.Scripts\UI\CardSelectUIController.cs" />
     <Compile Include="Assets\06.Resources\Effect\StateEffect\Demo.cs" />
     <Compile Include="Assets\02.Scripts\UI\TextBubble.cs" />
     <Compile Include="Assets\JMO Assets\Cartoon FX (legacy)\Demo\Assets\CFX_Demo.cs" />
+<<<<<<< HEAD
     <Compile Include="Assets\07.Shader\Glitch\GlitchController.cs" />
+=======
+>>>>>>> Kojungjun_new
     <Compile Include="Assets\02.Scripts\Monster\MonsterTest.cs" />
     <Compile Include="Assets\02.Scripts\Weapon\WeaponBasicData.cs" />
     <Compile Include="Assets\02.Scripts\Player\Player_2.cs" />
@@ -158,6 +166,7 @@
     <Compile Include="Assets\02.Scripts\BehaviorTree\DecoratorNode\CheckSpawnNode.cs" />
     <Compile Include="Assets\02.Scripts\Interact\Interactable.cs" />
     <Compile Include="Assets\JMO Assets\Cartoon FX (legacy)\Demo\Assets\CFX_Demo_RandomDir.cs" />
+    <Compile Include="Assets\LabChest.cs" />
     <Compile Include="Assets\02.Scripts\Weapon\WolfSword.cs" />
     <Compile Include="Assets\02.Scripts\CardManager\CardManage.cs" />
     <Compile Include="Assets\02.Scripts\BehaviorTree\CompositeNode\SelectorNode.cs" />
@@ -1782,43 +1791,43 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="Assembly-CSharp-firstpass.csproj">
-      <Project>{364ED3D9-3A36-8BF1-0941-00CBFCBF80C6}</Project>
+      <Project>{3077C424-219D-5023-6D92-9B961D6835A7}</Project>
       <Name>Assembly-CSharp-firstpass</Name>
     </ProjectReference>
     <ProjectReference Include="UniTask.Addressables.csproj">
-      <Project>{66AE8A1F-FE71-EB9E-377B-B050B9B978EA}</Project>
+      <Project>{E355DDF2-4172-D717-E5DA-915609E8F520}</Project>
       <Name>UniTask.Addressables</Name>
     </ProjectReference>
     <ProjectReference Include="Edgar.Unity.Examples.csproj">
-      <Project>{5ABECC2A-FFA1-6AD6-3243-3B8206E52ECB}</Project>
+      <Project>{D031875D-94D8-EE47-8839-2440506550FA}</Project>
       <Name>Edgar.Unity.Examples</Name>
     </ProjectReference>
     <ProjectReference Include="UniTask.csproj">
-      <Project>{DE860022-E730-589D-2EA3-D9B52CAA3E13}</Project>
+      <Project>{B9084FD6-AB0B-2AA8-13F1-B04EE6418C8F}</Project>
       <Name>UniTask</Name>
     </ProjectReference>
     <ProjectReference Include="UniTask.TextMeshPro.csproj">
-      <Project>{CC88EF5D-A142-FA5B-0A32-4ACA59C16D2B}</Project>
+      <Project>{AF3ABAD1-18FB-2062-CF91-26813C64962E}</Project>
       <Name>UniTask.TextMeshPro</Name>
     </ProjectReference>
     <ProjectReference Include="Edgar.Unity.FogOfWar.URP.csproj">
-      <Project>{5D1EF580-933C-CE30-416B-DD7A92F63421}</Project>
+      <Project>{FF459EB0-A437-4F36-3066-BF67BE2DFF99}</Project>
       <Name>Edgar.Unity.FogOfWar.URP</Name>
     </ProjectReference>
     <ProjectReference Include="UniTask.Linq.csproj">
-      <Project>{D4203A56-6D9B-0F2F-F57E-80A4128A0247}</Project>
+      <Project>{F052FF1C-D4F4-C188-1427-2560F4789DD8}</Project>
       <Name>UniTask.Linq</Name>
     </ProjectReference>
     <ProjectReference Include="Edgar.Unity.Editor.csproj">
-      <Project>{A1A25200-2719-5242-AF00-FAF26EFB82AF}</Project>
+      <Project>{F67C3431-3EE9-0D11-42EF-46C4CBD86F0C}</Project>
       <Name>Edgar.Unity.Editor</Name>
     </ProjectReference>
     <ProjectReference Include="Edgar.Unity.csproj">
-      <Project>{97D8BC59-AE07-00BF-6984-2C5F5EC05E4E}</Project>
+      <Project>{2AFC339B-1CFC-58A3-C127-6E86B3FE3ACC}</Project>
       <Name>Edgar.Unity</Name>
     </ProjectReference>
     <ProjectReference Include="UniTask.DOTween.csproj">
-      <Project>{44C17562-2AB8-7629-D89B-C7A4AB97AEBC}</Project>
+      <Project>{C45A115D-63D9-292A-A570-B8CED2FB1CA9}</Project>
       <Name>UniTask.DOTween</Name>
     </ProjectReference>
   </ItemGroup>

@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5178559739498277949}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: BOSSUI
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -44,7 +44,7 @@ GameObject:
   - component: {fileID: 5917022108137958651}
   - component: {fileID: 4602452780055836682}
   - component: {fileID: 1403494056093095176}
-  m_Layer: 5
+  m_Layer: 15
   m_Name: Dead Image (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -119,7 +119,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6209733506457266091}
   - component: {fileID: 1531952405029373739}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: Tilemaps
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -172,7 +172,7 @@ GameObject:
   - component: {fileID: 3288524680099743780}
   - component: {fileID: 3654407004514890569}
   - component: {fileID: 4334407406604694874}
-  m_Layer: 5
+  m_Layer: 15
   m_Name: Dying Message (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -320,7 +320,7 @@ GameObject:
   - component: {fileID: 5855248643922719741}
   - component: {fileID: 5855248643922719743}
   - component: {fileID: 5855248643922719742}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: Other 1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -443,7 +443,7 @@ GameObject:
   - component: {fileID: 5855248644256673236}
   - component: {fileID: 5855248644256673235}
   - component: {fileID: 5855248644256673234}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: Floor
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -25725,7 +25725,7 @@ GameObject:
   - component: {fileID: 5855248644356092819}
   - component: {fileID: 5855248644356092821}
   - component: {fileID: 5855248644356092820}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: Other 2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -25848,7 +25848,7 @@ GameObject:
   - component: {fileID: 5855248644448943303}
   - component: {fileID: 5855248644448943302}
   - component: {fileID: 5855248644448943301}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: Walls
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -28252,7 +28252,7 @@ GameObject:
   - component: {fileID: 5855248644784820085}
   - component: {fileID: 2593247976447920821}
   - component: {fileID: 5855248644784820083}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: Boss
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -28356,7 +28356,7 @@ GameObject:
   - component: {fileID: 5855248645681907006}
   - component: {fileID: 5855248645681907005}
   - component: {fileID: 5855248645681907004}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: Collideable
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -28584,7 +28584,7 @@ GameObject:
   - component: {fileID: 5855248645701449457}
   - component: {fileID: 5855248645701449459}
   - component: {fileID: 5855248645701449458}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: Other 3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -28705,7 +28705,7 @@ GameObject:
   - component: {fileID: 8421551155469659302}
   - component: {fileID: 450336479300504390}
   - component: {fileID: 4624082504595141050}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: Hades_Sound
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -28868,7 +28868,7 @@ GameObject:
   - component: {fileID: 2805808338926276144}
   - component: {fileID: 3568895742395194392}
   - component: {fileID: 8239084562447658421}
-  m_Layer: 5
+  m_Layer: 15
   m_Name: Dead Image (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -28944,7 +28944,7 @@ GameObject:
   - component: {fileID: 885318192169671816}
   - component: {fileID: 7518937402562139806}
   - component: {fileID: 5644056249939177631}
-  m_Layer: 5
+  m_Layer: 15
   m_Name: BossCanvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -29044,6 +29044,18 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 6410511999836243809}
     m_Modifications:
+    - target: {fileID: 2632367960169551666, guid: 7badce546c821a44b9967a20c605579e, type: 3}
+      propertyPath: m_Layer
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 2781977990128484056, guid: 7badce546c821a44b9967a20c605579e, type: 3}
+      propertyPath: m_Layer
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 3332579107136915668, guid: 7badce546c821a44b9967a20c605579e, type: 3}
+      propertyPath: m_Layer
+      value: 15
+      objectReference: {fileID: 0}
     - target: {fileID: 3650147111570815308, guid: 7badce546c821a44b9967a20c605579e, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -29124,6 +29136,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5785809324118332272, guid: 7badce546c821a44b9967a20c605579e, type: 3}
+      propertyPath: m_Layer
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 6270287851090063561, guid: 7badce546c821a44b9967a20c605579e, type: 3}
+      propertyPath: m_Layer
+      value: 15
+      objectReference: {fileID: 0}
     - target: {fileID: 6682092552024827271, guid: 7badce546c821a44b9967a20c605579e, type: 3}
       propertyPath: m_AnchoredPosition.x
       value: -60.57495
@@ -29131,6 +29151,10 @@ PrefabInstance:
     - target: {fileID: 7760496260519579763, guid: 7badce546c821a44b9967a20c605579e, type: 3}
       propertyPath: m_Name
       value: BossHpSlider
+      objectReference: {fileID: 0}
+    - target: {fileID: 7760496260519579763, guid: 7badce546c821a44b9967a20c605579e, type: 3}
+      propertyPath: m_Layer
+      value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 8692635610206166785, guid: 7badce546c821a44b9967a20c605579e, type: 3}
       propertyPath: m_AnchorMax.x
@@ -29161,6 +29185,18 @@ PrefabInstance:
     - target: {fileID: 67923765716152310, guid: 02681350ffb15644288910306960a1e2, type: 3}
       propertyPath: m_Name
       value: Hades
+      objectReference: {fileID: 0}
+    - target: {fileID: 67923765716152310, guid: 02681350ffb15644288910306960a1e2, type: 3}
+      propertyPath: m_Layer
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 1258890102707732986, guid: 02681350ffb15644288910306960a1e2, type: 3}
+      propertyPath: m_Layer
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 1950968381000434635, guid: 02681350ffb15644288910306960a1e2, type: 3}
+      propertyPath: m_Layer
+      value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 2979057829599389848, guid: 02681350ffb15644288910306960a1e2, type: 3}
       propertyPath: m_LocalScale.x
@@ -29211,6 +29247,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3039902574081454340, guid: 02681350ffb15644288910306960a1e2, type: 3}
+      propertyPath: m_Layer
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 3039902574081454340, guid: 02681350ffb15644288910306960a1e2, type: 3}
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
@@ -29234,9 +29274,37 @@ PrefabInstance:
       propertyPath: m_Color.r
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 5035020919779862985, guid: 02681350ffb15644288910306960a1e2, type: 3}
+      propertyPath: m_Layer
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 5091788491106609544, guid: 02681350ffb15644288910306960a1e2, type: 3}
+      propertyPath: m_Layer
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 6195027315353522971, guid: 02681350ffb15644288910306960a1e2, type: 3}
+      propertyPath: m_Layer
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 6338572486764649192, guid: 02681350ffb15644288910306960a1e2, type: 3}
+      propertyPath: m_Layer
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 8068953131395654308, guid: 02681350ffb15644288910306960a1e2, type: 3}
+      propertyPath: m_Layer
+      value: 15
+      objectReference: {fileID: 0}
     - target: {fileID: 8068953131395654308, guid: 02681350ffb15644288910306960a1e2, type: 3}
       propertyPath: m_IsActive
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8305105721574729252, guid: 02681350ffb15644288910306960a1e2, type: 3}
+      propertyPath: m_Layer
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 8690571925429437549, guid: 02681350ffb15644288910306960a1e2, type: 3}
+      propertyPath: m_Layer
+      value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 8690571925429437549, guid: 02681350ffb15644288910306960a1e2, type: 3}
       propertyPath: m_IsActive
@@ -29258,6 +29326,14 @@ PrefabInstance:
       propertyPath: bossImage2
       value: 
       objectReference: {fileID: 8239084562447658421}
+    - target: {fileID: 8870252314760207154, guid: 02681350ffb15644288910306960a1e2, type: 3}
+      propertyPath: m_Layer
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 8911696394844388399, guid: 02681350ffb15644288910306960a1e2, type: 3}
+      propertyPath: m_Layer
+      value: 15
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -29287,6 +29363,10 @@ PrefabInstance:
     - target: {fileID: 4262101963593116714, guid: 37ee6b8a7ac578142bba9ece9894f89b, type: 3}
       propertyPath: m_Name
       value: BossTimer
+      objectReference: {fileID: 0}
+    - target: {fileID: 4262101963593116714, guid: 37ee6b8a7ac578142bba9ece9894f89b, type: 3}
+      propertyPath: m_Layer
+      value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 8182783654338642265, guid: 37ee6b8a7ac578142bba9ece9894f89b, type: 3}
       propertyPath: m_Pivot.x

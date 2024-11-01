@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 8066360124246074185}
   - component: {fileID: 2716821725604798288}
   - component: {fileID: 8401392139165028883}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: Collideable
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -242,7 +242,7 @@ GameObject:
   - component: {fileID: 9102150962063352490}
   - component: {fileID: 6623713058226056412}
   - component: {fileID: 5565063981571944011}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: BossTunnel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -329,7 +329,7 @@ GameObject:
   - component: {fileID: 7228951933119799781}
   - component: {fileID: 2969146758787519126}
   - component: {fileID: 326097701938783453}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: Floor
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -913,7 +913,7 @@ GameObject:
   - component: {fileID: 197514310236250834}
   - component: {fileID: 4903585840813172625}
   - component: {fileID: 7543236085723360308}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: Other 2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1033,7 +1033,7 @@ GameObject:
   - component: {fileID: 5268053562667938966}
   - component: {fileID: 4226074525596191519}
   - component: {fileID: 8855926073556120345}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: Other 3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1156,7 +1156,7 @@ GameObject:
   - component: {fileID: 3262216264165724984}
   - component: {fileID: 178485447397600470}
   - component: {fileID: 1815937396353089853}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: Walls
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1678,7 +1678,7 @@ GameObject:
   - component: {fileID: 7148809800620104348}
   - component: {fileID: 5994534015738591648}
   - component: {fileID: 290153372302110930}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: Other 1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1797,7 +1797,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3029797607930886947}
   - component: {fileID: 6663972192961899271}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: BossConnect
   m_TagString: Untagged
   m_Icon: {fileID: 0}

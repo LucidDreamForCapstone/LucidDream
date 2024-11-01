@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 8038729597498083399}
   - component: {fileID: 81255914340335440}
   - component: {fileID: 4887207087292299326}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: Other 3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -130,7 +130,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4915300749570553807}
   - component: {fileID: 6180667541400574865}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: Tilemaps
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -184,7 +184,7 @@ GameObject:
   - component: {fileID: 6953738887925258551}
   - component: {fileID: 4798103714839313782}
   - component: {fileID: 6609828330439764729}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: Walls
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1324,7 +1324,7 @@ GameObject:
   - component: {fileID: 105987709684692758}
   - component: {fileID: 3256796173293786322}
   - component: {fileID: 171319215274576438}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: Other 2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1444,7 +1444,7 @@ GameObject:
   - component: {fileID: 5303991901690680775}
   - component: {fileID: 775035548614968215}
   - component: {fileID: 3959817051119095764}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: Other 1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1564,7 +1564,7 @@ GameObject:
   - component: {fileID: 6900883842133645786}
   - component: {fileID: 2563006977573770971}
   - component: {fileID: 3096193927907367237}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: Normal 4
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1654,7 +1654,7 @@ GameObject:
   - component: {fileID: 5872775808325493610}
   - component: {fileID: 8717095082184021996}
   - component: {fileID: 1540880716769201132}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: Floor
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3723,7 +3723,7 @@ GameObject:
   - component: {fileID: 20343561877025229}
   - component: {fileID: 622750525034227118}
   - component: {fileID: 6260755410139550679}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: Collideable
   m_TagString: Untagged
   m_Icon: {fileID: 0}

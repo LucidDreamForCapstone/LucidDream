@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7711732949969225857}
   - component: {fileID: 5112027443591232394}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: Tilemaps
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -61,7 +61,7 @@ GameObject:
   - component: {fileID: 6754630982548761389}
   - component: {fileID: 2458599605595833237}
   - component: {fileID: 5350400191209377729}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: Other 2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -181,7 +181,7 @@ GameObject:
   - component: {fileID: 4760871682458653521}
   - component: {fileID: 4605526849089011215}
   - component: {fileID: 2608562409646030907}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: Other 3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -304,7 +304,7 @@ GameObject:
   - component: {fileID: 1806676097968147729}
   - component: {fileID: 8947595289090679979}
   - component: {fileID: 607433998824318174}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: Floor
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2621,7 +2621,7 @@ GameObject:
   - component: {fileID: 8482508666238971882}
   - component: {fileID: 1426240291901438134}
   - component: {fileID: 3795494208242931096}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: Walls
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3900,7 +3900,7 @@ GameObject:
   - component: {fileID: 4637096564394492999}
   - component: {fileID: 7875346118595214668}
   - component: {fileID: 1006211819452037715}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: Collideable
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4128,7 +4128,7 @@ GameObject:
   - component: {fileID: 8373354045639481784}
   - component: {fileID: 2843636484191758990}
   - component: {fileID: 1603676968824042982}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: Normal 1 - Wall Inside
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4215,7 +4215,7 @@ GameObject:
   - component: {fileID: 2980788366072200420}
   - component: {fileID: 5409155489174926575}
   - component: {fileID: 4050090973240701937}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: Other 1
   m_TagString: Untagged
   m_Icon: {fileID: 0}

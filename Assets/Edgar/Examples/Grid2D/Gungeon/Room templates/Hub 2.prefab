@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3230168747323743898}
   - component: {fileID: 4888764570966122876}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: Tilemaps
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -64,7 +64,7 @@ GameObject:
   - component: {fileID: 7715005023882420591}
   - component: {fileID: 7715005023882420588}
   - component: {fileID: 7715005023882420589}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: Walls
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1265,7 +1265,7 @@ GameObject:
   - component: {fileID: 1619236222437683090}
   - component: {fileID: 8657172198427999959}
   - component: {fileID: 8755198798475093224}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: Floor
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4295,7 +4295,7 @@ GameObject:
   - component: {fileID: 7715005024736688697}
   - component: {fileID: 7715005024736688696}
   - component: {fileID: 8138930012724429173}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: Hub 2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4382,7 +4382,7 @@ GameObject:
   - component: {fileID: 7715005024818141914}
   - component: {fileID: 7715005024818141916}
   - component: {fileID: 7715005024818141917}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: Other 2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4502,7 +4502,7 @@ GameObject:
   - component: {fileID: 7715005025081677476}
   - component: {fileID: 7715005025081677478}
   - component: {fileID: 7715005025081677479}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: Other 1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4622,7 +4622,7 @@ GameObject:
   - component: {fileID: 7715005025146305300}
   - component: {fileID: 7715005025146305302}
   - component: {fileID: 7715005025146305303}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: Other 3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4745,7 +4745,7 @@ GameObject:
   - component: {fileID: 7715005025939671298}
   - component: {fileID: 7715005025939671299}
   - component: {fileID: 7715005025939671296}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: Collideable
   m_TagString: Untagged
   m_Icon: {fileID: 0}
