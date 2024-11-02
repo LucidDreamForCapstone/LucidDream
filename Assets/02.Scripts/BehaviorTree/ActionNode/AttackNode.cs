@@ -14,7 +14,7 @@ public class AttackNode : ActionNode {
                 _monster._attackFuncList[attackIndex]?.Invoke().Forget();
                 return State.Running;
             case MonsterBase.AttackState.Attacking:
-                return State.Running;
+                return State.Success;
             case MonsterBase.AttackState.CoolTime:
                 return State.Failure;
         }

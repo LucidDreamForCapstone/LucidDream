@@ -110,7 +110,6 @@ public class NodeView : UnityEditor.Experimental.GraphView.Node {
     }
 
     public void UpdateState() {
-
         RemoveFromClassList("running");
         RemoveFromClassList("failure");
         RemoveFromClassList("success");

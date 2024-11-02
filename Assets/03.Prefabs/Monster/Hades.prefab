@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 8712043765198850960}
   - component: {fileID: 8105634427388154863}
   - component: {fileID: 3507260071764381437}
-  m_Layer: 12
+  m_Layer: 6
   m_Name: Hades
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -93,11 +93,10 @@ MonoBehaviour:
     _dropChance: 100
   _tree: {fileID: 0}
   _isRightDefault: 0
-  _attackStateList: 
   _patternNum: 0
-  _searchDist: 0
-  _attackDist: 0
+  _attackStateList: 
   _isDead: 0
+  _isStun: 0
   _isSpawnComplete: 0
   _playerScript: {fileID: 0}
   _rigid: {fileID: 0}
@@ -105,11 +104,13 @@ MonoBehaviour:
   _animator: {fileID: 8105634427388154863}
   _useTree: 0
   _isBoss: 1
-  _bodyDamage: 250
   _hitSound: []
   _deathSound: {fileID: 8300000, guid: f6196de7a0679db4296630a6bcc490c2, type: 3}
+  _searchDist: 0
+  _attackDist: 0
   _def: 600
   _damage: 0
+  _bodyDamage: 250
   _moveSpeed: 0
   _maxHp: 100000
   _dieDelay: 2
@@ -328,13 +329,13 @@ PolygonCollider2D:
   m_AutoTiling: 0
   m_Points:
     m_Paths:
-    - - {x: 4.002793, y: -0.68452597}
-      - {x: 2.741763, y: 0.4410191}
-      - {x: -2.896631, y: 0.46373838}
-      - {x: -3.969625, y: -0.7265921}
-      - {x: -3.182767, y: -2.4656963}
-      - {x: -0.025386333, y: -2.6492684}
-      - {x: 3.1580768, y: -2.4645114}
+    - - {x: 4.4597387, y: -0.6410073}
+      - {x: 2.8723192, y: 0.789168}
+      - {x: -2.896631, y: 0.81188726}
+      - {x: -4.4700894, y: -0.61779565}
+      - {x: -3.400361, y: -2.6615303}
+      - {x: -0.0036273003, y: -2.8886209}
+      - {x: 3.4191885, y: -2.638586}
   m_UseDelaunayMesh: 0
 --- !u!1 &1258890102707732986
 GameObject:
@@ -346,7 +347,7 @@ GameObject:
   m_Component:
   - component: {fileID: 44890497406417492}
   - component: {fileID: 3843532268063311610}
-  m_Layer: 12
+  m_Layer: 6
   m_Name: Jaw
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -431,7 +432,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7465112626749927422}
   - component: {fileID: 6340151475191004547}
-  m_Layer: 12
+  m_Layer: 6
   m_Name: Inside
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -515,7 +516,7 @@ GameObject:
   m_Component:
   - component: {fileID: 9123336676314816137}
   - component: {fileID: 2597029581993678860}
-  m_Layer: 12
+  m_Layer: 6
   m_Name: Body
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -598,7 +599,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1592305319219711345}
-  m_Layer: 12
+  m_Layer: 6
   m_Name: Face
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -633,7 +634,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1706873560531319351}
   - component: {fileID: 2871063237361416934}
-  m_Layer: 12
+  m_Layer: 6
   m_Name: Head
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -718,13 +719,13 @@ GameObject:
   - component: {fileID: 2175884567441168487}
   - component: {fileID: 3943109101703619982}
   - component: {fileID: 4719307702759894084}
-  m_Layer: 10
+  m_Layer: 6
   m_Name: BodyDamage
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &2175884567441168487
 Transform:
   m_ObjectHideFlags: 0
@@ -814,7 +815,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6967078823858321675}
   - component: {fileID: 5226562629293271218}
-  m_Layer: 12
+  m_Layer: 6
   m_Name: WarningEffect5
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -898,7 +899,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5718935882464711235}
   - component: {fileID: 8753264353647520000}
-  m_Layer: 12
+  m_Layer: 6
   m_Name: Pattern5Effect
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -983,7 +984,7 @@ GameObject:
   - component: {fileID: 3209822269760284142}
   - component: {fileID: 3882298257011612751}
   - component: {fileID: 8760319739051556586}
-  m_Layer: 12
+  m_Layer: 6
   m_Name: Ball
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1087,7 +1088,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2957372383415264101}
-  m_Layer: 12
+  m_Layer: 6
   m_Name: CameraTarget
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1204,6 +1205,10 @@ PrefabInstance:
     - target: {fileID: 2659935419491640126, guid: 4c948757fdebdb84aaccda0e023add1b, type: 3}
       propertyPath: m_Name
       value: HadesVolume
+      objectReference: {fileID: 0}
+    - target: {fileID: 2659935419491640126, guid: 4c948757fdebdb84aaccda0e023add1b, type: 3}
+      propertyPath: m_Layer
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 2659935419491640126, guid: 4c948757fdebdb84aaccda0e023add1b, type: 3}
       propertyPath: m_IsActive

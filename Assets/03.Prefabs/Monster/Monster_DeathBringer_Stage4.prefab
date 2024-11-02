@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 199875945580118719}
   - component: {fileID: 9098754931369540085}
   - component: {fileID: 6387641976889586699}
-  - component: {fileID: 3487055695042911120}
+  - component: {fileID: 2665328793418752246}
   m_Layer: 6
   m_Name: Monster_DeathBringer_Stage4
   m_TagString: Enemy
@@ -72,10 +72,9 @@ MonoBehaviour:
   _tree: {fileID: 11400000, guid: 575ebb6e5250c214ea01825344157e82, type: 2}
   _isRightDefault: 0
   _patternNum: 2
-  _searchDist: 12
-  _attackDist: 6
   _attackStateList: 
   _isDead: 0
+  _isStun: 0
   _isSpawnComplete: 0
   _playerScript: {fileID: 0}
   _rigid: {fileID: 0}
@@ -83,11 +82,13 @@ MonoBehaviour:
   _animator: {fileID: 9098754931369540085}
   _useTree: 1
   _isBoss: 0
-  _bodyDamage: 40
   _hitSound: []
   _deathSound: {fileID: 0}
+  _searchDist: 12
+  _attackDist: 6
   _def: 40
   _damage: 120
+  _bodyDamage: 40
   _moveSpeed: 5
   _maxHp: 4500
   _dieDelay: 0.9
@@ -96,13 +97,9 @@ MonoBehaviour:
     rgba: 4283322111
   _exp: 20
   _feverAmount: 40
-  _model: {fileID: 0}
-  _yDiffOffset: 3
   _playerLayer:
     serializedVersion: 2
     m_Bits: 256
-  _searchRange: 100
-  _normalAttackRange: 6
   _normalAttackArea: {x: 6.4, y: 5}
   _normalAttackCooltime: 3
   _spellCastObj: {fileID: 3773634364785873459, guid: 05ba6d5da60f8f24aa3d6998378716ce, type: 3}
@@ -212,8 +209,8 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
---- !u!61 &3487055695042911120
-BoxCollider2D:
+--- !u!70 &2665328793418752246
+CapsuleCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -245,18 +242,8 @@ BoxCollider2D:
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.76, y: 0.3}
-    oldSize: {x: 8.75, y: 5.8125}
-    newSize: {x: 8.75, y: 5.8125}
-    adaptiveTilingThreshold: 0.5
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  serializedVersion: 2
-  m_Size: {x: 0.8, y: 1.7103381}
-  m_EdgeRadius: 0
+  m_Size: {x: 1.1883869, y: 3.2242055}
+  m_Direction: 0
 --- !u!1 &5619464064071259282
 GameObject:
   m_ObjectHideFlags: 0
@@ -358,7 +345,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &7072678974720296508
 Transform:
   m_ObjectHideFlags: 0

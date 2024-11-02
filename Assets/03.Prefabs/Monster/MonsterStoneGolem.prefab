@@ -98,7 +98,7 @@ GameObject:
   - component: {fileID: 199672638078589408}
   - component: {fileID: 1465585495557734120}
   - component: {fileID: 481506987256496119}
-  m_Layer: 12
+  m_Layer: 6
   m_Name: MonsterStoneGolem
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -136,22 +136,25 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   dropTable: []
   _tree: {fileID: 0}
-  _flipFlag: 0
-  _attackState: 0
-  _searchDist: 0
-  _attackDist: 0
+  _isRightDefault: 0
+  _patternNum: 0
+  _attackStateList: 
   _isDead: 0
+  _isStun: 0
   _isSpawnComplete: 0
   _playerScript: {fileID: 0}
   _rigid: {fileID: 0}
   _spriteRenderer: {fileID: 7977076169718144192}
   _animator: {fileID: 199672638078589408}
+  _useTree: 0
   _isBoss: 0
-  _bodyDamage: 50
   _hitSound: []
   _deathSound: {fileID: 8300000, guid: 40707bcf0eed07340b8d39a1d43d3703, type: 3}
+  _searchDist: 0
+  _attackDist: 0
   _def: 30
   _damage: 0
+  _bodyDamage: 50
   _moveSpeed: 0
   _maxHp: 2500
   _dieDelay: 1.5
@@ -295,7 +298,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: 0, y: -0.23}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -306,7 +309,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1.5, y: 1.5}
+  m_Size: {x: 2.5, y: 2}
   m_EdgeRadius: 0
 --- !u!1 &5361061833595021785
 GameObject:
@@ -325,7 +328,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &5183050936494605911
 Transform:
   m_ObjectHideFlags: 0

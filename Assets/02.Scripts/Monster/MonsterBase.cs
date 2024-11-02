@@ -28,7 +28,6 @@ public abstract class MonsterBase : DropableBase {
     #region serialized field
     [SerializeField] bool _useTree;
     [SerializeField] bool _isBoss;
-    [SerializeField] int _bodyDamage;
 
     [Header("Monster Sound")]
     [SerializeField] private AudioClip[] _hitSound;
@@ -43,6 +42,7 @@ public abstract class MonsterBase : DropableBase {
     [Header("")]
     [SerializeField] protected int _def;
     [SerializeField] public int _damage;
+    [SerializeField] protected int _bodyDamage;
     [SerializeField] public float _moveSpeed;
     [SerializeField] protected int _maxHp;
     [SerializeField] protected float _dieDelay;
@@ -84,6 +84,10 @@ public abstract class MonsterBase : DropableBase {
         }
     }
 
+    private void OnCollisionStay2D(Collision2D collision) {
+        if (collision.collider.CompareTag("Player") && !_isDead && _isSpawnComplete)
+            _playerScript.Damaged(_bodyDamage);
+    }
     #endregion // mono funcs
 
 
