@@ -8,18 +8,20 @@ using UnityEngine;
 public class PSM : MonoBehaviour {
     [SerializeField] private Player player1; // 첫 번째 캐릭터
     [SerializeField] private Player_2 player2; // 두 번째 캐릭터
+    [SerializeField] GameObject _miniMapObj;
     private MonoBehaviour currentPlayer; // 현재 조작 중인 캐릭터
     private int currentPlayerNum;
     private GlitchController glitchController; // GlitchController 인스턴스
     private bool isGlitching = false; // 글리치 효과 진행 중 여부
     private bool fogTag = true;
-    [SerializeField] private GameObject _gameObject;
+    [SerializeField] private GameObject _cameraObj;
 
     // UI 텍스트
     [SerializeField] private TextMeshProUGUI messageText; // TextMeshProUGUI 컴포넌트
 
     private void Start() {
         currentPlayerNum = 1;
+        _miniMapObj.SetActive(true);
         Player2ActiveDelay(2).Forget();
         glitchController = FindObjectOfType<GlitchController>(); // GlitchController 찾기
 
@@ -62,7 +64,7 @@ public class PSM : MonoBehaviour {
         isGlitching = true; // 글리치 시작 중
 
         if (fogTag) {
-            _gameObject.GetComponent<FogOfWarGrid2D>().enabled = false;
+            _cameraObj.GetComponent<FogOfWarGrid2D>().enabled = false;
         }
 
         // 글리치 효과를 시작합니다.
@@ -72,18 +74,18 @@ public class PSM : MonoBehaviour {
 
         // 기존 캐릭터 비활성화 및 새로운 캐릭터 활성화
         if (currentPlayerNum == 1) {
-            Debug.Log("ㅁㄴㅇㄹ1");
             player1.SetEnable(false);
             player2.SetEnable(true);
             currentPlayer = player2;
             currentPlayerNum = 2;
+            _miniMapObj.SetActive(false);
         }
         else if (currentPlayerNum == 2) {
-            Debug.Log("ㅁㄴㅇㄹ2");
             player2.SetEnable(false);
             player1.SetEnable(true);
             currentPlayer = player1;
             currentPlayerNum = 1;
+            _miniMapObj.SetActive(true);
         }
 
         // 카메라 전환
@@ -94,7 +96,7 @@ public class PSM : MonoBehaviour {
 
         // Fog Of War 다시 활성화
         if (!fogTag) {
-            _gameObject.GetComponent<FogOfWarGrid2D>().enabled = true; // 비활성화된 경우 활성화
+            _cameraObj.GetComponent<FogOfWarGrid2D>().enabled = true; // 비활성화된 경우 활성화
         }
 
         fogTag = !fogTag; // true -> false 또는 false -> true로 전환

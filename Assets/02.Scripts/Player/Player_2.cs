@@ -87,10 +87,10 @@ public class Player_2 : MonoBehaviour {
     private void PlayerMoveAnimation(float horizontal, float vertical) {
         // 애니메이션 처리
         if (horizontal > 0) {
-            _spriteRenderer.flipX = false; // 오른쪽으로 이동 시
+            _spriteRenderer.flipX = true; // 오른쪽으로 이동 시
         }
         else if (horizontal < 0) {
-            _spriteRenderer.flipX = true; // 왼쪽으로 이동 시
+            _spriteRenderer.flipX = false; // 왼쪽으로 이동 시
         }
 
         _animator.SetInteger("horizontal", (int)horizontal);
