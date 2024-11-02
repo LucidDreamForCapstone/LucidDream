@@ -1,4 +1,6 @@
+using Cysharp.Threading.Tasks;
 using Edgar.Unity; // TextMeshPro 관련 네임스페이스 추가
+using System;
 using System.Collections;
 using TMPro;
 using UnityEngine;
@@ -7,6 +9,7 @@ public class PSM : MonoBehaviour {
     [SerializeField] private Player player1; // 첫 번째 캐릭터
     [SerializeField] private Player_2 player2; // 두 번째 캐릭터
     private MonoBehaviour currentPlayer; // 현재 조작 중인 캐릭터
+    private int currentPlayerNum;
     private GlitchController glitchController; // GlitchController 인스턴스
     private bool isGlitching = false; // 글리치 효과 진행 중 여부
     private bool fogTag = true;
@@ -16,9 +19,8 @@ public class PSM : MonoBehaviour {
     [SerializeField] private TextMeshProUGUI messageText; // TextMeshProUGUI 컴포넌트
 
     private void Start() {
-        currentPlayer = player1; // 시작 시 player1으로 설정
-        player1.gameObject.SetActive(true); // player1 활성화
-        player2.gameObject.SetActive(false); // player2 비활성화
+        currentPlayerNum = 1;
+        Player2ActiveDelay(2).Forget();
         glitchController = FindObjectOfType<GlitchController>(); // GlitchController 찾기
 
         messageText.gameObject.SetActive(false); // 시작할 때 메시지 숨김
@@ -27,7 +29,7 @@ public class PSM : MonoBehaviour {
     private void Update() {
         if (Input.GetKeyDown(KeyCode.F) && !isGlitching) { // 글리치 중이 아닐 때만 캐릭터 스왑
             if (CanSwapCharacter()) {
-                StartCoroutine(SwapCharacter());
+                SwapCharacter().Forget();
             }
             else {
                 ShowMessage("주위에 몬스터가 있어서 불가능합니다."); // 메시지 표시
@@ -56,7 +58,7 @@ public class PSM : MonoBehaviour {
 
 
 
-    private IEnumerator SwapCharacter() {
+    private async UniTaskVoid SwapCharacter() {
         isGlitching = true; // 글리치 시작 중
 
         if (fogTag) {
@@ -65,17 +67,24 @@ public class PSM : MonoBehaviour {
 
         // 글리치 효과를 시작합니다.
         if (glitchController != null) {
-            yield return glitchController.TriggerGlitchEffect(); // 글리치 효과 시작
+            await glitchController.TriggerGlitchEffect(); // 글리치 효과 시작
         }
 
-        // 현재 캐릭터를 비활성화
-        currentPlayer.gameObject.SetActive(false);
-
-        // 캐릭터 스왑
-        currentPlayer = (currentPlayer == player1) ? (MonoBehaviour)player2 : player1;
-
-        // 새로운 캐릭터 활성화
-        currentPlayer.gameObject.SetActive(true);
+        // 기존 캐릭터 비활성화 및 새로운 캐릭터 활성화
+        if (currentPlayerNum == 1) {
+            Debug.Log("ㅁㄴㅇㄹ1");
+            player1.SetEnable(false);
+            player2.SetEnable(true);
+            currentPlayer = player2;
+            currentPlayerNum = 2;
+        }
+        else if (currentPlayerNum == 2) {
+            Debug.Log("ㅁㄴㅇㄹ2");
+            player2.SetEnable(false);
+            player1.SetEnable(true);
+            currentPlayer = player1;
+            currentPlayerNum = 1;
+        }
 
         // 카메라 전환
         Cinemachine.CinemachineVirtualCamera virtualCamera = FindObjectOfType<Cinemachine.CinemachineVirtualCamera>();
@@ -89,7 +98,7 @@ public class PSM : MonoBehaviour {
         }
 
         fogTag = !fogTag; // true -> false 또는 false -> true로 전환
-        yield return new WaitForSeconds(0.2f); // 0.2초 대기
+        await UniTask.Delay(TimeSpan.FromSeconds(0.2f));
         isGlitching = false; // 글리치 효과 종료
     }
 
@@ -102,5 +111,12 @@ public class PSM : MonoBehaviour {
     private IEnumerator HideMessage() {
         yield return new WaitForSeconds(2f); // 2초 후
         messageText.gameObject.SetActive(false); // 메시지 숨김
+    }
+
+    //To prevent Edgar targeting the player2 as the main player while doing map creating
+    private async UniTaskVoid Player2ActiveDelay(float waitTime) {
+        player2.gameObject.SetActive(false);
+        await UniTask.Delay(TimeSpan.FromSeconds(waitTime));
+        player2.gameObject.SetActive(true);
     }
 }

@@ -80,6 +80,7 @@ public class Player : MonoBehaviour {
     private List<GameObject> _magneticList = new List<GameObject>();
     private int _chargeCount;
     private InGameUIController _controller;
+    private bool _playerEnabled;
     #endregion // private variable
 
 
@@ -120,6 +121,7 @@ public class Player : MonoBehaviour {
         _stunTime = 0;
         _slowRate = 0;
         _controller = FindObjectOfType<InGameUIController>();
+        _playerEnabled = true;
     }
 
     private void FixedUpdate() {
@@ -301,8 +303,17 @@ public class Player : MonoBehaviour {
         return _isDead;
     }
 
+    public bool CheckEnabled() {
+        return _playerEnabled;
+    }
+
+    public void SetEnable(bool enabled) {
+        _playerEnabled = enabled;
+    }
+
     public void ArmTrigger(string trigger) {
-        _armAnimator.SetTrigger(trigger);
+        if (_playerEnabled)
+            _armAnimator.SetTrigger(trigger);
     }
 
     public void Stun(float lastTime) {
@@ -371,7 +382,7 @@ public class Player : MonoBehaviour {
     #region private funcs
 
     private void Move() {
-        if (!_isRollInvincible && !_isAttacking && !_isStun && !_isPause && !_isDead) {
+        if (!_isRollInvincible && !_isAttacking && !_isStun && !_isPause && !_isDead && _playerEnabled) {
             Vector2 moveVec = Vector2.zero;
             float horizontal = Input.GetAxisRaw("Horizontal");
             float vertical = Input.GetAxisRaw("Vertical");
@@ -394,7 +405,7 @@ public class Player : MonoBehaviour {
     }
 
     private async UniTaskVoid Phantom() {
-        if (Input.GetKey(KeyCode.Space) && _isPhantomReady && !_isStun && !_isPause && !_isDead) {
+        if (Input.GetKey(KeyCode.Space) && _isPhantomReady && !_isStun && !_isPause && !_isDead && _playerEnabled) {
             Debug.Log("Phantom ON");
             PhantomGhostEffect().Forget();
             //PlaySound(avoidSound);
@@ -475,7 +486,7 @@ public class Player : MonoBehaviour {
         return tcs.Task;
     }
 
-    protected void PlayerMoveAnimation(float horizontal, float vertical) {
+    private void PlayerMoveAnimation(float horizontal, float vertical) {
         if (horizontal > 0)
             _beforeFlipX = true;
         else if (horizontal < 0)
@@ -486,7 +497,7 @@ public class Player : MonoBehaviour {
         _animator.SetInteger("vertical", (int)vertical);
     }
 
-    protected void ArmMoveAnimation() {
+    private void ArmMoveAnimation() {
         _armAnimator.SetFloat("Horizontal", MoveDir.x);
         _armAnimator.SetFloat("Vertical", MoveDir.y);
 
