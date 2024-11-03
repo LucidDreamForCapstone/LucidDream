@@ -9,6 +9,7 @@ public abstract class MonsterBase : DropableBase {
     public enum AttackState {
         Ready,
         Attacking,
+        Finished,
         CoolTime
     }
 
