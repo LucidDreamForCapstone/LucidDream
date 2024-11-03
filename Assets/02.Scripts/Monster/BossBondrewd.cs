@@ -90,7 +90,7 @@ public class BossBondrewd : MonsterBase {
         _rushWarningEffect.SetActive(true);
         float timer = 0;
         while (timer < _rushWarningTime - 1) {
-            _rushWarningEffect.transform.right = _playerScript.transform.position - transform.position;
+            _rushWarningEffect.transform.right = (Vector2)(_playerScript.transform.position - transform.position);
             timer += Time.deltaTime;
             await UniTask.NextFrame();
         }
