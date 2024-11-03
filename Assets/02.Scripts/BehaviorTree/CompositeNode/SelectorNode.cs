@@ -15,7 +15,6 @@ public class SelectorNode : CompositeNode {
 
     protected override State OnUpdate() {
         Node childNode = _children[_current];
-        UnityEngine.Debug.Log("현재 노드 : " + _current);
         switch (childNode.Update()) {
             case State.Running:
                 return State.Running;
