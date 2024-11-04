@@ -9,6 +9,7 @@ public class BossBondrewd : MonsterBase {
     [SerializeField] GameObject _rushWarningEffect;
     [SerializeField] GameObject _rushEffect;
     [SerializeField] GameObject _backStepEffect;
+    [SerializeField] GameObject _chargingEffect;
     [SerializeField] GameObject _bulletObj;
     [SerializeField] GameObject _missileObj;
     [SerializeField] GameObject _armTargetObj;
@@ -47,15 +48,20 @@ public class BossBondrewd : MonsterBase {
     [SerializeField] float _homingLastTime;
     [SerializeField] int _missileDamage;
     [SerializeField] float _explodeRadius;
-
+    [Header("\nChain Explosion")]
+    [SerializeField] float _explosionCooltime;
+    [SerializeField] int _explosionDamage;
+    [SerializeField] float _explosionWarningTime;
 
     bool _isBackStepReady;
     bool _isChaseReady;
     bool _isRushReady;
     bool _isShootReady;
     bool _isMissileReady;
+    bool _isChainExplosionReady;
     Vector2[] _shootPos = { new Vector2(3.25f, -0.97f), new Vector2(-3.25f, -0.97f) };
     Vector2[] _missilePos = { new Vector2(-0.76f, 1.04f), new Vector2(0.76f, 1.04f) };
+    Vector2 _chainExplosionCenterPos;
 
     private void Start() {
         _isSpawnComplete = true;
@@ -103,7 +109,7 @@ public class BossBondrewd : MonsterBase {
         _backStepEffect.SetActive(false);
         _rigid.velocity = Vector2.zero;
         _attackStateList[0] = AttackState.Finished;
-        await UniTask.NextFrame();
+        await UniTask.Delay(TimeSpan.FromSeconds(0.01f));
         _attackStateList[0] = AttackState.CoolTime;
     }
     private async UniTaskVoid ChaseTask() {
@@ -127,7 +133,7 @@ public class BossBondrewd : MonsterBase {
         _dashEffect.SetActive(false);
         _rigid.velocity = Vector2.zero;
         _attackStateList[1] = AttackState.Finished;
-        await UniTask.NextFrame();
+        await UniTask.Delay(TimeSpan.FromSeconds(0.01f));
         _attackStateList[1] = AttackState.CoolTime;
     }
 
@@ -169,7 +175,7 @@ public class BossBondrewd : MonsterBase {
         _rigid.velocity = Vector2.zero;
         _bodyDamage = originBodyDamage;
         _attackStateList[2] = AttackState.Finished;
-        await UniTask.NextFrame();
+        await UniTask.Delay(TimeSpan.FromSeconds(0.01f));
         _attackStateList[2] = AttackState.CoolTime;
     }
 
@@ -199,7 +205,7 @@ public class BossBondrewd : MonsterBase {
             await UniTask.Delay(TimeSpan.FromSeconds(_shootInterval));
         }
         _attackStateList[3] = AttackState.Finished;
-        await UniTask.NextFrame();
+        await UniTask.Delay(TimeSpan.FromSeconds(0.01f));
         _attackStateList[3] = AttackState.CoolTime;
     }
     private async UniTaskVoid MoveSide() {
@@ -245,7 +251,7 @@ public class BossBondrewd : MonsterBase {
             await UniTask.Delay(TimeSpan.FromSeconds(_missileInterval));
         }
         _attackStateList[4] = AttackState.Finished;
-        await UniTask.NextFrame();
+        await UniTask.Delay(TimeSpan.FromSeconds(0.01f));
         _attackStateList[4] = AttackState.CoolTime;
     }
 
@@ -266,6 +272,24 @@ public class BossBondrewd : MonsterBase {
         projectileScript.SetHomingStartTime(_homingStartTime);
         projectileScript.SetHomingLastTime(_homingLastTime);
         projectile.SetActive(true);
+    }
+
+    private async UniTaskVoid ChainExplosionTask() {
+        _isChainExplosionReady = false;
+        ChainExplosion().Forget();
+        await UniTask.Delay(TimeSpan.FromSeconds(_explosionCooltime));
+        _isChainExplosionReady = true;
+        _attackStateList[5] = AttackState.Ready;
+    }
+
+    private async UniTaskVoid ChainExplosion() {
+        float duration = CalculateManhattanDist(transform.position, _chainExplosionCenterPos) / _moveSpeed;
+        SetFlipX(_chainExplosionCenterPos - (Vector2)transform.position);
+        await DOTween.To(() => _rigid.position, x => _rigid.MovePosition(x), _chainExplosionCenterPos, duration);
+        SetFlipX(Vector2.left);
+        _chargingEffect.SetActive(true);
+        await UniTask.Delay(TimeSpan.FromSeconds(_explosionWarningTime));
+        //bfs chain Explosion
     }
 
     private async UniTaskVoid Groggy() {
