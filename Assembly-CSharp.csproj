@@ -73,6 +73,7 @@
     <Compile Include="Assets\02.Scripts\Etc\SkillToolTip.cs" />
     <Compile Include="Assets\02.Scripts\Monster\MonsterDemon.cs" />
     <Compile Include="Assets\JMO Assets\Cartoon FX (legacy)\Demo\Assets\CFX_Demo_RandomDirectionTranslate.cs" />
+    <Compile Include="Assets\02.Scripts\Sound\FinalBossBGMManager.cs" />
     <Compile Include="Assets\02.Scripts\Player\Player.cs" />
     <Compile Include="Assets\02.Scripts\UI\Inven\InventoryManager.cs" />
     <Compile Include="Assets\Player2_InteractManager.cs" />
@@ -348,6 +349,7 @@
     <None Include="Assets\06.Resources\Super Pixel Effects Pack 2\spritesheet\fx2_bubble_small_white_loop\spritesheet.txt" />
     <None Include="Assets\06.Resources\Super Pixel Effects Pack 2\spritesheet\fx2_explosion_small_yellow\spritesheet.txt" />
     <None Include="Assets\06.Resources\Super Pixel Effects Pack 3\spritesheet\fx3_lightning_aura_small_violet\spritesheet.txt" />
+    <None Include="Assets\06.Resources\CyberpunkBGM\CyberTracks CORPO\License.txt" />
     <None Include="Assets\06.Resources\Super Pixel Effects Pack 3\spritesheet\fx3_impact_hit_small_yellow\spritesheet.txt" />
     <None Include="Assets\06.Resources\Super Pixel Effects Pack 1\spritesheet\fx1_energy_shield_small_orange\spritesheet.txt" />
     <None Include="Assets\06.Resources\Super Pixel Effects Pack 2\spritesheet\fx2_bubble_small_orange_appear\spritesheet.txt" />

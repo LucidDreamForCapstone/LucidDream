@@ -3,7 +3,6 @@ using UnityEngine;
 
 public class BGMManager : MonoBehaviour {
     public static BGMManager Instance;
-    private AudioSource bgmSource;
     private GungeonGameManager g_gameManager; // GungeonGameManager 참조
 
     [SerializeField] public AudioClip defaultBGM;
@@ -20,12 +19,10 @@ public class BGMManager : MonoBehaviour {
             Destroy(gameObject);
             return;
         }
-
-        bgmSource = GetComponent<AudioSource>();
     }
 
     private void Start() {
-        PlayBGM(defaultBGM);
+        SoundManager.Instance.PlayBGM(defaultBGM.name);
         g_gameManager = FindObjectOfType<GungeonGameManager>(); // GungeonGameManager 찾기
         currentStage = g_gameManager.Stage; // 현재 Stage 값 저장
     }
@@ -38,38 +35,14 @@ public class BGMManager : MonoBehaviour {
         }
     }
 
-    public void PlayBGM(AudioClip clip) {
-        if (bgmSource.clip == clip) return;
-
-        bgmSource.clip = clip;
-        bgmSource.loop = true;
-        bgmSource.Play();
-    }
-
-    public void PauseBGM() {
-        bgmSource.Pause();
-    }
-
-    public void ResumeBGM() {
-        bgmSource.UnPause();
-    }
-
-    public void StopBGM() {
-        bgmSource.Stop();
-    }
-
-    public void SetVolume(float volume) {
-        bgmSource.volume = volume;
-    }
-
     private void ChangeBGMForStage() {
         // Stage가 4일 때는 stage4BGM을 재생
         if (currentStage == 4) {
-            PlayBGM(stage4BGM);
+            SoundManager.Instance.PlayBGM(stage4BGM.name);
         }
         else {
             // Stage가 4가 아닌 경우 기본 BGM 재생
-            PlayBGM(defaultBGM);
+            SoundManager.Instance.PlayBGM(defaultBGM.name);
         }
     }
 }

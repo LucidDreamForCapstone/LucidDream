@@ -6,11 +6,10 @@ public class SoundManager : MonoBehaviour {
     #region private variable
 
     private static SoundManager _instance;
-    //[SerializeField] private AudioSource bgmSource;
+    [SerializeField] private AudioSource bgmSource; // BGM 재생을 위한 AudioSource
     [SerializeField] private AudioSource sfxSource_timeAffected; // SFX 재생을 위한 AudioSource
     [SerializeField] private AudioSource sfxSource_timeIgnore; // SFX 재생을 위한 AudioSource (시간 영향 X)
     [SerializeField] private AudioMixer m_AudioMixer;
-
     #endregion // private variable
 
     #region properties
@@ -52,6 +51,17 @@ public class SoundManager : MonoBehaviour {
         }
     }
 
+    public void PlayBGM(string clipName) {
+        AudioClip clip = Resources.Load<AudioClip>($"BGM/{clipName}");
+        if (clip != null) {
+            bgmSource.clip = clip;
+            bgmSource.Play();
+        }
+        else {
+            Debug.LogWarning($"BGM '{clipName}' not found in Resources/BGM/");
+        }
+    }
+
 
 
     public void SetMasterVolume(float volume) {
@@ -80,6 +90,19 @@ public class SoundManager : MonoBehaviour {
 
             // Audio Mixer에 새로운 Pitch 값 설정
             m_AudioMixer.SetFloat("SFXpitch", newPitch);
+            await UniTask.NextFrame();
+        }
+    }
+    public async UniTaskVoid SetBGMPitchLerp(float pitch, float lerpTime) {
+        float t, newPitch, timer = 0;
+        m_AudioMixer.GetFloat("BGMpitch", out float startPitch);
+        while (timer < lerpTime) {
+            timer += Time.unscaledDeltaTime;
+            t = timer / lerpTime;
+            newPitch = Mathf.Lerp(startPitch, pitch, t);
+
+            // Audio Mixer에 새로운 Pitch 값 설정
+            m_AudioMixer.SetFloat("BGMpitch", newPitch);
             await UniTask.NextFrame();
         }
     }
