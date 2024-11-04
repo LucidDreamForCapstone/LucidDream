@@ -133,6 +133,7 @@
     <Compile Include="Assets\02.Scripts\Interact\InteractManager.cs" />
     <Compile Include="Assets\02.Scripts\Bullet\Bullet.cs" />
     <Compile Include="Assets\02.Scripts\Weapon\MagicStaff.cs" />
+    <Compile Include="Assets\02.Scripts\Bullet\HomingBullet.cs" />
     <Compile Include="Assets\02.Scripts\Player\PlayerDataManager.cs" />
     <Compile Include="Assets\02.Scripts\Player\PlayerPrefsManager.cs" />
     <Compile Include="Assets\02.Scripts\Item\GuardEffect.cs" />

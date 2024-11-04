@@ -10,29 +10,52 @@ public class BossBondrewd : MonsterBase {
     [SerializeField] GameObject _rushEffect;
     [SerializeField] GameObject _backStepEffect;
     [SerializeField] GameObject _bulletObj;
+    [SerializeField] GameObject _missileObj;
     [SerializeField] GameObject _armTargetObj;
+    [SerializeField] GameObject _missileTargetObj;
     [SerializeField] SpriteRenderer _legSr;
+
+    [Header("\nBackStep")]
     [SerializeField] float _backStepCooltime;
     [SerializeField] float _backStepDist;
+    [Header("\nChase")]
     [SerializeField] float _chaseCooltime;
     [SerializeField] float _chaseDist;
+    [Header("\nRush")]
     [SerializeField] float _rushDist;
     [SerializeField] float _rushWarningTime;
     [SerializeField] float _rushCooltime;
     [SerializeField] int _rushDamage;
+    [Header("\nShoot")]
     [SerializeField] float _shootCooltime;
     [SerializeField] int _shootCount;
+    [SerializeField] float _shootDispersionRate;
     [SerializeField] int _bulletCount;
     [SerializeField] int _bulletDamage;
     [SerializeField] float _bulletSpeed;
     [SerializeField] float _bulletRange;
     [SerializeField] float _bulletInterval;
+    [SerializeField] float _sideDist;
     [SerializeField] float _shootInterval;
+    [Header("\nMissile")]
+    [SerializeField] float _missileCooltime;
+    [SerializeField] float _missileInterval;
+    [SerializeField] float _missileCount;
+    [SerializeField] float _missileSpeed;
+    [SerializeField] float _missileLastTime;
+    [SerializeField] float _homingStartTime;
+    [SerializeField] float _homingLastTime;
+    [SerializeField] int _missileDamage;
+    [SerializeField] float _explodeRadius;
+
+
     bool _isBackStepReady;
     bool _isChaseReady;
     bool _isRushReady;
     bool _isShootReady;
+    bool _isMissileReady;
     Vector2[] _shootPos = { new Vector2(3.25f, -0.97f), new Vector2(-3.25f, -0.97f) };
+    Vector2[] _missilePos = { new Vector2(-0.76f, 1.04f), new Vector2(0.76f, 1.04f) };
 
     private void Start() {
         _isSpawnComplete = true;
@@ -40,6 +63,7 @@ public class BossBondrewd : MonsterBase {
         _attackFuncList.Add(ChaseTask);
         _attackFuncList.Add(RushTask);
         _attackFuncList.Add(ShootTask);
+        _attackFuncList.Add(MissileTask);
     }
 
     protected override void AttackMove() {
@@ -166,8 +190,8 @@ public class BossBondrewd : MonsterBase {
             Vector3 fireDir = _playerScript.transform.position - _armTargetObj.transform.position;
             SetFlipX(fireDir);
             for (int i = 0; i < _bulletCount; i++) {
-                float x = Random.Range(-1f, 1f);
-                float y = Random.Range(-1f, 1f);
+                float x = Random.Range(-_shootDispersionRate, _shootDispersionRate);
+                float y = Random.Range(-_shootDispersionRate, _shootDispersionRate);
                 FireBullet(fireDir, new Vector2(x, y));
                 await UniTask.Delay(TimeSpan.FromSeconds(_bulletInterval));
             }
@@ -180,13 +204,14 @@ public class BossBondrewd : MonsterBase {
     }
     private async UniTaskVoid MoveSide() {
         Vector2 shootVec = _playerScript.transform.position - transform.position;
-        Vector2 sideVec = new Vector2(shootVec.y, -shootVec.x);
+        Vector2 sideDir = new Vector2(shootVec.y, -shootVec.x).normalized;
         int randomN = Random.Range(0, 2);
         if (randomN == 1) {
-            sideVec *= -1;
+            sideDir *= -1;
         }
-        _rigid.velocity = sideVec.normalized * _moveSpeed * 0.2f;
-        await UniTask.Delay(TimeSpan.FromSeconds(_shootInterval));
+        Vector2 endValue = (Vector2)transform.position + sideDir * _sideDist;
+        float duration = _sideDist / _moveSpeed * 2;
+        await DOTween.To(() => _rigid.position, x => _rigid.MovePosition(x), endValue, duration);
         _rigid.velocity = Vector2.zero;
     }
 
@@ -204,6 +229,48 @@ public class BossBondrewd : MonsterBase {
         projectile.SetActive(true);
     }
 
+    private async UniTaskVoid MissileTask() {
+        _isMissileReady = false;
+        Missile().Forget();
+        await UniTask.Delay(TimeSpan.FromSeconds(_missileCooltime));
+        _isMissileReady = true;
+        _attackStateList[4] = AttackState.Ready;
+    }
+
+    private async UniTaskVoid Missile() {
+        _attackStateList[4] = AttackState.Attacking;
+        for (int i = 0; i < _missileCount; i++) {
+            _animator.SetTrigger("Missile");
+            FireHomingExplosive();
+            await UniTask.Delay(TimeSpan.FromSeconds(_missileInterval));
+        }
+        _attackStateList[4] = AttackState.Finished;
+        await UniTask.NextFrame();
+        _attackStateList[4] = AttackState.CoolTime;
+    }
+
+    private void FireHomingExplosive() {
+        GameObject projectile = ObjectPool.Instance.GetObject(_missileObj);
+        HomingBullet projectileScript = projectile.GetComponent<HomingBullet>();
+        Vector2 targetDir = _playerScript.transform.position - transform.position;
+        SetFlipX(targetDir);
+        projectile.transform.right = Vector2.right;
+        if (targetDir.x < 0)
+            projectile.transform.right *= -1;
+        projectile.transform.position = _missileTargetObj.transform.position;
+        projectileScript.SetPlayer(_playerScript);
+        projectileScript.SetSpeed(_missileSpeed);
+        projectileScript.SetDmg(_missileDamage);
+        projectileScript.SetExplodeRadius(_explodeRadius);
+        projectileScript.SetLastTime(_missileLastTime);
+        projectileScript.SetHomingStartTime(_homingStartTime);
+        projectileScript.SetHomingLastTime(_homingLastTime);
+        projectile.SetActive(true);
+    }
+
+    private async UniTaskVoid Groggy() {
+        _animator.SetTrigger("Groggy");
+    }
 
     private float CalculateManhattanDist(Vector2 a, Vector2 b) {
         return Mathf.Abs(a.x - b.x) + Mathf.Abs(a.y - b.y);
@@ -214,6 +281,7 @@ public class BossBondrewd : MonsterBase {
             _spriteRenderer.flipX = true;
             _legSr.flipX = true;
             _armTargetObj.transform.localPosition = _shootPos[1];
+            _missileTargetObj.transform.localPosition = _missilePos[1];
             _dashEffect.GetComponent<SpriteRenderer>().flipX = true;
             _backStepEffect.GetComponent<SpriteRenderer>().flipX = false;
         }
@@ -222,6 +290,7 @@ public class BossBondrewd : MonsterBase {
             _spriteRenderer.flipX = false;
             _legSr.flipX = false;
             _armTargetObj.transform.localPosition = _shootPos[0];
+            _missileTargetObj.transform.localPosition = _missilePos[0];
             _dashEffect.GetComponent<SpriteRenderer>().flipX = false;
             _backStepEffect.GetComponent<SpriteRenderer>().flipX = true;
         }
