@@ -59,6 +59,7 @@ public class PSM : MonoBehaviour {
     private IEnumerator SwapCharacter() {
         isGlitching = true; // 글리치 시작 중
 
+        // Fog Of War 비활성화
         if (fogTag) {
             _gameObject.GetComponent<FogOfWarGrid2D>().enabled = false;
         }
@@ -80,6 +81,14 @@ public class PSM : MonoBehaviour {
         // 카메라 전환
         Cinemachine.CinemachineVirtualCamera virtualCamera = FindObjectOfType<Cinemachine.CinemachineVirtualCamera>();
         if (virtualCamera != null) {
+            // Transposer 가져오기
+            var transposer = virtualCamera.GetCinemachineComponent<Cinemachine.CinemachineTransposer>();
+            if (transposer != null) {
+                // Damping 값을 0으로 설정
+                transposer.m_XDamping = 0;
+                transposer.m_YDamping = 0;
+            }
+
             virtualCamera.Follow = currentPlayer.transform; // 새로운 캐릭터로 카메라 목표 변경
         }
 
@@ -89,9 +98,21 @@ public class PSM : MonoBehaviour {
         }
 
         fogTag = !fogTag; // true -> false 또는 false -> true로 전환
+
         yield return new WaitForSeconds(0.2f); // 0.2초 대기
+
+        // 글리치 효과가 끝난 후 Damping을 다시 1로 설정
+        if (virtualCamera != null) {
+            var transposer = virtualCamera.GetCinemachineComponent<Cinemachine.CinemachineTransposer>();
+            if (transposer != null) {
+                transposer.m_XDamping = 1; // Damping 값 복원
+                transposer.m_YDamping = 1; // Damping 값 복원
+            }
+        }
+
         isGlitching = false; // 글리치 효과 종료
     }
+
 
     private void ShowMessage(string message) {
         messageText.text = message; // 메시지 텍스트 업데이트

@@ -1,5 +1,7 @@
+using Cinemachine;
 using Cysharp.Threading.Tasks;
 using System;
+using System.Collections;
 using UnityEngine;
 
 public abstract class WeaponBase : ItemBase {
@@ -51,6 +53,11 @@ public abstract class WeaponBase : ItemBase {
     // 피버 스킬이 공격형인지 버프형인지 구분하는 플래그
     [SerializeField] protected bool _isBuffTypeFeverSkill;
     [SerializeField] protected AudioClip _normalAttackSound;     // 노말 어택 사운드
+
+    // 화면 흔들림
+    [SerializeField] protected float shakeDuration = 0.3f; // 흔들림 지속 시간
+    [SerializeField] protected float shakeAmplitude = 3.0f; // 흔들림 진폭
+    [SerializeField] protected float shakeFrequency = 25.0f; // 흔들림 주파수
 
     #endregion // serialized field
 
@@ -217,6 +224,8 @@ public abstract class WeaponBase : ItemBase {
 
     abstract protected void BasicAttackAnimation();
     abstract protected void Skill1Animation();
+
+
     abstract protected void Skill2Animation();
     abstract protected void FeverSkillAnimation();
 
@@ -237,6 +246,9 @@ public abstract class WeaponBase : ItemBase {
     protected double CalculateManhattanDist(Vector2 a, Vector2 b) {
         return Mathf.Abs(a.x - b.x) + Mathf.Abs(a.y - b.y);
     }
+
+   
+
 
     #endregion //protected funcs
 
@@ -284,8 +296,25 @@ public abstract class WeaponBase : ItemBase {
         }
     }
 
-    // 버프형 스킬 처리
-    private void ActivateFeverSkillWithoutTarget() {
+    private IEnumerator ShakeCamera() {
+        CinemachineVirtualCamera virtualCamera = FindObjectOfType<CinemachineVirtualCamera>();
+        if (virtualCamera != null) {
+            var noise = virtualCamera.GetCinemachineComponent<CinemachineBasicMultiChannelPerlin>();
+            if (noise != null) {
+                noise.m_AmplitudeGain = shakeAmplitude;
+                noise.m_FrequencyGain = shakeFrequency;
+
+                yield return new WaitForSeconds(shakeDuration);
+
+                noise.m_AmplitudeGain = 0;
+                noise.m_FrequencyGain = 0;
+            }
+        }
+    }
+
+
+// 버프형 스킬 처리
+private void ActivateFeverSkillWithoutTarget() {
         if (!_feverLock && PlayerDataManager.Instance.IsFeverReady()) {
             PlayerDataManager.Instance.SetFeverGauge(0);
             FeverSkillAnimation();  // 피버 스킬 실행

@@ -104,6 +104,8 @@ MonoBehaviour:
   dropTable:
   - _item: {fileID: 3596559577025724964, guid: f33437cbe1acea1438bac0ac1df81e94, type: 3}
     _dropChance: 100
+  - _item: {fileID: 6554170899350276541, guid: d9449e93f60efd64293b1a68d91ed88d, type: 3}
+    _dropChance: 100
   _chestRank: 0
   _openSound: {fileID: 8300000, guid: 01eda33b54ebe7b4894c6dd958381ba8, type: 3}
 --- !u!61 &2008323044701374281

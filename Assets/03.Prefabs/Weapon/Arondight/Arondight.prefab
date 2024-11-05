@@ -236,7 +236,7 @@ MonoBehaviour:
     _weaponCritDamage: 20
   _basicCoolTime: 1.5
   _basicDelay: 0.3
-  _skill1CoolTime: 30
+  _skill1CoolTime: 5
   _delay1: 1
   _skill2CoolTime: 0
   _delay2: 0
@@ -278,6 +278,9 @@ MonoBehaviour:
   _feverRange: 3
   _isBuffTypeFeverSkill: 0
   _normalAttackSound: {fileID: 8300000, guid: c3809432f89a2c545b27782b4cbe8466, type: 3}
+  shakeDuration: 0.3
+  shakeAmplitude: 3
+  shakeFrequency: 25
   _basicRange: 3
   _basicAngle: 120
   _lastTime1: 15
@@ -285,6 +288,7 @@ MonoBehaviour:
   wSound: {fileID: 8300000, guid: 6a6ff3de0d2723644be0fdb482e5128e, type: 3}
   feverSound: {fileID: 8300000, guid: c747a12af2af8a84a97ba2ff74106426, type: 3}
   feverSound2: {fileID: 8300000, guid: ce48eb0269ca19645bd3a80f38559331, type: 3}
+  pixelPerfectCamera: {fileID: 0}
 --- !u!212 &9084974105833488233
 SpriteRenderer:
   m_ObjectHideFlags: 0
