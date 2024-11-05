@@ -7,6 +7,7 @@ EditorUserSettings:
   m_ConfigSettings:
     RecentlyUsedSceneGuid-0:
 <<<<<<< HEAD
+<<<<<<< HEAD
       value: 020557515c575a5f0c5c0f7044275b44414f1d2f7d2c7765797d1b61e7e2306a
       flags: 0
     RecentlyUsedSceneGuid-1:
@@ -34,6 +35,18 @@ EditorUserSettings:
       flags: 0
     RecentlyUsedSceneGuid-3:
       value: 020557515c575a5f0c5c0f7044275b44414f1d2f7d2c7765797d1b61e7e2306a
+=======
+      value: 5253015750515e59085c592644215b444e154f2e7a7822682b7b1e60e0e36039
+      flags: 0
+    RecentlyUsedSceneGuid-1:
+      value: 5b05505006035a0e540c5e7611700f4440154d2b7d2b743679714d30b4b86c3d
+      flags: 0
+    RecentlyUsedSceneGuid-2:
+      value: 5b05030504010a5e550b0f2343725e441016402f747d7736282b1b35b2e16661
+      flags: 0
+    RecentlyUsedSceneGuid-3:
+      value: 0608555000535d595b0b0f75157a0b4447161a7c7d2b7767782b1860e4b5306d
+>>>>>>> origin/hojin_workSpace
       flags: 0
     RecentlyUsedSceneGuid-4:
       value: 5253015750515e59085c592644215b444e154f2e7a7822682b7b1e60e0e36039
@@ -50,7 +63,7 @@ EditorUserSettings:
   m_VCDebugCmd: 0
   m_VCDebugOut: 0
   m_SemanticMergeMode: 2
-  m_DesiredImportWorkerCount: 6
+  m_DesiredImportWorkerCount: 8
   m_StandbyImportWorkerCount: 2
   m_IdleImportWorkerShutdownDelay: 60000
   m_VCShowFailedCheckout: 1
