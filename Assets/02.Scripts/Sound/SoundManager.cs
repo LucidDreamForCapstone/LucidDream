@@ -107,6 +107,20 @@ public class SoundManager : MonoBehaviour {
         }
     }
 
+    public async UniTaskVoid SetBGMVolumeLerp(float percent, float lerpTime) {
+        float t, newVolume, timer = 0;
+        m_AudioMixer.GetFloat("BGM", out float startVolume);
+        while (timer < lerpTime) {
+            timer += Time.unscaledDeltaTime;
+            t = timer / lerpTime;
+            newVolume = Mathf.Lerp(startVolume, percent * startVolume, t);
+
+            // Audio Mixer에 새로운 Volume 값 설정
+            m_AudioMixer.SetFloat("BGM", newVolume);
+            await UniTask.NextFrame();
+        }
+    }
+
     public void PauseSFX() {
         sfxSource_timeAffected.Pause();
         sfxSource_timeIgnore.Pause();
