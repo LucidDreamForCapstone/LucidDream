@@ -19,6 +19,7 @@ MonoBehaviour:
   _monster: {fileID: 0}
   description: 
   _children:
+  - {fileID: -6236513056827574572}
   - {fileID: -7828177035175732620}
   - {fileID: -3977302011937094930}
   - {fileID: 4838395050495228527}
@@ -58,10 +59,29 @@ MonoBehaviour:
   _state: 0
   _started: 0
   _guid: 18bd84cd16e5b0848a94ebb18040a934
-  _position: {x: -440, y: 473}
+  _position: {x: -432.4752, y: 469.9801}
   _monster: {fileID: 0}
   description: "\uB3CC\uC9C4 \uACF5\uACA9"
   attackIndex: 2
+--- !u!114 &-6236513056827574572
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c5f7284dc31f37546ad47c44e1eaf1e4, type: 3}
+  m_Name: AttackNode
+  m_EditorClassIdentifier: 
+  _state: 0
+  _started: 0
+  _guid: 92882568baaccb44c86964b9bfbc205f
+  _position: {x: -593.24664, y: 469.54276}
+  _monster: {fileID: 0}
+  description: "\uC5F0\uC1C4 \uD3ED\uBC1C \uACF5\uACA9"
+  attackIndex: 5
 --- !u!114 &-5906169209080296870
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -166,6 +186,7 @@ MonoBehaviour:
   - {fileID: -7828177035175732620}
   - {fileID: 4838395050495228527}
   - {fileID: -3977302011937094930}
+  - {fileID: -6236513056827574572}
   _treeState: 0
   _monster: {fileID: 0}
 --- !u!114 &7205056774977453

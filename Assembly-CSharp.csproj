@@ -140,6 +140,7 @@
     <Compile Include="Assets\02.Scripts\Player\PlayerDataManager.cs" />
     <Compile Include="Assets\02.Scripts\Player\PlayerPrefsManager.cs" />
     <Compile Include="Assets\02.Scripts\Item\GuardEffect.cs" />
+    <Compile Include="Assets\02.Scripts\Monster\Explosion.cs" />
     <Compile Include="Assets\02.Scripts\UI\Inven\InventoryDescription.cs" />
     <Compile Include="Assets\02.Scripts\Sound\BGMManger.cs" />
     <Compile Include="Assets\JMO Assets\Cartoon FX (legacy)\Scripts\CFX_LightIntensityFade.cs" />

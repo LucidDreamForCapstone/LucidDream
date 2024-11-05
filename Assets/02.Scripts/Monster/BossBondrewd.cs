@@ -1,6 +1,7 @@
 ﻿using Cysharp.Threading.Tasks;
 using DG.Tweening;
 using System;
+using System.Collections.Generic;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -14,6 +15,7 @@ public class BossBondrewd : MonsterBase {
     [SerializeField] GameObject _missileObj;
     [SerializeField] GameObject _armTargetObj;
     [SerializeField] GameObject _missileTargetObj;
+    [SerializeField] GameObject _explosionObj;
     [SerializeField] SpriteRenderer _legSr;
 
     [Header("\nBackStep")]
@@ -52,6 +54,10 @@ public class BossBondrewd : MonsterBase {
     [SerializeField] float _explosionCooltime;
     [SerializeField] int _explosionDamage;
     [SerializeField] float _explosionWarningTime;
+    [SerializeField] float _explosionLastTime;
+    [SerializeField] float _explosionPosInterval;
+    [SerializeField] int _excludeCount;
+    [SerializeField] Vector2 _explosionSizeHalf;
 
     bool _isBackStepReady;
     bool _isChaseReady;
@@ -62,6 +68,7 @@ public class BossBondrewd : MonsterBase {
     Vector2[] _shootPos = { new Vector2(3.25f, -0.97f), new Vector2(-3.25f, -0.97f) };
     Vector2[] _missilePos = { new Vector2(-0.76f, 1.04f), new Vector2(0.76f, 1.04f) };
     Vector2 _chainExplosionCenterPos;
+    List<Explosion> _explosionCache = new List<Explosion>();
 
     private void Start() {
         _isSpawnComplete = true;
@@ -70,6 +77,7 @@ public class BossBondrewd : MonsterBase {
         _attackFuncList.Add(RushTask);
         _attackFuncList.Add(ShootTask);
         _attackFuncList.Add(MissileTask);
+        _attackFuncList.Add(ChainExplosionTask);
     }
 
     protected override void AttackMove() {
@@ -283,13 +291,57 @@ public class BossBondrewd : MonsterBase {
     }
 
     private async UniTaskVoid ChainExplosion() {
+        _attackStateList[5] = AttackState.Attacking;
         float duration = CalculateManhattanDist(transform.position, _chainExplosionCenterPos) / _moveSpeed;
         SetFlipX(_chainExplosionCenterPos - (Vector2)transform.position);
         await DOTween.To(() => _rigid.position, x => _rigid.MovePosition(x), _chainExplosionCenterPos, duration);
         SetFlipX(Vector2.left);
+        _chargingEffect.GetComponent<SpriteRenderer>().color = Color.white;
         _chargingEffect.SetActive(true);
+        List<Vector2> excludePosList = new List<Vector2>();
+        for (int i = 0; i < _excludeCount; i++) {
+            int x = Random.Range(-(int)_explosionSizeHalf.x, (int)_explosionSizeHalf.x + 1);
+            int y = Random.Range(-(int)_explosionSizeHalf.y, (int)_explosionSizeHalf.y + 1);
+            excludePosList.Add(new Vector2(x, y));
+        }
+
+        for (int i = (int)-_explosionSizeHalf.x; i < _explosionSizeHalf.x; i++) {
+            for (int j = (int)-_explosionSizeHalf.y; j < _explosionSizeHalf.y; j++) {
+                bool isExcludedPos = false;
+                for (int k = 0; k < excludePosList.Count; k++) {
+                    if (excludePosList[k].x == i && excludePosList[k].y == j) {
+                        isExcludedPos = true;
+                        break;
+                    }
+                }
+
+                if (!isExcludedPos) {
+                    var explosion = ObjectPool.Instance.GetObject(_explosionObj);
+                    _explosionCache.Add(explosion.GetComponent<Explosion>());
+                    explosion.transform.position = transform.position + new Vector3(i, j) * _explosionPosInterval;
+                    explosion.SetActive(true);
+                }
+            }
+        }
         await UniTask.Delay(TimeSpan.FromSeconds(_explosionWarningTime));
-        //bfs chain Explosion
+        for (int i = 0; i < _explosionCache.Count; i++) {
+            _explosionCache[i].SetPlayer(_playerScript);
+            _explosionCache[i].SetDamage(_explosionDamage);
+            _explosionCache[i].ExplodeTrigger();
+        }
+        await UniTask.Delay(TimeSpan.FromSeconds(_explosionLastTime));
+        for (int i = 0; i < _explosionCache.Count; i++) {
+            _explosionCache[i].FadeTrigger();
+        }
+        await UniTask.Delay(TimeSpan.FromSeconds(1));
+        for (int i = 0; i < _explosionCache.Count; i++) {
+            ObjectPool.Instance.ReturnObject(_explosionCache[i].gameObject);
+        }
+        _chargingEffect.GetComponent<SpriteRenderer>().DOFade(0, 1).ToUniTask().Forget();
+
+        _attackStateList[5] = AttackState.Finished;
+        await UniTask.Delay(TimeSpan.FromSeconds(0.01f));
+        _attackStateList[5] = AttackState.CoolTime;
     }
 
     private async UniTaskVoid Groggy() {
