@@ -1,40 +1,40 @@
 using Cysharp.Threading.Tasks;
-using Edgar.Unity; // TextMeshPro °ü·Ã ³×ÀÓ½ºÆäÀÌ½º Ãß°¡
+using Edgar.Unity; // TextMeshPro ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ó½ï¿½ï¿½ï¿½ï¿½Ì½ï¿½ ï¿½ß°ï¿½
 using System;
 using System.Collections;
 using TMPro;
 using UnityEngine;
 
 public class PSM : MonoBehaviour {
-    [SerializeField] private Player player1; // Ã¹ ¹øÂ° Ä³¸¯ÅÍ
-    [SerializeField] private Player_2 player2; // µÎ ¹øÂ° Ä³¸¯ÅÍ
+    [SerializeField] private Player player1; // Ã¹ ï¿½ï¿½Â° Ä³ï¿½ï¿½ï¿½ï¿½
+    [SerializeField] private Player_2 player2; // ï¿½ï¿½ ï¿½ï¿½Â° Ä³ï¿½ï¿½ï¿½ï¿½
     [SerializeField] GameObject _miniMapObj;
-    private MonoBehaviour currentPlayer; // ÇöÀç Á¶ÀÛ ÁßÀÎ Ä³¸¯ÅÍ
+    private MonoBehaviour currentPlayer; // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ Ä³ï¿½ï¿½ï¿½ï¿½
     private int currentPlayerNum;
-    private GlitchController glitchController; // GlitchController ÀÎ½ºÅÏ½º
-    private bool isGlitching = false; // ±Û¸®Ä¡ È¿°ú ÁøÇà Áß ¿©ºÎ
+    private GlitchController glitchController; // GlitchController ï¿½Î½ï¿½ï¿½Ï½ï¿½
+    private bool isGlitching = false; // ï¿½Û¸ï¿½Ä¡ È¿ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
     private bool fogTag = true;
     [SerializeField] private GameObject _cameraObj;
 
-    // UI ÅØ½ºÆ®
-    [SerializeField] private TextMeshProUGUI messageText; // TextMeshProUGUI ÄÄÆ÷³ÍÆ®
+    // UI ï¿½Ø½ï¿½Æ®
+    [SerializeField] private TextMeshProUGUI messageText; // TextMeshProUGUI ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ®
 
     private void Start() {
         currentPlayerNum = 1;
         _miniMapObj.SetActive(true);
         Player2ActiveDelay(2).Forget();
-        glitchController = FindObjectOfType<GlitchController>(); // GlitchController Ã£±â
+        glitchController = FindObjectOfType<GlitchController>(); // GlitchController Ã£ï¿½ï¿½
 
-        messageText.gameObject.SetActive(false); // ½ÃÀÛÇÒ ¶§ ¸Þ½ÃÁö ¼û±è
+        messageText.gameObject.SetActive(false); // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½Þ½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
     }
 
     private void Update() {
-        if (Input.GetKeyDown(KeyCode.F) && !isGlitching) { // ±Û¸®Ä¡ ÁßÀÌ ¾Æ´Ò ¶§¸¸ Ä³¸¯ÅÍ ½º¿Ò
+        if (Input.GetKeyDown(KeyCode.F) && !isGlitching) { // ï¿½Û¸ï¿½Ä¡ ï¿½ï¿½ï¿½ï¿½ ï¿½Æ´ï¿½ ï¿½ï¿½ï¿½ï¿½ Ä³ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
             if (CanSwapCharacter()) {
                 SwapCharacter().Forget();
             }
             else {
-                ShowMessage("ÁÖÀ§¿¡ ¸ó½ºÅÍ°¡ ÀÖ¾î¼­ ºÒ°¡´ÉÇÕ´Ï´Ù."); // ¸Þ½ÃÁö Ç¥½Ã
+                ShowMessage("ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Í°ï¿½ ï¿½Ö¾î¼­ ï¿½Ò°ï¿½ï¿½ï¿½ï¿½Õ´Ï´ï¿½."); // ï¿½Þ½ï¿½ï¿½ï¿½ Ç¥ï¿½ï¿½
             }
         }
     }
@@ -42,37 +42,38 @@ public class PSM : MonoBehaviour {
     private bool CanSwapCharacter() {
         if (player1 == null) {
             Debug.LogError("Player reference is not assigned.");
-            return false; // ÇÃ·¹ÀÌ¾î°¡ ÇÒ´çµÇÁö ¾ÊÀº °æ¿ì
+            return false; // ï¿½Ã·ï¿½ï¿½Ì¾î°¡ ï¿½Ò´ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½
         }
-        // ÇÃ·¹ÀÌ¾î ÁÖº¯ÀÇ Enemy¸¦ Ã¼Å©ÇÕ´Ï´Ù.
-        LayerMask enemyLayer = LayerMask.GetMask("Enemy"); // Enemy ·¹ÀÌ¾î ¸¶½ºÅ© °¡Á®¿À±â
-        Collider2D[] colliders = Physics2D.OverlapCircleAll(player1.transform.position, 20f, enemyLayer); // ¹ÝÁö¸§ 20, enemyLayer¸¸ °¨Áö
+        // ï¿½Ã·ï¿½ï¿½Ì¾ï¿½ ï¿½Öºï¿½ï¿½ï¿½ Enemyï¿½ï¿½ Ã¼Å©ï¿½Õ´Ï´ï¿½.
+        LayerMask enemyLayer = LayerMask.GetMask("Enemy"); // Enemy ï¿½ï¿½ï¿½Ì¾ï¿½ ï¿½ï¿½ï¿½ï¿½Å© ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+        Collider2D[] colliders = Physics2D.OverlapCircleAll(player1.transform.position, 20f, enemyLayer); // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ 20, enemyLayerï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
         foreach (var collider in colliders) {
-            Debug.Log($"Detected collider: {collider.gameObject.name} with tag: {collider.tag}"); // °¨ÁöµÈ ÄÝ¶óÀÌ´õ Ãâ·Â
+            Debug.Log($"Detected collider: {collider.gameObject.name} with tag: {collider.tag}"); // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ý¶ï¿½ï¿½Ì´ï¿½ ï¿½ï¿½ï¿½
             if (collider.CompareTag("Enemy")) {
                 Debug.Log("Enemy found! Cannot swap character.");
-                return false; // Enemy°¡ ÀÖÀ» °æ¿ì ½º¿Ò ºÒ°¡´É
+                return false; // Enemyï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ò°ï¿½ï¿½ï¿½
             }
         }
         Debug.Log("No enemies nearby. Can swap character.");
-        return true; // ½º¿Ò °¡´É
+        return true; // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
     }
 
 
 
     private async UniTaskVoid SwapCharacter() {
-        isGlitching = true; // ±Û¸®Ä¡ ½ÃÀÛ Áß
+        isGlitching = true; // ï¿½Û¸ï¿½Ä¡ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½
 
+        // Fog Of War ï¿½ï¿½È°ï¿½ï¿½È­
         if (fogTag) {
             _cameraObj.GetComponent<FogOfWarGrid2D>().enabled = false;
         }
 
-        // ±Û¸®Ä¡ È¿°ú¸¦ ½ÃÀÛÇÕ´Ï´Ù.
+        // ï¿½Û¸ï¿½Ä¡ È¿ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Õ´Ï´ï¿½.
         if (glitchController != null) {
-            await glitchController.TriggerGlitchEffect(); // ±Û¸®Ä¡ È¿°ú ½ÃÀÛ
+            await glitchController.TriggerGlitchEffect(); // ï¿½Û¸ï¿½Ä¡ È¿ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
         }
 
-        // ±âÁ¸ Ä³¸¯ÅÍ ºñÈ°¼ºÈ­ ¹× »õ·Î¿î Ä³¸¯ÅÍ È°¼ºÈ­
+        // ï¿½ï¿½ï¿½ï¿½ Ä³ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½È°ï¿½ï¿½È­ ï¿½ï¿½ ï¿½ï¿½ï¿½Î¿ï¿½ Ä³ï¿½ï¿½ï¿½ï¿½ È°ï¿½ï¿½È­
         if (currentPlayerNum == 1) {
             player1.SetEnable(false);
             player2.SetEnable(true);
@@ -88,31 +89,50 @@ public class PSM : MonoBehaviour {
             _miniMapObj.SetActive(true);
         }
 
-        // Ä«¸Þ¶ó ÀüÈ¯
+        // Ä«ï¿½Þ¶ï¿½ ï¿½ï¿½È¯
         Cinemachine.CinemachineVirtualCamera virtualCamera = FindObjectOfType<Cinemachine.CinemachineVirtualCamera>();
         if (virtualCamera != null) {
-            virtualCamera.Follow = currentPlayer.transform; // »õ·Î¿î Ä³¸¯ÅÍ·Î Ä«¸Þ¶ó ¸ñÇ¥ º¯°æ
+            // Transposer ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+            var transposer = virtualCamera.GetCinemachineComponent<Cinemachine.CinemachineTransposer>();
+            if (transposer != null) {
+                // Damping ï¿½ï¿½ï¿½ï¿½ 0ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
+                transposer.m_XDamping = 0;
+                transposer.m_YDamping = 0;
+            }
+
+            virtualCamera.Follow = currentPlayer.transform; // ï¿½ï¿½ï¿½Î¿ï¿½ Ä³ï¿½ï¿½ï¿½Í·ï¿½ Ä«ï¿½Þ¶ï¿½ ï¿½ï¿½Ç¥ ï¿½ï¿½ï¿½ï¿½
         }
 
-        // Fog Of War ´Ù½Ã È°¼ºÈ­
+        // Fog Of War ï¿½Ù½ï¿½ È°ï¿½ï¿½È­
         if (!fogTag) {
-            _cameraObj.GetComponent<FogOfWarGrid2D>().enabled = true; // ºñÈ°¼ºÈ­µÈ °æ¿ì È°¼ºÈ­
+            _cameraObj.GetComponent<FogOfWarGrid2D>().enabled = true; // ï¿½ï¿½È°ï¿½ï¿½È­ï¿½ï¿½ ï¿½ï¿½ï¿½ È°ï¿½ï¿½È­
         }
 
-        fogTag = !fogTag; // true -> false ¶Ç´Â false -> true·Î ÀüÈ¯
+        fogTag = !fogTag; // true -> false ï¿½Ç´ï¿½ false -> trueï¿½ï¿½ ï¿½ï¿½È¯
         await UniTask.Delay(TimeSpan.FromSeconds(0.2f));
-        isGlitching = false; // ±Û¸®Ä¡ È¿°ú Á¾·á
+
+        // ï¿½Û¸ï¿½Ä¡ È¿ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ Dampingï¿½ï¿½ ï¿½Ù½ï¿½ 1ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
+        if (virtualCamera != null) {
+            var transposer = virtualCamera.GetCinemachineComponent<Cinemachine.CinemachineTransposer>();
+            if (transposer != null) {
+                transposer.m_XDamping = 1; // Damping ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
+                transposer.m_YDamping = 1; // Damping ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
+            }
+        }
+
+        isGlitching = false; // ï¿½Û¸ï¿½Ä¡ È¿ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
     }
 
+
     private void ShowMessage(string message) {
-        messageText.text = message; // ¸Þ½ÃÁö ÅØ½ºÆ® ¾÷µ¥ÀÌÆ®
-        messageText.gameObject.SetActive(true); // ¸Þ½ÃÁö Ç¥½Ã
-        StartCoroutine(HideMessage()); // ¸Þ½ÃÁö ¼û±â±â ÄÚ·çÆ¾ È£Ãâ
+        messageText.text = message; // ï¿½Þ½ï¿½ï¿½ï¿½ ï¿½Ø½ï¿½Æ® ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ®
+        messageText.gameObject.SetActive(true); // ï¿½Þ½ï¿½ï¿½ï¿½ Ç¥ï¿½ï¿½
+        StartCoroutine(HideMessage()); // ï¿½Þ½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ú·ï¿½Æ¾ È£ï¿½ï¿½
     }
 
     private IEnumerator HideMessage() {
-        yield return new WaitForSeconds(2f); // 2ÃÊ ÈÄ
-        messageText.gameObject.SetActive(false); // ¸Þ½ÃÁö ¼û±è
+        yield return new WaitForSeconds(2f); // 2ï¿½ï¿½ ï¿½ï¿½
+        messageText.gameObject.SetActive(false); // ï¿½Þ½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
     }
 
     //To prevent Edgar targeting the player2 as the main player while doing map creating

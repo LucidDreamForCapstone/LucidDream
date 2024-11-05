@@ -15,7 +15,7 @@ public class WoodenSword : WeaponBase {
 
 
 
-
+    
 
     #region private variable
 
@@ -106,7 +106,7 @@ public class WoodenSword : WeaponBase {
 
     }
     #endregion //public funcs
-
+    
 
 
 

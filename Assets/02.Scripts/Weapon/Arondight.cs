@@ -1,8 +1,10 @@
 using Cysharp.Threading.Tasks;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.Experimental.Rendering.Universal;
 
 public class Arondight : WeaponBase {
     #region serialized field
@@ -14,7 +16,7 @@ public class Arondight : WeaponBase {
     [SerializeField] protected AudioClip wSound;
     [SerializeField] protected AudioClip feverSound;
     [SerializeField] protected AudioClip feverSound2;
-
+    private PixelPerfectCamera pixelPerfectCamera;
     //[SerializeField] float _feverRange;
 
     #endregion // serialized field
@@ -47,6 +49,7 @@ public class Arondight : WeaponBase {
 
     new private void Start() {
         base.Start();
+        pixelPerfectCamera = FindObjectOfType<PixelPerfectCamera>();
     }
 
     #endregion // mono funcs
@@ -69,7 +72,11 @@ public class Arondight : WeaponBase {
         _playerScript.ArmTrigger("Buff");
         PlaySound(wSound);
         Skill1();
+        // 카메라 줌 인 및 줌 아웃
+
     }
+
+
 
     protected override void Skill2Animation() {
         //_playerScript.AttackNow(_delay2).Forget();
@@ -145,8 +152,11 @@ public class Arondight : WeaponBase {
         playerEffect.transform.SetParent(_playerScript.transform);
         Destroy(playerEffect, 1f);
         DefUp().Forget();
+        // Pixel Perfect Camera 줌 인/줌 아웃 조절
+        if (pixelPerfectCamera != null) {
+            StartCoroutine(ZoomInAndOutStepCoroutine(20f));
+        }
     }
-
     public override void Skill2() {
     }
 
@@ -198,8 +208,34 @@ public class Arondight : WeaponBase {
 
 
     #region private funcs  
+    private IEnumerator ZoomInAndOutStepCoroutine(float targetPPU) {
+        if (pixelPerfectCamera != null) {
+            // 현재 PPU 값을 저장
+            float originalPPU = pixelPerfectCamera.assetsPPU;
 
-    private async UniTaskVoid DefUp() {
+            // 줌 인 (2씩 증가)
+            while (pixelPerfectCamera.assetsPPU < targetPPU) {
+                pixelPerfectCamera.assetsPPU += 1;
+                if (pixelPerfectCamera.assetsPPU > targetPPU) {
+                    pixelPerfectCamera.assetsPPU = (int)targetPPU; // 최대값 초과 방지
+                }
+                yield return new WaitForSeconds(0.03f); // 증감 속도 조절
+            }
+
+            // 대기 시간 (최대값 유지)
+            yield return new WaitForSeconds(0.5f);
+
+            // 줌 아웃 
+            while (pixelPerfectCamera.assetsPPU > originalPPU) {
+                pixelPerfectCamera.assetsPPU -= 1;
+                if (pixelPerfectCamera.assetsPPU < originalPPU) {
+                    pixelPerfectCamera.assetsPPU = (int)originalPPU; // 원래 값 초과 방지
+                }
+                yield return new WaitForSeconds(0.03f); // 증감 속도 조절
+            }
+        }
+    }
+        private async UniTaskVoid DefUp() {
         int currentDef = PlayerDataManager.Instance.Status._def;
         int defPlus = (int)(currentDef * _defenseUpRate * 0.01f);
         PlayerDataManager.Instance.SetDef(currentDef + defPlus);
