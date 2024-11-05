@@ -15,6 +15,8 @@ public class AttackNode : ActionNode {
                 return State.Running;
             case MonsterBase.AttackState.Attacking:
                 return State.Running;
+            case MonsterBase.AttackState.Finished:
+                return State.Success;
             case MonsterBase.AttackState.CoolTime:
                 return State.Failure;
         }

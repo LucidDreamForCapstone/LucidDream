@@ -17,7 +17,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &990255138527965887
 Transform:
   m_ObjectHideFlags: 0
@@ -177,7 +177,7 @@ GameObject:
   - component: {fileID: 5240750371680489871}
   - component: {fileID: 4300377128167412552}
   - component: {fileID: 8334906917385469493}
-  - component: {fileID: 3287448647765754171}
+  - component: {fileID: 1910250331554250258}
   m_Layer: 6
   m_Name: Monster_Demon
   m_TagString: Enemy
@@ -234,10 +234,9 @@ MonoBehaviour:
   _tree: {fileID: 11400000, guid: 7650c874b7023374688591967e122d53, type: 2}
   _isRightDefault: 1
   _patternNum: 1
-  _searchDist: 10
-  _attackDist: 6
   _attackStateList: 
   _isDead: 0
+  _isStun: 0
   _isSpawnComplete: 0
   _playerScript: {fileID: 0}
   _rigid: {fileID: 0}
@@ -245,11 +244,13 @@ MonoBehaviour:
   _animator: {fileID: 4300377128167412552}
   _useTree: 1
   _isBoss: 0
-  _bodyDamage: 10
   _hitSound: []
   _deathSound: {fileID: 0}
+  _searchDist: 10
+  _attackDist: 6
   _def: 5
   _damage: 30
+  _bodyDamage: 10
   _moveSpeed: 3
   _maxHp: 200
   _dieDelay: 2
@@ -363,8 +364,8 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
---- !u!61 &3287448647765754171
-BoxCollider2D:
+--- !u!58 &1910250331554250258
+CircleCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -396,15 +397,5 @@ BoxCollider2D:
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 3, y: 2.4375}
-    newSize: {x: 1, y: 1}
-    adaptiveTilingThreshold: 0.5
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1, y: 1}
-  m_EdgeRadius: 0
+  m_Radius: 1.2

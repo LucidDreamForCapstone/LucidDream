@@ -1,7 +1,6 @@
-using System.Collections;
+using Cysharp.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.Rendering;
-
 public class GlitchController : MonoBehaviour {
     public Volume volume;
     private GlitchEffect glitchEffect;
@@ -11,17 +10,16 @@ public class GlitchController : MonoBehaviour {
         volume.profile.TryGet(out glitchEffect);
     }
 
-    public IEnumerator TriggerGlitchEffect() {
+    public async UniTask TriggerGlitchEffect(float duration = 3f) {
         isActive = true;
         glitchEffect.intensity.value = 1f; // 최대 강도 설정
-        float duration = 3f; // 총 지속 시간
         float startIntensity = glitchEffect.intensity.value; // 시작 강도
         float endIntensity = 0f; // 끝 강도
 
         // 강도를 서서히 감소
-        for (float t = 0; t < duration; t += Time.deltaTime) {
+        for (float t = 0; t < duration; t += Time.unscaledDeltaTime) {
             glitchEffect.intensity.value = Mathf.Lerp(startIntensity, endIntensity, t / duration);
-            yield return null; // 한 프레임 대기
+            await UniTask.NextFrame();
         }
 
         glitchEffect.intensity.value = endIntensity; // 최종 강도 설정

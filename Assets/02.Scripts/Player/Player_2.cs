@@ -14,6 +14,7 @@ public class Player_2 : MonoBehaviour {
     private bool _isInvincible;
     private bool _isAttacking;
     private Vector2 _moveDir; // 이동 방향
+    private bool _playerEnabled;
     #endregion // private variable
 
     #region property
@@ -24,6 +25,7 @@ public class Player_2 : MonoBehaviour {
     private void Start() {
         _isDead = false;
         _isInvincible = false;
+        _playerEnabled = false;
         MoveDir = Vector2.down;
     }
 
@@ -48,12 +50,20 @@ public class Player_2 : MonoBehaviour {
         // 던전으로 돌아가는 로직 구현
     }
 
+    public bool CheckEnabled() {
+        return _playerEnabled;
+    }
+
+    public void SetEnable(bool enabled) {
+        _playerEnabled = enabled;
+    }
+
     #endregion // public funcs
 
     #region private funcs
 
     private void Move() {
-        if (!_isAttacking && !_isDead) {
+        if (!_isAttacking && !_isDead && _playerEnabled) {
             Vector2 moveVec = Vector2.zero;
             float horizontal = Input.GetAxisRaw("Horizontal");
             float vertical = Input.GetAxisRaw("Vertical");
@@ -77,10 +87,10 @@ public class Player_2 : MonoBehaviour {
     private void PlayerMoveAnimation(float horizontal, float vertical) {
         // 애니메이션 처리
         if (horizontal > 0) {
-            _spriteRenderer.flipX = false; // 오른쪽으로 이동 시
+            _spriteRenderer.flipX = true; // 오른쪽으로 이동 시
         }
         else if (horizontal < 0) {
-            _spriteRenderer.flipX = true; // 왼쪽으로 이동 시
+            _spriteRenderer.flipX = false; // 왼쪽으로 이동 시
         }
 
         _animator.SetInteger("horizontal", (int)horizontal);

@@ -179,7 +179,7 @@ public class PlayerWeaponManager : MonoBehaviour {
     #region private funcs   
 
     private void ActivateSkill() {
-        if (!_playerScript.CheckStun() && !_playerScript.CheckPause() && !_playerScript.CheckAttacking() && !_playerScript.CheckDead()) {
+        if (!_playerScript.CheckStun() && !_playerScript.CheckPause() && !_playerScript.CheckAttacking() && !_playerScript.CheckDead() && _playerScript.CheckEnabled()) {
             if (Input.GetKeyDown(KeyCode.Q))
                 _equippedWeapon.ActivateBasicAttack().Forget();
             else if (Input.GetKeyDown(KeyCode.W))

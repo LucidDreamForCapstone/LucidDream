@@ -8,6 +8,7 @@ public class ShockWave : MonoBehaviour {
     float _radius;
     float _fadeStartTime;
     float _fadeDuration;
+    float _radiusOffset = 5;
     Color _color;
     SpriteRenderer _spriteRenderer;
 
@@ -27,7 +28,7 @@ public class ShockWave : MonoBehaviour {
     }
 
     private async UniTaskVoid ShockWaveEffect() {
-        transform.DOScale(_radius, _fadeStartTime + _fadeDuration).ToUniTask().Forget();
+        transform.DOScale(_radius + _radiusOffset, _fadeStartTime + _fadeDuration).ToUniTask().Forget();
         await UniTask.Delay(TimeSpan.FromSeconds(_fadeStartTime));
         await _spriteRenderer.DOFade(0, _fadeDuration);
         transform.localScale = Vector3.one;

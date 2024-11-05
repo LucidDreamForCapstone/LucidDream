@@ -98,7 +98,7 @@ GameObject:
   - component: {fileID: 8205825111029519981}
   - component: {fileID: 275839514120579780}
   - component: {fileID: 8457160083381812873}
-  m_Layer: 12
+  m_Layer: 6
   m_Name: HadesPillar
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -135,22 +135,25 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   dropTable: []
   _tree: {fileID: 0}
-  _flipFlag: 0
-  _attackState: 0
-  _searchDist: 0
-  _attackDist: 0
+  _isRightDefault: 0
+  _patternNum: 0
+  _attackStateList: 
   _isDead: 0
+  _isStun: 0
   _isSpawnComplete: 0
   _playerScript: {fileID: 0}
   _rigid: {fileID: 0}
   _spriteRenderer: {fileID: 5668077776031623740}
   _animator: {fileID: 8457160083381812873}
+  _useTree: 0
   _isBoss: 0
-  _bodyDamage: 0
   _hitSound: []
   _deathSound: {fileID: 0}
+  _searchDist: 0
+  _attackDist: 0
   _def: 30
   _damage: 0
+  _bodyDamage: 0
   _moveSpeed: 0
   _maxHp: 4000
   _dieDelay: 1

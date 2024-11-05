@@ -3,8 +3,6 @@ using UnityEngine.SceneManagement;
 
 public class LobbyManager : MonoBehaviour {
     public static LobbyManager Instance;
-    private AudioSource bgmSource;
-
     [SerializeField] private AudioClip bgmClip;
 
     private void Awake() {
@@ -16,20 +14,11 @@ public class LobbyManager : MonoBehaviour {
             Destroy(gameObject); // 이미 인스턴스가 존재하면 파괴
             return;
         }
-
-        bgmSource = GetComponent<AudioSource>();
     }
 
     private void Start() {
-        PlayBGM(bgmClip);
+        SoundManager.Instance.PlayBGM(bgmClip.name);
         SceneManager.sceneLoaded += OnSceneLoaded;  // 씬 로드 시 이벤트 등록
-    }
-
-    public void PlayBGM(AudioClip clip) {
-        if (bgmSource.clip == clip) return; // 이미 같은 BGM이 재생 중일 경우 무시
-        bgmSource.clip = clip;
-        bgmSource.loop = true;
-        bgmSource.Play();
     }
 
     // 씬이 로드될 때 호출되는 메서드

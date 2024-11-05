@@ -34,7 +34,7 @@ public class Bullet : MonoBehaviour {
 
     #region mono funcs
 
-    private void OnEnable() {
+    protected void OnEnable() {
         _rigid = GetComponent<Rigidbody2D>();
         _rigid.velocity = transform.right * _fireSpeed;
         _timer = 0;
@@ -55,6 +55,8 @@ public class Bullet : MonoBehaviour {
                 if (collision.CompareTag("Player") && !_playerScript.CheckInvincible())
                     DamageToPlayer(collision);
                 else if (collision.GetComponent<Pillar>())
+                    Die();
+                else if (collision.CompareTag("Wall"))
                     Die();
             }
         }

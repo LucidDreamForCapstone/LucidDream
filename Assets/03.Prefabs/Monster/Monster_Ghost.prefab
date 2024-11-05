@@ -17,7 +17,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &4562011671272899229
 Transform:
   m_ObjectHideFlags: 0
@@ -93,7 +93,7 @@ GameObject:
   - component: {fileID: 9063362118200416871}
   - component: {fileID: 7110911660593533543}
   - component: {fileID: 3449715493766327855}
-  - component: {fileID: 6690282124604592220}
+  - component: {fileID: 6880923258550723889}
   m_Layer: 6
   m_Name: Monster_Ghost
   m_TagString: Enemy
@@ -146,6 +146,7 @@ MonoBehaviour:
   _patternNum: 1
   _attackStateList: 
   _isDead: 0
+  _isStun: 0
   _isSpawnComplete: 0
   _playerScript: {fileID: 0}
   _rigid: {fileID: 0}
@@ -153,13 +154,13 @@ MonoBehaviour:
   _animator: {fileID: 7110911660593533543}
   _useTree: 1
   _isBoss: 0
-  _bodyDamage: 10
   _hitSound: []
   _deathSound: {fileID: 0}
   _searchDist: 10
   _attackDist: 3
   _def: 15
   _damage: 15
+  _bodyDamage: 10
   _moveSpeed: 3
   _maxHp: 200
   _dieDelay: 4
@@ -270,8 +271,8 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
---- !u!61 &6690282124604592220
-BoxCollider2D:
+--- !u!70 &6880923258550723889
+CapsuleCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -302,19 +303,9 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: -0.23864636}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.44, y: 0.5}
-    oldSize: {x: 2.6875, y: 3.75}
-    newSize: {x: 1, y: 2}
-    adaptiveTilingThreshold: 0.5
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  serializedVersion: 2
-  m_Size: {x: 1, y: 1.6129622}
-  m_EdgeRadius: 0
+  m_Offset: {x: 0, y: 0}
+  m_Size: {x: 2, y: 3.4}
+  m_Direction: 0
 --- !u!1 &4095305951610435395
 GameObject:
   m_ObjectHideFlags: 0
