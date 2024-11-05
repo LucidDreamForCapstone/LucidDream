@@ -415,14 +415,12 @@ public class Player : MonoBehaviour {
             _phantomVolumeAnimator.gameObject.SetActive(true);
             SoundManager.Instance.SetSFXPitchLerp(_phantomTimeScale, _phantomLerpTime).Forget();
             SoundManager.Instance.SetBGMPitchLerp(0.5f, _phantomLerpTime).Forget();
-            SoundManager.Instance.SetBGMVolumeLerp(0.2f, _phantomLerpTime).Forget();
             await TimeScaleManager.Instance.TimeSlowLerp(_phantomTimeScale, _phantomLerpTime);
             while (!Input.GetKey(KeyCode.Space) && timer < _phantomLastTime && !_phantomForceCancelTrigger) {
                 timer += Time.deltaTime;
                 await UniTask.NextFrame();
             }
             DOTween.To(() => _phantomSpeedRate, x => _phantomSpeedRate = x, 1, _phantomLerpTime).ToUniTask().Forget();
-            SoundManager.Instance.SetBGMVolumeLerp(1.25f, _phantomLerpTime).Forget();
             SoundManager.Instance.SetBGMPitchLerp(1, _phantomLerpTime).Forget();
             SoundManager.Instance.SetSFXPitchLerp(1, _phantomLerpTime).Forget();
             _phantomVolumeAnimator.SetTrigger("End");
