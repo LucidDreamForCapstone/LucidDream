@@ -19,7 +19,6 @@ public class HomingBullet : ExplosiveBullet {
         float timer = 0;
         await UniTask.Delay(TimeSpan.FromSeconds(_homingStartTime));
         while (timer < _homingLastTime) {
-            //가만히 있으면 미사일이 빙빙도는데 이거 해결해라
             Vector2 lookAt = _playerScript.transform.position - transform.position;
             transform.right = Vector3.Slerp(transform.right, lookAt, timer * 0.003f);
             _rigid.velocity = transform.right * _fireSpeed;

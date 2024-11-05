@@ -16,6 +16,7 @@ public class BossBondrewd : MonsterBase {
     [SerializeField] GameObject _armTargetObj;
     [SerializeField] GameObject _missileTargetObj;
     [SerializeField] GameObject _explosionObj;
+    [SerializeField] GameObject _phantomGhostObj;
     [SerializeField] SpriteRenderer _legSr;
 
     [Header("\nBackStep")]
@@ -58,6 +59,10 @@ public class BossBondrewd : MonsterBase {
     [SerializeField] float _explosionPosInterval;
     [SerializeField] int _excludeCount;
     [SerializeField] Vector2 _explosionSizeHalf;
+    [Header("\nPhantom State")]
+    [SerializeField] float _ghostInterval;
+    [SerializeField] float _ghostLastTime;
+    [SerializeField] Color _ghostColor;
 
     bool _isBackStepReady;
     bool _isChaseReady;
@@ -65,10 +70,13 @@ public class BossBondrewd : MonsterBase {
     bool _isShootReady;
     bool _isMissileReady;
     bool _isChainExplosionReady;
+    bool _isPhantomActivated;
     Vector2[] _shootPos = { new Vector2(3.25f, -0.97f), new Vector2(-3.25f, -0.97f) };
     Vector2[] _missilePos = { new Vector2(-0.76f, 1.04f), new Vector2(0.76f, 1.04f) };
     Vector2 _chainExplosionCenterPos;
     List<Explosion> _explosionCache = new List<Explosion>();
+
+    private int _phantomMultiplier = 1;
 
     private void Start() {
         _isSpawnComplete = true;
@@ -78,6 +86,7 @@ public class BossBondrewd : MonsterBase {
         _attackFuncList.Add(ShootTask);
         _attackFuncList.Add(MissileTask);
         _attackFuncList.Add(ChainExplosionTask);
+        PhantomGhostEffect().Forget();
     }
 
     protected override void AttackMove() {
@@ -96,6 +105,7 @@ public class BossBondrewd : MonsterBase {
         }
     }
 
+    #region BackStep
     private async UniTaskVoid BackStepTask() {
         _isBackStepReady = false;
         BackStep().Forget();
@@ -111,6 +121,7 @@ public class BossBondrewd : MonsterBase {
         float duration = _backStepDist / _moveSpeed;
         SetFlipX(-backstepDir);
         _backStepEffect.SetActive(true);
+        _backStepEffect.GetComponent<Animator>().SetFloat("Phantom", _phantomMultiplier);
         _animator.SetBool("Run", true);
         await DOTween.To(() => _rigid.position, x => _rigid.MovePosition(x), endValue, duration);
         _animator.SetBool("Run", false);
@@ -120,6 +131,9 @@ public class BossBondrewd : MonsterBase {
         await UniTask.Delay(TimeSpan.FromSeconds(0.01f));
         _attackStateList[0] = AttackState.CoolTime;
     }
+    #endregion
+
+    #region Chase
     private async UniTaskVoid ChaseTask() {
         _isChaseReady = false;
         Chase().Forget();
@@ -135,6 +149,7 @@ public class BossBondrewd : MonsterBase {
         float duration = _chaseDist / _moveSpeed;
         SetFlipX(dashDir);
         _dashEffect.SetActive(true);
+        _dashEffect.GetComponent<Animator>().SetFloat("Phantom", _phantomMultiplier);
         _animator.SetBool("Run", true);
         await DOTween.To(() => _rigid.position, x => _rigid.MovePosition(x), endValue, duration);
         _animator.SetBool("Run", false);
@@ -145,6 +160,9 @@ public class BossBondrewd : MonsterBase {
         _attackStateList[1] = AttackState.CoolTime;
     }
 
+    #endregion
+
+    #region Rush
     private async UniTaskVoid RushTask() {
         _isRushReady = false;
         Rush().Forget();
@@ -175,6 +193,8 @@ public class BossBondrewd : MonsterBase {
         _bodyDamage = _rushDamage;
         _rushEffect.transform.right = rushDir;
         _rushEffect.SetActive(true);
+        _rushEffect.GetComponent<Animator>().SetFloat("Phantom", _phantomMultiplier);
+
         SetFlipX(rushDir);
         _animator.SetBool("Run", true);
         await DOTween.To(() => _rigid.position, x => _rigid.MovePosition(x), endValue, duration);
@@ -187,6 +207,9 @@ public class BossBondrewd : MonsterBase {
         _attackStateList[2] = AttackState.CoolTime;
     }
 
+    #endregion
+
+    #region Shoot
     private async UniTaskVoid ShootTask() {
         _isShootReady = false;
         Shoot().Forget();
@@ -207,10 +230,10 @@ public class BossBondrewd : MonsterBase {
                 float x = Random.Range(-_shootDispersionRate, _shootDispersionRate);
                 float y = Random.Range(-_shootDispersionRate, _shootDispersionRate);
                 FireBullet(fireDir, new Vector2(x, y));
-                await UniTask.Delay(TimeSpan.FromSeconds(_bulletInterval));
+                await UniTask.Delay(TimeSpan.FromSeconds(_bulletInterval / _phantomMultiplier));
             }
             cnt++;
-            await UniTask.Delay(TimeSpan.FromSeconds(_shootInterval));
+            await UniTask.Delay(TimeSpan.FromSeconds(_shootInterval / _phantomMultiplier));
         }
         _attackStateList[3] = AttackState.Finished;
         await UniTask.Delay(TimeSpan.FromSeconds(0.01f));
@@ -243,6 +266,9 @@ public class BossBondrewd : MonsterBase {
         projectile.SetActive(true);
     }
 
+    #endregion
+
+    #region Missile
     private async UniTaskVoid MissileTask() {
         _isMissileReady = false;
         Missile().Forget();
@@ -256,7 +282,10 @@ public class BossBondrewd : MonsterBase {
         for (int i = 0; i < _missileCount; i++) {
             _animator.SetTrigger("Missile");
             FireHomingExplosive();
-            await UniTask.Delay(TimeSpan.FromSeconds(_missileInterval));
+            if (_isPhantomActivated)
+                await UniTask.Delay(TimeSpan.FromSeconds(_missileInterval / _phantomMultiplier));
+            else
+                await UniTask.Delay(TimeSpan.FromSeconds(_missileInterval));
         }
         _attackStateList[4] = AttackState.Finished;
         await UniTask.Delay(TimeSpan.FromSeconds(0.01f));
@@ -282,6 +311,9 @@ public class BossBondrewd : MonsterBase {
         projectile.SetActive(true);
     }
 
+    #endregion
+
+    #region Explosion
     private async UniTaskVoid ChainExplosionTask() {
         _isChainExplosionReady = false;
         ChainExplosion().Forget();
@@ -344,9 +376,40 @@ public class BossBondrewd : MonsterBase {
         _attackStateList[5] = AttackState.CoolTime;
     }
 
+    #endregion
+
     private async UniTaskVoid Groggy() {
         _animator.SetTrigger("Groggy");
     }
+
+    #region Phantom State
+    private async UniTaskVoid PhantomGhostEffect() {
+        _isPhantomActivated = true;
+        _phantomMultiplier = 4;
+        _animator.SetFloat("Phantom", _phantomMultiplier);
+        _moveSpeed *= _phantomMultiplier;
+        while (_isPhantomActivated) {
+            SinglePhantomGhost().Forget();
+            await UniTask.Delay(TimeSpan.FromSeconds(_ghostInterval));
+        }
+        _phantomMultiplier = 1;
+        _animator.SetFloat("Phantom", _phantomMultiplier);
+        _moveSpeed *= _phantomMultiplier;
+    }
+
+    private async UniTaskVoid SinglePhantomGhost() {
+        GameObject ghostEffect = ObjectPool.Instance.GetObject(_phantomGhostObj);
+        SpriteRenderer sr = ghostEffect.GetComponent<SpriteRenderer>();
+        sr.color = _ghostColor;
+        //sr.sprite = _spriteRenderer.sprite;      
+        sr.flipX = _spriteRenderer.flipX;
+        ghostEffect.transform.position = transform.position;
+        ghostEffect.SetActive(true);
+        await sr.DOFade(0, _ghostLastTime);
+        ObjectPool.Instance.ReturnObject(ghostEffect);
+    }
+
+    #endregion
 
     private float CalculateManhattanDist(Vector2 a, Vector2 b) {
         return Mathf.Abs(a.x - b.x) + Mathf.Abs(a.y - b.y);
