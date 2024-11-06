@@ -14,6 +14,7 @@ public class BossBondrewd : MonsterBase {
     [SerializeField] GameObject _rushEffect;
     [SerializeField] GameObject _backStepEffect;
     [SerializeField] GameObject _chargingEffect;
+    [SerializeField] GameObject _groggyEffect;
     [SerializeField] GameObject _bulletObj;
     [SerializeField] GameObject _missileObj;
     [SerializeField] GameObject _armTargetObj;
@@ -174,6 +175,15 @@ public class BossBondrewd : MonsterBase {
             _isPhase3Reached = true;
         }
         UpdateHpSlider();
+    }
+
+    public async override UniTaskVoid Stun(float lastTime, float offsetY = 2) {
+        _cts.Cancel();
+        base.Stun(lastTime, 2).Forget();
+        await UniTask.Delay(TimeSpan.FromSeconds(lastTime));
+        _cts.Dispose();
+        _cts = null;
+        _cts = new CancellationTokenSource();
     }
 
     #endregion
@@ -570,7 +580,7 @@ public class BossBondrewd : MonsterBase {
     public void DecreaseGroggyGauge() {
         _groggyGauge -= _groggyDecreaseAmount;
         UpdateGroggySlider();
-        if (_groggyGauge < 0 && !_isGroggy) {
+        if (_groggyGauge <= 0 && !_isGroggy) {
             _groggyGauge = 0;
             Groggy().Forget();
         }
@@ -581,17 +591,21 @@ public class BossBondrewd : MonsterBase {
         _isGroggy = true;
         _cts.Cancel();
         _useTree = false;
+        _groggyEffect.SetActive(true);
+        StateEffectManager.Instance.SummonEffect(transform, StateType.Confusion, 3, _groggyLastTime, 3).Forget();
         await UniTask.Delay(TimeSpan.FromSeconds(_groggyLastTime));
         _cts.Dispose();
         _cts = null;
         _cts = new CancellationTokenSource();
+        _groggyEffect.SetActive(false);
+        await UniTask.Delay(TimeSpan.FromSeconds(1));
         _isGroggy = false;
         _useTree = true;
         Debug.Log("Groggy End");
         while (_groggyGauge < 100) {
             _groggyGauge += 1f;
             UpdateGroggySlider();
-            await UniTask.Delay(TimeSpan.FromSeconds(0.01f));
+            await UniTask.Delay(TimeSpan.FromSeconds(0.03f));
         }
         _groggyGauge = 100;
     }

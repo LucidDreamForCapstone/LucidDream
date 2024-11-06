@@ -30,9 +30,12 @@ public class StateEffectManager : MonoBehaviour {
 
     #region public funcs
 
-    public async UniTaskVoid SummonEffect(Transform caster, StateType stateType, float offsetY, float lastTime) {
+    public async UniTaskVoid SummonEffect(Transform caster, StateType stateType, float offsetY, float lastTime, float scale = 1) {
         GameObject stateEffect = Instantiate(_stateObjs[(int)stateType], caster);
         stateEffect.transform.localPosition = Vector3.up * offsetY;
+        if (stateType == StateType.Confusion) {
+            stateEffect.transform.GetChild(0).GetChild(0).localScale = new Vector3(scale, scale, 1);
+        }
         await UniTask.Delay(TimeSpan.FromSeconds(lastTime));
         Destroy(stateEffect);
     }
