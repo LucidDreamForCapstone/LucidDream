@@ -3,6 +3,7 @@ using DG.Tweening;
 using System;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using Random = UnityEngine.Random;
 
 public class BossBondrewd : MonsterBase {
@@ -18,6 +19,9 @@ public class BossBondrewd : MonsterBase {
     [SerializeField] GameObject _explosionObj;
     [SerializeField] GameObject _phantomGhostObj;
     [SerializeField] SpriteRenderer _legSr;
+    [SerializeField] Slider _hpSlider;
+    [SerializeField] Color _phase2HpColor;
+    [SerializeField] Color _phase3HpColor;
 
     [Header("\nBackStep")]
     [SerializeField] float _backStepCooltime;
@@ -71,6 +75,9 @@ public class BossBondrewd : MonsterBase {
     bool _isMissileReady;
     bool _isChainExplosionReady;
     bool _isPhantomActivated;
+    bool _isPhase2Reached;
+    bool _isPhase3Reached;
+    int _currentPhaseNum;
     Vector2[] _shootPos = { new Vector2(3.25f, -0.97f), new Vector2(-3.25f, -0.97f) };
     Vector2[] _missilePos = { new Vector2(-0.76f, 1.04f), new Vector2(0.76f, 1.04f) };
     Vector2 _chainExplosionCenterPos;
@@ -87,6 +94,9 @@ public class BossBondrewd : MonsterBase {
         _attackFuncList.Add(MissileTask);
         _attackFuncList.Add(ChainExplosionTask);
         PhantomGhostEffect().Forget();
+        _isPhase2Reached = false;
+        _isPhase3Reached = false;
+        _currentPhaseNum = 1;
     }
 
     protected override void AttackMove() {
@@ -103,6 +113,24 @@ public class BossBondrewd : MonsterBase {
             _legSr.color = Color.white;
             _isColorChanged = false;
         }
+    }
+
+    public override void Damaged(int dmg, bool isCrit)//플레이어 공격에 데미지를 입음
+    {
+        base.Damaged(dmg, isCrit);
+        if (!_isPhase2Reached && CheckHpRatio(2.0f / 3.0f)) {
+            _hpSlider.fillRect.GetComponent<Image>().color = _phase2HpColor;
+            _hpSlider.transform.GetChild(0).GetComponent<Image>().color = _phase3HpColor;
+            _currentPhaseNum = 2;
+            _isPhase2Reached = true;
+        }
+        else if (!_isPhase3Reached && _isPhase2Reached && CheckHpRatio(1.0f / 3.0f)) {
+            _hpSlider.fillRect.GetComponent<Image>().color = _phase3HpColor;
+            _hpSlider.transform.GetChild(0).GetComponent<Image>().color = Color.white;
+            _currentPhaseNum = 3;
+            _isPhase3Reached = true;
+        }
+        UpdateHpSlider();
     }
 
     #region BackStep
@@ -434,5 +462,24 @@ public class BossBondrewd : MonsterBase {
             _backStepEffect.GetComponent<SpriteRenderer>().flipX = true;
         }
 
+    }
+
+    private void UpdateHpSlider() {
+        int phaseCount = 3 - _currentPhaseNum;
+        float maxHp = _maxHp / 3;
+        float hp = _hp - maxHp * phaseCount;
+        _hpSlider.value = hp / maxHp;
+    }
+
+    /// <summary>
+    /// Check if current Hp ratio is less than input ratio
+    /// </summary>
+    /// <param name="ratio"></param>
+    /// <returns></returns>
+    private bool CheckHpRatio(float ratio) {
+        if ((float)_hp / (float)_maxHp < ratio)
+            return true;
+        else
+            return false;
     }
 }
