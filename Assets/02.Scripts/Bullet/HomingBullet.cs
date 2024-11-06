@@ -6,14 +6,13 @@ public class HomingBullet : ExplosiveBullet {
     float _homingStartTime;
     float _homingLastTime;
 
-    new private void OnEnable() {
+    protected override void OnEnable() {
         base.OnEnable();
         Homing().Forget();
     }
 
     public void SetHomingStartTime(float starttime) { _homingStartTime = starttime; }
     public void SetHomingLastTime(float lasttime) { _homingLastTime = lasttime; }
-
 
     private async UniTaskVoid Homing() {
         float timer = 0;

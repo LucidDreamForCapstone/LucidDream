@@ -2,11 +2,13 @@
 using DG.Tweening;
 using System;
 using System.Collections.Generic;
+using System.Threading;
 using UnityEngine;
 using UnityEngine.UI;
 using Random = UnityEngine.Random;
 
 public class BossBondrewd : MonsterBase {
+    #region Serialize Field
     [SerializeField] GameObject _dashEffect;
     [SerializeField] GameObject _rushWarningEffect;
     [SerializeField] GameObject _rushEffect;
@@ -18,11 +20,16 @@ public class BossBondrewd : MonsterBase {
     [SerializeField] GameObject _missileTargetObj;
     [SerializeField] GameObject _explosionObj;
     [SerializeField] GameObject _phantomGhostObj;
+    //[SerializeField] List<GameObject> _chargerList; after change class to charger
+
     [SerializeField] SpriteRenderer _legSr;
     [SerializeField] Slider _hpSlider;
+    [SerializeField] Slider _phantomGaugeSlider;
+    [SerializeField] Slider _groggySlider;
     [SerializeField] Color _phase2HpColor;
     [SerializeField] Color _phase3HpColor;
-
+    [SerializeField] Color _phantomGaugeActivateColor;
+    [SerializeField] Color _phantomGaugeDeactivateColor;
     [Header("\nBackStep")]
     [SerializeField] float _backStepCooltime;
     [SerializeField] float _backStepDist;
@@ -55,6 +62,7 @@ public class BossBondrewd : MonsterBase {
     [SerializeField] float _homingLastTime;
     [SerializeField] int _missileDamage;
     [SerializeField] float _explodeRadius;
+    [SerializeField] int _groggyDecreaseAmount;
     [Header("\nChain Explosion")]
     [SerializeField] float _explosionCooltime;
     [SerializeField] int _explosionDamage;
@@ -67,25 +75,47 @@ public class BossBondrewd : MonsterBase {
     [SerializeField] float _ghostInterval;
     [SerializeField] float _ghostLastTime;
     [SerializeField] Color _ghostColor;
+    [SerializeField] int _phantomGaugeIncreaseAmount;
+    [SerializeField] int _phantomGaugeDecreaseAmount;
+    [SerializeField] float _phantomGaugeUpdateInterval;
+    [Header("\nGroggy State")]
+    [SerializeField] float _groggyLastTime;
+    #endregion
 
+    #region Private variables
+    CancellationTokenSource _cts;
     bool _isBackStepReady;
     bool _isChaseReady;
     bool _isRushReady;
     bool _isShootReady;
     bool _isMissileReady;
     bool _isChainExplosionReady;
-    bool _isPhantomActivated;
     bool _isPhase2Reached;
     bool _isPhase3Reached;
+    bool _isGroggy;
     int _currentPhaseNum;
+    float _phantomGauge;
+    float _groggyGauge;
+    int _currentActivatedChargerCount;
     Vector2[] _shootPos = { new Vector2(3.25f, -0.97f), new Vector2(-3.25f, -0.97f) };
     Vector2[] _missilePos = { new Vector2(-0.76f, 1.04f), new Vector2(0.76f, 1.04f) };
     Vector2 _chainExplosionCenterPos;
     List<Explosion> _explosionCache = new List<Explosion>();
 
-    private int _phantomMultiplier = 1;
+    int _phantomMultiplier;
+    PhantomState _currentPhantomState;
+    float _phantomTimer;
 
+    enum PhantomState {
+        DeActivated,
+        Activated
+    }
+
+    #endregion
+
+    #region Mono funcs
     private void Start() {
+        _cts = new CancellationTokenSource();
         _isSpawnComplete = true;
         _attackFuncList.Add(BackStepTask);
         _attackFuncList.Add(ChaseTask);
@@ -93,12 +123,25 @@ public class BossBondrewd : MonsterBase {
         _attackFuncList.Add(ShootTask);
         _attackFuncList.Add(MissileTask);
         _attackFuncList.Add(ChainExplosionTask);
-        PhantomGhostEffect().Forget();
         _isPhase2Reached = false;
         _isPhase3Reached = false;
         _currentPhaseNum = 1;
+        _phantomMultiplier = 1;
+        _animator.SetFloat("Phantom", _phantomMultiplier);
+        _phantomGauge = 0;
+        _currentPhantomState = PhantomState.DeActivated;
+        _phantomTimer = 0;
+        _currentActivatedChargerCount = 1; //Temp
+        _groggyGauge = 100;
+        UpdateGroggySlider();
     }
+    new private void Update() {
+        base.Update();
+        PhantomManage();
+    }
+    #endregion
 
+    #region Protected Funcs
     protected override void AttackMove() {
     }
 
@@ -133,6 +176,8 @@ public class BossBondrewd : MonsterBase {
         UpdateHpSlider();
     }
 
+    #endregion
+
     #region BackStep
     private async UniTaskVoid BackStepTask() {
         _isBackStepReady = false;
@@ -151,13 +196,19 @@ public class BossBondrewd : MonsterBase {
         _backStepEffect.SetActive(true);
         _backStepEffect.GetComponent<Animator>().SetFloat("Phantom", _phantomMultiplier);
         _animator.SetBool("Run", true);
-        await DOTween.To(() => _rigid.position, x => _rigid.MovePosition(x), endValue, duration);
-        _animator.SetBool("Run", false);
-        _backStepEffect.SetActive(false);
-        _rigid.velocity = Vector2.zero;
-        _attackStateList[0] = AttackState.Finished;
-        await UniTask.Delay(TimeSpan.FromSeconds(0.01f));
-        _attackStateList[0] = AttackState.CoolTime;
+        try {
+            await DOTween.To(() => _rigid.position, x => _rigid.MovePosition(x), endValue, duration).WithCancellation(_cts.Token);
+        }
+        catch (OperationCanceledException) {
+        }
+        finally {
+            _animator.SetBool("Run", false);
+            _backStepEffect.SetActive(false);
+            _rigid.velocity = Vector2.zero;
+            _attackStateList[0] = AttackState.Finished;
+            await UniTask.Delay(TimeSpan.FromSeconds(0.01f));
+            _attackStateList[0] = AttackState.CoolTime;
+        }
     }
     #endregion
 
@@ -179,13 +230,19 @@ public class BossBondrewd : MonsterBase {
         _dashEffect.SetActive(true);
         _dashEffect.GetComponent<Animator>().SetFloat("Phantom", _phantomMultiplier);
         _animator.SetBool("Run", true);
-        await DOTween.To(() => _rigid.position, x => _rigid.MovePosition(x), endValue, duration);
-        _animator.SetBool("Run", false);
-        _dashEffect.SetActive(false);
-        _rigid.velocity = Vector2.zero;
-        _attackStateList[1] = AttackState.Finished;
-        await UniTask.Delay(TimeSpan.FromSeconds(0.01f));
-        _attackStateList[1] = AttackState.CoolTime;
+        try {
+            await DOTween.To(() => _rigid.position, x => _rigid.MovePosition(x), endValue, duration).WithCancellation(_cts.Token);
+        }
+        catch (OperationCanceledException) {
+        }
+        finally {
+            _animator.SetBool("Run", false);
+            _dashEffect.SetActive(false);
+            _rigid.velocity = Vector2.zero;
+            _attackStateList[1] = AttackState.Finished;
+            await UniTask.Delay(TimeSpan.FromSeconds(0.01f));
+            _attackStateList[1] = AttackState.CoolTime;
+        }
     }
 
     #endregion
@@ -203,36 +260,42 @@ public class BossBondrewd : MonsterBase {
         _attackStateList[2] = AttackState.Attacking;
         _rushWarningEffect.SetActive(true);
         float timer = 0;
-        while (timer < _rushWarningTime - 1) {
-            Vector2 tempDir = _playerScript.transform.position - transform.position;
-            SetFlipX(tempDir);
-            _rushWarningEffect.transform.right = tempDir;
-            timer += Time.deltaTime;
-            await UniTask.NextFrame();
-        }
-
-        Vector2 rushDir = (_playerScript.transform.position - transform.position).normalized;
-        Vector2 endValue = (Vector2)transform.position + rushDir * _rushDist;
-        float duration = _rushDist / _moveSpeed;
-        await UniTask.Delay(TimeSpan.FromSeconds(1));
-        _rushWarningEffect.SetActive(false);
-
         int originBodyDamage = _bodyDamage;
-        _bodyDamage = _rushDamage;
-        _rushEffect.transform.right = rushDir;
-        _rushEffect.SetActive(true);
-        _rushEffect.GetComponent<Animator>().SetFloat("Phantom", _phantomMultiplier);
+        try {
+            while (timer < _rushWarningTime - 1) {
+                Vector2 tempDir = _playerScript.transform.position - transform.position;
+                SetFlipX(tempDir);
+                _rushWarningEffect.transform.right = tempDir;
+                timer += Time.deltaTime;
+                await UniTask.NextFrame(_cts.Token);
+            }
 
-        SetFlipX(rushDir);
-        _animator.SetBool("Run", true);
-        await DOTween.To(() => _rigid.position, x => _rigid.MovePosition(x), endValue, duration);
-        _animator.SetBool("Run", false);
-        _rushEffect.SetActive(false);
-        _rigid.velocity = Vector2.zero;
-        _bodyDamage = originBodyDamage;
-        _attackStateList[2] = AttackState.Finished;
-        await UniTask.Delay(TimeSpan.FromSeconds(0.01f));
-        _attackStateList[2] = AttackState.CoolTime;
+            Vector2 rushDir = (_playerScript.transform.position - transform.position).normalized;
+            Vector2 endValue = (Vector2)transform.position + rushDir * _rushDist;
+            float duration = _rushDist / _moveSpeed;
+            await UniTask.Delay(TimeSpan.FromSeconds(1), cancellationToken: _cts.Token);
+            _rushWarningEffect.SetActive(false);
+            _bodyDamage = _rushDamage;
+            _rushEffect.transform.right = rushDir;
+            _rushEffect.SetActive(true);
+            _rushEffect.GetComponent<Animator>().SetFloat("Phantom", _phantomMultiplier);
+
+            SetFlipX(rushDir);
+            _animator.SetBool("Run", true);
+            await DOTween.To(() => _rigid.position, x => _rigid.MovePosition(x), endValue, duration).WithCancellation(_cts.Token);
+        }
+        catch (OperationCanceledException) {
+            _rushWarningEffect.SetActive(false);
+        }
+        finally {
+            _animator.SetBool("Run", false);
+            _rushEffect.SetActive(false);
+            _rigid.velocity = Vector2.zero;
+            _bodyDamage = originBodyDamage;
+            _attackStateList[2] = AttackState.Finished;
+            await UniTask.Delay(TimeSpan.FromSeconds(0.01f));
+            _attackStateList[2] = AttackState.CoolTime;
+        }
     }
 
     #endregion
@@ -249,23 +312,31 @@ public class BossBondrewd : MonsterBase {
     private async UniTaskVoid Shoot() {
         _attackStateList[3] = AttackState.Attacking;
         int cnt = 0;
-        while (cnt < _shootCount) {
-            MoveSide().Forget();
-            _animator.SetTrigger("ShootRun");
-            Vector3 fireDir = _playerScript.transform.position - _armTargetObj.transform.position;
-            SetFlipX(fireDir);
-            for (int i = 0; i < _bulletCount; i++) {
-                float x = Random.Range(-_shootDispersionRate, _shootDispersionRate);
-                float y = Random.Range(-_shootDispersionRate, _shootDispersionRate);
-                FireBullet(fireDir, new Vector2(x, y));
-                await UniTask.Delay(TimeSpan.FromSeconds(_bulletInterval / _phantomMultiplier));
+        try {
+            while (cnt < _shootCount) {
+                MoveSide().Forget();
+                _animator.SetTrigger("ShootRun");
+                Vector3 fireDir = _playerScript.transform.position - _armTargetObj.transform.position;
+                Vector3 lookAt = _playerScript.transform.position - transform.position;
+                SetFlipX(lookAt);
+                for (int i = 0; i < _bulletCount; i++) {
+                    float x = Random.Range(-_shootDispersionRate, _shootDispersionRate);
+                    float y = Random.Range(-_shootDispersionRate, _shootDispersionRate);
+                    FireBullet(fireDir, new Vector2(x, y));
+                    await UniTask.Delay(TimeSpan.FromSeconds(_bulletInterval / _phantomMultiplier), cancellationToken: _cts.Token);
+                }
+                cnt++;
+                await UniTask.Delay(TimeSpan.FromSeconds(_shootInterval / _phantomMultiplier), cancellationToken: _cts.Token);
             }
-            cnt++;
-            await UniTask.Delay(TimeSpan.FromSeconds(_shootInterval / _phantomMultiplier));
+
         }
-        _attackStateList[3] = AttackState.Finished;
-        await UniTask.Delay(TimeSpan.FromSeconds(0.01f));
-        _attackStateList[3] = AttackState.CoolTime;
+        catch (OperationCanceledException) {
+        }
+        finally {
+            _attackStateList[3] = AttackState.Finished;
+            await UniTask.Delay(TimeSpan.FromSeconds(0.01f));
+            _attackStateList[3] = AttackState.CoolTime;
+        }
     }
     private async UniTaskVoid MoveSide() {
         Vector2 shootVec = _playerScript.transform.position - transform.position;
@@ -276,8 +347,14 @@ public class BossBondrewd : MonsterBase {
         }
         Vector2 endValue = (Vector2)transform.position + sideDir * _sideDist;
         float duration = _sideDist / _moveSpeed * 2;
-        await DOTween.To(() => _rigid.position, x => _rigid.MovePosition(x), endValue, duration);
-        _rigid.velocity = Vector2.zero;
+        try {
+            await DOTween.To(() => _rigid.position, x => _rigid.MovePosition(x), endValue, duration).WithCancellation(_cts.Token);
+        }
+        catch (OperationCanceledException) {
+        }
+        finally {
+            _rigid.velocity = Vector2.zero;
+        }
     }
 
     private void FireBullet(Vector3 dir, Vector3 offsetDir) {
@@ -307,22 +384,25 @@ public class BossBondrewd : MonsterBase {
 
     private async UniTaskVoid Missile() {
         _attackStateList[4] = AttackState.Attacking;
-        for (int i = 0; i < _missileCount; i++) {
-            _animator.SetTrigger("Missile");
-            FireHomingExplosive();
-            if (_isPhantomActivated)
-                await UniTask.Delay(TimeSpan.FromSeconds(_missileInterval / _phantomMultiplier));
-            else
-                await UniTask.Delay(TimeSpan.FromSeconds(_missileInterval));
+        try {
+            for (int i = 0; i < _missileCount; i++) {
+                _animator.SetTrigger("Missile");
+                FireHomingExplosive();
+                await UniTask.Delay(TimeSpan.FromSeconds(_missileInterval / _phantomMultiplier), cancellationToken: _cts.Token);
+            }
         }
-        _attackStateList[4] = AttackState.Finished;
-        await UniTask.Delay(TimeSpan.FromSeconds(0.01f));
-        _attackStateList[4] = AttackState.CoolTime;
+        catch (OperationCanceledException) {
+        }
+        finally {
+            _attackStateList[4] = AttackState.Finished;
+            await UniTask.Delay(TimeSpan.FromSeconds(0.01f));
+            _attackStateList[4] = AttackState.CoolTime;
+        }
     }
 
     private void FireHomingExplosive() {
         GameObject projectile = ObjectPool.Instance.GetObject(_missileObj);
-        HomingBullet projectileScript = projectile.GetComponent<HomingBullet>();
+        BondrewdMissile projectileScript = projectile.GetComponent<BondrewdMissile>();
         Vector2 targetDir = _playerScript.transform.position - transform.position;
         SetFlipX(targetDir);
         projectile.transform.right = Vector2.right;
@@ -338,7 +418,6 @@ public class BossBondrewd : MonsterBase {
         projectileScript.SetHomingLastTime(_homingLastTime);
         projectile.SetActive(true);
     }
-
     #endregion
 
     #region Explosion
@@ -354,75 +433,122 @@ public class BossBondrewd : MonsterBase {
         _attackStateList[5] = AttackState.Attacking;
         float duration = CalculateManhattanDist(transform.position, _chainExplosionCenterPos) / _moveSpeed;
         SetFlipX(_chainExplosionCenterPos - (Vector2)transform.position);
-        await DOTween.To(() => _rigid.position, x => _rigid.MovePosition(x), _chainExplosionCenterPos, duration);
-        SetFlipX(Vector2.left);
-        _chargingEffect.GetComponent<SpriteRenderer>().color = Color.white;
-        _chargingEffect.SetActive(true);
-        List<Vector2> excludePosList = new List<Vector2>();
-        for (int i = 0; i < _excludeCount; i++) {
-            int x = Random.Range(-(int)_explosionSizeHalf.x, (int)_explosionSizeHalf.x + 1);
-            int y = Random.Range(-(int)_explosionSizeHalf.y, (int)_explosionSizeHalf.y + 1);
-            excludePosList.Add(new Vector2(x, y));
-        }
+        _animator.SetBool("Run", true);
+        try {
+            await DOTween.To(() => _rigid.position, x => _rigid.MovePosition(x), _chainExplosionCenterPos, duration).WithCancellation(_cts.Token);
+            _animator.SetBool("Run", false);
+            SetFlipX(Vector2.left);
+            _chargingEffect.GetComponent<SpriteRenderer>().color = Color.white;
+            _chargingEffect.SetActive(true);
+            List<Vector2> excludePosList = new List<Vector2>();
+            for (int i = 0; i < _excludeCount; i++) {
+                int x = Random.Range(-(int)_explosionSizeHalf.x, (int)_explosionSizeHalf.x + 1);
+                int y = Random.Range(-(int)_explosionSizeHalf.y, (int)_explosionSizeHalf.y + 1);
+                excludePosList.Add(new Vector2(x, y));
+            }
 
-        for (int i = (int)-_explosionSizeHalf.x; i < _explosionSizeHalf.x; i++) {
-            for (int j = (int)-_explosionSizeHalf.y; j < _explosionSizeHalf.y; j++) {
-                bool isExcludedPos = false;
-                for (int k = 0; k < excludePosList.Count; k++) {
-                    if (excludePosList[k].x == i && excludePosList[k].y == j) {
-                        isExcludedPos = true;
-                        break;
+            for (int i = (int)-_explosionSizeHalf.x; i < _explosionSizeHalf.x; i++) {
+                for (int j = (int)-_explosionSizeHalf.y; j < _explosionSizeHalf.y; j++) {
+                    bool isExcludedPos = false;
+                    for (int k = 0; k < excludePosList.Count; k++) {
+                        if (excludePosList[k].x == i && excludePosList[k].y == j) {
+                            isExcludedPos = true;
+                            break;
+                        }
+                    }
+
+                    if (!isExcludedPos) {
+                        var explosion = ObjectPool.Instance.GetObject(_explosionObj);
+                        _explosionCache.Add(explosion.GetComponent<Explosion>());
+                        explosion.transform.position = transform.position + new Vector3(i, j) * _explosionPosInterval;
+                        explosion.SetActive(true);
                     }
                 }
-
-                if (!isExcludedPos) {
-                    var explosion = ObjectPool.Instance.GetObject(_explosionObj);
-                    _explosionCache.Add(explosion.GetComponent<Explosion>());
-                    explosion.transform.position = transform.position + new Vector3(i, j) * _explosionPosInterval;
-                    explosion.SetActive(true);
-                }
             }
+            await UniTask.Delay(TimeSpan.FromSeconds(_explosionWarningTime), cancellationToken: _cts.Token);
+            for (int i = 0; i < _explosionCache.Count; i++) {
+                _explosionCache[i].SetPlayer(_playerScript);
+                _explosionCache[i].SetDamage(_explosionDamage);
+                _explosionCache[i].ExplodeTrigger();
+            }
+            await UniTask.Delay(TimeSpan.FromSeconds(_explosionLastTime), cancellationToken: _cts.Token);
         }
-        await UniTask.Delay(TimeSpan.FromSeconds(_explosionWarningTime));
-        for (int i = 0; i < _explosionCache.Count; i++) {
-            _explosionCache[i].SetPlayer(_playerScript);
-            _explosionCache[i].SetDamage(_explosionDamage);
-            _explosionCache[i].ExplodeTrigger();
+        catch (OperationCanceledException) {
         }
-        await UniTask.Delay(TimeSpan.FromSeconds(_explosionLastTime));
-        for (int i = 0; i < _explosionCache.Count; i++) {
-            _explosionCache[i].FadeTrigger();
-        }
-        await UniTask.Delay(TimeSpan.FromSeconds(1));
-        for (int i = 0; i < _explosionCache.Count; i++) {
-            ObjectPool.Instance.ReturnObject(_explosionCache[i].gameObject);
-        }
-        _chargingEffect.GetComponent<SpriteRenderer>().DOFade(0, 1).ToUniTask().Forget();
+        finally {
+            for (int i = 0; i < _explosionCache.Count; i++) {
+                _explosionCache[i].FadeTrigger();
+            }
+            await UniTask.Delay(TimeSpan.FromSeconds(1));
+            for (int i = 0; i < _explosionCache.Count; i++) {
+                ObjectPool.Instance.ReturnObject(_explosionCache[i].gameObject);
+            }
+            _chargingEffect.GetComponent<SpriteRenderer>().DOFade(0, 1).ToUniTask().Forget();
 
-        _attackStateList[5] = AttackState.Finished;
-        await UniTask.Delay(TimeSpan.FromSeconds(0.01f));
-        _attackStateList[5] = AttackState.CoolTime;
+            _attackStateList[5] = AttackState.Finished;
+            await UniTask.Delay(TimeSpan.FromSeconds(0.01f));
+            _attackStateList[5] = AttackState.CoolTime;
+        }
     }
 
     #endregion
 
-    private async UniTaskVoid Groggy() {
-        _animator.SetTrigger("Groggy");
-    }
-
     #region Phantom State
+
+    private void PhantomManage() {
+        switch (_currentPhantomState) {
+            case PhantomState.DeActivated:
+                if (_phantomGauge > 100) {
+                    _phantomTimer = 0;
+                    _currentPhantomState = PhantomState.Activated;
+                    _phantomGauge = 100;
+                    _phantomGaugeSlider.fillRect.GetComponent<Image>().color = _phantomGaugeActivateColor;
+
+                    _phantomMultiplier = 4;
+                    _animator.SetFloat("Phantom", _phantomMultiplier);
+                    _moveSpeed *= _phantomMultiplier;
+
+                    PhantomGhostEffect().Forget();
+                }
+
+                if (_phantomTimer < _phantomGaugeUpdateInterval) {
+                    _phantomTimer += Time.deltaTime;
+                }
+                else {
+                    _phantomGauge += _phantomGaugeIncreaseAmount * _currentActivatedChargerCount * 0.01f;
+                    UpdatePhantomGaugeSlider();
+                    _phantomTimer = 0;
+                }
+
+                break;
+            case PhantomState.Activated:
+                if (_phantomGauge < 0) {
+                    _phantomTimer = 0;
+                    _currentPhantomState = PhantomState.DeActivated;
+                    _phantomGauge = 0;
+                    _phantomGaugeSlider.fillRect.GetComponent<Image>().color = _phantomGaugeDeactivateColor;
+
+                    _moveSpeed /= _phantomMultiplier;
+                    _phantomMultiplier = 1;
+                    _animator.SetFloat("Phantom", _phantomMultiplier);
+                }
+
+                if (_phantomTimer < _phantomGaugeUpdateInterval) {
+                    _phantomTimer += Time.deltaTime;
+                }
+                else {
+                    _phantomGauge -= _phantomGaugeDecreaseAmount * 0.01f;
+                    UpdatePhantomGaugeSlider();
+                    _phantomTimer = 0;
+                }
+                break;
+        }
+    }
     private async UniTaskVoid PhantomGhostEffect() {
-        _isPhantomActivated = true;
-        _phantomMultiplier = 4;
-        _animator.SetFloat("Phantom", _phantomMultiplier);
-        _moveSpeed *= _phantomMultiplier;
-        while (_isPhantomActivated) {
+        while (_currentPhantomState == PhantomState.Activated) {
             SinglePhantomGhost().Forget();
             await UniTask.Delay(TimeSpan.FromSeconds(_ghostInterval));
         }
-        _phantomMultiplier = 1;
-        _animator.SetFloat("Phantom", _phantomMultiplier);
-        _moveSpeed *= _phantomMultiplier;
     }
 
     private async UniTaskVoid SinglePhantomGhost() {
@@ -439,6 +565,39 @@ public class BossBondrewd : MonsterBase {
 
     #endregion
 
+    #region Groggy State
+
+    public void DecreaseGroggyGauge() {
+        _groggyGauge -= _groggyDecreaseAmount;
+        UpdateGroggySlider();
+        if (_groggyGauge < 0 && !_isGroggy) {
+            _groggyGauge = 0;
+            Groggy().Forget();
+        }
+    }
+
+    private async UniTaskVoid Groggy() {
+        Debug.Log("Groggy Start");
+        _isGroggy = true;
+        _cts.Cancel();
+        _useTree = false;
+        await UniTask.Delay(TimeSpan.FromSeconds(_groggyLastTime));
+        _cts.Dispose();
+        _cts = null;
+        _cts = new CancellationTokenSource();
+        _isGroggy = false;
+        _useTree = true;
+        Debug.Log("Groggy End");
+        while (_groggyGauge < 100) {
+            _groggyGauge += 1f;
+            UpdateGroggySlider();
+            await UniTask.Delay(TimeSpan.FromSeconds(0.01f));
+        }
+        _groggyGauge = 100;
+    }
+
+    #endregion
+    #region Util funcs
     private float CalculateManhattanDist(Vector2 a, Vector2 b) {
         return Mathf.Abs(a.x - b.x) + Mathf.Abs(a.y - b.y);
     }
@@ -482,4 +641,12 @@ public class BossBondrewd : MonsterBase {
         else
             return false;
     }
+
+    private void UpdatePhantomGaugeSlider() {
+        _phantomGaugeSlider.value = _phantomGauge / 100.0f;
+    }
+    private void UpdateGroggySlider() {
+        _groggySlider.value = _groggyGauge / 100.0f;
+    }
+    #endregion
 }

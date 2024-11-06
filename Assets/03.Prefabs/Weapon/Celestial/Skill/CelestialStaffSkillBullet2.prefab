@@ -48,7 +48,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d133e23da49b76d459366f4b71579a30, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _targetIsMonster: 1
+  _targetType: 0
   _stunDebuff: 0
   _slowDebuff: 0
   _shockWaveObj: {fileID: 3846065944111756103, guid: a50dcad6b7f2f0243afa5597d9ad5133, type: 3}

@@ -27,7 +27,7 @@ public abstract class MonsterBase : DropableBase {
     public Animator _animator;//manual put
 
     #region serialized field
-    [SerializeField] bool _useTree;
+    [SerializeField] protected bool _useTree;
     [SerializeField] bool _isBoss;
 
     [Header("Monster Sound")]
@@ -79,7 +79,7 @@ public abstract class MonsterBase : DropableBase {
             Spawn().Forget();
     }
 
-    private void Update() {
+    protected void Update() {
         if (_useTree) {
             _tree.Update();
         }

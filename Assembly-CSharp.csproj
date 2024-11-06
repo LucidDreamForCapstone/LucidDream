@@ -84,6 +84,7 @@
     <Compile Include="Assets\02.Scripts\Item\ItemData.cs" />
     <Compile Include="Assets\02.Scripts\Monster\MonsterBody.cs" />
     <Compile Include="Assets\02.Scripts\UI\Inven\InventoryPage.cs" />
+    <Compile Include="Assets\02.Scripts\Bullet\BondrewdMissile.cs" />
     <Compile Include="Assets\02.Scripts\Player\PlayerSwapManager.cs" />
     <Compile Include="Assets\02.Scripts\ShopItem\ShopItemBase.cs" />
     <Compile Include="Assets\02.Scripts\Monster\MonsterStoneGolem.cs" />
