@@ -98,6 +98,7 @@ public class BossBondrewd : MonsterBase {
     float _phantomGauge;
     float _groggyGauge;
     int _currentActivatedChargerCount;
+    BoxCollider2D _bondrewdCollider;
     Vector2[] _shootPos = { new Vector2(3.25f, -0.97f), new Vector2(-3.25f, -0.97f) };
     Vector2[] _missilePos = { new Vector2(-0.76f, 1.04f), new Vector2(0.76f, 1.04f) };
     Vector2 _chainExplosionCenterPos;
@@ -117,6 +118,7 @@ public class BossBondrewd : MonsterBase {
     #region Mono funcs
     private void Start() {
         _cts = new CancellationTokenSource();
+        _bondrewdCollider = GetComponent<BoxCollider2D>();
         _isSpawnComplete = true;
         _attackFuncList.Add(BackStepTask);
         _attackFuncList.Add(ChaseTask);
@@ -184,6 +186,26 @@ public class BossBondrewd : MonsterBase {
         _cts.Dispose();
         _cts = null;
         _cts = new CancellationTokenSource();
+    }
+
+    protected override async UniTaskVoid Die() {
+        _cts.Cancel();
+        _isDead = true;
+        _hp = 0;
+        _animator.SetTrigger("Die");
+        _hpSlider.gameObject.SetActive(false);
+        _spriteRenderer.sortingLayerName = "Default";
+        _legSr.sortingLayerName = "Default";
+        _bondrewdCollider.enabled = false;
+        _hpSlider.gameObject.SetActive(false);
+        _phantomGaugeSlider.gameObject.SetActive(false);
+        _groggySlider.gameObject.SetActive(false);
+        _groggyEffect.SetActive(false);
+        DropItems();
+        _playerScript.GetExp(_exp);
+        _cts.Dispose();
+        _cts = null;
+        PlayerDataManager.Instance.SetFeverGauge(PlayerDataManager.Instance.Status._feverGauge + _feverAmount);
     }
 
     #endregion
@@ -555,7 +577,7 @@ public class BossBondrewd : MonsterBase {
         }
     }
     private async UniTaskVoid PhantomGhostEffect() {
-        while (_currentPhantomState == PhantomState.Activated) {
+        while (_currentPhantomState == PhantomState.Activated && !_isDead) {
             SinglePhantomGhost().Forget();
             await UniTask.Delay(TimeSpan.FromSeconds(_ghostInterval));
         }
