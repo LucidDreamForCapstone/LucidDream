@@ -131,6 +131,7 @@
     <Compile Include="Assets\02.Scripts\Monster\BossBondrewd.cs" />
     <Compile Include="Assets\02.Scripts\Weapon\NoWeapon.cs" />
     <Compile Include="Assets\02.Scripts\Etc\ObjectPoolData.cs" />
+    <Compile Include="Assets\ObjectLayerController.cs" />
     <Compile Include="Assets\02.Scripts\Monster\MonsterGhost.cs" />
     <Compile Include="Assets\02.Scripts\UI\InGameUIController.cs" />
     <Compile Include="Assets\02.Scripts\Interact\InteractManager.cs" />
@@ -171,6 +172,7 @@
     <Compile Include="Assets\02.Scripts\Weapon\WolfSword.cs" />
     <Compile Include="Assets\02.Scripts\CardManager\CardManage.cs" />
     <Compile Include="Assets\02.Scripts\BehaviorTree\CompositeNode\SelectorNode.cs" />
+    <Compile Include="Assets\DoorControl.cs" />
     <Compile Include="Assets\02.Scripts\BehaviorTree\ActionNode\ChaseNode.cs" />
     <Compile Include="Assets\02.Scripts\Monster\HadesSoundControl.cs" />
     <Compile Include="Assets\07.Shader\Glitch\Glith.cs" />
