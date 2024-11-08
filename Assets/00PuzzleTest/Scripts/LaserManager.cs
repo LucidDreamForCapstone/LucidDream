@@ -7,28 +7,45 @@ public class LaserManager : MonoBehaviour
     [SerializeField]
     private int poolSize = 20; // Adjust as needed
     [SerializeField]
+    private int initialTargetLaserCount = 3;
+    [SerializeField]
     private GameObject laserPrefab;
     [SerializeField]
     private GameObject dispenser;
+    [SerializeField]
+    private Destination destination;
 
     private Queue<GameObject> laserPool = new Queue<GameObject>();
     private List<GameObject> activeLasers = new List<GameObject>();
     private Queue<GameObject> newLasers = new Queue<GameObject>();
+    private List<ReflectorInformation> reflectors = new List<ReflectorInformation>();
 
     void Start()
     {
         // Initialize the pool with inactive laser objects
+        ReflectorInformation[] infos = GetComponentsInChildren<ReflectorInformation>();
+        foreach (ReflectorInformation info in infos)
+        {
+            reflectors.Add(info);
+        }
+
         for (int i = 0; i < poolSize; i++)
         {
             GameObject laser = Instantiate(laserPrefab, this.transform);
             laser.SetActive(false);
             laserPool.Enqueue(laser);
         }
+        Debug.Log("LaserManager Initialized------!!!");
     }
 
     void Update()
     {
         UpdateLasers();
+        if (destination.DestCount <= 0)
+        {
+            Debug.Log("Game Clear!");
+        }
+        destination.DestCount = initialTargetLaserCount;
     }
 
     void SeparateLaser(List<Vector2> reflectDirections, Vector2 reflectorPosition, float magnitude)
@@ -88,6 +105,11 @@ public class LaserManager : MonoBehaviour
 
     public void UpdateLasers()
     {
+        for (int i = 0; i < reflectors.Count; i++)
+        {
+            reflectors[i].IsUsed = false;
+        }
+        // Debug.Log(activeLasers.Count);
         ResetAllLasersToPool();
         GameObject initialLaser = GetLaserFromPool();
         if (initialLaser != null)
@@ -101,5 +123,6 @@ public class LaserManager : MonoBehaviour
             LaserBeam laser = newLasers.Dequeue().GetComponent<LaserBeam>();
             laser.UpdateRaser();
         }
+        Debug.Log(destination.DestCount);
     }
 }
