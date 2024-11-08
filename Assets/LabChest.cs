@@ -1,10 +1,12 @@
 using UnityEngine;
+using UnityEngine.UI;
 
 public class LabChest : DropableBase {
     #region serialize field
 
     [SerializeField] ChestRank _chestRank;
     [SerializeField] protected AudioClip _openSound;
+    [SerializeField] private GameObject _openImage;
     #endregion //serialize field
 
     #region private variable
@@ -19,6 +21,9 @@ public class LabChest : DropableBase {
     protected void Start() {
         _isOpened = false;
         _animator = GetComponent<Animator>();
+        if (_openImage != null) {
+            _openImage.gameObject.SetActive(false);
+        }
     }
 
     protected void OnCollisionStay2D(Collision2D collision) {
@@ -48,10 +53,20 @@ public class LabChest : DropableBase {
             if (Input.GetKey(KeyCode.G)) // 'G' 키를 눌렀을 때
             {
                 Player2_InteractManager.Instance.InteractCoolTime().Forget(); // 쿨타임 처리
-                _animator.SetTrigger("Open"); // 애니메이션 실행
+                if (_animator != null) {
+                    _animator.SetTrigger("Open"); // 열기 애니메이션 실행
+                }
                 DropItems(); // 아이템 드롭
                 _isOpened = true; // 상자 열림 상태로 변경
+                // 애니메이션을 중단하고 openImage 표시
+                if (_animator != null) {
+                    _animator.enabled = false; // 애니메이터 중단
+                }
                 PlaySound(_openSound); // 열기 소리 재생
+                if (_openImage != null) {
+                    _openImage.gameObject.SetActive(true); // _openImage 활성화
+                }
+
             }
         }
     }
