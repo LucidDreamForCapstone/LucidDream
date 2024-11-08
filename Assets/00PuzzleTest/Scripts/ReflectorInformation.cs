@@ -5,6 +5,8 @@ public class ReflectorInformation : MonoBehaviour
 {
     [SerializeField]
     private ReflectorInformationObj reflectorInformationObj;
+    [SerializeField]
+    private bool isUsed = false;
     void Start()
     {
 
@@ -13,6 +15,15 @@ public class ReflectorInformation : MonoBehaviour
     void Update()
     {
 
+    }
+
+    public bool IsUsed {
+        get {
+            return isUsed;
+        }
+        set {
+            isUsed = value;
+        }
     }
     public List<Vector2> GetRotatedReflectionDirections()
     {

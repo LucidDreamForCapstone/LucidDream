@@ -25,10 +25,12 @@ namespace Puzzle
         public void InitLaser(Vector2 startPos, Vector2 startDir, Action<List<Vector2>, Vector2, float> onSeperate)
         {
             this.startDir = startDir;
+
             this.startPos = startPos;
             SeperateLaser = onSeperate;
             maxReflectionCount = 10;
             laserLength = 10;
+
         }
         #endregion
 
@@ -37,12 +39,10 @@ namespace Puzzle
         {
 
         }
-
         void Update()
         {
             //UpdateRaser();
         }
-
         public void UpdateRaser()
         {
             List<Vector3> laserPoints = new List<Vector3>();
@@ -52,10 +52,19 @@ namespace Puzzle
             for (int i = 0; i < maxReflectionCount; i++)
             {
                 RaycastHit2D hit = Physics2D.Raycast(nextPos, nextDir, laserLength, layerMask);
-                //Debug.DrawRay(nextPos, nextDir * laserLength, Color.red, 0.1f);
+                // Debug.DrawRay(nextPos, nextDir * laserLength, Color.red, 0.1f);
                 if (hit)
                 {
-                    if (hit.transform.gameObject.GetComponent<ReflectorInformation>() != null)//거울에 부딪히면
+                    Destination dest = hit.transform.GetComponent<Destination>();
+                    if (dest)
+                    {
+                        dest.DestCount--;
+                        Debug.Log("DestCount decreased");
+                        laserPoints.Add(hit.transform.position);
+                        break;
+                    }
+                    ReflectorInformation info = hit.transform.gameObject.GetComponent<ReflectorInformation>();
+                    if (info != null && info.IsUsed == false)//거울에 부딪히면
                     {
                         Collider2D collider = hit.collider;
                         Vector2 reflectorPosition = hit.transform.position; //충돌 거울의 위치
@@ -70,9 +79,9 @@ namespace Puzzle
                         else// 아니면 레이저 반사
                         {
                             nextPos = LaserUtil.ToBoundary(reflectorPosition, reflectDirs[0], (collider.bounds.extents.magnitude));
-                            //Debug.Log(nextPos);
                             nextDir = reflectDirs[0];
                         }
+                        info.IsUsed = true;
                     }
                 }
                 else //거울에 부딪히지 않으면
@@ -82,10 +91,27 @@ namespace Puzzle
                     break;
                 }
             }
+            Vector3[] LaserPoints = new Vector3[laserPoints.Count];
+            for (int i = 0; i < laserPoints.Count; i++)
+            {
+                laserPoints[i] = transform.InverseTransformPoint(laserPoints[i]); // 로컬 좌표를 월드 좌표로 변환
+            }
             lineRenderer.positionCount = laserPoints.Count;
             lineRenderer.SetPositions(laserPoints.ToArray());
         }
+        private bool IsPathSame(List<Vector3> newPath, List<Vector3> oldPath)
+        {
+            if (newPath.Count != oldPath.Count)
+                return false;
 
+            for (int i = 0; i < newPath.Count; i++)
+            {
+                if (Vector3.Distance(newPath[i], oldPath[i]) > 0.01f) // 허용 오차 내에서 비교
+                    return false;
+            }
+
+            return true;
+        }
         #endregion
     }
 }
