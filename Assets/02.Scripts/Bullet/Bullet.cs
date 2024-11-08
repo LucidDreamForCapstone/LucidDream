@@ -2,9 +2,15 @@ using UnityEngine;
 
 public class Bullet : MonoBehaviour {
 
+    protected enum TargetType {
+        Monster,
+        Player,
+        Both
+    }
+
     #region serialize field
 
-    [SerializeField] protected bool _targetIsMonster;
+    [SerializeField] protected TargetType _targetType;
     [SerializeField] protected bool _stunDebuff;
     [SerializeField] protected bool _slowDebuff;
 
@@ -34,7 +40,7 @@ public class Bullet : MonoBehaviour {
 
     #region mono funcs
 
-    protected void OnEnable() {
+    virtual protected void OnEnable() {
         _rigid = GetComponent<Rigidbody2D>();
         _rigid.velocity = transform.right * _fireSpeed;
         _timer = 0;
@@ -43,21 +49,28 @@ public class Bullet : MonoBehaviour {
         Timer();
     }
 
-    private void OnTriggerEnter2D(Collider2D collision) {
+    virtual protected void OnTriggerEnter2D(Collider2D collision) {
         if (collision.CompareTag("Wall"))
             Die();
         else {
-            if (_targetIsMonster) {
-                if (collision.CompareTag("Enemy"))
+            if (_targetType == TargetType.Monster) {
+                if (collision.CompareTag("Enemy")) {
                     DamageToMonster(collision);
+                    Die();
+                }
             }
-            else {
+            else if (_targetType == TargetType.Player) {
+                if (collision.CompareTag("Player") && !_playerScript.CheckInvincible()) {
+                    DamageToPlayer(collision);
+                    Die();
+                }
+            }
+            else if (_targetType == TargetType.Both) {
                 if (collision.CompareTag("Player") && !_playerScript.CheckInvincible())
                     DamageToPlayer(collision);
-                else if (collision.GetComponent<Pillar>())
-                    Die();
-                else if (collision.CompareTag("Wall"))
-                    Die();
+                else if (collision.CompareTag("Enemy"))
+                    DamageToMonster(collision);
+                Die();
             }
         }
     }
@@ -93,7 +106,6 @@ public class Bullet : MonoBehaviour {
             monster.Slow(_slowRate, _slowTime).Forget();
 
         _playerScript.NormalMagicalAttack(monster, _multiplier);
-        ObjectPool.Instance.ReturnObject(gameObject);
     }
 
     virtual protected void DamageToPlayer(Collider2D collision) {
@@ -103,7 +115,6 @@ public class Bullet : MonoBehaviour {
             _playerScript.Slow(_slowRate, _slowTime);
 
         _playerScript.Damaged(_dmg);
-        ObjectPool.Instance.ReturnObject(gameObject);
     }
 
 

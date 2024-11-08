@@ -84,6 +84,7 @@
     <Compile Include="Assets\02.Scripts\Item\ItemData.cs" />
     <Compile Include="Assets\02.Scripts\Monster\MonsterBody.cs" />
     <Compile Include="Assets\02.Scripts\UI\Inven\InventoryPage.cs" />
+    <Compile Include="Assets\02.Scripts\Bullet\BondrewdMissile.cs" />
     <Compile Include="Assets\02.Scripts\Player\PlayerSwapManager.cs" />
     <Compile Include="Assets\02.Scripts\ShopItem\ShopItemBase.cs" />
     <Compile Include="Assets\02.Scripts\Monster\MonsterStoneGolem.cs" />
@@ -140,6 +141,7 @@
     <Compile Include="Assets\02.Scripts\Player\PlayerDataManager.cs" />
     <Compile Include="Assets\02.Scripts\Player\PlayerPrefsManager.cs" />
     <Compile Include="Assets\02.Scripts\Item\GuardEffect.cs" />
+    <Compile Include="Assets\02.Scripts\Monster\Explosion.cs" />
     <Compile Include="Assets\02.Scripts\UI\Inven\InventoryDescription.cs" />
     <Compile Include="Assets\02.Scripts\Sound\BGMManger.cs" />
     <Compile Include="Assets\JMO Assets\Cartoon FX (legacy)\Scripts\CFX_LightIntensityFade.cs" />
@@ -153,6 +155,7 @@
     <Compile Include="Assets\07.Shader\Glitch\CustomRenderPassFeature.cs" />
     <Compile Include="Assets\JMO Assets\Cartoon FX (legacy)\Demo\Assets\CFX_Demo_New.cs" />
     <Compile Include="Assets\02.Scripts\Etc\ObjectPool.cs" />
+    <Compile Include="Assets\02.Scripts\Monster\Charger.cs" />
     <Compile Include="Assets\00PuzzleTest\Scripts\LaserManager.cs" />
     <Compile Include="Assets\00PuzzleTest\Scripts\LaserDispenser.cs" />
     <Compile Include="Assets\02.Scripts\Sound\LobbyManager.cs" />

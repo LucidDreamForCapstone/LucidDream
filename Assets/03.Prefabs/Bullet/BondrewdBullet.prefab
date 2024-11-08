@@ -48,7 +48,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c14753fdac154b84987b63a06e360349, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _targetIsMonster: 0
+  _targetType: 1
   _stunDebuff: 0
   _slowDebuff: 0
 --- !u!212 &8021095232287331241

@@ -27,7 +27,7 @@ public abstract class MonsterBase : DropableBase {
     public Animator _animator;//manual put
 
     #region serialized field
-    [SerializeField] bool _useTree;
+    [SerializeField] protected bool _useTree;
     [SerializeField] bool _isBoss;
 
     [Header("Monster Sound")]
@@ -79,7 +79,7 @@ public abstract class MonsterBase : DropableBase {
             Spawn().Forget();
     }
 
-    private void Update() {
+    protected void Update() {
         if (_useTree) {
             _tree.Update();
         }
@@ -120,9 +120,9 @@ public abstract class MonsterBase : DropableBase {
             _playerScript.Damaged(_bodyDamage);
     }
 
-    public async UniTaskVoid Stun(float lastTime) {
+    virtual public async UniTaskVoid Stun(float lastTime, float offsetY = 1) {
         _isStun = true;
-        StateEffectManager.Instance.SummonEffect(transform, StateType.Stuned, 1, lastTime).Forget();
+        StateEffectManager.Instance.SummonEffect(transform, StateType.Stuned, offsetY, lastTime).Forget();
         await UniTask.Delay(TimeSpan.FromSeconds(lastTime));
         _isStun = false;
     }
