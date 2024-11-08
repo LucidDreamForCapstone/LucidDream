@@ -1,6 +1,6 @@
 using UnityEngine;
-
-public class Player_2 : MonoBehaviour {
+public class Player_2 : MonoBehaviour
+{
     #region serialized field
     [SerializeField] private Rigidbody2D _rigid;
     [SerializeField] private SpriteRenderer _spriteRenderer;
@@ -31,6 +31,7 @@ public class Player_2 : MonoBehaviour {
 
     private void FixedUpdate() {
         Move(); // 기본 움직임
+
     }
 
     private void Update() {

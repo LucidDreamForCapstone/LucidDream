@@ -8,19 +8,16 @@ public class ObjectLayerController : MonoBehaviour
     void Start() {
         // SpriteRenderer 컴포넌트 참조
         _spriteRenderer = GetComponent<SpriteRenderer>();
-        if (_spriteRenderer == null) {
-            Debug.LogError("SpriteRenderer가 없습니다.");
-        }
     }
 
     void Update() {
-        ChangeLayer(); // 매 프레임마다 레이어 변경
+        if (Player2DataManager.Instance.Player2 != null) // Player_2 인스턴스가 존재할 경우
+        {
+            ChangeLayer(Player2DataManager.Instance.Player2.transform.position); // 거리 계산 및 레이어 변경
+        }
     }
 
-    private void ChangeLayer() {
-        if (PlayerDataManager.Instance.Player == null) return; // Player가 null인 경우 종료
-
-        var playerPosition = PlayerDataManager.Instance.Player.transform.position;
+    private void ChangeLayer(Vector3 playerPosition) {
         var objectPosition = transform.position;
 
         // Player와 오브젝트의 y 좌표 차이에 따라 레이어 변경
