@@ -22,14 +22,14 @@ namespace Puzzle
         int maxReflectionCount = 10;
 
         #region Constructor
-        public void InitLaser(Vector2 startPos, Vector2 startDir, Action<List<Vector2>, Vector2, float> onSeperate)
+        public void InitLaser(Vector2 startPos, Vector2 startDir, Action<List<Vector2>, Vector2, float> onSeperate, float maxLaserLen)
         {
             this.startDir = startDir;
 
             this.startPos = startPos;
             SeperateLaser = onSeperate;
             maxReflectionCount = 10;
-            laserLength = 10;
+            laserLength = maxLaserLen;
 
         }
         #endregion
@@ -59,7 +59,7 @@ namespace Puzzle
                     if (dest)
                     {
                         dest.DestCount--;
-                        Debug.Log("DestCount decreased");
+                        //Debug.Log("DestCount decreased");
                         laserPoints.Add(hit.transform.position);
                         break;
                     }

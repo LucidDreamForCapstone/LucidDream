@@ -14,6 +14,10 @@ public class LaserManager : MonoBehaviour
     private GameObject dispenser;
     [SerializeField]
     private Destination destination;
+    [SerializeField]
+    private float maxLaserLength = 10;
+    [SerializeField]
+    DoorControl doorController;
 
     private Queue<GameObject> laserPool = new Queue<GameObject>();
     private List<GameObject> activeLasers = new List<GameObject>();
@@ -41,9 +45,9 @@ public class LaserManager : MonoBehaviour
     void Update()
     {
         UpdateLasers();
-        if (destination.DestCount <= 0)
+        if (isGameClear())
         {
-            Debug.Log("Game Clear!");
+            doorController.DoorOpenOnGameClear(true);
         }
         destination.DestCount = initialTargetLaserCount;
     }
@@ -56,7 +60,7 @@ public class LaserManager : MonoBehaviour
             if (laser != null)
             {
                 Vector2 laserStartPos = LaserUtil.ToBoundary(reflectorPosition, direction, magnitude);
-                laser.GetComponent<LaserBeam>().InitLaser(laserStartPos, direction, SeparateLaser);
+                laser.GetComponent<LaserBeam>().InitLaser(laserStartPos, direction, SeparateLaser, maxLaserLength);
                 activeLasers.Add(laser);
                 newLasers.Enqueue(laser);
             }
@@ -114,7 +118,7 @@ public class LaserManager : MonoBehaviour
         GameObject initialLaser = GetLaserFromPool();
         if (initialLaser != null)
         {
-            initialLaser.GetComponent<LaserBeam>().InitLaser(dispenser.transform.position, Vector2.up, SeparateLaser);
+            initialLaser.GetComponent<LaserBeam>().InitLaser(dispenser.transform.position, Vector2.up, SeparateLaser, maxLaserLength);
             activeLasers.Add(initialLaser);
         }
         newLasers.Enqueue(initialLaser);
@@ -123,6 +127,11 @@ public class LaserManager : MonoBehaviour
             LaserBeam laser = newLasers.Dequeue().GetComponent<LaserBeam>();
             laser.UpdateRaser();
         }
-        Debug.Log(destination.DestCount);
+        // Debug.Log(destination.DestCount);
+    }
+
+    public bool isGameClear()
+    {
+        return destination.DestCount <= 0;
     }
 }
