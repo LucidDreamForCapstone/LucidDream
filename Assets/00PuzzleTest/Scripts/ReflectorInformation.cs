@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ReflectorInformation : MonoBehaviour
+public class ReflectorInformation : MonoBehaviour, Interactable
 {
     [SerializeField]
     private ReflectorInformationObj reflectorInformationObj;
@@ -50,6 +50,39 @@ public class ReflectorInformation : MonoBehaviour
 
         return new Vector2(x, y);
     }
+
+    #region Interaction
+    protected void OnCollisionStay2D(Collision2D collision)
+    {
+        if (collision.gameObject.CompareTag("Player"))
+        {
+
+            RotateReflector();
+        }
+    }
+    public bool IsInteractBlock()
+    {
+        return true;
+    }
+
+    public string GetInteractText()
+    {
+        return "È¸Àü (G)";
+    }
+
+    protected virtual void RotateReflector()
+    {
+        if (Player2_InteractManager.Instance.CheckInteractable(this))
+        {
+
+            if (Input.GetKey(KeyCode.G))
+            {
+                Player2_InteractManager.Instance.InteractCoolTime().Forget();
+                transform.Rotate(0, 0, 2);
+            }
+        }
+    }
+    #endregion
     #region properties
     public ReflectorInformationObj ReflectorInformationObj {
         get {
