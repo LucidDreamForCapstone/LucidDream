@@ -276,7 +276,7 @@ public class InGameUIController : MonoBehaviour {
         // ��Ÿ���� ������ ���� ��Ÿ���� 0���� ����
         remainingCooldownTimes[skillIndex] = 0f;
         skillCooldownImages[skillIndex].fillAmount = 1f;
-    }
+    } 
 
 
     private IEnumerator ShowNotificationRoutine(string message, float displayDuration) {
