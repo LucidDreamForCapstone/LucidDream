@@ -21,12 +21,13 @@ public class BossBondrewd : MonsterBase {
     [SerializeField] GameObject _missileTargetObj;
     [SerializeField] GameObject _explosionObj;
     [SerializeField] GameObject _phantomGhostObj;
-    //[SerializeField] List<GameObject> _chargerList; after change class to charger
+    [SerializeField] List<GameObject> _chargerList;
 
     [SerializeField] SpriteRenderer _legSr;
     [SerializeField] Slider _hpSlider;
     [SerializeField] Slider _phantomGaugeSlider;
     [SerializeField] Slider _groggySlider;
+    [SerializeField] List<Image> _chargerUIList;
     [SerializeField] Color _phase2HpColor;
     [SerializeField] Color _phase3HpColor;
     [SerializeField] Color _phantomGaugeActivateColor;
@@ -97,7 +98,7 @@ public class BossBondrewd : MonsterBase {
     int _currentPhaseNum;
     float _phantomGauge;
     float _groggyGauge;
-    int _currentActivatedChargerCount;
+    [SerializeField] int _currentActivatedChargerCount;
     BoxCollider2D _bondrewdCollider;
     Vector2[] _shootPos = { new Vector2(3.25f, -0.97f), new Vector2(-3.25f, -0.97f) };
     Vector2[] _missilePos = { new Vector2(-0.76f, 1.04f), new Vector2(0.76f, 1.04f) };
@@ -134,19 +135,23 @@ public class BossBondrewd : MonsterBase {
         _phantomGauge = 0;
         _currentPhantomState = PhantomState.DeActivated;
         _phantomTimer = 0;
-        _currentActivatedChargerCount = 1; //Temp
+        _currentActivatedChargerCount = 0;
         _groggyGauge = 100;
         UpdateGroggySlider();
     }
     new private void Update() {
         base.Update();
         PhantomManage();
+        if (Input.GetKeyDown(KeyCode.F1))
+            GameObject.Find("Charger1").GetComponent<Charger>().CallBackRemoveShield();
+        if (Input.GetKeyDown(KeyCode.F2))
+            GameObject.Find("Charger2").GetComponent<Charger>().CallBackRemoveShield();
+        if (Input.GetKeyDown(KeyCode.F3))
+            GameObject.Find("Charger3").GetComponent<Charger>().CallBackRemoveShield();
     }
     #endregion
 
-    #region Protected Funcs
-    protected override void AttackMove() {
-    }
+    #region Override Funcs
 
     protected override async UniTaskVoid ChangeColor()//피격 시 붉은 색으로 몬스터 색 변경
     {
@@ -600,11 +605,13 @@ public class BossBondrewd : MonsterBase {
     #region Groggy State
 
     public void DecreaseGroggyGauge() {
-        _groggyGauge -= _groggyDecreaseAmount;
-        UpdateGroggySlider();
-        if (_groggyGauge <= 0 && !_isGroggy) {
-            _groggyGauge = 0;
-            Groggy().Forget();
+        if (!_isGroggy) {
+            _groggyGauge -= _groggyDecreaseAmount;
+            UpdateGroggySlider();
+            if (_groggyGauge <= 0) {
+                _groggyGauge = 0;
+                Groggy().Forget();
+            }
         }
     }
 
@@ -633,6 +640,21 @@ public class BossBondrewd : MonsterBase {
     }
 
     #endregion
+
+    #region Charger State
+
+    public void ChargerCntIncrease(int index) {
+        _currentActivatedChargerCount++;
+        _chargerUIList[index].DOColor(Color.white, 1);
+    }
+
+    public void ChargerCntDecrease(int index) {
+        _currentActivatedChargerCount--;
+        _chargerUIList[index].DOColor(Color.gray, 1);
+    }
+
+    #endregion
+
     #region Util funcs
     private float CalculateManhattanDist(Vector2 a, Vector2 b) {
         return Mathf.Abs(a.x - b.x) + Mathf.Abs(a.y - b.y);

@@ -43,35 +43,6 @@ public class MonsterDemon : MonsterBase {
 
 
 
-    #region protected funcs
-
-    protected override void AttackMove() {
-        /*
-        double dist = CalculateManhattanDist(transform.position, _playerScript.transform.position);
-        if (!_isFiring && !_isDead && !_isStun && _isSpawnComplete && dist < _searchRange) {
-            Vector2 moveVec = _playerScript.transform.position - transform.position;
-
-            if (moveVec.x < 0)
-                _spriteRenderer.flipX = true;
-            else
-                _spriteRenderer.flipX = false;
-
-            if (dist > _attackRange)
-                _rigid.velocity = moveVec.normalized * _moveSpeed;
-            else if (_isFireReady)
-                FireTask().Forget();
-            else
-                _rigid.velocity = Vector2.zero;
-        }
-        else
-            _rigid.velocity = Vector2.zero;
-        */
-    }
-
-    #endregion //protected funcs
-
-
-
 
     #region private funcs
 

@@ -71,57 +71,6 @@ public class MonsterDeathBringer : MonsterBase {
 
 
     #region protected funcs
-    protected override void AttackMove() {
-        /*
-        if (!_isAttacking && !_isStun && !_isDead && _isSpawnComplete) {
-            double dist = CalculateManhattanDist(transform.position, _playerScript.transform.position);
-            float yDiff = transform.position.y - _playerScript.transform.position.y;
-
-            if (dist < _normalAttackRange && yDiff < _yDiffOffset) {
-                _rigid.velocity = Vector2.zero;
-                _animator.SetBool("Walk", false);
-
-                if (_isNormalAttackReady) {
-                    NormalAttackTask().Forget();
-                }
-
-            }
-            else if (dist < _searchRange) {
-                if (_isSpellAttackReady) {
-                    _rigid.velocity = Vector2.zero;
-                    SpellAttackTask().Forget();
-                }
-                else {
-                    Vector2 moveVec = _playerScript.transform.position - transform.position;
-
-                    if (moveVec.x < 0) {
-                        _model.transform.localPosition = -Vector3.right * 2.2f;
-                        _spriteRenderer.flipX = false;
-                    }
-
-                    else {
-                        _model.transform.localPosition = Vector3.right * 2.2f;
-                        _spriteRenderer.flipX = true;
-                    }
-
-                    if (dist < _normalAttackRange)
-                        _rigid.velocity = Vector2.up * moveVec.normalized.y * _moveSpeed;
-                    else
-                        _rigid.velocity = moveVec.normalized * _moveSpeed;
-                    _animator.SetBool("Walk", true);
-                }
-            }
-            else {
-                _rigid.velocity = Vector2.zero;
-                _animator.SetBool("Walk", false);
-            }
-        }
-        else {
-            _rigid.velocity = Vector2.zero;
-            _animator.SetBool("Walk", false);
-        }
-        */
-    }
 
     protected override async UniTaskVoid Die() {
         _isDead = true;

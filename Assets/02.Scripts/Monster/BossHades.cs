@@ -212,10 +212,6 @@ public class BossHades : MonsterBase {
 
     #region protected funcs
 
-    protected override void AttackMove() {
-
-    }
-
     protected override async UniTaskVoid ChangeColor()//피격 시 붉은 색으로 몬스터 색 변경
     {
         if (!_isColorChanged) {

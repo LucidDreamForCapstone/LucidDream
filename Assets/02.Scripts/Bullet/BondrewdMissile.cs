@@ -51,7 +51,7 @@ public class BondrewdMissile : HomingBullet {
             int i, length = possibleTargets.Length;
             if (length > 0) {
                 for (i = 0; i < length; i++) {
-                    if (possibleTargets[i].CompareTag("Enemy")) {
+                    if (possibleTargets[i].GetComponent<BossBondrewd>()) {
                         var boss = possibleTargets[i].GetComponent<BossBondrewd>();
                         if (_stunDebuff)
                             boss.Stun(_stunTime).Forget();
