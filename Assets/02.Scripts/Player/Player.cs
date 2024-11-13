@@ -416,7 +416,7 @@ public class Player : MonoBehaviour {
             SoundManager.Instance.SetSFXPitchLerp(_phantomTimeScale, _phantomLerpTime).Forget();
             SoundManager.Instance.SetBGMPitchLerp(0.5f, _phantomLerpTime).Forget();
             await TimeScaleManager.Instance.TimeSlowLerp(_phantomTimeScale, _phantomLerpTime);
-            while (!Input.GetKey(KeyCode.Space) && timer < _phantomLastTime && !_phantomForceCancelTrigger) {
+            while (!Input.GetKey(KeyCode.Space) && timer < _phantomLastTime && !_phantomForceCancelTrigger && !_isStun) {
                 timer += Time.deltaTime;
                 await UniTask.NextFrame();
             }

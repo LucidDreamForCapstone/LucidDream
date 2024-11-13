@@ -157,7 +157,7 @@ public abstract class WeaponBase : ItemBase {
             // 피버 게이지 0으로 설정 후 스킬 실행
             PlayerDataManager.Instance.SetFeverGauge(0);
             FeverSkillAnimation();
-            inGameUIController.ResetFeverFill();  // Fever 게이지를 0으로 만듦
+            //inGameUIController.ResetFeverFill();  // Fever 게이지를 0으로 만듦
         }
         else {
             Debug.Log("아직 피버 게이지가 가득 차지 않았거나 피버 스킬이 잠겨서 피버 스킬을 사용할 수 없습니다.");
