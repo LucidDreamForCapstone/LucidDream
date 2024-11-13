@@ -1,11 +1,13 @@
 using Cysharp.Threading.Tasks;
 using System;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Charger : MonsterBase {
     [SerializeField] int _chargerIndex;
     [SerializeField] int _hpRecoverAmount;
     [SerializeField] BossBondrewd _boss;
+    [SerializeField] Slider _hpSlider;
     CapsuleCollider2D _chargerCollider;
     CircleCollider2D _shieldCollider;
     SpriteRenderer _shieldSr;
@@ -18,6 +20,7 @@ public class Charger : MonsterBase {
         _shieldAnimator = transform.GetChild(0).GetComponent<Animator>();
         _shieldSr = transform.GetChild(0).GetComponent<SpriteRenderer>();
         InitializeCharger(_chargerIndex + 1).Forget();
+        UpdateHpSlider();
     }
 
     private void OnTriggerStay2D(Collider2D collider) {
@@ -37,6 +40,7 @@ public class Charger : MonsterBase {
         else {
             ChangeColor().Forget();
             _hp -= dmg;
+            UpdateHpSlider();
             PlayRandomSound();
         }
     }
@@ -57,8 +61,9 @@ public class Charger : MonsterBase {
     }
 
     protected async override UniTaskVoid Die() {
-        _hp = 1;
-        await UniTask.NextFrame();
+        _hp = 0;
+        UpdateHpSlider();
+        await UniTask.Delay(TimeSpan.FromSeconds(1));
         ChargerOff();
         GenerateShield();
     }
@@ -97,6 +102,7 @@ public class Charger : MonsterBase {
     private async UniTaskVoid RecoverHp() {
         while (_hp < _maxHp) {
             _hp += _hpRecoverAmount;
+            UpdateHpSlider();
             await UniTask.Delay(TimeSpan.FromSeconds(1f));
         }
         _hp = _maxHp;
@@ -108,10 +114,15 @@ public class Charger : MonsterBase {
         GenerateShield();
         while (_hp < _maxHp) {
             _hp += _hpRecoverAmount;
+            UpdateHpSlider();
             await UniTask.Delay(TimeSpan.FromSeconds(delay));
         }
         _hp = _maxHp;
         ChargerOn();
+    }
+
+    private void UpdateHpSlider() {
+        _hpSlider.value = (float)_hp / (float)_maxHp;
     }
 
     protected override void OnCollisionStay2D(Collision2D collision) {
