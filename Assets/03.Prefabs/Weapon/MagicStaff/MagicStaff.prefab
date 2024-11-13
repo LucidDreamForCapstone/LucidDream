@@ -100,8 +100,11 @@ MonoBehaviour:
   _feverSkillEffect1: {fileID: 0}
   _feverRange: 0
   _isBuffTypeFeverSkill: 1
-  nomalattackSound: {fileID: 0}
-  _chargeInterval: 0.3
+  _normalAttackSound: {fileID: 0}
+  shakeDuration: 0.3
+  shakeAmplitude: 3
+  shakeFrequency: 25
+  _chargeInterval: 0.23
   _projectileObj: {fileID: 1967797107504303826, guid: a003e8b4ac776bf47b50d4c74d46c09a, type: 3}
   _projectileSpeed: 6
   _basicRange: 8

@@ -278,7 +278,10 @@ MonoBehaviour:
   _feverRange: 5
   _isBuffTypeFeverSkill: 0
   _normalAttackSound: {fileID: 8300000, guid: 46b5c764763d9fb4597dec19bbf6637e, type: 3}
-  _chargeInterval: 0.3
+  shakeDuration: 0.3
+  shakeAmplitude: 3
+  shakeFrequency: 25
+  _chargeInterval: 0.12
   _healChance: 10
   _healAmount: 50
   _basicProjectileObj: {fileID: 8497690414709338641, guid: bd87b96fe8e988341bafedfeba5226d1, type: 3}
