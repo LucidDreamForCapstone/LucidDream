@@ -11,7 +11,7 @@ public class BossBondrewd : MonsterBase {
     #region Serialize Field
     [SerializeField] GameObject _dashEffect;
     [SerializeField] GameObject _rushWarningEffect;
-    [SerializeField] GameObject _rushEffect;
+    [SerializeField] List<GameObject> _rushEffectList;
     [SerializeField] GameObject _backStepEffect;
     [SerializeField] GameObject _chargingEffect;
     [SerializeField] GameObject _groggyEffect;
@@ -295,44 +295,51 @@ public class BossBondrewd : MonsterBase {
 
     private async UniTaskVoid Rush() {
         _attackStateList[2] = AttackState.Attacking;
-        _rushWarningEffect.SetActive(true);
-        float timer = 0;
-        int originBodyDamage = _bodyDamage;
-        try {
-            while (timer < _rushWarningTime - 1) {
-                Vector2 tempDir = _playerScript.transform.position - transform.position;
-                SetFlipX(tempDir);
-                _rushWarningEffect.transform.right = tempDir;
-                timer += Time.deltaTime;
-                await UniTask.NextFrame(_cts.Token);
+        int currentPhaseNum = _currentPhaseNum;
+        for (int i = 0; i < currentPhaseNum; i++) {
+            _rushWarningEffect.SetActive(true);
+            float rushWarningTime = _rushWarningTime - (_currentPhaseNum - 1) * 0.25f;
+            float timer = 0;
+            int originBodyDamage = _bodyDamage;
+            try {
+                while (timer < rushWarningTime - 1) {
+                    Vector2 tempDir = _playerScript.transform.position - transform.position;
+                    SetFlipX(tempDir);
+                    _rushWarningEffect.transform.right = tempDir;
+                    timer += Time.deltaTime;
+                    await UniTask.NextFrame(_cts.Token);
+                }
+
+                Vector2 rushDir = (_playerScript.transform.position - transform.position).normalized;
+                Vector2 endValue = (Vector2)transform.position + rushDir * _rushDist;
+                float duration = _rushDist / _moveSpeed;
+                await UniTask.Delay(TimeSpan.FromSeconds(1 - (_currentPhaseNum - 1) * 0.35f), cancellationToken: _cts.Token);
+                _rushWarningEffect.SetActive(false);
+                _bodyDamage = _rushDamage;
+                _rushEffectList[currentPhaseNum - 1].transform.right = rushDir;
+                _rushEffectList[currentPhaseNum - 1].SetActive(true);
+                _rushEffectList[currentPhaseNum - 1].GetComponent<Animator>().SetFloat("Phantom", _phantomMultiplier);
+
+                SetFlipX(rushDir);
+                _animator.SetBool("Run", true);
+                await DOTween.To(() => _rigid.position, x => _rigid.MovePosition(x), endValue, duration).WithCancellation(_cts.Token);
             }
-
-            Vector2 rushDir = (_playerScript.transform.position - transform.position).normalized;
-            Vector2 endValue = (Vector2)transform.position + rushDir * _rushDist;
-            float duration = _rushDist / _moveSpeed;
-            await UniTask.Delay(TimeSpan.FromSeconds(1), cancellationToken: _cts.Token);
-            _rushWarningEffect.SetActive(false);
-            _bodyDamage = _rushDamage;
-            _rushEffect.transform.right = rushDir;
-            _rushEffect.SetActive(true);
-            _rushEffect.GetComponent<Animator>().SetFloat("Phantom", _phantomMultiplier);
-
-            SetFlipX(rushDir);
-            _animator.SetBool("Run", true);
-            await DOTween.To(() => _rigid.position, x => _rigid.MovePosition(x), endValue, duration).WithCancellation(_cts.Token);
+            catch (OperationCanceledException) {
+                _rushWarningEffect.SetActive(false);
+                _attackStateList[2] = AttackState.Finished;
+                await UniTask.Delay(TimeSpan.FromSeconds(0.01f));
+                _attackStateList[2] = AttackState.CoolTime;
+            }
+            finally {
+                _animator.SetBool("Run", false);
+                _rushEffectList[currentPhaseNum - 1].SetActive(false);
+                _rigid.velocity = Vector2.zero;
+                _bodyDamage = originBodyDamage;
+            }
         }
-        catch (OperationCanceledException) {
-            _rushWarningEffect.SetActive(false);
-        }
-        finally {
-            _animator.SetBool("Run", false);
-            _rushEffect.SetActive(false);
-            _rigid.velocity = Vector2.zero;
-            _bodyDamage = originBodyDamage;
-            _attackStateList[2] = AttackState.Finished;
-            await UniTask.Delay(TimeSpan.FromSeconds(0.01f));
-            _attackStateList[2] = AttackState.CoolTime;
-        }
+        _attackStateList[2] = AttackState.Finished;
+        await UniTask.Delay(TimeSpan.FromSeconds(0.01f));
+        _attackStateList[2] = AttackState.CoolTime;
     }
 
     #endregion
@@ -350,7 +357,7 @@ public class BossBondrewd : MonsterBase {
         _attackStateList[3] = AttackState.Attacking;
         int cnt = 0;
         try {
-            while (cnt < _shootCount) {
+            while (cnt < _shootCount + _currentPhaseNum - 1) {
                 MoveSide().Forget();
                 _animator.SetTrigger("ShootRun");
                 Vector3 fireDir = _playerScript.transform.position - _armTargetObj.transform.position;
