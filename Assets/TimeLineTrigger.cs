@@ -7,13 +7,13 @@ public class TimeLineTrigger : MonoBehaviour
 {
     private void Start() {
         if (playableDirector != null) {
-            playableDirector.Pause(); // ½ÃÀÛ ½Ã Timeline ÀÏ½ÃÁ¤Áö
+            playableDirector.Pause(); // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ Timeline ï¿½Ï½ï¿½ï¿½ï¿½ï¿½ï¿½
         }
     }
-    [SerializeField] private PlayableDirector playableDirector; // ¿¬°áµÈ Timeline
+    [SerializeField] private PlayableDirector playableDirector; // ï¿½ï¿½ï¿½ï¿½ï¿½ Timeline
     private bool hasTriggered = false;
     private void OnTriggerEnter(Collider other) {
-        if (hasTriggered) return; // ÀÌ¹Ì ½ÇÇàµÇ¾úÀ¸¸é ¹«½Ã
+        if (hasTriggered) return; // ï¿½Ì¹ï¿½ ï¿½ï¿½ï¿½ï¿½Ç¾ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
         if (other.CompareTag("Player")) {
             hasTriggered = true;
             playableDirector.Resume();

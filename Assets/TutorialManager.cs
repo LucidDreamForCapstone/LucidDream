@@ -5,25 +5,25 @@ using Cysharp.Threading.Tasks;
 
 public class TutorialManager : MonoBehaviour
 {
-    [SerializeField] private GameObject targetObject; // È°¼ºÈ­ÇÒ ¿ÀºêÁ§Æ®
-    [SerializeField] private float delayTime = 19f;   // Áö¿¬ ½Ã°£ (19ÃÊ)
-    [SerializeField] private float fadeDuration = 3f;// ÆäÀÌµå ÀÎ Áö¼Ó ½Ã°£ (1ÃÊ)
+    [SerializeField] private GameObject targetObject; // È°ï¿½ï¿½È­ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ®
+    [SerializeField] private float delayTime = 19f;   // ï¿½ï¿½ï¿½ï¿½ ï¿½Ã°ï¿½ (19ï¿½ï¿½)
+    [SerializeField] private float fadeDuration = 3f;// ï¿½ï¿½ï¿½Ìµï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ã°ï¿½ (1ï¿½ï¿½)
 
     private CanvasGroup canvasGroup;
 
     private void Start() {
         if (targetObject != null) {
-            // CanvasGroup È®ÀÎ ¹× Ãß°¡
+            // CanvasGroup È®ï¿½ï¿½ ï¿½ï¿½ ï¿½ß°ï¿½
             canvasGroup = targetObject.GetComponent<CanvasGroup>();
             if (canvasGroup == null) {
                 canvasGroup = targetObject.AddComponent<CanvasGroup>();
             }
 
-            // ÃÊ±â »óÅÂ ¼³Á¤
-            targetObject.SetActive(false); // ÃÊ±â ºñÈ°¼ºÈ­
-            canvasGroup.alpha = 0; // Åõ¸í »óÅÂ
+            // ï¿½Ê±ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
+            targetObject.SetActive(false); // ï¿½Ê±ï¿½ ï¿½ï¿½È°ï¿½ï¿½È­
+            canvasGroup.alpha = 0; // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 
-            // 19ÃÊ ÈÄ ÆäÀÌµå ÀÎ È¿°ú
+            // 19ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½Ìµï¿½ ï¿½ï¿½ È¿ï¿½ï¿½
             ActivateWithFadeInAsync().Forget();
         }
         else {
@@ -32,13 +32,13 @@ public class TutorialManager : MonoBehaviour
     }
 
     private async UniTaskVoid ActivateWithFadeInAsync() {
-        // 19ÃÊ ´ë±â
+        // 19ï¿½ï¿½ ï¿½ï¿½ï¿½
         await UniTask.Delay(System.TimeSpan.FromSeconds(delayTime));
 
-        // ¿ÀºêÁ§Æ® È°¼ºÈ­
+        // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ® È°ï¿½ï¿½È­
         targetObject.SetActive(true);
 
-        // ÆäÀÌµå ÀÎ È¿°ú
+        // ï¿½ï¿½ï¿½Ìµï¿½ ï¿½ï¿½ È¿ï¿½ï¿½
         await FadeInAsync();
     }
 
@@ -48,9 +48,9 @@ public class TutorialManager : MonoBehaviour
         while (elapsedTime < fadeDuration) {
             elapsedTime += Time.deltaTime;
             canvasGroup.alpha = Mathf.Clamp01(elapsedTime / fadeDuration);
-            await UniTask.Yield(); // ´ÙÀ½ ÇÁ·¹ÀÓ±îÁö ´ë±â
+            await UniTask.Yield(); // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ó±ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½
         }
 
-        canvasGroup.alpha = 1f; // ¿ÏÀüÈ÷ º¸ÀÌµµ·Ï ¼³Á¤
+        canvasGroup.alpha = 1f; // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ìµï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
     }
 }
