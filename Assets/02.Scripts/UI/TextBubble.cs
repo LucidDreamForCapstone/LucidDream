@@ -2,16 +2,17 @@
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
-
-public class TextBubble : MonoBehaviour {
+public class TextBubble : MonoBehaviour
+{
     AudioSource _audioSource;
-    [SerializeField] AudioClip _textSound;
-    [SerializeField] TextMeshProUGUI _textUI;
-    [SerializeField] List<TextBubbleData> _wordList;
-    [SerializeField] int _fontSize;
-    [SerializeField] Color _fontColor;
+    [SerializeField] AudioClip _textSound; // ï¿½ï¿½ï¿½Ú¸ï¿½ï¿½ï¿½ ï¿½ï¿½ÂµÇ´ï¿½ ï¿½Ò¸ï¿½
+    [SerializeField] TextMeshProUGUI _textUI; // UI ï¿½Ø½ï¿½Æ®
+    [SerializeField] List<SentenceData> _sentenceList; // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+    [SerializeField] int _fontSize; // ï¿½Ø½ï¿½Æ® Å©ï¿½ï¿½
+    [SerializeField] Color _fontColor; // ï¿½Ø½ï¿½Æ® ï¿½ï¿½ï¿½ï¿½
 
-    #region mono funcs
+    private bool _isPrinting = false; // ï¿½ßºï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ã·ï¿½ï¿½ï¿½
+
     private void Start() {
         _textUI.text = "";
         _textUI.fontSize = _fontSize;
@@ -19,29 +20,53 @@ public class TextBubble : MonoBehaviour {
         _audioSource = GetComponent<AudioSource>();
     }
 
-    #endregion
+    /// <summary>
+    /// Signal Emitterï¿½ï¿½ï¿½ï¿½ È£ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Þ¼ï¿½ï¿½ï¿½ (ï¿½ï¿½ï¿½ï¿½ ï¿½Îµï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½)
+    /// </summary>
+    public void TriggerPrintSentenceByIndex(int index) {
+        Debug.Log($"TriggerPrintSentenceByIndex called with index: {index}");
+        TriggerPrintSentenceAsync(index).Forget(); // ï¿½ñµ¿±ï¿½ ï¿½Ô¼ï¿½ È£ï¿½ï¿½
+    }
 
     public void TriggerPrintSentence() {
-        PrintSentence().Forget(); //UniTaskVoid ÇÔ¼ö´Â À¯´ÏÆ¼¿¡¼­ ÀÎ½ÄÀ» ¸øÇÔ.
+        PrintSentence().Forget(); //UniTaskVoid ï¿½Ô¼ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Æ¼ï¿½ï¿½ï¿½ï¿½ ï¿½Î½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½.
+    }
+
+        // ï¿½Îµï¿½ï¿½ï¿½ ï¿½ï¿½È¿ï¿½ï¿½ ï¿½Ë»ï¿½
+        if (sentenceIndex < 0 || sentenceIndex >= _sentenceList.Count) {
+            Debug.LogError($"Invalid sentenceIndex: {sentenceIndex}. It must be between 0 and {_sentenceList.Count - 1}.");
+            _isPrinting = false; // ï¿½ßºï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
+            return;
+        }
+
+        _isPrinting = true;
+        _textUI.text = ""; // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
+
+        SentenceData sentence = _sentenceList[sentenceIndex]; // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+        foreach (var word in sentence.Words) {
+            await PrintWord(word); // ï¿½Ü¾ï¿½ ï¿½ï¿½ï¿½
+        }
+
+        _isPrinting = false;
     }
 
 
-    #region private funcs
+    /// <summary>
+    /// ï¿½Ü¾î¸¦ ï¿½ï¿½ï¿½ï¿½Õ´Ï´ï¿½.
+    /// </summary>
+    private async UniTask PrintWord(TextBubbleData data) {
+        for (int i = 0; i < data._word.Length; i++) {
+            _textUI.text += data._word[i]; // ï¿½ï¿½ï¿½ï¿½ ï¿½ß°ï¿½
 
-    private async UniTaskVoid PrintSentence() {
-        _audioSource.Play();
-        int j, length = _wordList.Count;
-        for (int i = 0; i < length; i++) {
-            _audioSource.UnPause();
-            TextBubbleData data = _wordList[i];
-            for (j = 0; j < data._word.Length - 1; j++) {
-                _textUI.text += data._word[j];
-                await UniTask.Delay(System.TimeSpan.FromSeconds(data._charWaitTime));
+            if (_textSound != null) {
+                _audioSource.PlayOneShot(_textSound); // ï¿½Ò¸ï¿½ ï¿½ï¿½ï¿½
             }
-            _textUI.text += data._word[j];
-            _audioSource.Pause();
-            await UniTask.Delay(System.TimeSpan.FromSeconds(data._wordWaitTime));
+
+            await UniTask.Delay(System.TimeSpan.FromSeconds(data._charWaitTime)); // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½Ã°ï¿½
         }
+
+        await UniTask.Delay(System.TimeSpan.FromSeconds(data._wordWaitTime)); // ï¿½Ü¾ï¿½ ï¿½ï¿½ï¿½ ï¿½Ã°ï¿½
+        _textUI.text += " "; // ï¿½Ü¾ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ß°ï¿½
     }
 
     #endregion
@@ -82,7 +107,7 @@ public class TextBubble : MonoBehaviour
 
     private async UniTaskVoid PrintSentence(TextBubbleData data) {
         _audioSource.Play();
-        _textUI.text = ""; // ÀÌÀü ÅØ½ºÆ® ÃÊ±âÈ­
+        _textUI.text = ""; // ï¿½ï¿½ï¿½ï¿½ ï¿½Ø½ï¿½Æ® ï¿½Ê±ï¿½È­
         for (int j = 0; j < data._word.Length - 1; j++) {
             _textUI.text += data._word[j];
             await UniTask.Delay(System.TimeSpan.FromSeconds(data._charWaitTime));
@@ -105,13 +130,13 @@ using UnityEngine;
 public class TextBubble : MonoBehaviour
 {
     AudioSource _audioSource;
-    [SerializeField] AudioClip _textSound; // ±ÛÀÚ¸¶´Ù Ãâ·ÂµÇ´Â ¼Ò¸®
-    [SerializeField] TextMeshProUGUI _textUI; // UI ÅØ½ºÆ®
-    [SerializeField] List<SentenceData> _sentenceList; // ¹®Àå µ¥ÀÌÅÍ
-    [SerializeField] int _fontSize; // ÅØ½ºÆ® Å©±â
-    [SerializeField] Color _fontColor; // ÅØ½ºÆ® »ö»ó
+    [SerializeField] AudioClip _textSound; // ï¿½ï¿½ï¿½Ú¸ï¿½ï¿½ï¿½ ï¿½ï¿½ÂµÇ´ï¿½ ï¿½Ò¸ï¿½
+    [SerializeField] TextMeshProUGUI _textUI; // UI ï¿½Ø½ï¿½Æ®
+    [SerializeField] List<SentenceData> _sentenceList; // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+    [SerializeField] int _fontSize; // ï¿½Ø½ï¿½Æ® Å©ï¿½ï¿½
+    [SerializeField] Color _fontColor; // ï¿½Ø½ï¿½Æ® ï¿½ï¿½ï¿½ï¿½
 
-    private bool _isPrinting = false; // Áßº¹ ½ÇÇà ¹æÁö ÇÃ·¡±×
+    private bool _isPrinting = false; // ï¿½ßºï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ã·ï¿½ï¿½ï¿½
 
     private void Start() {
         _textUI.text = "";
@@ -121,47 +146,47 @@ public class TextBubble : MonoBehaviour
     }
 
     /// <summary>
-    /// Signal Emitter¿¡¼­ È£Ãâ °¡´ÉÇÑ ¸Þ¼­µå (¹®Àå ÀÎµ¦½º¸¦ ±â¹ÝÀ¸·Î ½ÇÇà)
+    /// Signal Emitterï¿½ï¿½ï¿½ï¿½ È£ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Þ¼ï¿½ï¿½ï¿½ (ï¿½ï¿½ï¿½ï¿½ ï¿½Îµï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½)
     /// </summary>
     public void TriggerPrintSentenceByIndex(int index) {
-        TriggerPrintSentenceAsync(index).Forget(); // ºñµ¿±â ÇÔ¼ö È£Ãâ
+        TriggerPrintSentenceAsync(index).Forget(); // ï¿½ñµ¿±ï¿½ ï¿½Ô¼ï¿½ È£ï¿½ï¿½
     }
 
     /// <summary>
-    /// Æ¯Á¤ ¹®ÀåÀ» Ãâ·ÂÇÕ´Ï´Ù.
+    /// Æ¯ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Õ´Ï´ï¿½.
     /// </summary>
     private async UniTask TriggerPrintSentenceAsync(int sentenceIndex) {
-        if (_isPrinting) return; // ÀÌ¹Ì Ãâ·Â ÁßÀÌ¸é ¹«½Ã
-        if (sentenceIndex < 0 || sentenceIndex >= _sentenceList.Count) return; // Àß¸øµÈ ÀÎµ¦½º ¹æÁö
+        if (_isPrinting) return; // ï¿½Ì¹ï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ì¸ï¿½ ï¿½ï¿½ï¿½ï¿½
+        if (sentenceIndex < 0 || sentenceIndex >= _sentenceList.Count) return; // ï¿½ß¸ï¿½ï¿½ï¿½ ï¿½Îµï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 
         _isPrinting = true;
-        // ÀÌÀü ¹®Àå Á¦°Å
+        // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
         _textUI.text = "";
 
-        SentenceData sentence = _sentenceList[sentenceIndex]; // ¹®Àå °¡Á®¿À±â
+        SentenceData sentence = _sentenceList[sentenceIndex]; // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
         foreach (var word in sentence.Words) {
-            await PrintWord(word); // ´Ü¾î Ãâ·Â
+            await PrintWord(word); // ï¿½Ü¾ï¿½ ï¿½ï¿½ï¿½
         }
 
         _isPrinting = false;
     }
 
     /// <summary>
-    /// ´Ü¾î¸¦ Ãâ·ÂÇÕ´Ï´Ù.
+    /// ï¿½Ü¾î¸¦ ï¿½ï¿½ï¿½ï¿½Õ´Ï´ï¿½.
     /// </summary>
     private async UniTask PrintWord(TextBubbleData data) {
         for (int i = 0; i < data._word.Length; i++) {
-            _textUI.text += data._word[i]; // ±ÛÀÚ Ãß°¡
+            _textUI.text += data._word[i]; // ï¿½ï¿½ï¿½ï¿½ ï¿½ß°ï¿½
 
             if (_textSound != null) {
-                _audioSource.PlayOneShot(_textSound); // ¼Ò¸® Ãâ·Â
+                _audioSource.PlayOneShot(_textSound); // ï¿½Ò¸ï¿½ ï¿½ï¿½ï¿½
             }
 
-            await UniTask.Delay(System.TimeSpan.FromSeconds(data._charWaitTime)); // ±ÛÀÚ ´ë±â ½Ã°£
+            await UniTask.Delay(System.TimeSpan.FromSeconds(data._charWaitTime)); // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½Ã°ï¿½
         }
 
-        await UniTask.Delay(System.TimeSpan.FromSeconds(data._wordWaitTime)); // ´Ü¾î ´ë±â ½Ã°£
-        _textUI.text += " "; // ´Ü¾î °£ °ø¹é Ãß°¡
+        await UniTask.Delay(System.TimeSpan.FromSeconds(data._wordWaitTime)); // ï¿½Ü¾ï¿½ ï¿½ï¿½ï¿½ ï¿½Ã°ï¿½
+        _textUI.text += " "; // ï¿½Ü¾ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ß°ï¿½
     }
 }
 
