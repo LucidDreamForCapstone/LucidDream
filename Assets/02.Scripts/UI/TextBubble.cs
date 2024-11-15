@@ -5,7 +5,7 @@ using UnityEngine;
 public class TextBubble : MonoBehaviour
 {
     AudioSource _audioSource;
-    [SerializeField] AudioClip _textSound; // ���ڸ��� ��µǴ� �Ҹ�
+    //[SerializeField] AudioClip _textSound; // ���ڸ��� ��µǴ� �Ҹ�
     [SerializeField] TextMeshProUGUI _textUI; // UI �ؽ�Ʈ
     [SerializeField] List<SentenceData> _sentenceList; // ���� ������
     [SerializeField] int _fontSize; // �ؽ�Ʈ ũ��
@@ -24,6 +24,7 @@ public class TextBubble : MonoBehaviour
     /// Signal Emitter���� ȣ�� ������ �޼��� (���� �ε����� ������� ����)
     /// </summary>
     public void TriggerPrintSentenceByIndex(int index) {
+        Debug.Log($"TriggerPrintSentenceByIndex called with index: {index}");
         TriggerPrintSentenceAsync(index).Forget(); // �񵿱� �Լ� ȣ��
     }
 
@@ -32,8 +33,12 @@ public class TextBubble : MonoBehaviour
     /// </summary>
     private async UniTask TriggerPrintSentenceAsync(int sentenceIndex) {
         if (_isPrinting) return; // �̹� ��� ���̸� ����
-        if (sentenceIndex < 0 || sentenceIndex >= _sentenceList.Count) return; // �߸��� �ε��� ����
 
+        if (sentenceIndex < 0 || sentenceIndex >= _sentenceList.Count) {
+            Debug.LogError($"Invalid sentenceIndex: {sentenceIndex}. It must be between 0 and {_sentenceList.Count - 1}.");
+            _isPrinting = false; // �ߺ� ���� ���� ����
+            return;
+        }
         _isPrinting = true;
         // ���� ���� ����
         _textUI.text = "";
@@ -52,10 +57,6 @@ public class TextBubble : MonoBehaviour
     private async UniTask PrintWord(TextBubbleData data) {
         for (int i = 0; i < data._word.Length; i++) {
             _textUI.text += data._word[i]; // ���� �߰�
-
-            if (_textSound != null) {
-                _audioSource.PlayOneShot(_textSound); // �Ҹ� ���
-            }
 
             await UniTask.Delay(System.TimeSpan.FromSeconds(data._charWaitTime)); // ���� ��� �ð�
         }

@@ -2,53 +2,53 @@ using Cinemachine;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
 
-public class TimeLineTrigger : MonoBehaviour
+public class TimeLineTrigger : TutorialStart
 {
-    [SerializeField] private CinemachineVirtualCamera targetCamera; // 전환할 Cinemachine Virtual Camera
-    [SerializeField] private CinemachineVirtualCamera defaultCamera; // 기본 Virtual Camera
-    [SerializeField] private TimelineManager timelineManager; // 타임라인 매니저
-    private bool hasTriggered = false; // 플레이어가 트리거를 이미 발동했는지 확인
+    [SerializeField] private CinemachineVirtualCamera targetCamera; // ��ȯ�� Cinemachine Virtual Camera
+    [SerializeField] private CinemachineVirtualCamera defaultCamera; // �⺻ Virtual Camera
+    [SerializeField] private TimelineManager timelineManager; // Ÿ�Ӷ��� �Ŵ���
+    private bool hasTriggered = false; // �÷��̾ Ʈ���Ÿ� �̹� �ߵ��ߴ��� Ȯ��
 
     private async void OnTriggerEnter2D(Collider2D other) {
-        // 플레이어만 감지
+        // �÷��̾ ����
         if (!other.CompareTag("Player") || hasTriggered) {
             return;
         }
 
         hasTriggered = true;
 
-        // 타임라인 재개
+        // ī�޶� ��ȯ
+        ActivateCamera(targetCamera);
+
+        await FadeInColorFilter();
+        // Ÿ�Ӷ��� �簳
         timelineManager.ResumeTimeline();
-        // 2초 대기 후 원래 카메라로 복구
+
+        // 2�� ��� �� ���� ī�޶�� ����
         await UniTask.Delay(System.TimeSpan.FromSeconds(2));
         RestoreDefaultCamera();
-        // 트리거 재사용 가능하도록 리셋 (필요 시)
-        hasTriggered = false;
     }
 
-    /// <summary>
-    /// 특정 카메라 활성화
-    /// </summary>
     private void ActivateCamera(CinemachineVirtualCamera cameraToActivate) {
         if (cameraToActivate != null) {
             foreach (var vcam in FindObjectsOfType<CinemachineVirtualCamera>()) {
-                vcam.Priority = 0; // 모든 카메라 우선순위 낮춤
+                vcam.Priority = 0; // ��� ī�޶� �켱���� ����
             }
 
-            cameraToActivate.Priority = 10; // 활성화할 카메라 우선순위 높임
+            cameraToActivate.Priority = 10; // Ȱ��ȭ�� ī�޶� �켱���� ����
         }
     }
 
     /// <summary>
-    /// 기본 카메라 복구
+    /// �⺻ ī�޶� ����
     /// </summary>
     private void RestoreDefaultCamera() {
         if (defaultCamera != null) {
             foreach (var vcam in FindObjectsOfType<CinemachineVirtualCamera>()) {
-                vcam.Priority = 0; // 모든 카메라 우선순위 초기화
+                vcam.Priority = 0; // ��� ī�޶� �켱���� �ʱ�ȭ
             }
 
-            defaultCamera.Priority = 10; // 기본 카메라 우선순위 복구
+            defaultCamera.Priority = 10; // �⺻ ī�޶� �켱���� ����
         }
     }
 }

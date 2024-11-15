@@ -3,7 +3,7 @@ using UnityEngine.Rendering;
 using UnityEngine.Rendering.Universal;
 using Cysharp.Threading.Tasks;
 
-public class ColorFilterFadeIn : MonoBehaviour
+public class TutorialStart : MonoBehaviour
 { 
 
     [SerializeField] private Volume postProcessingVolume; // Post Processing Volume ÂüÁ¶
