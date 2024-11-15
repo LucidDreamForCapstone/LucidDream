@@ -206,6 +206,7 @@ public class BossBondrewd : MonsterBase {
         _phantomGaugeSlider.gameObject.SetActive(false);
         _groggySlider.gameObject.SetActive(false);
         _groggyEffect.SetActive(false);
+        _chargerUIList.ForEach((chargeUI) => chargeUI.gameObject.SetActive(false));
         DropItems();
         _playerScript.GetExp(_exp);
         _cts.Dispose();
