@@ -7098,10 +7098,10 @@ TextureImporter:
       name: tileset x2_333
       rect:
         serializedVersion: 2
-        x: 1280
-        y: 512
-        width: 64
-        height: 64
+        x: 1286
+        y: 516
+        width: 58
+        height: 43
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
