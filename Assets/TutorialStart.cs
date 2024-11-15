@@ -3,12 +3,9 @@ using UnityEngine.Rendering;
 using UnityEngine.Rendering.Universal;
 using Cysharp.Threading.Tasks;
 
-<<<<<<< Updated upstream
 public class ColorFilterFadeIn : MonoBehaviour
-=======
-public class TutorialStart : MonoBehaviour
->>>>>>> Stashed changes
-{
+{ 
+
     [SerializeField] private Volume postProcessingVolume; // Post Processing Volume 참조
     [SerializeField] private float fadeDuration = 3f; // 페이드 인 시간 (초)
 
@@ -29,12 +26,7 @@ public class TutorialStart : MonoBehaviour
             Debug.LogError("Color Adjustments is not found in the Post Processing Volume.");
         }
     }
-
-<<<<<<< Updated upstream
-    private async UniTask FadeInColorFilter() {
-=======
     protected async UniTask FadeInColorFilter() {
->>>>>>> Stashed changes
         float elapsedTime = 0f;
 
         while (elapsedTime < fadeDuration) {
