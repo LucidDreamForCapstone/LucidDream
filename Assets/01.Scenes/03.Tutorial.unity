@@ -1088,8 +1088,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   textMeshProGUI: {fileID: 0}
   color1: {r: 1, g: 1, b: 1, a: 1}
-  color2: {r: 1, g: 0.97624236, b: 0, a: 1}
-  blinkSpeed: 1
+  color2: {r: 1, g: 0.6434471, b: 0, a: 1}
+  blinkSpeed: 0.5
 --- !u!114 &106126605
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1539,7 +1539,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &222622417
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1573,8 +1573,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   textMeshProGUI: {fileID: 0}
   color1: {r: 1, g: 1, b: 1, a: 1}
-  color2: {r: 1, g: 0, b: 0.0062470436, a: 1}
-  blinkSpeed: 1
+  color2: {r: 1, g: 0.6434471, b: 0, a: 1}
+  blinkSpeed: 0.5
 --- !u!114 &222622419
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1836,7 +1836,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &338525434
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1870,8 +1870,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   textMeshProGUI: {fileID: 0}
   color1: {r: 1, g: 1, b: 1, a: 0.25490198}
-  color2: {r: 1, g: 0, b: 0.13601112, a: 1}
-  blinkSpeed: 1
+  color2: {r: 1, g: 0.6434471, b: 0, a: 1}
+  blinkSpeed: 0.5
 --- !u!114 &338525436
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2126,7 +2126,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &374224730
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2143,7 +2143,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -453, y: -29}
+  m_AnchoredPosition: {x: -431, y: 29}
   m_SizeDelta: {x: 1000, y: 400}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &374224731
@@ -2158,10 +2158,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3bdbb26055435e846b15298ba56f330a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  textMeshProGUI: {fileID: 0}
+  textMeshProGUI: {fileID: 374224732}
   color1: {r: 1, g: 1, b: 1, a: 1}
-  color2: {r: 1, g: 0, b: 0.03760767, a: 1}
-  blinkSpeed: 1
+  color2: {r: 1, g: 0.6434471, b: 0, a: 1}
+  blinkSpeed: 0.5
 --- !u!114 &374224732
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -17607,8 +17607,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   textMeshProGUI: {fileID: 0}
   color1: {r: 1, g: 1, b: 1, a: 1}
-  color2: {r: 1, g: 0.97624236, b: 0, a: 1}
-  blinkSpeed: 1
+  color2: {r: 1, g: 0.6434471, b: 0, a: 1}
+  blinkSpeed: 0.5
 --- !u!114 &766524674
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -18796,9 +18796,6 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 652177461014761772, guid: aac7bedbbcbfff449b85a763e9af3024, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1932358839}
-    - targetCorrespondingSourceObject: {fileID: 9102800192207926202, guid: aac7bedbbcbfff449b85a763e9af3024, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1225334224}
     - targetCorrespondingSourceObject: {fileID: 6335235280532469455, guid: aac7bedbbcbfff449b85a763e9af3024, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1159814359}
@@ -18821,7 +18818,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &846263073
 RectTransform:
   m_ObjectHideFlags: 0
@@ -18855,8 +18852,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   textMeshProGUI: {fileID: 0}
   color1: {r: 1, g: 1, b: 1, a: 0.25490198}
-  color2: {r: 1, g: 0, b: 0.13601112, a: 1}
-  blinkSpeed: 1
+  color2: {r: 1, g: 0.6434471, b: 0, a: 1}
+  blinkSpeed: 0.5
 --- !u!114 &846263075
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -19248,10 +19245,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3bdbb26055435e846b15298ba56f330a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  textMeshProGUI: {fileID: 0}
+  textMeshProGUI: {fileID: 949549486}
   color1: {r: 1, g: 1, b: 1, a: 1}
-  color2: {r: 1, g: 0.97624236, b: 0, a: 1}
-  blinkSpeed: 1
+  color2: {r: 1, g: 0.6434471, b: 0, a: 1}
+  blinkSpeed: 0.5
 --- !u!114 &949549486
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -19487,7 +19484,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1079248949
 RectTransform:
   m_ObjectHideFlags: 0
@@ -19521,8 +19518,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   textMeshProGUI: {fileID: 0}
   color1: {r: 1, g: 1, b: 1, a: 0.25490198}
-  color2: {r: 1, g: 0, b: 0.13601112, a: 1}
-  blinkSpeed: 1
+  color2: {r: 1, g: 0.6434471, b: 0, a: 1}
+  blinkSpeed: 0.5
 --- !u!114 &1079248951
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -19779,7 +19776,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1084417155
 RectTransform:
   m_ObjectHideFlags: 0
@@ -19811,10 +19808,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3bdbb26055435e846b15298ba56f330a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  textMeshProGUI: {fileID: 0}
+  textMeshProGUI: {fileID: 1084417157}
   color1: {r: 1, g: 1, b: 1, a: 1}
-  color2: {r: 1, g: 0, b: 0.03760767, a: 1}
-  blinkSpeed: 1
+  color2: {r: 1, g: 0.6434471, b: 0, a: 1}
+  blinkSpeed: 0.5
 --- !u!114 &1084417157
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -20591,28 +20588,7 @@ MonoBehaviour:
   textMeshProGUI: {fileID: 0}
   color1: {r: 1, g: 1, b: 1, a: 1}
   color2: {r: 1, g: 0, b: 0.03760767, a: 1}
-  blinkSpeed: 1
---- !u!1 &1225334220 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 9102800192207926202, guid: aac7bedbbcbfff449b85a763e9af3024, type: 3}
-  m_PrefabInstance: {fileID: 840934878}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &1225334224
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1225334220}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3bdbb26055435e846b15298ba56f330a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  textMeshProGUI: {fileID: 0}
-  color1: {r: 1, g: 1, b: 1, a: 1}
-  color2: {r: 1, g: 0.11308181, b: 0, a: 1}
-  blinkSpeed: 1
+  blinkSpeed: 0.5
 --- !u!114 &1285523971 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 604831732717375729, guid: 7a893a6f4b0095b4d8e4845ccf472daf, type: 3}
@@ -20864,7 +20840,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1376082163
 RectTransform:
   m_ObjectHideFlags: 0
@@ -20898,8 +20874,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   textMeshProGUI: {fileID: 0}
   color1: {r: 1, g: 1, b: 1, a: 0.25490198}
-  color2: {r: 1, g: 0, b: 0.13601112, a: 1}
-  blinkSpeed: 1
+  color2: {r: 1, g: 0.6434471, b: 0, a: 1}
+  blinkSpeed: 0.5
 --- !u!114 &1376082165
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -21293,6 +21269,7 @@ GameObject:
   - component: {fileID: 1469579580}
   - component: {fileID: 1469579582}
   - component: {fileID: 1469579581}
+  - component: {fileID: 1469579583}
   m_Layer: 0
   m_Name: TimeLineTrigger_2
   m_TagString: Untagged
@@ -21377,6 +21354,23 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 18.39825, y: 0.25278854}
   m_EdgeRadius: 0
+--- !u!114 &1469579583
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1469579579}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a03fec8092b87ab459f35f1c8f33d975, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tutorialUIs:
+  - {fileID: 1615995440}
+  continueText: {fileID: 338525436}
+  delayBeforeContinueText: 2
+  postProcessingVolume: {fileID: 671481261}
 --- !u!1 &1552312665
 GameObject:
   m_ObjectHideFlags: 0
@@ -21434,7 +21428,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1592864733
 RectTransform:
   m_ObjectHideFlags: 0
@@ -21468,8 +21462,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   textMeshProGUI: {fileID: 0}
   color1: {r: 1, g: 1, b: 1, a: 0.25490198}
-  color2: {r: 1, g: 0, b: 0.13601112, a: 1}
-  blinkSpeed: 1
+  color2: {r: 1, g: 0.6434471, b: 0, a: 1}
+  blinkSpeed: 0.5
 --- !u!114 &1592864735
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -21586,7 +21580,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1615995441
 RectTransform:
   m_ObjectHideFlags: 0
@@ -21620,7 +21614,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 0.92156863}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -21683,7 +21677,6 @@ Transform:
   - {fileID: 869570774}
   - {fileID: 1054531146}
   - {fileID: 1469579580}
-  - {fileID: 1826193326}
   m_Father: {fileID: 1119702955}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!66 &1626900966
@@ -22577,7 +22570,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1697169303
 RectTransform:
   m_ObjectHideFlags: 0
@@ -22611,8 +22604,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   textMeshProGUI: {fileID: 0}
   color1: {r: 1, g: 1, b: 1, a: 0.25490198}
-  color2: {r: 1, g: 0, b: 0.13601112, a: 1}
-  blinkSpeed: 1
+  color2: {r: 1, g: 0.6434471, b: 0, a: 1}
+  blinkSpeed: 0.5
 --- !u!114 &1697169305
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -22711,83 +22704,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1697169302}
   m_CullTransparentMesh: 1
---- !u!1 &1826193325
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1826193326}
-  - component: {fileID: 1826193327}
-  m_Layer: 0
-  m_Name: Trigger_
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1826193326
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1826193325}
-  serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -15.49, y: 3.97, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 0}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 1626900965}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!61 &1826193327
-BoxCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1826193325}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_ForceSendLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ForceReceiveLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ContactCaptureLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_CallbackLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_IsTrigger: 1
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0.48589134, y: -1.1453762}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0, y: 0}
-    oldSize: {x: 0, y: 0}
-    newSize: {x: 0, y: 0}
-    adaptiveTilingThreshold: 0
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  serializedVersion: 2
-  m_Size: {x: 18.39825, y: 0.25278854}
-  m_EdgeRadius: 0
 --- !u!1 &1834020943 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1213858276333295106, guid: a3953d91f13026241b9304ad71aa546a, type: 3}
@@ -62695,6 +62611,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2137579751}
   - component: {fileID: 2137579750}
+  - component: {fileID: 2137579752}
   m_Layer: 0
   m_Name: TutorialUIManager
   m_TagString: Untagged
@@ -62723,7 +62640,8 @@ MonoBehaviour:
   - {fileID: 374224729}
   - {fileID: 1697169302}
   continueText: {fileID: 338525436}
-  delayBeforeContinueText: 0.7
+  delayBeforeContinueText: 2
+  postProcessingVolume: {fileID: 671481261}
 --- !u!4 &2137579751
 Transform:
   m_ObjectHideFlags: 0
@@ -62733,12 +62651,57 @@ Transform:
   m_GameObject: {fileID: 2137579749}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -14.504108, y: 25.044622, z: 0}
+  m_LocalPosition: {x: -14.504108, y: 25.38, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!61 &2137579752
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2137579749}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0.042412758, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 17.965342, y: 1}
+  m_EdgeRadius: 0
 --- !u!1001 &3293589214754748349
 PrefabInstance:
   m_ObjectHideFlags: 0
