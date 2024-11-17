@@ -192,11 +192,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _invincibleLastTime: 1.5
-  _phantomLastTime: 2
   _phantomTimeScale: 0.2
   _phantomLerpTime: 0.5
-  _phantomCoolTime: 10
+  _phantomCoolTime: 1
   _phantomSpeedBonus: 400
+  _phantomGaugeUseAmount: 10
+  _phantomGaugeRecoverAmount: 8
+  _phantomSlider: {fileID: 0}
   _phantomGhostObj: {fileID: 6024089705646008288, guid: 6655b0effe23aca4aa9b651fd6a08362, type: 3}
   _phantomVolumeAnimator: {fileID: 8047837748155434033}
   _phantomGhostColor: {r: 0.8862745, g: 0.63529414, b: 1, a: 0.79607844}

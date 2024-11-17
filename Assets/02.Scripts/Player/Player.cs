@@ -4,6 +4,7 @@ using Edgar.Unity.Examples.Gungeon;
 using System;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using Random = UnityEngine.Random;
 
 public class Player : MonoBehaviour {
@@ -17,11 +18,14 @@ public class Player : MonoBehaviour {
     #region serialized field
 
     [SerializeField] private float _invincibleLastTime;
-    [SerializeField] private float _phantomLastTime; //ingameTime
+    //[SerializeField] private float _phantomLastTime; //ingameTime
     [SerializeField] private float _phantomTimeScale; // 0 ~ 1
     [SerializeField] private float _phantomLerpTime;
     [SerializeField] private float _phantomCoolTime;
     [SerializeField] private float _phantomSpeedBonus;
+    [SerializeField] private float _phantomGaugeUseAmount;
+    [SerializeField] private float _phantomGaugeRecoverAmount;
+    [SerializeField] private Slider _phantomSlider;
     [SerializeField] private GameObject _phantomGhostObj;
     [SerializeField] private Animator _phantomVolumeAnimator;
     [SerializeField] private Color _phantomGhostColor;
@@ -66,6 +70,7 @@ public class Player : MonoBehaviour {
     protected bool _isRollInvincible;//obsolete
     private bool _isCustomInvincible;//특수 함수에 의한 무적 상태
     //private bool _isRollReady;
+    private float _currentPhantomGauge;
     private bool _isPhantomReady;
     private bool _isPhantomActivated;
     private bool _phantomForceCancelTrigger;
@@ -110,6 +115,8 @@ public class Player : MonoBehaviour {
         _phantomVolumeAnimator.gameObject.SetActive(false);
         _isPhantomReady = true;
         _isPhantomActivated = false;
+        _currentPhantomGauge = 100;
+        UpdatePhantomGauge();
         _phantomForceCancelTrigger = false;
         _phantomSpeedRate = 1;
         _isRollInvincible = false;//obsolete
@@ -132,6 +139,7 @@ public class Player : MonoBehaviour {
     protected void Update() {
         //Roll().Forget();
         Phantom().Forget();
+        PhantomGaugeManage();
         SearchNearItems();
         ItemMagnetic();
         StunState();
@@ -404,20 +412,37 @@ public class Player : MonoBehaviour {
         }
     }
 
+    private void PhantomGaugeManage() {
+        if (_isPhantomActivated) {
+            if (_currentPhantomGauge > 0)
+                _currentPhantomGauge -= _phantomGaugeUseAmount * Time.unscaledDeltaTime;
+            else {
+                _currentPhantomGauge = 0;
+                _phantomForceCancelTrigger = true;
+            }
+        }
+        else {
+            if (_currentPhantomGauge < 100) {
+                _currentPhantomGauge += _phantomGaugeRecoverAmount * Time.unscaledDeltaTime;
+            }
+            else
+                _currentPhantomGauge = 100;
+        }
+        UpdatePhantomGauge();
+    }
+
     private async UniTaskVoid Phantom() {
         if (Input.GetKey(KeyCode.Space) && _isPhantomReady && !_isStun && !_isPause && !_isDead && _playerEnabled) {
             Debug.Log("Phantom ON");
             PhantomGhostEffect().Forget();
             //PlaySound(avoidSound);
             _isPhantomReady = false;
-            float timer = 0;
             DOTween.To(() => _phantomSpeedRate, x => _phantomSpeedRate = x, _phantomSpeedBonus * 0.01f, _phantomLerpTime).ToUniTask().Forget();
             _phantomVolumeAnimator.gameObject.SetActive(true);
             SoundManager.Instance.SetSFXPitchLerp(_phantomTimeScale, _phantomLerpTime).Forget();
             SoundManager.Instance.SetBGMPitchLerp(0.5f, _phantomLerpTime).Forget();
             await TimeScaleManager.Instance.TimeSlowLerp(_phantomTimeScale, _phantomLerpTime);
-            while (!Input.GetKey(KeyCode.Space) && timer < _phantomLastTime && !_phantomForceCancelTrigger) {
-                timer += Time.deltaTime;
+            while (!Input.GetKey(KeyCode.Space) && !_phantomForceCancelTrigger && !_isStun) {
                 await UniTask.NextFrame();
             }
             DOTween.To(() => _phantomSpeedRate, x => _phantomSpeedRate = x, 1, _phantomLerpTime).ToUniTask().Forget();
@@ -626,6 +651,10 @@ public class Player : MonoBehaviour {
             await UniTask.Delay(TimeSpan.FromSeconds(delay), ignoreTimeScale: true);
             SoundManager.Instance.PlaySFX(clip.name, true);
         }
+    }
+
+    private void UpdatePhantomGauge() {
+        _phantomSlider.value = _currentPhantomGauge / 100;
     }
     #endregion //private funcs
 }
