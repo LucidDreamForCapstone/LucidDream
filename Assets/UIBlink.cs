@@ -25,7 +25,7 @@ public class UIBlink : MonoBehaviour
 
     private void Update() {
         if (isBlinking) {
-            float t = Mathf.PingPong(Time.time * blinkSpeed, 1f); // 0~1 사이의 값을 반복
+            float t = Mathf.PingPong(Time.unscaledTime * blinkSpeed, 1f); // 0~1 사이의 값을 반복
             textMeshProGUI.color = Color.Lerp(color1, color2, t); // 두 색상 사이를 전환
         }
     }

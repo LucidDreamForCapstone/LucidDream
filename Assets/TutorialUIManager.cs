@@ -1,4 +1,4 @@
-using System.Collections;
+/*using System.Collections;
 using UnityEngine;
 using UnityEngine.Rendering;
 using UnityEngine.Rendering.Universal;
@@ -7,27 +7,28 @@ using TMPro;
 public class TutorialUIManager : MonoBehaviour
 {
     [Header("UI Elements")]
-    [SerializeField] private GameObject[] tutorialUIs; // 각 튜토리얼 UI 패널들
-    [SerializeField] private TextMeshProUGUI continueText; // "G키를 누르세요" 문구
-    [SerializeField] private float delayBeforeContinueText = 1f; // "G키를 누르세요" 문구 표시 딜레이
+    [SerializeField] private GameObject[] tutorialUIs; // Tutorial UI panels
+    [SerializeField] private TextMeshProUGUI continueText; // "Press G to continue" text
+    [SerializeField] private float delayBeforeContinueText = 1f; // Delay before showing "Press G to continue" text
 
     [Header("Post Processing Settings")]
     [SerializeField] private Volume postProcessingVolume; // Post Processing Volume
-    private ColorAdjustments colorAdjustments; // Color Adjustments 컴포넌트
+    private ColorAdjustments colorAdjustments; // Color Adjustments component
 
-    private int currentIndex = 0; // 현재 활성화된 UI 인덱스
-    private bool canContinue = false; // G키 입력 대기 상태
+    private int currentIndex = 0; // Current active UI index
+    private bool canContinue = false; // Waiting for G key input
+    protected float previousMoveSpeed; // Store previous move speed 
 
     private void Start() {
-        // 모든 UI 초기화
+        // Initialize all UI
         foreach (var ui in tutorialUIs) {
             ui.SetActive(false);
         }
         continueText.gameObject.SetActive(false);
 
-        // PostProcessing Volume에서 ColorAdjustments 가져오기
+        // Get ColorAdjustments from PostProcessing Volume
         if (postProcessingVolume != null && postProcessingVolume.profile.TryGet(out colorAdjustments)) {
-            colorAdjustments.colorFilter.value = Color.white; // 초기 색상: 흰색 (255, 255, 255)
+            colorAdjustments.colorFilter.value = Color.white; // Initial color: white (255, 255, 255)
         }
         else {
             Debug.LogError("Post Processing Volume or Color Adjustments not set!");
@@ -41,7 +42,122 @@ public class TutorialUIManager : MonoBehaviour
     }
 
     private void Update() {
-        // G키 입력 감지
+        // Detect G key input
+        if (canContinue && Input.GetKeyDown(KeyCode.G)) {
+            HideCurrentTutorialUI();
+            ShowNextTutorialUI();
+        }
+    }
+
+    private void ShowNextTutorialUI() {
+        if (currentIndex >= tutorialUIs.Length) return;
+        // Activate the current tutorial UI
+        tutorialUIs[currentIndex].SetActive(true);
+        // Set time scale to 0 (pause the game)
+        Time.timeScale = 0f;
+        // Adjust color: switch to darker color
+        SetColorFilter(new Color(68f / 255f, 67f / 255f, 66f / 255f));
+
+        StartCoroutine(ShowContinueTextAfterDelay());
+    }
+
+    private void HideCurrentTutorialUI() {
+        if (currentIndex >= tutorialUIs.Length) return;
+
+        // Deactivate the current UI
+        tutorialUIs[currentIndex].SetActive(false);
+        continueText.gameObject.SetActive(false);
+        canContinue = false; // Disable input until the next UI is shown
+        currentIndex++;
+        // If all UIs are finished, restore color and time scale
+        if (currentIndex >= tutorialUIs.Length) {
+            Time.timeScale = 1f; // Restore time scale
+            StartCoroutine(RestoreDefaultColor());
+        }
+    }
+
+    private IEnumerator ShowContinueTextAfterDelay() {
+        yield return new WaitForSeconds(delayBeforeContinueText);
+
+        // Show "Press G to continue" text
+        continueText.gameObject.SetActive(true);
+        canContinue = true;
+    }
+
+    /// <summary>
+    /// Set the ColorFilter
+    /// </summary>
+    /// <param name="targetColor">Target color</param>
+    protected void SetColorFilter(Color targetColor) {
+        if (colorAdjustments != null) {
+            colorAdjustments.colorFilter.value = targetColor;
+        }
+    }
+
+    /// <summary>
+    /// Restore the ColorFilter to its original value over 1 second
+    /// </summary>
+    protected IEnumerator RestoreDefaultColor() {
+        if (colorAdjustments == null) yield break;
+
+        Color initialColor = colorAdjustments.colorFilter.value;
+        Color targetColor = Color.white; // Target color: white (255, 255, 255)
+        float elapsedTime = 0f;
+
+        while (elapsedTime < delayBeforeContinueText) {
+            elapsedTime += Time.deltaTime;
+            colorAdjustments.colorFilter.value = Color.Lerp(initialColor, targetColor, elapsedTime / delayBeforeContinueText);
+            yield return null;
+        }
+
+        colorAdjustments.colorFilter.value = targetColor; // Set to the exact target color
+    }
+}*/
+using System.Collections;
+using UnityEngine;
+using UnityEngine.Rendering;
+using UnityEngine.Rendering.Universal;
+using TMPro;
+
+public class TutorialUIManager : MonoBehaviour
+{
+    [Header("UI Elements")]
+    [SerializeField] private GameObject[] tutorialUIs; // Tutorial UI panels
+    [SerializeField] private TextMeshProUGUI continueText; // "Press G to continue" text
+    [SerializeField] protected float delayBeforeContinueText = 1f; // Delay before showing "Press G to continue" text
+
+    [Header("Post Processing Settings")]
+    [SerializeField] private Volume postProcessingVolume; // Post Processing Volume
+    protected ColorAdjustments colorAdjustments; // Color Adjustments component
+
+    private int currentIndex = 0; // Current active UI index
+    private bool canContinue = false; // Waiting for G key input
+    protected float previousMoveSpeed; // Store previous move speed 
+
+    private void Start() {
+        // Initialize all UI
+        foreach (var ui in tutorialUIs) {
+            ui.SetActive(false);
+        }
+        continueText.gameObject.SetActive(false);
+
+        // Get ColorAdjustments from PostProcessing Volume
+        if (postProcessingVolume != null && postProcessingVolume.profile.TryGet(out colorAdjustments)) {
+            colorAdjustments.colorFilter.value = Color.white; // Initial color: white (255, 255, 255)
+        }
+        else {
+            Debug.LogError("Post Processing Volume or Color Adjustments not set!");
+        }
+    }
+
+    private void OnTriggerEnter2D(Collider2D other) {
+        if (other.CompareTag("Player") && currentIndex < tutorialUIs.Length) {
+            ShowNextTutorialUI();
+        }
+    }
+
+    private void Update() {
+        // Detect G key input
         if (canContinue && Input.GetKeyDown(KeyCode.G)) {
             HideCurrentTutorialUI();
             ShowNextTutorialUI();
@@ -51,10 +167,13 @@ public class TutorialUIManager : MonoBehaviour
     private void ShowNextTutorialUI() {
         if (currentIndex >= tutorialUIs.Length) return;
 
-        // 현재 튜토리얼 UI 활성화
+        // Activate the current tutorial UI
         tutorialUIs[currentIndex].SetActive(true);
 
-        // 색상 조절: 어두운 색으로 변경
+        // Set time scale to 0 (pause the game)
+        Time.timeScale = 0f;
+
+        // Adjust color: switch to darker color
         SetColorFilter(new Color(68f / 255f, 67f / 255f, 66f / 255f));
 
         StartCoroutine(ShowContinueTextAfterDelay());
@@ -63,52 +182,54 @@ public class TutorialUIManager : MonoBehaviour
     private void HideCurrentTutorialUI() {
         if (currentIndex >= tutorialUIs.Length) return;
 
-        // 현재 UI 비활성화
+        // Deactivate the current UI
         tutorialUIs[currentIndex].SetActive(false);
         continueText.gameObject.SetActive(false);
-        canContinue = false; // 다음 UI가 나타날 때까지 입력 비활성화
+        canContinue = false; // Disable input until the next UI is shown
         currentIndex++;
 
-        // 모든 UI가 끝난 경우 색상 복구
+        // If all UIs are finished, restore color and time scale
         if (currentIndex >= tutorialUIs.Length) {
+            Time.timeScale = 1f; // Restore time scale
             StartCoroutine(RestoreDefaultColor());
         }
     }
 
     private IEnumerator ShowContinueTextAfterDelay() {
-        yield return new WaitForSeconds(delayBeforeContinueText);
+        // Use WaitForSecondsRealtime to avoid time scale influence
+        yield return new WaitForSecondsRealtime(delayBeforeContinueText);
 
-        // "계속하려면 G키를 누르세요" 문구 표시
+        // Show "Press G to continue" text
         continueText.gameObject.SetActive(true);
         canContinue = true;
     }
 
     /// <summary>
-    /// ColorFilter를 설정
+    /// Set the ColorFilter
     /// </summary>
-    /// <param name="targetColor">목표 색상</param>
-    private void SetColorFilter(Color targetColor) {
+    /// <param name="targetColor">Target color</param>
+    protected void SetColorFilter(Color targetColor) {
         if (colorAdjustments != null) {
             colorAdjustments.colorFilter.value = targetColor;
         }
     }
 
     /// <summary>
-    /// 1초 동안 ColorFilter를 원래 값으로 복구
+    /// Restore the ColorFilter to its original value over 1 second
     /// </summary>
-    private IEnumerator RestoreDefaultColor() {
+    protected virtual IEnumerator RestoreDefaultColor() {
         if (colorAdjustments == null) yield break;
 
         Color initialColor = colorAdjustments.colorFilter.value;
-        Color targetColor = Color.white; // 목표 색상: 흰색 (255, 255, 255)
+        Color targetColor = Color.white; // Target color: white (255, 255, 255)
         float elapsedTime = 0f;
 
         while (elapsedTime < delayBeforeContinueText) {
-            elapsedTime += Time.deltaTime;
+            elapsedTime += Time.unscaledDeltaTime; // Use unscaledDeltaTime to avoid time scale influence
             colorAdjustments.colorFilter.value = Color.Lerp(initialColor, targetColor, elapsedTime / delayBeforeContinueText);
             yield return null;
         }
 
-        colorAdjustments.colorFilter.value = targetColor; // 정확히 목표 색상으로 설정
+        colorAdjustments.colorFilter.value = targetColor; // Set to the exact target color
     }
 }

@@ -405,10 +405,14 @@ public class Player : MonoBehaviour {
     }
 
     private async UniTaskVoid Phantom() {
+        // 팬텀 사용 가능 여부 확인
+        if (!PlayerTriggerManager.Instance.CanUsePhantom) {
+            return;
+        }
+
         if (Input.GetKey(KeyCode.Space) && _isPhantomReady && !_isStun && !_isPause && !_isDead && _playerEnabled) {
             Debug.Log("Phantom ON");
             PhantomGhostEffect().Forget();
-            //PlaySound(avoidSound);
             _isPhantomReady = false;
             float timer = 0;
             DOTween.To(() => _phantomSpeedRate, x => _phantomSpeedRate = x, _phantomSpeedBonus * 0.01f, _phantomLerpTime).ToUniTask().Forget();
@@ -416,10 +420,12 @@ public class Player : MonoBehaviour {
             SoundManager.Instance.SetSFXPitchLerp(_phantomTimeScale, _phantomLerpTime).Forget();
             SoundManager.Instance.SetBGMPitchLerp(0.5f, _phantomLerpTime).Forget();
             await TimeScaleManager.Instance.TimeSlowLerp(_phantomTimeScale, _phantomLerpTime);
+
             while (!Input.GetKey(KeyCode.Space) && timer < _phantomLastTime && !_phantomForceCancelTrigger && !_isStun) {
                 timer += Time.deltaTime;
                 await UniTask.NextFrame();
             }
+
             DOTween.To(() => _phantomSpeedRate, x => _phantomSpeedRate = x, 1, _phantomLerpTime).ToUniTask().Forget();
             SoundManager.Instance.SetBGMPitchLerp(1, _phantomLerpTime).Forget();
             SoundManager.Instance.SetSFXPitchLerp(1, _phantomLerpTime).Forget();
@@ -434,6 +440,8 @@ public class Player : MonoBehaviour {
             Debug.Log("**Phantom Ready**");
         }
     }
+
+
 
     private async UniTaskVoid PhantomGhostEffect() {
         _isPhantomActivated = true;

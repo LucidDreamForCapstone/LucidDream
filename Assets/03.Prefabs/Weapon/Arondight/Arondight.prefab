@@ -275,7 +275,7 @@ MonoBehaviour:
   _skillEffect2: {fileID: 0}
   _feverSkillEffect0: {fileID: 7683237564934185518, guid: 7eb368eeb3c1e384f99437140b42bdc4, type: 3}
   _feverSkillEffect1: {fileID: 3255017985017833012, guid: dab33d3a041c2434f86d422b71acb24e, type: 3}
-  _feverRange: 3
+  _feverRange: 5
   _isBuffTypeFeverSkill: 0
   _normalAttackSound: {fileID: 8300000, guid: c3809432f89a2c545b27782b4cbe8466, type: 3}
   shakeDuration: 0.3
@@ -288,7 +288,6 @@ MonoBehaviour:
   wSound: {fileID: 8300000, guid: 6a6ff3de0d2723644be0fdb482e5128e, type: 3}
   feverSound: {fileID: 8300000, guid: c747a12af2af8a84a97ba2ff74106426, type: 3}
   feverSound2: {fileID: 8300000, guid: ce48eb0269ca19645bd3a80f38559331, type: 3}
-  pixelPerfectCamera: {fileID: 0}
 --- !u!212 &9084974105833488233
 SpriteRenderer:
   m_ObjectHideFlags: 0

@@ -4,51 +4,76 @@ using UnityEngine;
 
 public class TimeLineTrigger : TutorialStart
 {
-    [SerializeField] private CinemachineVirtualCamera targetCamera; // ��ȯ�� Cinemachine Virtual Camera
-    [SerializeField] private CinemachineVirtualCamera defaultCamera; // �⺻ Virtual Camera
-    [SerializeField] private TimelineManager timelineManager; // Ÿ�Ӷ��� �Ŵ���
-    private bool hasTriggered = false; // �÷��̾ Ʈ���Ÿ� �̹� �ߵ��ߴ��� Ȯ��
+    [SerializeField] private CinemachineVirtualCamera targetCamera; // Target Cinemachine Virtual Camera
+    [SerializeField] private CinemachineVirtualCamera defaultCamera; // Default Virtual Camera
+    [SerializeField] private TimelineManager timelineManager; // Timeline Manager
+    private bool hasTriggered = false; // Check if the player has already triggered the event
+    private CinemachineBrain cinemachineBrain; // Reference to the Cinemachine Brain
 
-    private async void OnTriggerEnter2D(Collider2D other) {
-        // �÷��̾ ����
-        if (!other.CompareTag("Player") || hasTriggered) {
+    private void Start()
+    {
+        cinemachineBrain = Camera.main.GetComponent<CinemachineBrain>();
+        if (cinemachineBrain == null)
+        {
+            Debug.LogError("CinemachineBrain not found on the main camera!");
+        }
+    }
+
+    private async void OnTriggerEnter2D(Collider2D other)
+    {
+        if (!other.CompareTag("Player") || hasTriggered)
+        {
             return;
         }
 
         hasTriggered = true;
 
-        // ī�޶� ��ȯ
+        // Temporarily set Manual Update for Cinemachine
+        if (cinemachineBrain != null) {
+            cinemachineBrain.m_UpdateMethod = CinemachineBrain.UpdateMethod.ManualUpdate;
+        }
+        // Switch to target camera
         ActivateCamera(targetCamera);
 
-        await FadeInColorFilter();
-        // Ÿ�Ӷ��� �簳
-        timelineManager.ResumeTimeline();
+        await FadeInColor_unscaled(); // Assume this is a color fade-in effect
+        //timelineManager.ResumeTimeline(); // Resume the timeline
 
-        // 2�� ��� �� ���� ī�޶�� ����
-        await UniTask.Delay(System.TimeSpan.FromSeconds(2));
+        // Wait for 2 seconds (ignores time scale)
+        await UniTask.Delay(System.TimeSpan.FromSeconds(2), ignoreTimeScale: true);
+
+        // Restore default camera
         RestoreDefaultCamera();
-    }
 
-    private void ActivateCamera(CinemachineVirtualCamera cameraToActivate) {
-        if (cameraToActivate != null) {
-            foreach (var vcam in FindObjectsOfType<CinemachineVirtualCamera>()) {
-                vcam.Priority = 0; // ��� ī�޶� �켱���� ����
-            }
-
-            cameraToActivate.Priority = 10; // Ȱ��ȭ�� ī�޶� �켱���� ����
+        // Restore Cinemachine to Smart Update
+        if (cinemachineBrain != null)
+        {
+            cinemachineBrain.m_UpdateMethod = CinemachineBrain.UpdateMethod.SmartUpdate;
         }
     }
 
-    /// <summary>
-    /// �⺻ ī�޶� ����
-    /// </summary>
-    private void RestoreDefaultCamera() {
-        if (defaultCamera != null) {
-            foreach (var vcam in FindObjectsOfType<CinemachineVirtualCamera>()) {
-                vcam.Priority = 0; // ��� ī�޶� �켱���� �ʱ�ȭ
+    private void ActivateCamera(CinemachineVirtualCamera cameraToActivate)
+    {
+        if (cameraToActivate != null)
+        {
+            foreach (var vcam in FindObjectsOfType<CinemachineVirtualCamera>())
+            {
+                vcam.Priority = 0; // Reset all cameras' priority
             }
 
-            defaultCamera.Priority = 10; // �⺻ ī�޶� �켱���� ����
+            cameraToActivate.Priority = 10; // Set the active camera's priority
+        }
+    }
+
+    private void RestoreDefaultCamera()
+    {
+        if (defaultCamera != null)
+        {
+            foreach (var vcam in FindObjectsOfType<CinemachineVirtualCamera>())
+            {
+                vcam.Priority = 0; // Reset all cameras' priority
+            }
+
+            defaultCamera.Priority = 10; // Set the default camera's priority
         }
     }
 }
