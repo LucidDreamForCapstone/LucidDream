@@ -109,7 +109,7 @@ public abstract class WeaponBase : ItemBase {
         if (_isBasicReady) {
             BasicAttackAnimation();
             _isBasicReady = false;
-            await UniTask.Delay(TimeSpan.FromSeconds(_basicCoolTime), ignoreTimeScale: true);
+            await UniTask.Delay(TimeSpan.FromSeconds(_basicCoolTime));
             _isBasicReady = true;
         }
     }
@@ -120,7 +120,7 @@ public abstract class WeaponBase : ItemBase {
             Skill1Animation();
             inGameUIController.UseSkill(1);
 
-            await UniTask.Delay(TimeSpan.FromSeconds(_skill1CoolTime), ignoreTimeScale: true);
+            await UniTask.Delay(TimeSpan.FromSeconds(_skill1CoolTime));
             _isSkill1Ready = true;
         }
     }
@@ -130,7 +130,7 @@ public abstract class WeaponBase : ItemBase {
             _isSkill2Ready = false;
             Skill2Animation();
             inGameUIController.UseSkill(2);
-            await UniTask.Delay(TimeSpan.FromSeconds(_skill2CoolTime), ignoreTimeScale: true);
+            await UniTask.Delay(TimeSpan.FromSeconds(_skill2CoolTime));
             _isSkill2Ready = true;
         }
     }
@@ -247,7 +247,7 @@ public abstract class WeaponBase : ItemBase {
         return Mathf.Abs(a.x - b.x) + Mathf.Abs(a.y - b.y);
     }
 
-   
+
 
 
     #endregion //protected funcs
@@ -313,8 +313,8 @@ public abstract class WeaponBase : ItemBase {
     }
 
 
-// 버프형 스킬 처리
-private void ActivateFeverSkillWithoutTarget() {
+    // 버프형 스킬 처리
+    private void ActivateFeverSkillWithoutTarget() {
         if (!_feverLock && PlayerDataManager.Instance.IsFeverReady()) {
             PlayerDataManager.Instance.SetFeverGauge(0);
             FeverSkillAnimation();  // 피버 스킬 실행
