@@ -1,8 +1,8 @@
 using UnityEngine;
 
-public class PlayerTriggerManager : MonoBehaviour
+public class PhantomTrigger : MonoBehaviour
 {
-    public static PlayerTriggerManager Instance { get; private set; }
+    public static PhantomTrigger Instance { get; private set; }
 
     private bool _canUsePhantom = false; // ÆÒÅÒ »ç¿ë °¡´É ¿©ºÎ
 

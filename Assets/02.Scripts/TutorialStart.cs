@@ -13,17 +13,6 @@ public class TutorialStart : MonoBehaviour
     private ColorAdjustments colorAdjustments;
 
     private async void Start() {
-        // Validate Post Processing Volume and profile
-        if (postProcessingVolume == null) {
-            Debug.LogError("Post Processing Volume is not assigned!");
-            return;
-        }
-
-        if (postProcessingVolume.profile == null) {
-            Debug.LogError("Post Processing Volume profile is missing!");
-            return;
-        }
-
         // Try to get ColorAdjustments from the Post Processing Volume
         if (postProcessingVolume.profile.TryGet(out colorAdjustments)) {
             colorAdjustments.colorFilter.overrideState = true; // Enable color filter override

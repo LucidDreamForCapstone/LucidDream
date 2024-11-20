@@ -6,9 +6,10 @@ public class TimeLineTriggerTimeScaled : TutorialStart
 {
     [SerializeField] private CinemachineVirtualCamera targetCamera; // ��ȯ�� Cinemachine Virtual Camera
     [SerializeField] private CinemachineVirtualCamera defaultCamera; // �⺻ Virtual Camera
-    [SerializeField] private TimelineManager timelineManager; // Ÿ�Ӷ��� �Ŵ���
+    [SerializeField] private TimeLineManager timelineManager; // Ÿ�Ӷ��� �Ŵ���
     private bool hasTriggered = false; // �÷��̾ Ʈ���Ÿ� �̹� �ߵ��ߴ��� Ȯ��
-
+    [SerializeField] private bool isResumeTimeLine;
+    [SerializeField] private bool isCameraMove;
     private async void OnTriggerEnter2D(Collider2D other) {
         // �÷��̾ ����
         if (!other.CompareTag("Player") || hasTriggered) {
@@ -17,16 +18,19 @@ public class TimeLineTriggerTimeScaled : TutorialStart
 
         hasTriggered = true;
 
-        // ī�޶� ��ȯ
+        if(isCameraMove)
         ActivateCamera(targetCamera);
 
         await FadeInColor();
         // Ÿ�Ӷ��� �簳
+        if(isResumeTimeLine)
         timelineManager.ResumeTimeline();
 
         // 2�� ��� �� ���� ī�޶�� ����
-        await UniTask.Delay(System.TimeSpan.FromSeconds(2));
-        RestoreDefaultCamera();
+        if (isCameraMove) {
+            await UniTask.Delay(System.TimeSpan.FromSeconds(2));
+            RestoreDefaultCamera();
+        }
     }
 
     private void ActivateCamera(CinemachineVirtualCamera cameraToActivate) {

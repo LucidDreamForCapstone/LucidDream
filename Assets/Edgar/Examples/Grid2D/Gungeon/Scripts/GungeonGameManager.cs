@@ -3,11 +3,13 @@ using System.Diagnostics;
 using UnityEngine;
 using Random = System.Random;
 
-namespace Edgar.Unity.Examples.Gungeon {
+namespace Edgar.Unity.Examples.Gungeon
+{
     /// <summary>
     /// Example of a simple game manager that uses the DungeonGeneratorRunner to generate levels.
     /// </summary>
-    public class GungeonGameManager : GameManagerBase<GungeonGameManager> {
+    public class GungeonGameManager : GameManagerBase<GungeonGameManager>
+    {
         // Current active room
 
         private RoomInstanceGrid2D currentRoom;

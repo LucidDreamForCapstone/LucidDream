@@ -659,7 +659,7 @@ Transform:
   m_GameObject: {fileID: 51091009}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -14.37, y: 132.21, z: -7.5}
+  m_LocalPosition: {x: -14.37, y: 132.54, z: -7.5}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -2657,7 +2657,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9216186443822832565, guid: 7854683fcb0019e4592a51316204f2fd, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 132.21
+      value: 132.54
       objectReference: {fileID: 0}
     - target: {fileID: 9216186443822832565, guid: 7854683fcb0019e4592a51316204f2fd, type: 3}
       propertyPath: m_LocalPosition.z
@@ -19799,6 +19799,7 @@ MonoBehaviour:
   targetCamera: {fileID: 1908367913}
   defaultCamera: {fileID: 185807762}
   timelineManager: {fileID: 148706940}
+  isResumeTimeLine: 1
 --- !u!114 &640755239 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 4152372944325490960, guid: 207945cd43c5579468fee037f57e015d, type: 3}
@@ -19931,6 +19932,10 @@ PrefabInstance:
       propertyPath: guardSound
       value: 
       objectReference: {fileID: 8300000, guid: 745078ef3d69f2e40aeb2317bb280eb4, type: 3}
+    - target: {fileID: 6660471644841417567, guid: e94958180e5464f49a814b9bec5cab78, type: 3}
+      propertyPath: _phantomSlider
+      value: 
+      objectReference: {fileID: 1102519072}
     - target: {fileID: 6660471644841417567, guid: e94958180e5464f49a814b9bec5cab78, type: 3}
       propertyPath: deathUIController
       value: 
@@ -21495,6 +21500,14 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 8164392642080105954, guid: aac7bedbbcbfff449b85a763e9af3024, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8164392642080105954, guid: aac7bedbbcbfff449b85a763e9af3024, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8215375900091810749, guid: aac7bedbbcbfff449b85a763e9af3024, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0.5
@@ -22975,6 +22988,17 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1084417154}
   m_CullTransparentMesh: 1
+--- !u!114 &1102519072 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5617811572705532704, guid: aac7bedbbcbfff449b85a763e9af3024, type: 3}
+  m_PrefabInstance: {fileID: 840934878}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 67db9e8f0e2ae9c40bc1e2b64352a6b4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1119702953
 GameObject:
   m_ObjectHideFlags: 0
@@ -24799,6 +24823,7 @@ MonoBehaviour:
   targetCamera: {fileID: 2093371539}
   defaultCamera: {fileID: 185807762}
   timelineManager: {fileID: 148706940}
+  isResumeTimeLine: 0
 --- !u!114 &1469579584
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -28592,6 +28617,7 @@ MonoBehaviour:
   targetCamera: {fileID: 916321318}
   defaultCamera: {fileID: 185807762}
   timelineManager: {fileID: 148706940}
+  isResumeTimeLine: 0
 --- !u!114 &1956717886
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -70619,6 +70645,7 @@ MonoBehaviour:
   targetCamera: {fileID: 1182723994}
   defaultCamera: {fileID: 185807762}
   timelineManager: {fileID: 148706940}
+  isResumeTimeLine: 0
 --- !u!1 &2042884072 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 2584678932687537808, guid: 7854683fcb0019e4592a51316204f2fd, type: 3}
@@ -70679,6 +70706,7 @@ MonoBehaviour:
   targetCamera: {fileID: 51091010}
   defaultCamera: {fileID: 185807762}
   timelineManager: {fileID: 148706940}
+  isResumeTimeLine: 0
 --- !u!61 &2053201240
 BoxCollider2D:
   m_ObjectHideFlags: 0

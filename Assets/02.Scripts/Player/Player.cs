@@ -437,7 +437,7 @@ public class Player : MonoBehaviour {
 
     private async UniTaskVoid Phantom() {
         // 팬텀 사용 가능 여부 확인
-        if (!PlayerTriggerManager.Instance.CanUsePhantom) {
+        if (!PhantomTrigger.Instance.CanUsePhantom) {
             return;
         }
 

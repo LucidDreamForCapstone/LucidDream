@@ -6,9 +6,9 @@ public class SoundManager : MonoBehaviour {
     #region private variable
 
     private static SoundManager _instance;
-    [SerializeField] private AudioSource bgmSource; // BGM Àç»ýÀ» À§ÇÑ AudioSource
-    [SerializeField] private AudioSource sfxSource_timeAffected; // SFX Àç»ýÀ» À§ÇÑ AudioSource
-    [SerializeField] private AudioSource sfxSource_timeIgnore; // SFX Àç»ýÀ» À§ÇÑ AudioSource (½Ã°£ ¿µÇâ X)
+    [SerializeField] private AudioSource bgmSource; // BGM ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ AudioSource
+    [SerializeField] private AudioSource sfxSource_timeAffected; // SFX ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ AudioSource
+    [SerializeField] private AudioSource sfxSource_timeIgnore; // SFX ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ AudioSource (ï¿½Ã°ï¿½ ï¿½ï¿½ï¿½ï¿½ X)
     [SerializeField] private AudioMixer m_AudioMixer;
     #endregion // private variable
 
@@ -91,7 +91,7 @@ public class SoundManager : MonoBehaviour {
             t = timer / lerpTime;
             newPitch = Mathf.Lerp(startPitch, pitch, t);
 
-            // Audio Mixer¿¡ »õ·Î¿î Pitch °ª ¼³Á¤
+            // Audio Mixerï¿½ï¿½ ï¿½ï¿½ï¿½Î¿ï¿½ Pitch ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
             m_AudioMixer.SetFloat("SFXpitch", newPitch);
             await UniTask.NextFrame();
         }
@@ -104,7 +104,7 @@ public class SoundManager : MonoBehaviour {
             t = timer / lerpTime;
             newPitch = Mathf.Lerp(startPitch, pitch, t);
 
-            // Audio Mixer¿¡ »õ·Î¿î Pitch °ª ¼³Á¤
+            // Audio Mixerï¿½ï¿½ ï¿½ï¿½ï¿½Î¿ï¿½ Pitch ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
             m_AudioMixer.SetFloat("BGMpitch", newPitch);
             await UniTask.NextFrame();
         }
