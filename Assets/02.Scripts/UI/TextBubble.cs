@@ -2,45 +2,69 @@ using Cysharp.Threading.Tasks;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
-
-public class TextBubble : MonoBehaviour {
+public class TextBubble : MonoBehaviour
+{
     AudioSource _audioSource;
-    [SerializeField] AudioClip _textSound;
-    [SerializeField] TextMeshProUGUI _textUI;
-    [SerializeField] List<TextBubbleData> _wordList;
-    [SerializeField] int _fontSize;
-    [SerializeField] Color _fontColor;
+    //[SerializeField] AudioClip _textSound; // ���ڸ��� ��µǴ� �Ҹ�
+    [SerializeField] TextMeshProUGUI _textUI; // UI �ؽ�Ʈ
+    [SerializeField] List<SentenceData> _sentenceList; // ���� ������
+    [SerializeField] int _fontSize; // �ؽ�Ʈ ũ��
+    [SerializeField] Color _fontColor; // �ؽ�Ʈ ����
 
-    #region mono funcs
+    private bool _isPrinting = false; // �ߺ� ���� ���� �÷���
+
     private void Start() {
         _textUI.text = "";
         _textUI.fontSize = _fontSize;
         _textUI.color = _fontColor;
         _audioSource = GetComponent<AudioSource>();
-        PrintSentence().Forget();
     }
 
-    #endregion
+    /// <summary>
+    /// Signal Emitter���� ȣ�� ������ �޼��� (���� �ε����� ������� ����)
+    /// </summary>
+    public void TriggerPrintSentenceByIndex(int index) {
+        Debug.Log($"TriggerPrintSentenceByIndex called with index: {index}");
+        TriggerPrintSentenceAsync(index).Forget(); // �񵿱� �Լ� ȣ��
+    }
 
+    /// <summary>
+    /// Ư�� ������ ����մϴ�.
+    /// </summary>
+    private async UniTask TriggerPrintSentenceAsync(int sentenceIndex) {
+        if (_isPrinting) return; // �̹� ��� ���̸� ����
 
-
-    #region private funcs
-
-    private async UniTaskVoid PrintSentence() {
-        _audioSource.Play();
-        int j, length = _wordList.Count;
-        for (int i = 0; i < length; i++) {
-            _audioSource.UnPause();
-            TextBubbleData data = _wordList[i];
-            for (j = 0; j < data._word.Length - 1; j++) {
-                _textUI.text += data._word[j];
-                await UniTask.Delay(System.TimeSpan.FromSeconds(data._charWaitTime));
-            }
-            _textUI.text += data._word[j];
-            _audioSource.Pause();
-            await UniTask.Delay(System.TimeSpan.FromSeconds(data._wordWaitTime));
+        if (sentenceIndex < 0 || sentenceIndex >= _sentenceList.Count) {
+            Debug.LogError($"Invalid sentenceIndex: {sentenceIndex}. It must be between 0 and {_sentenceList.Count - 1}.");
+            _isPrinting = false; // �ߺ� ���� ���� ����
+            return;
         }
+        _isPrinting = true;
+        // ���� ���� ����
+        _textUI.text = "";
+
+        SentenceData sentence = _sentenceList[sentenceIndex]; // ���� ��������
+        foreach (var word in sentence.Words) {
+            await PrintWord(word); // �ܾ� ���
+        }
+
+        _isPrinting = false;
     }
 
-    #endregion
+    /// <summary>
+    /// �ܾ ����մϴ�.
+    /// </summary>
+    private async UniTask PrintWord(TextBubbleData data) {
+        for (int i = 0; i < data._word.Length; i++) {
+            _textUI.text += data._word[i]; // ���� �߰�
+
+            await UniTask.Delay(System.TimeSpan.FromSeconds(data._charWaitTime)); // ���� ��� �ð�
+        }
+
+        await UniTask.Delay(System.TimeSpan.FromSeconds(data._wordWaitTime)); // �ܾ� ��� �ð�
+        _textUI.text += " "; // �ܾ� �� ���� �߰�
+    }
 }
+
+
+

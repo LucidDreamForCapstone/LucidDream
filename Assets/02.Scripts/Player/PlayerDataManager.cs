@@ -1,4 +1,6 @@
 using UnityEngine;
+using Cysharp.Threading.Tasks;
+using System;
 
 public class PlayerDataManager : MonoBehaviour {
     #region private variable
@@ -284,6 +286,40 @@ public class PlayerDataManager : MonoBehaviour {
         _ingameUIController.SetCoin(_status._coin); // UI에 코인 갱신
         return true;
     }
+
+    /*public async UniTaskVoid UseFeverSkill(int feverDuration = 0) {
+        // 피버 스킬 사용: 게이지를 초기화하고 UI를 동기화
+        SetFeverGauge(0);
+
+        // 스킬 지속 시간 동안 대기
+        await UniTask.Delay(TimeSpan.FromSeconds(feverDuration));
+
+        Debug.Log("Fever Skill Ended");
+    }
+
+    public void AddFeverGauge(int value) {
+        // 몬스터 처치 시 피버 게이지 추가
+        int newFeverGauge = _status._feverGauge + value;
+
+        // 최대 게이지 초과 방지
+        if (newFeverGauge > _status._maxFeverGauge) {
+            newFeverGauge = _status._maxFeverGauge;
+        }
+
+        SetFeverGauge(newFeverGauge); // UI 동기화
+    }
+
+    public void SetFeverGauge(int feverGauge) {
+        // 피버 게이지와 UI 동기화
+        if (feverGauge > _status._maxFeverGauge)
+            feverGauge = _status._maxFeverGauge;
+
+        _status._feverGauge = feverGauge;
+
+        // UI 업데이트
+        _ingameUIController.SetFever(feverGauge, _status._maxFeverGauge);
+    } */
+
 
     #endregion // public funcs
 

@@ -164,7 +164,6 @@ public abstract class MonsterBase : DropableBase {
             _isColorChanged = false;
         }
     }
-
     virtual protected async UniTaskVoid Die() {
         _isDead = true;
         _hp = 0;
@@ -172,12 +171,22 @@ public abstract class MonsterBase : DropableBase {
         _animator.SetTrigger("Die");
         PlaySound(_deathSound);
         DropItems();
+
+        // MonsterUIDeathTrigger를 통해 Death UI를 표시
+        var deathTrigger = GetComponent<MonsterUIDeathTrigger>();
+        if (deathTrigger != null) {
+            await deathTrigger.TriggerDeathUI(); // UI 완료 후 다음 동작으로 이동
+        }
+
+        // 경험치 획득 로직 호출
         _playerScript.GetExp(_exp);
+
         PlayerDataManager.Instance.SetFeverGauge(PlayerDataManager.Instance.Status._feverGauge + _feverAmount);
         GetComponent<GungeonEnemy>().RoomManager.OnEnemyKilled(gameObject);
         await UniTask.Delay(TimeSpan.FromSeconds(_dieDelay));
         gameObject.SetActive(false);
     }
+
     protected void PlaySound(AudioClip clip) {
         if (clip != null) {
             SoundManager.Instance.PlaySFX(clip.name);

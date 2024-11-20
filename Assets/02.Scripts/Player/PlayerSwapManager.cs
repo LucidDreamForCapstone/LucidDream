@@ -12,20 +12,26 @@ public class PlayerSwapManager : MonoBehaviour {
     private MonoBehaviour currentPlayer; // 현재 조작 중인 캐릭터
     private int currentPlayerNum;
     private GlitchController glitchController; // GlitchController 인스턴스
+    private VignetteController vignetteController; //글리치에 화면 효과 부여
     private bool isGlitching = false; // 글리치 효과 진행 중 여부
     private bool fogTag = true;
     [SerializeField] private GameObject _cameraObj;
+    [SerializeField] private Canvas player1UICanvas; // Player1 UI Canvas
+    [SerializeField] private Canvas player2UICanvas; // Player2 UI Canvas
 
     // UI 텍스트
     [SerializeField] private TextMeshProUGUI messageText; // TextMeshProUGUI 컴포넌트
 
     private void Start() {
+        if (Display.displays.Length > 1) Display.displays[1].Activate(); // Display 2 활성화
+        if (Display.displays.Length > 2) Display.displays[2].Activate(); // Display 3 활성화
         currentPlayerNum = 1;
         _miniMapObj.SetActive(true);
         Player2ActiveDelay(2).Forget();
         glitchController = FindObjectOfType<GlitchController>(); // GlitchController 찾기
-
+        vignetteController = FindObjectOfType<VignetteController>();
         messageText.gameObject.SetActive(false); // 시작할 때 메시지 숨김
+        if (Display.displays.Length > 1) Display.displays[1].Activate(); // Display 2 활성화
     }
 
     private void Update() {
@@ -69,7 +75,10 @@ public class PlayerSwapManager : MonoBehaviour {
 
         // 글리치 효과를 시작합니다.
         if (glitchController != null) {
-            await glitchController.TriggerGlitchEffect(); // 글리치 효과 시작
+            await UniTask.WhenAll(
+                glitchController.TriggerGlitchEffect(), // 글리치 효과
+                vignetteController.TriggerColorGlitchEffect(3f, 3) // 3초간 3회 반복 화면 밝기 변화
+            );
         }
 
         // 기존 캐릭터 비활성화 및 새로운 캐릭터 활성화
@@ -77,6 +86,8 @@ public class PlayerSwapManager : MonoBehaviour {
             player1.SetEnable(false);
             player2.SetEnable(true);
             currentPlayer = player2;
+            player1UICanvas.targetDisplay = 1; // Player1 UI를 Display 2로 전환
+            player2UICanvas.targetDisplay = 0; // Player2 UI를 Display 1로 전환
             currentPlayerNum = 2;
             _miniMapObj.SetActive(false);
         }
@@ -85,8 +96,12 @@ public class PlayerSwapManager : MonoBehaviour {
             player1.SetEnable(true);
             currentPlayer = player1;
             currentPlayerNum = 1;
+            player1UICanvas.targetDisplay = 0; // Player1 UI를 Display 1로 전환
+            player2UICanvas.targetDisplay = 1; // Player2 UI를 Display 2로 전환
             _miniMapObj.SetActive(true);
         }
+        // 디스플레이 업데이트
+        Canvas.ForceUpdateCanvases();
 
         // 카메라 전환
         Cinemachine.CinemachineVirtualCamera virtualCamera = FindObjectOfType<Cinemachine.CinemachineVirtualCamera>();
@@ -118,16 +133,14 @@ public class PlayerSwapManager : MonoBehaviour {
                 transposer.m_YDamping = 1; // Damping 값 복원
             }
         }
-
         isGlitching = false; // 글리치 효과 종료
-
     }
 
     private void ShowMessage(string message) {
         messageText.text = message; // 메시지 텍스트 업데이트
         messageText.gameObject.SetActive(true); // 메시지 표시
         StartCoroutine(HideMessage()); // 메시지 숨기기 코루틴 호출
-    }
+    }   
 
     private IEnumerator HideMessage() {
         yield return new WaitForSeconds(2f); // 2초 후
@@ -140,4 +153,5 @@ public class PlayerSwapManager : MonoBehaviour {
         await UniTask.Delay(TimeSpan.FromSeconds(waitTime));
         player2.gameObject.SetActive(true);
     }
+
 }

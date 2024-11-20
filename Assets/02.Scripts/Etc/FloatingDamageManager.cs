@@ -51,7 +51,7 @@ public class FloatingDamageManager : MonoBehaviour {
         GameObject txtObject = Instantiate(_text);
         Vector3 uiPosition = Camera.main.WorldToScreenPoint(vr.transform.position);
         txtObject.transform.localPosition = uiPosition;
-        txtObject.transform.SetParent(GameObject.Find("Canvas").transform);
+        txtObject.transform.SetParent(GameObject.Find("Player1Canvas").transform);
         txtObject.transform.SetAsFirstSibling();
         txtObject.SetActive(true);
         txtObject.GetComponent<FloatingText>().ShowDamage(damage, isMine, isCrit, isHeal);
