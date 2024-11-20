@@ -17,7 +17,7 @@ MonoBehaviour:
     path: SaveFile.es3
     encryptionType: 0
     compressionType: 0
-    encryptionPassword: password
+    encryptionPassword: PassWorD
     directory: 0
     format: 0
     prettyPrint: 1

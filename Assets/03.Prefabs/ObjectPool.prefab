@@ -114,7 +114,7 @@ MonoBehaviour:
   - _poolObj: {fileID: 7847557806235586828, guid: 2b04ca8f08215ce4483b1d1933392e7e, type: 3}
     _poolAmount: 50
   - _poolObj: {fileID: 5900248430671744489, guid: 442b4ad7e3c436a43b08dfb892e760de, type: 3}
-    _poolAmount: 15
+    _poolAmount: 5
   - _poolObj: {fileID: 2369603767111171399, guid: 36293e28c821cd24783d875f04ab4d13, type: 3}
     _poolAmount: 100
   - _poolObj: {fileID: 952376227452689569, guid: 87227546723202f41b84539dbddee9d4, type: 3}

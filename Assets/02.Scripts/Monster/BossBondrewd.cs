@@ -11,7 +11,7 @@ public class BossBondrewd : MonsterBase {
     #region Serialize Field
     [SerializeField] GameObject _dashEffect;
     [SerializeField] GameObject _rushWarningEffect;
-    [SerializeField] GameObject _rushEffect;
+    [SerializeField] List<GameObject> _rushEffectList;
     [SerializeField] GameObject _backStepEffect;
     [SerializeField] GameObject _chargingEffect;
     [SerializeField] GameObject _groggyEffect;
@@ -21,12 +21,13 @@ public class BossBondrewd : MonsterBase {
     [SerializeField] GameObject _missileTargetObj;
     [SerializeField] GameObject _explosionObj;
     [SerializeField] GameObject _phantomGhostObj;
-    //[SerializeField] List<GameObject> _chargerList; after change class to charger
+    [SerializeField] List<GameObject> _chargerList;
 
     [SerializeField] SpriteRenderer _legSr;
     [SerializeField] Slider _hpSlider;
     [SerializeField] Slider _phantomGaugeSlider;
     [SerializeField] Slider _groggySlider;
+    [SerializeField] List<Image> _chargerUIList;
     [SerializeField] Color _phase2HpColor;
     [SerializeField] Color _phase3HpColor;
     [SerializeField] Color _phantomGaugeActivateColor;
@@ -97,7 +98,7 @@ public class BossBondrewd : MonsterBase {
     int _currentPhaseNum;
     float _phantomGauge;
     float _groggyGauge;
-    int _currentActivatedChargerCount;
+    [SerializeField] int _currentActivatedChargerCount;
     BoxCollider2D _bondrewdCollider;
     Vector2[] _shootPos = { new Vector2(3.25f, -0.97f), new Vector2(-3.25f, -0.97f) };
     Vector2[] _missilePos = { new Vector2(-0.76f, 1.04f), new Vector2(0.76f, 1.04f) };
@@ -134,19 +135,23 @@ public class BossBondrewd : MonsterBase {
         _phantomGauge = 0;
         _currentPhantomState = PhantomState.DeActivated;
         _phantomTimer = 0;
-        _currentActivatedChargerCount = 1; //Temp
+        _currentActivatedChargerCount = 0;
         _groggyGauge = 100;
         UpdateGroggySlider();
     }
     new private void Update() {
         base.Update();
         PhantomManage();
+        if (Input.GetKeyDown(KeyCode.F1))
+            GameObject.Find("Charger1").GetComponent<Charger>().CallBackRemoveShield();
+        if (Input.GetKeyDown(KeyCode.F2))
+            GameObject.Find("Charger2").GetComponent<Charger>().CallBackRemoveShield();
+        if (Input.GetKeyDown(KeyCode.F3))
+            GameObject.Find("Charger3").GetComponent<Charger>().CallBackRemoveShield();
     }
     #endregion
 
-    #region Protected Funcs
-    protected override void AttackMove() {
-    }
+    #region Override Funcs
 
     protected override async UniTaskVoid ChangeColor()//피격 시 붉은 색으로 몬스터 색 변경
     {
@@ -201,6 +206,7 @@ public class BossBondrewd : MonsterBase {
         _phantomGaugeSlider.gameObject.SetActive(false);
         _groggySlider.gameObject.SetActive(false);
         _groggyEffect.SetActive(false);
+        _chargerUIList.ForEach((chargeUI) => chargeUI.gameObject.SetActive(false));
         DropItems();
         _playerScript.GetExp(_exp);
         _cts.Dispose();
@@ -290,44 +296,51 @@ public class BossBondrewd : MonsterBase {
 
     private async UniTaskVoid Rush() {
         _attackStateList[2] = AttackState.Attacking;
-        _rushWarningEffect.SetActive(true);
-        float timer = 0;
-        int originBodyDamage = _bodyDamage;
-        try {
-            while (timer < _rushWarningTime - 1) {
-                Vector2 tempDir = _playerScript.transform.position - transform.position;
-                SetFlipX(tempDir);
-                _rushWarningEffect.transform.right = tempDir;
-                timer += Time.deltaTime;
-                await UniTask.NextFrame(_cts.Token);
+        int currentPhaseNum = _currentPhaseNum;
+        for (int i = 0; i < currentPhaseNum; i++) {
+            _rushWarningEffect.SetActive(true);
+            float rushWarningTime = _rushWarningTime - (_currentPhaseNum - 1) * 0.25f;
+            float timer = 0;
+            int originBodyDamage = _bodyDamage;
+            try {
+                while (timer < rushWarningTime - 1) {
+                    Vector2 tempDir = _playerScript.transform.position - transform.position;
+                    SetFlipX(tempDir);
+                    _rushWarningEffect.transform.right = tempDir;
+                    timer += Time.deltaTime;
+                    await UniTask.NextFrame(_cts.Token);
+                }
+
+                Vector2 rushDir = (_playerScript.transform.position - transform.position).normalized;
+                Vector2 endValue = (Vector2)transform.position + rushDir * _rushDist;
+                float duration = _rushDist / _moveSpeed;
+                await UniTask.Delay(TimeSpan.FromSeconds(1 - (_currentPhaseNum - 1) * 0.35f), cancellationToken: _cts.Token);
+                _rushWarningEffect.SetActive(false);
+                _bodyDamage = _rushDamage;
+                _rushEffectList[currentPhaseNum - 1].transform.right = rushDir;
+                _rushEffectList[currentPhaseNum - 1].SetActive(true);
+                _rushEffectList[currentPhaseNum - 1].GetComponent<Animator>().SetFloat("Phantom", _phantomMultiplier);
+
+                SetFlipX(rushDir);
+                _animator.SetBool("Run", true);
+                await DOTween.To(() => _rigid.position, x => _rigid.MovePosition(x), endValue, duration).WithCancellation(_cts.Token);
             }
-
-            Vector2 rushDir = (_playerScript.transform.position - transform.position).normalized;
-            Vector2 endValue = (Vector2)transform.position + rushDir * _rushDist;
-            float duration = _rushDist / _moveSpeed;
-            await UniTask.Delay(TimeSpan.FromSeconds(1), cancellationToken: _cts.Token);
-            _rushWarningEffect.SetActive(false);
-            _bodyDamage = _rushDamage;
-            _rushEffect.transform.right = rushDir;
-            _rushEffect.SetActive(true);
-            _rushEffect.GetComponent<Animator>().SetFloat("Phantom", _phantomMultiplier);
-
-            SetFlipX(rushDir);
-            _animator.SetBool("Run", true);
-            await DOTween.To(() => _rigid.position, x => _rigid.MovePosition(x), endValue, duration).WithCancellation(_cts.Token);
+            catch (OperationCanceledException) {
+                _rushWarningEffect.SetActive(false);
+                _attackStateList[2] = AttackState.Finished;
+                await UniTask.Delay(TimeSpan.FromSeconds(0.01f));
+                _attackStateList[2] = AttackState.CoolTime;
+            }
+            finally {
+                _animator.SetBool("Run", false);
+                _rushEffectList[currentPhaseNum - 1].SetActive(false);
+                _rigid.velocity = Vector2.zero;
+                _bodyDamage = originBodyDamage;
+            }
         }
-        catch (OperationCanceledException) {
-            _rushWarningEffect.SetActive(false);
-        }
-        finally {
-            _animator.SetBool("Run", false);
-            _rushEffect.SetActive(false);
-            _rigid.velocity = Vector2.zero;
-            _bodyDamage = originBodyDamage;
-            _attackStateList[2] = AttackState.Finished;
-            await UniTask.Delay(TimeSpan.FromSeconds(0.01f));
-            _attackStateList[2] = AttackState.CoolTime;
-        }
+        _attackStateList[2] = AttackState.Finished;
+        await UniTask.Delay(TimeSpan.FromSeconds(0.01f));
+        _attackStateList[2] = AttackState.CoolTime;
     }
 
     #endregion
@@ -345,7 +358,7 @@ public class BossBondrewd : MonsterBase {
         _attackStateList[3] = AttackState.Attacking;
         int cnt = 0;
         try {
-            while (cnt < _shootCount) {
+            while (cnt < _shootCount + _currentPhaseNum - 1) {
                 MoveSide().Forget();
                 _animator.SetTrigger("ShootRun");
                 Vector3 fireDir = _playerScript.transform.position - _armTargetObj.transform.position;
@@ -600,11 +613,13 @@ public class BossBondrewd : MonsterBase {
     #region Groggy State
 
     public void DecreaseGroggyGauge() {
-        _groggyGauge -= _groggyDecreaseAmount;
-        UpdateGroggySlider();
-        if (_groggyGauge <= 0 && !_isGroggy) {
-            _groggyGauge = 0;
-            Groggy().Forget();
+        if (!_isGroggy) {
+            _groggyGauge -= _groggyDecreaseAmount;
+            UpdateGroggySlider();
+            if (_groggyGauge <= 0) {
+                _groggyGauge = 0;
+                Groggy().Forget();
+            }
         }
     }
 
@@ -633,6 +648,21 @@ public class BossBondrewd : MonsterBase {
     }
 
     #endregion
+
+    #region Charger State
+
+    public void ChargerCntIncrease(int index) {
+        _currentActivatedChargerCount++;
+        _chargerUIList[index].DOColor(Color.white, 1);
+    }
+
+    public void ChargerCntDecrease(int index) {
+        _currentActivatedChargerCount--;
+        _chargerUIList[index].DOColor(Color.gray, 1);
+    }
+
+    #endregion
+
     #region Util funcs
     private float CalculateManhattanDist(Vector2 a, Vector2 b) {
         return Mathf.Abs(a.x - b.x) + Mathf.Abs(a.y - b.y);

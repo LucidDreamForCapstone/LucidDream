@@ -26,7 +26,6 @@ public class Pillar : MonsterBase {
         _animator.SetTrigger("Die");
     }
 
-    protected override void AttackMove() { }
     #endregion
 
 

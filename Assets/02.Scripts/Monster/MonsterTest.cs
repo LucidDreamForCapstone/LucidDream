@@ -25,10 +25,6 @@ public class MonsterTest : MonsterBase {
         }
     }
 
-    protected override void AttackMove() {
-
-    }
-
     #endregion //private funcs
 
 }

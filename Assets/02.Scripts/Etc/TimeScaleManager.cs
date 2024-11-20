@@ -29,10 +29,12 @@ public class TimeScaleManager : MonoBehaviour {
     */
 
     public void TimeStop() {
-        _timeScaleCache = Time.timeScale;
-        SoundManager.Instance.PauseSFX();
-        PauseEffects();
-        Time.timeScale = 0;
+        if (Time.timeScale > 0) {
+            _timeScaleCache = Time.timeScale;
+            SoundManager.Instance.PauseSFX();
+            PauseEffects();
+            Time.timeScale = 0;
+        }
     }
 
     public void TimeRestore() {
@@ -40,6 +42,8 @@ public class TimeScaleManager : MonoBehaviour {
         UnPauseEffects();
         SoundManager.Instance.UnPauseSFX();
     }
+
+
 
     public async UniTask TimeSlowLerp(float timeScale, float lerpTime) {
         await DOTween.To(() => Time.timeScale, x => Time.timeScale = x, timeScale, lerpTime);

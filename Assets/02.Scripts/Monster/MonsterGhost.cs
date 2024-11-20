@@ -39,45 +39,6 @@ public class MonsterGhost : MonsterBase {
 
 
 
-    #region protected funcs
-
-    protected override void AttackMove() {
-        /*
-        if (!_isAttacking && !_isDead && !_isStun && _isSpawnComplete) {
-            double dist = CalculateManhattanDist(transform.position, _playerScript.transform.position);
-
-            if (dist < _attackRange) {
-                if (_isAttackReady)
-                    AttackTask().Forget();
-
-                _rigid.velocity = Vector2.zero;
-            }
-            else if (dist < _searchRange) {
-                Vector2 moveVec = _playerScript.transform.position - transform.position;
-
-                if (moveVec.x < 0)
-                    _spriteRenderer.flipX = false;
-                else
-                    _spriteRenderer.flipX = true;
-
-                _rigid.velocity = moveVec.normalized * _moveSpeed;
-                _animator.SetBool("Run", true);
-            }
-            else {
-                _rigid.velocity = Vector2.zero;
-                _animator.SetBool("Run", false);
-            }
-        }
-        else
-            _rigid.velocity = Vector2.zero;
-        */
-    }
-
-    #endregion //protected funcs
-
-
-
-
     #region private funcs
 
     private async UniTaskVoid ScratchTask() {
