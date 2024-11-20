@@ -4,6 +4,7 @@ using Edgar.Unity.Examples.Gungeon;
 using System;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using Random = UnityEngine.Random;
 
 public class Player : MonoBehaviour {
@@ -17,11 +18,13 @@ public class Player : MonoBehaviour {
     #region serialized field
 
     [SerializeField] private float _invincibleLastTime;
-    [SerializeField] private float _phantomLastTime; //ingameTime
+    //[SerializeField] private float _phantomLastTime; //ingameTime
     [SerializeField] private float _phantomTimeScale; // 0 ~ 1
     [SerializeField] private float _phantomLerpTime;
-    [SerializeField] private float _phantomCoolTime;
     [SerializeField] private float _phantomSpeedBonus;
+    [SerializeField] private float _phantomGaugeUseAmount;
+    [SerializeField] private float _phantomGaugeRecoverAmount;
+    [SerializeField] private Slider _phantomSlider;
     [SerializeField] private GameObject _phantomGhostObj;
     [SerializeField] private Animator _phantomVolumeAnimator;
     [SerializeField] private Color _phantomGhostColor;
@@ -66,7 +69,9 @@ public class Player : MonoBehaviour {
     protected bool _isRollInvincible;//obsolete
     private bool _isCustomInvincible;//특수 함수에 의한 무적 상태
     //private bool _isRollReady;
+    private float _currentPhantomGauge;
     private bool _isPhantomReady;
+    private bool _isPhantomLocked;
     private bool _isPhantomActivated;
     private bool _phantomForceCancelTrigger;
     protected bool _isAttacking;
@@ -109,7 +114,10 @@ public class Player : MonoBehaviour {
         _isInvincible = false;
         _phantomVolumeAnimator.gameObject.SetActive(false);
         _isPhantomReady = true;
+        _isPhantomLocked = false;
         _isPhantomActivated = false;
+        _currentPhantomGauge = 100;
+        UpdatePhantomGauge();
         _phantomForceCancelTrigger = false;
         _phantomSpeedRate = 1;
         _isRollInvincible = false;//obsolete
@@ -132,6 +140,7 @@ public class Player : MonoBehaviour {
     protected void Update() {
         //Roll().Forget();
         Phantom().Forget();
+        PhantomGaugeManage();
         SearchNearItems();
         ItemMagnetic();
         StunState();
@@ -404,40 +413,60 @@ public class Player : MonoBehaviour {
         }
     }
 
+    private void PhantomGaugeManage() {
+        if (_isPhantomActivated) {
+            if (_currentPhantomGauge > 0)
+                _currentPhantomGauge -= _phantomGaugeUseAmount * Time.unscaledDeltaTime;
+            else {
+                _currentPhantomGauge = 0;
+                _phantomForceCancelTrigger = true;
+                _isPhantomLocked = true;
+            }
+        }
+        else {
+            if (_currentPhantomGauge < 100) {
+                _currentPhantomGauge += _phantomGaugeRecoverAmount * Time.unscaledDeltaTime;
+            }
+            else {
+                _currentPhantomGauge = 100;
+                _isPhantomLocked = false;
+            }
+        }
+        UpdatePhantomGauge();
+    }
+
     private async UniTaskVoid Phantom() {
         // 팬텀 사용 가능 여부 확인
         if (!PlayerTriggerManager.Instance.CanUsePhantom) {
             return;
         }
 
-        if (Input.GetKey(KeyCode.Space) && _isPhantomReady && !_isStun && !_isPause && !_isDead && _playerEnabled) {
+        if (Input.GetKey(KeyCode.Space) && _isPhantomReady && !_isPhantomLocked && !_isStun && !_isPause && !_isDead && _playerEnabled) {
             Debug.Log("Phantom ON");
             PhantomGhostEffect().Forget();
             _isPhantomReady = false;
-            float timer = 0;
             DOTween.To(() => _phantomSpeedRate, x => _phantomSpeedRate = x, _phantomSpeedBonus * 0.01f, _phantomLerpTime).ToUniTask().Forget();
             _phantomVolumeAnimator.gameObject.SetActive(true);
             SoundManager.Instance.SetSFXPitchLerp(_phantomTimeScale, _phantomLerpTime).Forget();
             SoundManager.Instance.SetBGMPitchLerp(0.5f, _phantomLerpTime).Forget();
             await TimeScaleManager.Instance.TimeSlowLerp(_phantomTimeScale, _phantomLerpTime);
-
-            while (!Input.GetKey(KeyCode.Space) && timer < _phantomLastTime && !_phantomForceCancelTrigger && !_isStun) {
-                timer += Time.deltaTime;
+            while (!Input.GetKey(KeyCode.Space) && !_phantomForceCancelTrigger && !_isStun) {
                 await UniTask.NextFrame();
             }
-
+            _isPhantomActivated = false;
+            _phantomForceCancelTrigger = false;
             DOTween.To(() => _phantomSpeedRate, x => _phantomSpeedRate = x, 1, _phantomLerpTime).ToUniTask().Forget();
             SoundManager.Instance.SetBGMPitchLerp(1, _phantomLerpTime).Forget();
             SoundManager.Instance.SetSFXPitchLerp(1, _phantomLerpTime).Forget();
             _phantomVolumeAnimator.SetTrigger("End");
             await TimeScaleManager.Instance.TimeRestoreLerp(_phantomLerpTime);
             _phantomVolumeAnimator.gameObject.SetActive(false);
-            _isPhantomActivated = false;
-            _phantomForceCancelTrigger = false;
             Debug.Log("Phantom OFF");
-            await UniTask.Delay(TimeSpan.FromSeconds(_phantomCoolTime));
             _isPhantomReady = true;
             Debug.Log("**Phantom Ready**");
+        }
+        else if (_isPhantomLocked) {
+            Debug.Log("팬텀 리바운드 상태이므로 팬텀 사용이 불가능합니다.");
         }
     }
 
@@ -634,6 +663,10 @@ public class Player : MonoBehaviour {
             await UniTask.Delay(TimeSpan.FromSeconds(delay), ignoreTimeScale: true);
             SoundManager.Instance.PlaySFX(clip.name, true);
         }
+    }
+
+    private void UpdatePhantomGauge() {
+        _phantomSlider.value = _currentPhantomGauge / 100;
     }
     #endregion //private funcs
 }

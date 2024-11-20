@@ -22,10 +22,6 @@ public class MonsterNightBorne : MonsterBase {
         Move().Forget();
     }
 
-    protected override void AttackMove() {
-
-    }
-
     private async UniTaskVoid Move() {
         while (true) {
             float randomX = UnityEngine.Random.Range(-1.0f, 1);

@@ -85,7 +85,7 @@ public abstract class MonsterBase : DropableBase {
         }
     }
 
-    private void OnCollisionStay2D(Collision2D collision) {
+    virtual protected void OnCollisionStay2D(Collision2D collision) {
         if (collision.collider.CompareTag("Player") && !_isDead && _isSpawnComplete)
             _playerScript.Damaged(_bodyDamage);
     }
@@ -151,8 +151,6 @@ public abstract class MonsterBase : DropableBase {
 
 
     #region protected funcs
-
-    protected abstract void AttackMove();
 
     virtual protected async UniTaskVoid ChangeColor() {
         if (!_isColorChanged) {

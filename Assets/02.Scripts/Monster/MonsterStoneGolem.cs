@@ -43,10 +43,6 @@ public class MonsterStoneGolem : MonsterBase {
 
     #region protected funcs
 
-    protected override void AttackMove() {
-
-    }
-
     protected override async UniTaskVoid Die() {
         _isDead = true;
         _hp = 0;

@@ -30,7 +30,7 @@ public class SoundManager : MonoBehaviour {
     }
 
     void Start() {
-        SetVolume();
+        LoadSoundData();
     }
 
     #endregion // mono funcs
@@ -66,14 +66,17 @@ public class SoundManager : MonoBehaviour {
 
     public void SetMasterVolume(float volume) {
         m_AudioMixer.SetFloat("Master", volume);
+        SaveSoundData();
     }
 
     public void SetBGMVolume(float volume) {
         m_AudioMixer.SetFloat("BGM", volume);
+        SaveSoundData();
     }
 
     public void SetSFXVolume(float volume) {
         m_AudioMixer.SetFloat("SFX", volume);
+        SaveSoundData();
     }
 
     public void SetSFXPitch(float pitch) {
@@ -120,14 +123,37 @@ public class SoundManager : MonoBehaviour {
 
     #region private funcs
 
-    private void SetVolume() {
-        //m_AudioMixer.SetFloat("Master", Mathf.Log10(PlayerPrefsManager.Instance.GetMasterVolume()) * 20);
-        //m_AudioMixer.SetFloat("BGM", Mathf.Log10(PlayerPrefsManager.Instance.GetBGMVolume()) * 20);
-        //m_AudioMixer.SetFloat("SFX", Mathf.Log10(PlayerPrefsManager.Instance.GetSFXVolume()) * 20);
-        m_AudioMixer.SetFloat("Master", -0.08f); //Temp setting. Use upper code when save implementation is done.
-        m_AudioMixer.SetFloat("SFXpitch", 1);
+    private void SaveSoundData() {
+        m_AudioMixer.GetFloat("Master", out float master);
+        m_AudioMixer.GetFloat("BGM", out float bgm);
+        m_AudioMixer.GetFloat("SFX", out float sfx);
+        ES3File es3File = new ES3File("SoundData.es3");
+        es3File.Save("masterVolume", master);
+        es3File.Save("bgmVolume", bgm);
+        es3File.Save("sfxVolume", sfx);
+        es3File.Sync();
     }
 
+    private void LoadSoundData() {
+        float master, bgm, sfx;
+        ES3File es3File = new ES3File("SoundData.es3");
+        if (es3File.KeyExists("masterVolume"))
+            master = es3File.Load<float>("masterVolume");
+        else
+            master = 0;
+        if (es3File.KeyExists("bgmVolume"))
+            bgm = es3File.Load<float>("bgmVolume");
+        else
+            bgm = 0;
+        if (es3File.KeyExists("sfxVolume"))
+            sfx = es3File.Load<float>("sfxVolume");
+        else
+            sfx = 0;
+
+        m_AudioMixer.SetFloat("Master", master);
+        m_AudioMixer.SetFloat("BGM", bgm);
+        m_AudioMixer.SetFloat("SFX", sfx);
+    }
     #endregion // private funcs
 }
 
