@@ -62,6 +62,7 @@ public class Charger : MonsterBase {
 
     protected async override UniTaskVoid Die() {
         _hp = 0;
+        PlayerDataManager.Instance.SetFeverGauge(_feverAmount);
         UpdateHpSlider();
         await UniTask.Delay(TimeSpan.FromSeconds(1));
         ChargerOff();

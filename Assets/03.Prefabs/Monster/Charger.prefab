@@ -79,7 +79,7 @@ MonoBehaviour:
     serializedVersion: 2
     rgba: 4283322111
   _exp: 0
-  _feverAmount: 0
+  _feverAmount: 100
   _chargerIndex: 0
   _hpRecoverAmount: 300
   _boss: {fileID: 0}

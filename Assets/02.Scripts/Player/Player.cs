@@ -345,7 +345,7 @@ public class Player : MonoBehaviour {
 
     public void ChargeGaugeUp() {
         if (_chargeCount < 5) {
-            _chargeGauge[_chargeCount++].DOColor(_chargeColor, 0.1f).SetUpdate(true);
+            _chargeGauge[_chargeCount++].DOColor(_chargeColor, 0.07f).SetUpdate(true);
             if (_chargeCount == 5) {
                 for (int i = 0; i < 5; i++)
                     _chargeGauge[i].DOColor(_chargeMaxColor, 0.1f).SetUpdate(true);
@@ -356,7 +356,7 @@ public class Player : MonoBehaviour {
 
     public void ResetChargeGauge() {
         for (int i = 0; i < 5; i++) {
-            _chargeGauge[i].DOColor(_chargeOriginColor, 1).SetUpdate(true);
+            _chargeGauge[i].DOColor(_chargeOriginColor, 0.35f).SetUpdate(true);
             _chargeCount = 0;
         }
     }

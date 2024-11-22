@@ -61,7 +61,7 @@ MonoBehaviour:
     _weaponMoveSpeed: 5
     _weaponCritChance: 0
     _weaponCritDamage: 0
-  _basicCoolTime: 1
+  _basicCoolTime: 0.5
   _basicDelay: 1
   _skill1CoolTime: 0
   _delay1: 0
@@ -100,7 +100,10 @@ MonoBehaviour:
   _feverSkillEffect1: {fileID: 0}
   _feverRange: 0
   _isBuffTypeFeverSkill: 0
-  nomalattackSound: {fileID: 0}
+  _normalAttackSound: {fileID: 0}
+  shakeDuration: 0.3
+  shakeAmplitude: 3
+  shakeFrequency: 25
   _chargeInterval: 0.3
   _projectileObj: {fileID: 585414209913786896, guid: fd48be06f842432408b782ad3c10c608, type: 3}
   _projectileSpeed: 6

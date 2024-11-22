@@ -232,7 +232,7 @@ MonoBehaviour:
     _weaponMoveSpeed: 15
     _weaponCritChance: 0
     _weaponCritDamage: 0
-  _basicCoolTime: 1
+  _basicCoolTime: 0.5
   _basicDelay: 0.4
   _skill1CoolTime: 7
   _delay1: 0.5

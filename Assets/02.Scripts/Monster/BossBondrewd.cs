@@ -98,7 +98,7 @@ public class BossBondrewd : MonsterBase {
     int _currentPhaseNum;
     float _phantomGauge;
     float _groggyGauge;
-    [SerializeField] int _currentActivatedChargerCount;
+    int _currentActivatedChargerCount;
     BoxCollider2D _bondrewdCollider;
     Vector2[] _shootPos = { new Vector2(3.25f, -0.97f), new Vector2(-3.25f, -0.97f) };
     Vector2[] _missilePos = { new Vector2(-0.76f, 1.04f), new Vector2(0.76f, 1.04f) };
