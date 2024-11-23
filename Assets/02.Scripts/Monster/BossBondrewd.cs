@@ -24,6 +24,7 @@ public class BossBondrewd : MonsterBase {
     [SerializeField] List<GameObject> _chargerList;
 
     [SerializeField] SpriteRenderer _legSr;
+    [SerializeField] GameObject _bossUI;
     [SerializeField] Slider _hpSlider;
     [SerializeField] Slider _phantomGaugeSlider;
     [SerializeField] Slider _groggySlider;
@@ -198,13 +199,10 @@ public class BossBondrewd : MonsterBase {
         _isDead = true;
         _hp = 0;
         _animator.SetTrigger("Die");
-        _hpSlider.gameObject.SetActive(false);
         _spriteRenderer.sortingLayerName = "Default";
         _legSr.sortingLayerName = "Default";
         _bondrewdCollider.enabled = false;
-        _hpSlider.gameObject.SetActive(false);
-        _phantomGaugeSlider.gameObject.SetActive(false);
-        _groggySlider.gameObject.SetActive(false);
+        _bossUI.SetActive(false);
         _groggyEffect.SetActive(false);
         _chargerUIList.ForEach((chargeUI) => chargeUI.gameObject.SetActive(false));
         DropItems();
@@ -630,7 +628,14 @@ public class BossBondrewd : MonsterBase {
         _useTree = false;
         _groggyEffect.SetActive(true);
         StateEffectManager.Instance.SummonEffect(transform, StateType.Confusion, 3, _groggyLastTime, 3).Forget();
-        await UniTask.Delay(TimeSpan.FromSeconds(_groggyLastTime));
+        float timer = 0;
+        while (timer < _groggyLastTime) {
+            _groggyGauge += 100 / _groggyLastTime * Time.deltaTime;
+            UpdateGroggySlider();
+            timer += Time.deltaTime;
+            await UniTask.NextFrame();
+        }
+        _groggyGauge = 100;
         _cts.Dispose();
         _cts = null;
         _cts = new CancellationTokenSource();
@@ -639,12 +644,6 @@ public class BossBondrewd : MonsterBase {
         _isGroggy = false;
         _useTree = true;
         Debug.Log("Groggy End");
-        while (_groggyGauge < 100) {
-            _groggyGauge += 1f;
-            UpdateGroggySlider();
-            await UniTask.Delay(TimeSpan.FromSeconds(0.03f));
-        }
-        _groggyGauge = 100;
     }
 
     #endregion
