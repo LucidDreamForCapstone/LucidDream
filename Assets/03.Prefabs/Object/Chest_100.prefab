@@ -353,11 +353,12 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6192144375615978543}
+  - component: {fileID: 7254048178318881476}
   - component: {fileID: 4672548880203904844}
   - component: {fileID: 6230994933644719349}
+  - component: {fileID: 6954258257783551882}
   - component: {fileID: 3948249908278090091}
   - component: {fileID: 7101138803648856550}
-  - component: {fileID: 7254048178318881476}
   m_Layer: 0
   m_Name: Chest_100
   m_TagString: Interactable
@@ -382,6 +383,40 @@ Transform:
   - {fileID: 1341091447793776744}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &7254048178318881476
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9049388991510689282}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9684c879ba587444da1ded2385b7a7e2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dropTable:
+  - _item: {fileID: 438956390268976642, guid: f14bcc985c06b074a932d910b3d2df3e, type: 3}
+    _dropChance: 100
+  - _item: {fileID: 2397993577778757249, guid: 47ee25402d47a4a41a9b90426bb271d7, type: 3}
+    _dropChance: 10
+  - _item: {fileID: 1782461251843806131, guid: 2e7cce9df1eeced4ca983c3126477d58, type: 3}
+    _dropChance: 10
+  - _item: {fileID: 3579808356831541882, guid: 05b74ee39875fc14aae218c401ebe8f6, type: 3}
+    _dropChance: 100
+  - _item: {fileID: 3596559577025724964, guid: 4327f566d4fccc44bba0aa55a9243b1c, type: 3}
+    _dropChance: 5
+  - _item: {fileID: 6554170899350276541, guid: d9449e93f60efd64293b1a68d91ed88d, type: 3}
+    _dropChance: 40
+  - _item: {fileID: 4748116994987269957, guid: 2af424789dc149144a105b5fd64c6d71, type: 3}
+    _dropChance: 40
+  - _item: {fileID: 6034467555048407030, guid: 7b91d6586cde091499e578b1d827ad96, type: 3}
+    _dropChance: 5
+  _chestRank: 2
+  _openSound: {fileID: 8300000, guid: 01eda33b54ebe7b4894c6dd958381ba8, type: 3}
+  _message: "\uCF54\uC778\uC774 \uBD80\uC871\uD569\uB2C8\uB2E4."
+  _requiredCoins: 100
+  effectSound: {fileID: 8300000, guid: 6690079742dd41148a6e480bff9ffdc2, type: 3}
 --- !u!212 &4672548880203904844
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -479,6 +514,41 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1.2, y: 0.2830884}
   m_EdgeRadius: 0
+--- !u!58 &6954258257783551882
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9049388991510689282}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  serializedVersion: 2
+  m_Radius: 0.4
 --- !u!50 &3948249908278090091
 Rigidbody2D:
   serializedVersion: 4
@@ -527,36 +597,3 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
---- !u!114 &7254048178318881476
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9049388991510689282}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9684c879ba587444da1ded2385b7a7e2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  dropTable:
-  - _item: {fileID: 438956390268976642, guid: f14bcc985c06b074a932d910b3d2df3e, type: 3}
-    _dropChance: 100
-  - _item: {fileID: 2397993577778757249, guid: 47ee25402d47a4a41a9b90426bb271d7, type: 3}
-    _dropChance: 10
-  - _item: {fileID: 1782461251843806131, guid: 2e7cce9df1eeced4ca983c3126477d58, type: 3}
-    _dropChance: 10
-  - _item: {fileID: 3579808356831541882, guid: 05b74ee39875fc14aae218c401ebe8f6, type: 3}
-    _dropChance: 100
-  - _item: {fileID: 3596559577025724964, guid: 4327f566d4fccc44bba0aa55a9243b1c, type: 3}
-    _dropChance: 5
-  - _item: {fileID: 6554170899350276541, guid: d9449e93f60efd64293b1a68d91ed88d, type: 3}
-    _dropChance: 40
-  - _item: {fileID: 4748116994987269957, guid: 2af424789dc149144a105b5fd64c6d71, type: 3}
-    _dropChance: 40
-  - _item: {fileID: 6034467555048407030, guid: 7b91d6586cde091499e578b1d827ad96, type: 3}
-    _dropChance: 5
-  _chestRank: 2
-  _openSound: {fileID: 8300000, guid: 01eda33b54ebe7b4894c6dd958381ba8, type: 3}
-  _requiredCoins: 100
-  effectSound: {fileID: 8300000, guid: 6690079742dd41148a6e480bff9ffdc2, type: 3}

@@ -86,6 +86,7 @@ public class Player : MonoBehaviour {
     private int _chargeCount;
     private InGameUIController _controller;
     private bool _playerEnabled;
+    private bool _isMessagePrinting;
     #endregion // private variable
 
 
@@ -130,6 +131,7 @@ public class Player : MonoBehaviour {
         _slowRate = 0;
         _controller = FindObjectOfType<InGameUIController>();
         _playerEnabled = true;
+        _isMessagePrinting = false;
     }
 
     private void FixedUpdate() {
@@ -465,8 +467,9 @@ public class Player : MonoBehaviour {
             _isPhantomReady = true;
             Debug.Log("**Phantom Ready**");
         }
-        else if (_isPhantomLocked) {
-            Debug.Log("팬텀 리바운드 상태이므로 팬텀 사용이 불가능합니다.");
+        else if (_isPhantomLocked && Input.GetKey(KeyCode.Space)) {
+            string message = "팬텀 리바운드 상태이므로 팬텀을 사용할 수 없습니다.";
+            PrintMessage(message).Forget();
         }
     }
 
@@ -495,7 +498,6 @@ public class Player : MonoBehaviour {
         await sr.DOFade(0, _ghostLastTime).SetUpdate(true);
         ObjectPool.Instance.ReturnObject(ghostEffect);
     }
-
 
     /*
     private async UniTaskVoid Roll() {
@@ -662,6 +664,14 @@ public class Player : MonoBehaviour {
         if (clip != null) {
             await UniTask.Delay(TimeSpan.FromSeconds(delay), ignoreTimeScale: true);
             SoundManager.Instance.PlaySFX(clip.name, true);
+        }
+    }
+    private async UniTaskVoid PrintMessage(string message) {
+        if (!_isMessagePrinting) {
+            _isMessagePrinting = true;
+            SystemMessageManager.Instance.PushSystemMessage(message, Color.red);
+            await UniTask.Delay(TimeSpan.FromSeconds(0.5f));
+            _isMessagePrinting = false;
         }
     }
 

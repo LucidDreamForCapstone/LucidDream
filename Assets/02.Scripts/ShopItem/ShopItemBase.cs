@@ -1,79 +1,10 @@
-/*using UnityEngine;
-
-public abstract class ShopItemBase : MonoBehaviour, Interactable {
-    [Header("아이템 가격")]
-    [SerializeField] private int _price = 30;
-    [SerializeField] private string _name;
-    private bool _isUsed;
-
-    #region mono funcs
-
-    private void Start() {
-        _isUsed = false;
-    }
-
-    private void OnCollisionStay2D(Collision2D collision) {
-        if (collision.gameObject.CompareTag("Player")) {
-            UseItem();
-        }
-    }
-
-    #endregion
-
-
-
-
-
-    #region protected funcs
-
-    protected abstract void ItemEffect();
-
-    #endregion
-
-
-
-
-
-    #region public funcs
-
-    public string GetName() { return _name; }
-
-    public bool IsInteractBlock() {
-        if (_isUsed) return true;
-        else return false;
-    }
-
-    public string GetInteractText() {
-        return $"[{_name}] 구매 (G)";
-    }
-    #endregion
-
-
-
-    #region private funcs
-
-    private void UseItem() {
-        if (!_isUsed && InteractManager.Instance.CheckInteractable(this)) {
-            if (Input.GetKey(KeyCode.G)) {
-                InteractManager.Instance.InteractCoolTime().Forget();
-                if (PlayerDataManager.Instance.BuyItem(_price)) {
-                    ItemEffect();
-                    _isUsed = true;
-                    Destroy(this.gameObject);
-                }
-            }
-        }
-    }
-
-    #endregion
-} */
-
 using UnityEngine;
 
 public abstract class ShopItemBase : MonoBehaviour, Interactable {
     [Header("아이템 가격")]
     [SerializeField] private int _price;
     [SerializeField] private string _name;
+    [SerializeField] protected string _warningMessage;
     protected InGameUIController inGameUIController;
     private bool _isUsed;
     private Animator _animator;
@@ -85,8 +16,7 @@ public abstract class ShopItemBase : MonoBehaviour, Interactable {
         _isUsed = false;
         _animator = GetComponent<Animator>();
     }
-
-    private void OnCollisionStay2D(Collision2D collision) {
+    private void OnTriggerStay2D(Collider2D collision) {
         if (collision.gameObject.CompareTag("Player")) {
             OpenShopItem();
         }
@@ -135,20 +65,13 @@ public abstract class ShopItemBase : MonoBehaviour, Interactable {
                 }
                 else {
                     Debug.Log("Not enough coins.");
-                    inGameUIController.ShowNotification("코인이 부족합니다.", 1f); // 2초 동안 문구 표시
+                    string message = "코인이 부족합니다."; //Coin E Bujokhapnida
+                    SystemMessageManager.Instance.PushSystemMessage(message, Color.red);
                 }
             }
         }
 
     }
-
-
-    /*private void PlayPurchaseAnimation() {
-        if (_animator != null) {
-            _animator.SetTrigger("Purchase");
-        }
-    }*/
-
     #endregion
 }
 

@@ -9,9 +9,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4151153953099191616}
-  - component: {fileID: 2128403838987545142}
   - component: {fileID: 3348039780658177386}
+  - component: {fileID: 2128403838987545142}
   - component: {fileID: 2008323044701374281}
+  - component: {fileID: 6791252198075123071}
   - component: {fileID: 6026586742765396011}
   - component: {fileID: 1667537691499920610}
   m_Layer: 0
@@ -36,6 +37,43 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &3348039780658177386
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1213858276333295106}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4dd6d4d3f18b6624085d9f76fdd88206, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dropTable:
+  - _item: {fileID: 438956390268976642, guid: f14bcc985c06b074a932d910b3d2df3e, type: 3}
+    _dropChance: 90
+  - _item: {fileID: 2397993577778757249, guid: 47ee25402d47a4a41a9b90426bb271d7, type: 3}
+    _dropChance: 70
+  - _item: {fileID: 1782461251843806131, guid: 2e7cce9df1eeced4ca983c3126477d58, type: 3}
+    _dropChance: 50
+  - _item: {fileID: 3579808356831541882, guid: 05b74ee39875fc14aae218c401ebe8f6, type: 3}
+    _dropChance: 30
+  - _item: {fileID: 4748116994987269957, guid: 2af424789dc149144a105b5fd64c6d71, type: 3}
+    _dropChance: 15
+  - _item: {fileID: 3596559577025724964, guid: 4327f566d4fccc44bba0aa55a9243b1c, type: 3}
+    _dropChance: 3
+  - _item: {fileID: 333487530329746681, guid: d3b95dbb730d026449fe65dc26f1d829, type: 3}
+    _dropChance: 70
+  - _item: {fileID: 6034467555048407030, guid: 7b91d6586cde091499e578b1d827ad96, type: 3}
+    _dropChance: 3
+  - _item: {fileID: 3596559577025724964, guid: 34f334e7e561f9a4badf6d458a3b72b6, type: 3}
+    _dropChance: 30
+  - _item: {fileID: 6554170899350276541, guid: d9449e93f60efd64293b1a68d91ed88d, type: 3}
+    _dropChance: 15
+  - _item: {fileID: 5376336266447102507, guid: b5075d300cbd11e4d88b6aa52ee53558, type: 3}
+    _dropChance: 30
+  _chestRank: 1
+  _openSound: {fileID: 8300000, guid: 01eda33b54ebe7b4894c6dd958381ba8, type: 3}
 --- !u!212 &2128403838987545142
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -88,43 +126,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &3348039780658177386
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1213858276333295106}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4dd6d4d3f18b6624085d9f76fdd88206, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  dropTable:
-  - _item: {fileID: 438956390268976642, guid: f14bcc985c06b074a932d910b3d2df3e, type: 3}
-    _dropChance: 90
-  - _item: {fileID: 2397993577778757249, guid: 47ee25402d47a4a41a9b90426bb271d7, type: 3}
-    _dropChance: 70
-  - _item: {fileID: 1782461251843806131, guid: 2e7cce9df1eeced4ca983c3126477d58, type: 3}
-    _dropChance: 50
-  - _item: {fileID: 3579808356831541882, guid: 05b74ee39875fc14aae218c401ebe8f6, type: 3}
-    _dropChance: 30
-  - _item: {fileID: 4748116994987269957, guid: 2af424789dc149144a105b5fd64c6d71, type: 3}
-    _dropChance: 15
-  - _item: {fileID: 3596559577025724964, guid: 4327f566d4fccc44bba0aa55a9243b1c, type: 3}
-    _dropChance: 3
-  - _item: {fileID: 333487530329746681, guid: d3b95dbb730d026449fe65dc26f1d829, type: 3}
-    _dropChance: 70
-  - _item: {fileID: 6034467555048407030, guid: 7b91d6586cde091499e578b1d827ad96, type: 3}
-    _dropChance: 3
-  - _item: {fileID: 3596559577025724964, guid: 34f334e7e561f9a4badf6d458a3b72b6, type: 3}
-    _dropChance: 30
-  - _item: {fileID: 6554170899350276541, guid: d9449e93f60efd64293b1a68d91ed88d, type: 3}
-    _dropChance: 15
-  - _item: {fileID: 5376336266447102507, guid: b5075d300cbd11e4d88b6aa52ee53558, type: 3}
-    _dropChance: 30
-  _chestRank: 1
-  _openSound: {fileID: 8300000, guid: 01eda33b54ebe7b4894c6dd958381ba8, type: 3}
 --- !u!61 &2008323044701374281
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -170,6 +171,41 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1.2, y: 0.2830884}
   m_EdgeRadius: 0
+--- !u!58 &6791252198075123071
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1213858276333295106}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  serializedVersion: 2
+  m_Radius: 0.4
 --- !u!50 &6026586742765396011
 Rigidbody2D:
   serializedVersion: 4

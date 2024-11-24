@@ -28944,7 +28944,7 @@ GameObject:
   - component: {fileID: 885318192169671816}
   - component: {fileID: 7518937402562139806}
   - component: {fileID: 5644056249939177631}
-  m_Layer: 15
+  m_Layer: 5
   m_Name: BossCanvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -29152,10 +29152,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: BossHpSlider
       objectReference: {fileID: 0}
-    - target: {fileID: 7760496260519579763, guid: 7badce546c821a44b9967a20c605579e, type: 3}
-      propertyPath: m_Layer
-      value: 15
-      objectReference: {fileID: 0}
     - target: {fileID: 8692635610206166785, guid: 7badce546c821a44b9967a20c605579e, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0
@@ -29185,10 +29181,6 @@ PrefabInstance:
     - target: {fileID: 67923765716152310, guid: 02681350ffb15644288910306960a1e2, type: 3}
       propertyPath: m_Name
       value: Hades
-      objectReference: {fileID: 0}
-    - target: {fileID: 67923765716152310, guid: 02681350ffb15644288910306960a1e2, type: 3}
-      propertyPath: m_Layer
-      value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 1258890102707732986, guid: 02681350ffb15644288910306960a1e2, type: 3}
       propertyPath: m_Layer
@@ -29247,20 +29239,8 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3039902574081454340, guid: 02681350ffb15644288910306960a1e2, type: 3}
-      propertyPath: m_Layer
-      value: 15
-      objectReference: {fileID: 0}
-    - target: {fileID: 3039902574081454340, guid: 02681350ffb15644288910306960a1e2, type: 3}
       propertyPath: m_IsActive
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3507260071764381437, guid: 02681350ffb15644288910306960a1e2, type: 3}
-      propertyPath: m_Enabled
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3507260071764381437, guid: 02681350ffb15644288910306960a1e2, type: 3}
-      propertyPath: m_Points.m_Paths.Array.data[0].Array.data[0].x
-      value: 4.59
       objectReference: {fileID: 0}
     - target: {fileID: 3882298257011612751, guid: 02681350ffb15644288910306960a1e2, type: 3}
       propertyPath: m_Color.b
@@ -29274,33 +29254,13 @@ PrefabInstance:
       propertyPath: m_Color.r
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 5035020919779862985, guid: 02681350ffb15644288910306960a1e2, type: 3}
-      propertyPath: m_Layer
-      value: 15
-      objectReference: {fileID: 0}
-    - target: {fileID: 5091788491106609544, guid: 02681350ffb15644288910306960a1e2, type: 3}
-      propertyPath: m_Layer
-      value: 15
-      objectReference: {fileID: 0}
     - target: {fileID: 6195027315353522971, guid: 02681350ffb15644288910306960a1e2, type: 3}
-      propertyPath: m_Layer
-      value: 15
-      objectReference: {fileID: 0}
-    - target: {fileID: 6338572486764649192, guid: 02681350ffb15644288910306960a1e2, type: 3}
-      propertyPath: m_Layer
-      value: 15
-      objectReference: {fileID: 0}
-    - target: {fileID: 8068953131395654308, guid: 02681350ffb15644288910306960a1e2, type: 3}
       propertyPath: m_Layer
       value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 8068953131395654308, guid: 02681350ffb15644288910306960a1e2, type: 3}
       propertyPath: m_IsActive
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8305105721574729252, guid: 02681350ffb15644288910306960a1e2, type: 3}
-      propertyPath: m_Layer
-      value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 8690571925429437549, guid: 02681350ffb15644288910306960a1e2, type: 3}
       propertyPath: m_Layer
@@ -29326,14 +29286,6 @@ PrefabInstance:
       propertyPath: bossImage2
       value: 
       objectReference: {fileID: 8239084562447658421}
-    - target: {fileID: 8870252314760207154, guid: 02681350ffb15644288910306960a1e2, type: 3}
-      propertyPath: m_Layer
-      value: 15
-      objectReference: {fileID: 0}
-    - target: {fileID: 8911696394844388399, guid: 02681350ffb15644288910306960a1e2, type: 3}
-      propertyPath: m_Layer
-      value: 15
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -29356,17 +29308,9 @@ PrefabInstance:
       propertyPath: m_margin.y
       value: -25.08667
       objectReference: {fileID: 0}
-    - target: {fileID: 3404560357468094892, guid: 37ee6b8a7ac578142bba9ece9894f89b, type: 3}
-      propertyPath: m_VerticalAlignment
-      value: 256
-      objectReference: {fileID: 0}
     - target: {fileID: 4262101963593116714, guid: 37ee6b8a7ac578142bba9ece9894f89b, type: 3}
       propertyPath: m_Name
       value: BossTimer
-      objectReference: {fileID: 0}
-    - target: {fileID: 4262101963593116714, guid: 37ee6b8a7ac578142bba9ece9894f89b, type: 3}
-      propertyPath: m_Layer
-      value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 8182783654338642265, guid: 37ee6b8a7ac578142bba9ece9894f89b, type: 3}
       propertyPath: m_Pivot.x

@@ -1,9 +1,8 @@
 using Cysharp.Threading.Tasks;
 using Edgar.Unity; // TextMeshPro 관련 네임스페이스 추가
 using System;
-using System.Collections;
-using TMPro;
 using UnityEngine;
+
 
 public class PlayerSwapManager : MonoBehaviour {
     [SerializeField] private Player player1; // 첫 번째 캐릭터
@@ -20,7 +19,8 @@ public class PlayerSwapManager : MonoBehaviour {
     [SerializeField] private Canvas player2UICanvas; // Player2 UI Canvas
 
     // UI 텍스트
-    [SerializeField] private TextMeshProUGUI messageText; // TextMeshProUGUI 컴포넌트
+    [SerializeField] string _message;
+    [SerializeField] Color _messageColor;
 
     private void Start() {
         if (Display.displays.Length > 1) Display.displays[1].Activate(); // Display 2 활성화
@@ -30,7 +30,6 @@ public class PlayerSwapManager : MonoBehaviour {
         Player2ActiveDelay(2).Forget();
         glitchController = FindObjectOfType<GlitchController>(); // GlitchController 찾기
         vignetteController = FindObjectOfType<VignetteController>();
-        messageText.gameObject.SetActive(false); // 시작할 때 메시지 숨김
         if (Display.displays.Length > 1) Display.displays[1].Activate(); // Display 2 활성화
     }
 
@@ -40,7 +39,7 @@ public class PlayerSwapManager : MonoBehaviour {
                 SwapCharacter().Forget();
             }
             else {
-                ShowMessage("주위에 몬스터가 있어서 불가능합니다."); // 메시지 표시
+                SystemMessageManager.Instance.PushSystemMessage(_message, _messageColor);
             }
         }
     }
@@ -134,17 +133,6 @@ public class PlayerSwapManager : MonoBehaviour {
             }
         }
         isGlitching = false; // 글리치 효과 종료
-    }
-
-    private void ShowMessage(string message) {
-        messageText.text = message; // 메시지 텍스트 업데이트
-        messageText.gameObject.SetActive(true); // 메시지 표시
-        StartCoroutine(HideMessage()); // 메시지 숨기기 코루틴 호출
-    }   
-
-    private IEnumerator HideMessage() {
-        yield return new WaitForSeconds(2f); // 2초 후
-        messageText.gameObject.SetActive(false); // 메시지 숨김
     }
 
     //To prevent Edgar targeting the player2 as the main player while doing map creating

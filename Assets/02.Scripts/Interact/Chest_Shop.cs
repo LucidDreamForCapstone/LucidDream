@@ -5,6 +5,7 @@ using UnityEngine;
 
 public class Chest_Shop : Chest {
     #region serialize field
+    [SerializeField] private string _message;
     [SerializeField] private int _requiredCoins = 100;
     [SerializeField] protected AudioClip effectSound;
     #endregion //serialize field
@@ -15,10 +16,21 @@ public class Chest_Shop : Chest {
 
     #region private field
     private InGameUIController inGameUIController;
+    private bool _isPrinting;
 
 
     #endregion //serialize field
 
+
+
+
+    #region mono funcs
+    new private void Start() {
+        base.Start();
+        inGameUIController = FindObjectOfType<InGameUIController>();
+        _isPrinting = false;
+    }
+    #endregion //mono
 
 
 
@@ -39,21 +51,26 @@ public class Chest_Shop : Chest {
                 }
                 else {
                     // 코인이 부족할 때 알림 메시지 표시
-                    inGameUIController.ShowNotification("코인이 부족합니다.", 2f);
+                    NoCoinMessage().Forget();
                 }
             }
         }
     }
 
-    #endregion //protected funcs
+    #endregion //protected func
 
 
-    #region mono funcs
-    new private void Start() {
-        base.Start();
-        inGameUIController = FindObjectOfType<InGameUIController>();
+
+    #region private funcs
+
+    private async UniTaskVoid NoCoinMessage() {
+        if (!_isPrinting) {
+            _isPrinting = true;
+            SystemMessageManager.Instance.PushSystemMessage(_message, Color.red);
+            await UniTask.Delay(TimeSpan.FromSeconds(0.5f));
+            _isPrinting = false;
+        }
     }
 
-
-    #endregion //mono
+    #endregion
 }

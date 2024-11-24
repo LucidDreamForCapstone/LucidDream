@@ -194,9 +194,8 @@ MonoBehaviour:
   _invincibleLastTime: 1.5
   _phantomTimeScale: 0.2
   _phantomLerpTime: 0.5
-  _phantomCoolTime: 1
   _phantomSpeedBonus: 400
-  _phantomGaugeUseAmount: 10
+  _phantomGaugeUseAmount: 16
   _phantomGaugeRecoverAmount: 8
   _phantomSlider: {fileID: 0}
   _phantomGhostObj: {fileID: 6024089705646008288, guid: 6655b0effe23aca4aa9b651fd6a08362, type: 3}
@@ -561,8 +560,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _equippedWeapon: {fileID: 5584106991003330457}
   _inGameUIController: {fileID: 0}
-  cooldownWarningText: {fileID: 0}
-  cooldownTextCanvasGroup: {fileID: 0}
+  _warningMessage: "\uC2A4\uD0AC \uCFE8\uD0C0\uC784 \uC911\uC5D0\uB294 \uC7A5\uBE44\uB97C
+    \uAD50\uCCB4\uD560 \uC218 \uC5C6\uC2B5\uB2C8\uB2E4."
+  _cooldownWarningTextColor: {r: 0.50980395, g: 0.7294118, b: 1, a: 1}
 --- !u!212 &562714066122027051
 SpriteRenderer:
   m_ObjectHideFlags: 0

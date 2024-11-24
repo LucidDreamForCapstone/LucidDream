@@ -207,9 +207,11 @@ public class BossBondrewd : MonsterBase {
         _chargerUIList.ForEach((chargeUI) => chargeUI.gameObject.SetActive(false));
         DropItems();
         _playerScript.GetExp(_exp);
+        PlayerDataManager.Instance.SetFeverGauge(PlayerDataManager.Instance.Status._feverGauge + _feverAmount);
+        await UniTask.Delay(TimeSpan.FromSeconds(2));
         _cts.Dispose();
         _cts = null;
-        PlayerDataManager.Instance.SetFeverGauge(PlayerDataManager.Instance.Status._feverGauge + _feverAmount);
+
     }
 
     #endregion
