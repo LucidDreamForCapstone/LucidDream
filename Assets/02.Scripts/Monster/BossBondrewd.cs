@@ -23,6 +23,7 @@ public class BossBondrewd : MonsterBase {
     [SerializeField] GameObject _phantomGhostObj;
     [SerializeField] List<GameObject> _chargerList;
 
+    [SerializeField] AudioClip _dashSound;
     [SerializeField] SpriteRenderer _legSr;
     [SerializeField] GameObject _bossUI;
     [SerializeField] Slider _hpSlider;
@@ -86,6 +87,7 @@ public class BossBondrewd : MonsterBase {
     #endregion
 
     #region Private variables
+
     CancellationTokenSource _cts;
     bool _isBackStepReady;
     bool _isChaseReady;
@@ -235,6 +237,7 @@ public class BossBondrewd : MonsterBase {
         _backStepEffect.GetComponent<Animator>().SetFloat("Phantom", _phantomMultiplier);
         _animator.SetBool("Run", true);
         try {
+            SoundManager.Instance.PlaySFX(_dashSound.name);
             await DOTween.To(() => _rigid.position, x => _rigid.MovePosition(x), endValue, duration).WithCancellation(_cts.Token);
         }
         catch (OperationCanceledException) {
@@ -269,6 +272,7 @@ public class BossBondrewd : MonsterBase {
         _dashEffect.GetComponent<Animator>().SetFloat("Phantom", _phantomMultiplier);
         _animator.SetBool("Run", true);
         try {
+            SoundManager.Instance.PlaySFX(_dashSound.name);
             await DOTween.To(() => _rigid.position, x => _rigid.MovePosition(x), endValue, duration).WithCancellation(_cts.Token);
         }
         catch (OperationCanceledException) {
