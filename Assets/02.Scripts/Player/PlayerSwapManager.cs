@@ -2,6 +2,7 @@ using Cysharp.Threading.Tasks;
 using Edgar.Unity; // TextMeshPro 관련 네임스페이스 추가
 using System;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 
 public class PlayerSwapManager : MonoBehaviour {
@@ -50,19 +51,25 @@ public class PlayerSwapManager : MonoBehaviour {
             return false; // 플레이어가 할당되지 않은 경우
         }
         // 플레이어 주변의 Enemy를 체크합니다.
-        LayerMask enemyLayer = LayerMask.GetMask("Enemy"); // Enemy 레이어 마스크 가져오기
-        Collider2D[] colliders = Physics2D.OverlapCircleAll(player1.transform.position, 20f, enemyLayer); // 반지름 20, enemyLayer만 감지
-        foreach (var collider in colliders) {
-            Debug.Log($"Detected collider: {collider.gameObject.name} with tag: {collider.tag}"); // 감지된 콜라이더 출력
-            if (collider.CompareTag("Enemy")) {
-                Debug.Log("Enemy found! Cannot swap character.");
-                return false; // Enemy가 있을 경우 스왑 불가능
+        if (!IsFinalBossScene()) {
+            LayerMask enemyLayer = LayerMask.GetMask("Enemy"); // Enemy 레이어 마스크 가져오기
+            Collider2D[] colliders = Physics2D.OverlapCircleAll(player1.transform.position, 20f, enemyLayer); // 반지름 20, enemyLayer만 감지
+            foreach (var collider in colliders) {
+                Debug.Log($"Detected collider: {collider.gameObject.name} with tag: {collider.tag}"); // 감지된 콜라이더 출력
+                if (collider.CompareTag("Enemy")) {
+                    Debug.Log("Enemy found! Cannot swap character.");
+                    return false; // Enemy가 있을 경우 스왑 불가능
+                }
             }
         }
         Debug.Log("No enemies nearby. Can swap character.");
         return true; // 스왑 가능
     }
 
+    private bool IsFinalBossScene() {
+        string finalBossScene = "BossTestScene";//after change it
+        return SceneManager.GetActiveScene().name == finalBossScene;
+    }
 
 
     private async UniTaskVoid SwapCharacter() {
@@ -74,9 +81,16 @@ public class PlayerSwapManager : MonoBehaviour {
 
         // 글리치 효과를 시작합니다.
         if (glitchController != null) {
+            float glitchTime = 3;
+            int flashCount = 3;
+            if (IsFinalBossScene()) {
+                glitchTime = 1;
+                flashCount = 2;
+            }
+
             await UniTask.WhenAll(
-                glitchController.TriggerGlitchEffect(), // 글리치 효과
-                vignetteController.TriggerColorGlitchEffect(3f, 3) // 3초간 3회 반복 화면 밝기 변화
+                glitchController.TriggerGlitchEffect(glitchTime), // 글리치 효과
+                vignetteController.TriggerColorGlitchEffect(glitchTime, flashCount) // 3초간 3회 반복 화면 밝기 변화
             );
         }
 

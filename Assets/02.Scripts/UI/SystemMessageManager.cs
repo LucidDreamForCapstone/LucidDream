@@ -2,13 +2,14 @@ using Cysharp.Threading.Tasks;
 using DG.Tweening;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using TMPro;
 using UnityEngine;
 
 public class SystemMessageManager : MonoBehaviour {
     private static SystemMessageManager _instance;
     private bool _isPrinting;
-    private Queue<SystemMessageData> _q;
+    private List<SystemMessageData> _messageList;
     [SerializeField] TextMeshProUGUI _systemMessageTM;
     [SerializeField] AudioClip _warningSound;
 
@@ -28,7 +29,7 @@ public class SystemMessageManager : MonoBehaviour {
         _messages.Add("<size=60>어명을 집행하겠다.</size>");
         _instance = this;
         _systemMessageTM.color = new Color(0, 0, 0, 0);
-        _q = new Queue<SystemMessageData>();
+        _messageList = new List<SystemMessageData>();
         _isPrinting = false;
     }
 
@@ -57,13 +58,16 @@ public class SystemMessageManager : MonoBehaviour {
 
 
     public void PushSystemMessage(string message, Color color, bool withSound = true, float lastTime = 1.0f, float fadeTime = 0.6f) {
-        _q.Enqueue(new SystemMessageData(message, color, withSound, lastTime, fadeTime));
+        if (_messageList.Count == 0 || (_messageList.Count > 0 && _messageList.Last()._message != message)) {
+            _messageList.Add(new SystemMessageData(message, color, withSound, lastTime, fadeTime));
+        }
     }
 
     private async UniTaskVoid PrintSystemMessage() {
-        if (_q.Count > 0 && !_isPrinting) {
+        if (_messageList.Count > 0 && !_isPrinting) {
             _isPrinting = true;
-            SystemMessageData messageData = _q.Dequeue();
+            SystemMessageData messageData = _messageList.First();
+            _messageList.RemoveAt(0);
             if (messageData._withSound)
                 SoundManager.Instance.PlaySFX(_warningSound.name, true);
             Color color = messageData._color;

@@ -469,7 +469,7 @@ public class Player : MonoBehaviour {
         }
         else if (_isPhantomLocked && Input.GetKey(KeyCode.Space)) {
             string message = "팬텀 리바운드 상태이므로 팬텀을 사용할 수 없습니다.";
-            PrintMessage(message).Forget();
+            SystemMessageManager.Instance.PushSystemMessage(message, Color.red);
         }
     }
 
@@ -664,14 +664,6 @@ public class Player : MonoBehaviour {
         if (clip != null) {
             await UniTask.Delay(TimeSpan.FromSeconds(delay), ignoreTimeScale: true);
             SoundManager.Instance.PlaySFX(clip.name, true);
-        }
-    }
-    private async UniTaskVoid PrintMessage(string message) {
-        if (!_isMessagePrinting) {
-            _isMessagePrinting = true;
-            SystemMessageManager.Instance.PushSystemMessage(message, Color.red);
-            await UniTask.Delay(TimeSpan.FromSeconds(0.5f));
-            _isMessagePrinting = false;
         }
     }
 

@@ -1,5 +1,3 @@
-using Cysharp.Threading.Tasks;
-using System;
 using UnityEngine;
 
 
@@ -51,7 +49,7 @@ public class Chest_Shop : Chest {
                 }
                 else {
                     // 코인이 부족할 때 알림 메시지 표시
-                    NoCoinMessage().Forget();
+                    SystemMessageManager.Instance.PushSystemMessage(_message, Color.red);
                 }
             }
         }
@@ -59,18 +57,4 @@ public class Chest_Shop : Chest {
 
     #endregion //protected func
 
-
-
-    #region private funcs
-
-    private async UniTaskVoid NoCoinMessage() {
-        if (!_isPrinting) {
-            _isPrinting = true;
-            SystemMessageManager.Instance.PushSystemMessage(_message, Color.red);
-            await UniTask.Delay(TimeSpan.FromSeconds(0.5f));
-            _isPrinting = false;
-        }
-    }
-
-    #endregion
 }

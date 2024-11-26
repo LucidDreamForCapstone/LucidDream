@@ -2041,6 +2041,7 @@ GameObject:
   - component: {fileID: 1394341612225223589}
   - component: {fileID: 1835770044964720918}
   - component: {fileID: 8833578898220950648}
+  - component: {fileID: 5754046057818404957}
   m_Layer: 5
   m_Name: OptionUI
   m_TagString: Untagged
@@ -2124,6 +2125,21 @@ MonoBehaviour:
   _masterVolumeSlider: {fileID: 6557119426728755273}
   _bgmVolumeSlider: {fileID: 684371232161556034}
   _sfxVolumeSlider: {fileID: 7257803496103731602}
+--- !u!114 &5754046057818404957
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5703352504725736093}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e19747de3f5aca642ab2be37e372fb86, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_EffectColor: {r: 0.84194195, g: 0.67105734, b: 0.9811321, a: 1}
+  m_EffectDistance: {x: 8, y: 8}
+  m_UseGraphicAlpha: 1
 --- !u!1 &5878067370346410984
 GameObject:
   m_ObjectHideFlags: 0
