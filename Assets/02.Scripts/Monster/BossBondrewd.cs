@@ -23,7 +23,7 @@ public class BossBondrewd : MonsterBase {
     [SerializeField] GameObject _phantomGhostObj;
     [SerializeField] List<GameObject> _chargerList;
 
-    [SerializeField] AudioClip _dashSound;
+    //[SerializeField] AudioClip _dashSound;
     [SerializeField] SpriteRenderer _legSr;
     [SerializeField] GameObject _bossUI;
     [SerializeField] Slider _hpSlider;
@@ -145,12 +145,6 @@ public class BossBondrewd : MonsterBase {
     new private void Update() {
         base.Update();
         PhantomManage();
-        if (Input.GetKeyDown(KeyCode.F1))
-            GameObject.Find("Charger1").GetComponent<Charger>().CallBackRemoveShield();
-        if (Input.GetKeyDown(KeyCode.F2))
-            GameObject.Find("Charger2").GetComponent<Charger>().CallBackRemoveShield();
-        if (Input.GetKeyDown(KeyCode.F3))
-            GameObject.Find("Charger3").GetComponent<Charger>().CallBackRemoveShield();
     }
     #endregion
 
@@ -237,7 +231,7 @@ public class BossBondrewd : MonsterBase {
         _backStepEffect.GetComponent<Animator>().SetFloat("Phantom", _phantomMultiplier);
         _animator.SetBool("Run", true);
         try {
-            SoundManager.Instance.PlaySFX(_dashSound.name);
+            //SoundManager.Instance.PlaySFX(_dashSound.name);
             await DOTween.To(() => _rigid.position, x => _rigid.MovePosition(x), endValue, duration).WithCancellation(_cts.Token);
         }
         catch (OperationCanceledException) {
@@ -272,7 +266,7 @@ public class BossBondrewd : MonsterBase {
         _dashEffect.GetComponent<Animator>().SetFloat("Phantom", _phantomMultiplier);
         _animator.SetBool("Run", true);
         try {
-            SoundManager.Instance.PlaySFX(_dashSound.name);
+            //SoundManager.Instance.PlaySFX(_dashSound.name);
             await DOTween.To(() => _rigid.position, x => _rigid.MovePosition(x), endValue, duration).WithCancellation(_cts.Token);
         }
         catch (OperationCanceledException) {

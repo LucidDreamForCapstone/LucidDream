@@ -103,6 +103,10 @@ public enum RoomLinkDir {
     Vertical
 }
 
+public enum PressKey {
+    Q, W, E, R, Space
+}
+
 #endregion Definations
 
 

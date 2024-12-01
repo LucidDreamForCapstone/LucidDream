@@ -1,21 +1,16 @@
 using Cysharp.Threading.Tasks;
 using System;
 using System.Collections.Generic;
-using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 using Random = UnityEngine.Random;
 
 public class ButtonPressQTE : MonoBehaviour {
-    enum PressKey {
-        Q, W, E, R, Space
-    }
-
 
     [SerializeField] BossBondrewd _boss;
     [SerializeField] List<Charger> _chargers;
     [SerializeField] Slider _progressSlider;
-    [SerializeField] TextMeshProUGUI _keyStringTM;
+    [SerializeField] List<KeyBoard> _keyBoards;
     [SerializeField] float _minusAmount;
     [SerializeField] float _plusAmount;
     [SerializeField] float _eventDelay;
@@ -30,8 +25,10 @@ public class ButtonPressQTE : MonoBehaviour {
     private List<bool> _shieldStateList = new List<bool>();
     private Image _sliderFill;
 
-    private void Start() {
+    private void Awake() {
         _currentGauge = 0;
+        UpdateSlider();
+        _keyBoards.ForEach(key => key.gameObject.SetActive(false));
         _isShieldDestroyReady = true;
         _isPlayerConnected = false;
         _isEventOnProcess = false;
@@ -69,41 +66,37 @@ public class ButtonPressQTE : MonoBehaviour {
         }
     }
 
-    public async UniTaskVoid ButtonQTE() {
+    private async UniTaskVoid ButtonQTE() {
         if (!_isEventOnProcess && _isShieldDestroyReady && _isPlayerConnected && CheckTargetExist()) {
+            _keyBoards.ForEach(key => key.gameObject.SetActive(false));
             _isEventOnProcess = true;
             _sliderFill.color = Color.red;
             _progressSlider.gameObject.SetActive(true);
             PressKey randomKey = (PressKey)Random.Range(0, (int)PressKey.Space + 1);
             KeyCode selectedKey = KeyCode.None;
-            string keyString = "";
             switch (randomKey) {
                 case PressKey.Q:
                     selectedKey = KeyCode.Q;
-                    keyString = "Q";
                     break;
                 case PressKey.W:
                     selectedKey = KeyCode.W;
-                    keyString = "W";
                     break;
                 case PressKey.E:
                     selectedKey = KeyCode.E;
-                    keyString = "E";
                     break;
                 case PressKey.R:
                     selectedKey = KeyCode.R;
-                    keyString = "R";
                     break;
                 case PressKey.Space:
                     selectedKey = KeyCode.Space;
-                    keyString = "SPACE";
                     break;
             }
-            _keyStringTM.text = keyString;
+            _keyBoards[(int)randomKey].gameObject.SetActive(true);
 
             while (_currentGauge < 100 && _isPlayerConnected) {
                 if (Input.GetKeyDown(selectedKey)) {
                     _currentGauge += _plusAmount;
+                    _keyBoards[(int)randomKey].Pressed();
                 }
                 await UniTask.NextFrame();
             }

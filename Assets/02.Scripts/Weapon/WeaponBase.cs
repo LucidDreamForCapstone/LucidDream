@@ -109,7 +109,7 @@ public abstract class WeaponBase : ItemBase {
         if (_isBasicReady) {
             BasicAttackAnimation();
             _isBasicReady = false;
-            await UniTask.Delay(TimeSpan.FromSeconds(_basicCoolTime));
+            await UniTask.Delay(TimeSpan.FromSeconds(_basicCoolTime), ignoreTimeScale: true);
             _isBasicReady = true;
         }
     }
