@@ -3,6 +3,7 @@ using DG.Tweening;
 using System;
 using System.Collections.Generic;
 using System.Threading;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 using Random = UnityEngine.Random;
@@ -20,6 +21,7 @@ public class BossBondrewd : MonsterBase {
     [SerializeField] GameObject _armTargetObj;
     [SerializeField] GameObject _missileTargetObj;
     [SerializeField] GameObject _explosionObj;
+    [SerializeField] GameObject _explosionCenterFlag;
     [SerializeField] GameObject _phantomGhostObj;
     [SerializeField] List<GameObject> _chargerList;
 
@@ -29,6 +31,7 @@ public class BossBondrewd : MonsterBase {
     [SerializeField] Slider _hpSlider;
     [SerializeField] Slider _phantomGaugeSlider;
     [SerializeField] Slider _groggySlider;
+    [SerializeField] TextMeshProUGUI _timerTM;
     [SerializeField] List<Image> _chargerUIList;
     [SerializeField] Color _phase2HpColor;
     [SerializeField] Color _phase3HpColor;
@@ -83,6 +86,7 @@ public class BossBondrewd : MonsterBase {
     [SerializeField] int _phantomGaugeDecreaseAmount;
     [SerializeField] float _phantomGaugeUpdateInterval;
     [Header("\nGroggy State")]
+    [SerializeField] int _normalGroggyDecreaseAmount;
     [SerializeField] float _groggyLastTime;
     #endregion
 
@@ -95,6 +99,8 @@ public class BossBondrewd : MonsterBase {
     bool _isShootReady;
     bool _isMissileReady;
     bool _isChainExplosionReady;
+    bool _isChainExplosionActivated; //for prevent stun when chain explosion pattern
+    bool _isChainExplosionWarning;
     bool _isPhase2Reached;
     bool _isPhase3Reached;
     bool _isGroggy;
@@ -105,7 +111,6 @@ public class BossBondrewd : MonsterBase {
     BoxCollider2D _bondrewdCollider;
     Vector2[] _shootPos = { new Vector2(3.25f, -0.97f), new Vector2(-3.25f, -0.97f) };
     Vector2[] _missilePos = { new Vector2(-0.76f, 1.04f), new Vector2(0.76f, 1.04f) };
-    Vector2 _chainExplosionCenterPos;
     List<Explosion> _explosionCache = new List<Explosion>();
 
     int _phantomMultiplier;
@@ -132,6 +137,7 @@ public class BossBondrewd : MonsterBase {
         _attackFuncList.Add(ChainExplosionTask);
         _isPhase2Reached = false;
         _isPhase3Reached = false;
+        _isChainExplosionActivated = false;
         _currentPhaseNum = 1;
         _phantomMultiplier = 1;
         _animator.SetFloat("Phantom", _phantomMultiplier);
@@ -140,6 +146,7 @@ public class BossBondrewd : MonsterBase {
         _phantomTimer = 0;
         _currentActivatedChargerCount = 0;
         _groggyGauge = 100;
+        _timerTM.gameObject.SetActive(false);
         UpdateGroggySlider();
     }
     new private void Update() {
@@ -166,6 +173,7 @@ public class BossBondrewd : MonsterBase {
     public override void Damaged(int dmg, bool isCrit)//플레이어 공격에 데미지를 입음
     {
         base.Damaged(dmg, isCrit);
+        DecreaseGroggyGauge(_normalGroggyDecreaseAmount);
         if (!_isPhase2Reached && CheckHpRatio(2.0f / 3.0f)) {
             _hpSlider.fillRect.GetComponent<Image>().color = _phase2HpColor;
             _hpSlider.transform.GetChild(0).GetComponent<Image>().color = _phase3HpColor;
@@ -182,12 +190,17 @@ public class BossBondrewd : MonsterBase {
     }
 
     public async override UniTaskVoid Stun(float lastTime, float offsetY = 2) {
-        _cts.Cancel();
-        base.Stun(lastTime, 2).Forget();
-        await UniTask.Delay(TimeSpan.FromSeconds(lastTime));
-        _cts.Dispose();
-        _cts = null;
-        _cts = new CancellationTokenSource();
+        if (!_isChainExplosionActivated) {
+            _cts.Cancel();
+            base.Stun(lastTime, 2).Forget();
+            await UniTask.Delay(TimeSpan.FromSeconds(lastTime));
+            _cts.Dispose();
+            _cts = null;
+            _cts = new CancellationTokenSource();
+        }
+        else {
+            SystemMessageManager.Instance.PushSystemMessage("보스가 일시적으로 스턴에 걸리지 않습니다.", Color.yellow);
+        }
     }
 
     protected override async UniTaskVoid Die() {
@@ -459,6 +472,7 @@ public class BossBondrewd : MonsterBase {
         projectileScript.SetLastTime(_missileLastTime);
         projectileScript.SetHomingStartTime(_homingStartTime);
         projectileScript.SetHomingLastTime(_homingLastTime);
+        projectileScript.SetGroggyDecreaseAmount(_groggyDecreaseAmount);
         projectile.SetActive(true);
     }
     #endregion
@@ -472,13 +486,15 @@ public class BossBondrewd : MonsterBase {
         _attackStateList[5] = AttackState.Ready;
     }
 
-    private async UniTaskVoid ChainExplosion() {
+    private async UniTaskVoid ChainExplosion() { //얘도 타이머 필요하겠다
         _attackStateList[5] = AttackState.Attacking;
-        float duration = CalculateManhattanDist(transform.position, _chainExplosionCenterPos) / _moveSpeed;
-        SetFlipX(_chainExplosionCenterPos - (Vector2)transform.position);
+        _isChainExplosionActivated = true;
+        Vector2 chainExplosionCenterPos = _explosionCenterFlag.transform.position;
+        float duration = CalculateManhattanDist(transform.position, chainExplosionCenterPos) / _moveSpeed;
+        SetFlipX(chainExplosionCenterPos - (Vector2)transform.position);
         _animator.SetBool("Run", true);
         try {
-            await DOTween.To(() => _rigid.position, x => _rigid.MovePosition(x), _chainExplosionCenterPos, duration).WithCancellation(_cts.Token);
+            await DOTween.To(() => _rigid.position, x => _rigid.MovePosition(x), chainExplosionCenterPos, duration).WithCancellation(_cts.Token);
             _animator.SetBool("Run", false);
             SetFlipX(Vector2.left);
             _chargingEffect.GetComponent<SpriteRenderer>().color = Color.white;
@@ -508,7 +524,20 @@ public class BossBondrewd : MonsterBase {
                     }
                 }
             }
-            await UniTask.Delay(TimeSpan.FromSeconds(_explosionWarningTime), cancellationToken: _cts.Token);
+
+            float timer = _explosionWarningTime;
+            _isChainExplosionWarning = true;
+            _timerTM.gameObject.SetActive(true);
+            while (timer > 0) {
+                timer -= Time.deltaTime;
+                int sec = Mathf.FloorToInt(timer);
+                if (sec < 0)
+                    sec = 0;
+                _timerTM.text = $"00 : {sec:D2}";
+                await UniTask.NextFrame(_cts.Token);
+            }
+            _isChainExplosionWarning = false;
+
             for (int i = 0; i < _explosionCache.Count; i++) {
                 _explosionCache[i].SetPlayer(_playerScript);
                 _explosionCache[i].SetDamage(_explosionDamage);
@@ -526,12 +555,25 @@ public class BossBondrewd : MonsterBase {
             for (int i = 0; i < _explosionCache.Count; i++) {
                 ObjectPool.Instance.ReturnObject(_explosionCache[i].gameObject);
             }
-            _chargingEffect.GetComponent<SpriteRenderer>().DOFade(0, 1).ToUniTask().Forget();
-
+            await _chargingEffect.GetComponent<SpriteRenderer>().DOFade(0, 1);
+            _chargingEffect.SetActive(false);
+            _isChainExplosionWarning = false;
+            _isChainExplosionActivated = false;
+            _timerTM.gameObject.SetActive(false);
             _attackStateList[5] = AttackState.Finished;
             await UniTask.Delay(TimeSpan.FromSeconds(0.01f));
             _attackStateList[5] = AttackState.CoolTime;
         }
+    }
+
+    public void ShowExplosionWarning() {
+        for (int i = 0; i < _explosionCache.Count; i++) {
+            _explosionCache[i].WarningTrigger();
+        }
+    }
+
+    public bool CheckExplosionWarning() {
+        return _isChainExplosionWarning;
     }
 
     #endregion
@@ -610,9 +652,9 @@ public class BossBondrewd : MonsterBase {
 
     #region Groggy State
 
-    public void DecreaseGroggyGauge() {
+    public void DecreaseGroggyGauge(int decreaseAmount) {
         if (!_isGroggy) {
-            _groggyGauge -= _groggyDecreaseAmount;
+            _groggyGauge -= decreaseAmount;
             UpdateGroggySlider();
             if (_groggyGauge <= 0) {
                 _groggyGauge = 0;

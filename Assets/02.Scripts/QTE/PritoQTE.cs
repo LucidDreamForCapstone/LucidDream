@@ -7,19 +7,20 @@ using UnityEngine.UI;
 using Random = UnityEngine.Random;
 
 public class PritoQTE : MonoBehaviour { //Maplestory Prito Mini Game
+    [SerializeField] BossBondrewd _boss;
     [SerializeField] Canvas _keyboardCanvas;
     [SerializeField] Slider _progressSlider;
     [SerializeField] List<GameObject> _keyBoardObjList;
     [SerializeField] List<int> _buttonCountList;
     [SerializeField] float _plusAmount;
     [SerializeField] float _minusAmount;
+    [SerializeField] float _eventDelay;
     [SerializeField] AudioClip _successSound;
     [SerializeField] AudioClip _failSound;
 
     //BoxCollider2D _triggerCollider;
     private bool _isPlayerConnected; //check if player2 collider is on the event trigger collider
     private bool _isEventOnProcess;
-    private bool _isExplosionPatternActivated;
     private bool _isReady;
     private float _currentGauge;
     private Image _sliderFill;
@@ -30,8 +31,8 @@ public class PritoQTE : MonoBehaviour { //Maplestory Prito Mini Game
         _isPlayerConnected = false;
         _isEventOnProcess = false;
         _isReady = true;
-        _isExplosionPatternActivated = true; //temp : must be changed to false
         _sliderFill = _progressSlider.fillRect.GetComponent<Image>();
+        _progressSlider.gameObject.SetActive(false);
     }
 
     private void Update() {
@@ -54,9 +55,10 @@ public class PritoQTE : MonoBehaviour { //Maplestory Prito Mini Game
 
 
     private async UniTaskVoid ButtonQTE() {
-        if (!_isEventOnProcess && _isPlayerConnected && _isReady && _isExplosionPatternActivated) {
+        if (!_isEventOnProcess && _isPlayerConnected && _isReady && _boss.CheckExplosionWarning()) {
             _isEventOnProcess = true;
             _isReady = false;
+            _progressSlider.gameObject.SetActive(true);
             _sliderFill.color = Color.red;
             _currentGauge = 0;
             UpdateSlider();
@@ -74,13 +76,14 @@ public class PritoQTE : MonoBehaviour { //Maplestory Prito Mini Game
             if (i == patternCount) { //Mission Complete
                 SoundManager.Instance.PlaySFX(_successSound.name, true);
                 _sliderFill.color = Color.green;
-                //패턴 눈에 보이게 조치
-                await UniTask.Delay(TimeSpan.FromSeconds(2));
+                _boss.ShowExplosionWarning(); //make warning effect visible
+                await UniTask.Delay(TimeSpan.FromSeconds(_eventDelay));
+                _progressSlider.gameObject.SetActive(false);
                 DecreaseGauge(false).Forget();
-                MakeReadyWithDelay().Forget();
+                _isReady = true;
             }
             else {
-                DecreaseGauge(true).Forget();
+                DecreaseGauge().Forget();
                 _isReady = true;
             }
 
@@ -89,7 +92,7 @@ public class PritoQTE : MonoBehaviour { //Maplestory Prito Mini Game
         }
     }
 
-    private async UniTask<bool> ButtonSequence(int count) {
+    private async UniTask<bool> ButtonSequence(int count) { //문제 맞추자마자 나가면 상승하는 유니테스크에 감소 유니테스크가 중첩되서 오류 발생
         List<PressKey> keys = GetRandomButtonList(count);
         List<KeyBoard> keyBoards = new List<KeyBoard>();
         List<Image> keyBoardImages = new List<Image>();
@@ -100,7 +103,7 @@ public class PritoQTE : MonoBehaviour { //Maplestory Prito Mini Game
             keyBoardImages.Add(keyBoards[j].GetComponent<Image>());
         }
 
-        while (_isPlayerConnected && _isEventOnProcess && _isExplosionPatternActivated && progressPointer < count) {
+        while (_isPlayerConnected && _isEventOnProcess && _boss.CheckExplosionWarning() && progressPointer < count) {
             KeyCode targetKeycode = ParseKeyCode((int)keys[progressPointer]);
             if (Input.anyKeyDown) {
                 if (canInteract && Input.GetKeyDown(targetKeycode)) { //Pressed Right Button
@@ -123,7 +126,7 @@ public class PritoQTE : MonoBehaviour { //Maplestory Prito Mini Game
             await UniTask.NextFrame();
         }
 
-        if (_isPlayerConnected && _isExplosionPatternActivated) {
+        if (_isPlayerConnected && _boss.CheckExplosionWarning()) {
             for (int j = 0; j < keyBoards.Count; j++) {
                 keyBoards[j].gameObject.SetActive(false);
             }
@@ -185,12 +188,6 @@ public class PritoQTE : MonoBehaviour { //Maplestory Prito Mini Game
         _currentGauge = 0;
     }
 
-    private async UniTaskVoid MakeReadyWithDelay(float delay = 10) {
-        await UniTask.Delay(TimeSpan.FromSeconds(delay));
-        _isReady = true;
-        UpdateSlider();
-    }
-
     private void DestroyAllKeyObjects() {
         foreach (Transform child in _keyboardCanvas.transform) {
             Destroy(child.gameObject);
@@ -199,9 +196,5 @@ public class PritoQTE : MonoBehaviour { //Maplestory Prito Mini Game
 
     private void UpdateSlider() {
         _progressSlider.value = _currentGauge / 100;
-    }
-
-    public void SetExplosionState(bool state) {
-        _isExplosionPatternActivated = state;
     }
 }

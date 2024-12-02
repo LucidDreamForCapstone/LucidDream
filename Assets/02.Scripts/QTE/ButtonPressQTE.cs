@@ -33,6 +33,7 @@ public class ButtonPressQTE : MonoBehaviour {
         _isPlayerConnected = false;
         _isEventOnProcess = false;
         _sliderFill = _progressSlider.fillRect.GetComponent<Image>();
+        _progressSlider.gameObject.SetActive(false);
         for (int i = 0; i < 3; i++) {
             _chargingStateList.Add(false);
             _shieldStateList.Add(true);
@@ -107,8 +108,10 @@ public class ButtonPressQTE : MonoBehaviour {
                 _isShieldDestroyReady = false;
                 _currentGauge = 0;
                 _sliderFill.color = Color.green;
+                _keyBoards[(int)randomKey].gameObject.SetActive(false);
                 await UniTask.Delay(TimeSpan.FromSeconds(_eventDelay));
                 _isShieldDestroyReady = true;
+                UpdateSlider();
                 _progressSlider.gameObject.SetActive(false);
                 _isEventOnProcess = false;
             }
