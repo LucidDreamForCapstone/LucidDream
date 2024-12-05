@@ -25,7 +25,9 @@ public class GlitchController : MonoBehaviour {
         glitchEffect.intensity.value = endIntensity; // 최종 강도 설정
         isActive = false;
     }
-
+    public void Glitch() {
+        TriggerGlitchEffect(3f).Forget();
+    }
     public bool IsActive() {
         return isActive; // 글리치 효과가 활성화되었는지 여부 반환
     }

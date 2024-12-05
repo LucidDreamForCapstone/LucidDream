@@ -6,7 +6,7 @@ public class TimeLineTrigger : TutorialStart
 {
     [SerializeField] private CinemachineVirtualCamera targetCamera; // Target Cinemachine Virtual Camera
     [SerializeField] private CinemachineVirtualCamera defaultCamera; // Default Virtual Camera
-    [SerializeField] private TimelineManager timelineManager; // Timeline Manager
+    [SerializeField] private TimeLineManager timelineManager; // Timeline Manager
     private bool hasTriggered = false; // Check if the player has already triggered the event
     private CinemachineBrain cinemachineBrain; // Reference to the Cinemachine Brain
 

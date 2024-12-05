@@ -1,41 +1,42 @@
 using Cysharp.Threading.Tasks;
-using Edgar.Unity; // TextMeshPro °ü·Ã ³×ÀÓ½ºÆäÀÌ½º Ãß°¡
+using Edgar.Unity; // TextMeshPro ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ó½ï¿½ï¿½ï¿½ï¿½Ì½ï¿½ ï¿½ß°ï¿½
 using System;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
 
 public class PlayerSwapManager : MonoBehaviour {
-    [SerializeField] private Player player1; // Ã¹ ¹øÂ° Ä³¸¯ÅÍ
-    [SerializeField] private Player_2 player2; // µÎ ¹øÂ° Ä³¸¯ÅÍ
+    [SerializeField] private Player player1; // Ã¹ ï¿½ï¿½Â° Ä³ï¿½ï¿½ï¿½ï¿½
+    [SerializeField] private Player_2 player2; // ï¿½ï¿½ ï¿½ï¿½Â° Ä³ï¿½ï¿½ï¿½ï¿½
     [SerializeField] GameObject _miniMapObj;
-    private MonoBehaviour currentPlayer; // ÇöÀç Á¶ÀÛ ÁßÀÎ Ä³¸¯ÅÍ
+    private MonoBehaviour currentPlayer; // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ Ä³ï¿½ï¿½ï¿½ï¿½
     private int currentPlayerNum;
-    private GlitchController glitchController; // GlitchController ÀÎ½ºÅÏ½º
-    private VignetteController vignetteController; //±Û¸®Ä¡¿¡ È­¸é È¿°ú ºÎ¿©
-    private bool isGlitching = false; // ±Û¸®Ä¡ È¿°ú ÁøÇà Áß ¿©ºÎ
+    private GlitchController glitchController; // GlitchController ï¿½Î½ï¿½ï¿½Ï½ï¿½
+    private VignetteController vignetteController; //ï¿½Û¸ï¿½Ä¡ï¿½ï¿½ È­ï¿½ï¿½ È¿ï¿½ï¿½ ï¿½Î¿ï¿½
+    private bool isGlitching = false; // ï¿½Û¸ï¿½Ä¡ È¿ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
     private bool fogTag = true;
     [SerializeField] private GameObject _cameraObj;
     [SerializeField] private Canvas player1UICanvas; // Player1 UI Canvas
     [SerializeField] private Canvas player2UICanvas; // Player2 UI Canvas
 
-    // UI ÅØ½ºÆ®
+    // UI ï¿½Ø½ï¿½Æ®
     [SerializeField] string _message;
     [SerializeField] Color _messageColor;
+    private bool canSwap = true; // ï¿½Ã·ï¿½ï¿½Ì¾ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 
     private void Start() {
-        if (Display.displays.Length > 1) Display.displays[1].Activate(); // Display 2 È°¼ºÈ­
-        if (Display.displays.Length > 2) Display.displays[2].Activate(); // Display 3 È°¼ºÈ­
+        if (Display.displays.Length > 1) Display.displays[1].Activate(); // Display 2 È°ï¿½ï¿½È­
+        if (Display.displays.Length > 2) Display.displays[2].Activate(); // Display 3 È°ï¿½ï¿½È­
         currentPlayerNum = 1;
         _miniMapObj.SetActive(true);
         Player2ActiveDelay(2).Forget();
-        glitchController = FindObjectOfType<GlitchController>(); // GlitchController Ã£±â
+        glitchController = FindObjectOfType<GlitchController>(); // GlitchController Ã£ï¿½ï¿½
         vignetteController = FindObjectOfType<VignetteController>();
-        if (Display.displays.Length > 1) Display.displays[1].Activate(); // Display 2 È°¼ºÈ­
+        if (Display.displays.Length > 1) Display.displays[1].Activate(); // Display 2 È°ï¿½ï¿½È­
     }
 
     private void Update() {
-        if (Input.GetKeyDown(KeyCode.F) && !isGlitching) { // ±Û¸®Ä¡ ÁßÀÌ ¾Æ´Ò ¶§¸¸ Ä³¸¯ÅÍ ½º¿Ò
+        if (Input.GetKeyDown(KeyCode.F) && !isGlitching && canSwap) { // ï¿½Û¸ï¿½Ä¡ ï¿½ï¿½ï¿½ï¿½ ï¿½Æ´Ï¸ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
             if (CanSwapCharacter()) {
                 SwapCharacter().Forget();
             }
@@ -43,27 +44,26 @@ public class PlayerSwapManager : MonoBehaviour {
                 SystemMessageManager.Instance.PushSystemMessage(_message, _messageColor);
             }
         }
+        else if (Input.GetKeyDown(KeyCode.F) && !canSwap) {
+            ShowMessage("ï¿½ï¿½ï¿½ï¿½ ï¿½Ã·ï¿½ï¿½Ì¾î¸¦ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï´ï¿½."); // ï¿½ï¿½ï¿½ï¿½ ï¿½Ò°ï¿½ï¿½ï¿½ ï¿½Þ½ï¿½ï¿½ï¿½ Ç¥ï¿½ï¿½
+        }
     }
 
     private bool CanSwapCharacter() {
         if (player1 == null) {
             Debug.LogError("Player reference is not assigned.");
-            return false; // ÇÃ·¹ÀÌ¾î°¡ ÇÒ´çµÇÁö ¾ÊÀº °æ¿ì
+            return false; // ï¿½Ã·ï¿½ï¿½Ì¾î°¡ ï¿½Ò´ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½
         }
-        // ÇÃ·¹ÀÌ¾î ÁÖº¯ÀÇ Enemy¸¦ Ã¼Å©ÇÕ´Ï´Ù.
         if (!IsFinalBossScene()) {
-            LayerMask enemyLayer = LayerMask.GetMask("Enemy"); // Enemy ·¹ÀÌ¾î ¸¶½ºÅ© °¡Á®¿À±â
-            Collider2D[] colliders = Physics2D.OverlapCircleAll(player1.transform.position, 20f, enemyLayer); // ¹ÝÁö¸§ 20, enemyLayer¸¸ °¨Áö
+            LayerMask enemyLayer = LayerMask.GetMask("Enemy"); // Enemy ï¿½ï¿½ï¿½Ì¾ï¿½ ï¿½ï¿½ï¿½ï¿½Å© ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+            Collider2D[] colliders = Physics2D.OverlapCircleAll(player1.transform.position, 20f, enemyLayer); // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ 20, enemyLayerï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
             foreach (var collider in colliders) {
-                Debug.Log($"Detected collider: {collider.gameObject.name} with tag: {collider.tag}"); // °¨ÁöµÈ ÄÝ¶óÀÌ´õ Ãâ·Â
                 if (collider.CompareTag("Enemy")) {
-                    Debug.Log("Enemy found! Cannot swap character.");
-                    return false; // Enemy°¡ ÀÖÀ» °æ¿ì ½º¿Ò ºÒ°¡´É
+                    return false; // Enemyï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ò°ï¿½ï¿½ï¿½
                 }
             }
         }
-        Debug.Log("No enemies nearby. Can swap character.");
-        return true; // ½º¿Ò °¡´É
+        return true; // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
     }
 
     private bool IsFinalBossScene() {
@@ -73,13 +73,12 @@ public class PlayerSwapManager : MonoBehaviour {
 
 
     private async UniTaskVoid SwapCharacter() {
-        isGlitching = true; // ±Û¸®Ä¡ ½ÃÀÛ Áß
+        isGlitching = true;
 
         if (fogTag) {
             _cameraObj.GetComponent<FogOfWarGrid2D>().enabled = false;
         }
 
-        // ±Û¸®Ä¡ È¿°ú¸¦ ½ÃÀÛÇÕ´Ï´Ù.
         if (glitchController != null) {
             float glitchTime = 3;
             int flashCount = 3;
@@ -89,18 +88,17 @@ public class PlayerSwapManager : MonoBehaviour {
             }
 
             await UniTask.WhenAll(
-                glitchController.TriggerGlitchEffect(glitchTime), // ±Û¸®Ä¡ È¿°ú
-                vignetteController.TriggerColorGlitchEffect(glitchTime, flashCount) // 3ÃÊ°£ 3È¸ ¹Ýº¹ È­¸é ¹à±â º¯È­
+                glitchController.TriggerGlitchEffect(glitchTime), // ï¿½Û¸ï¿½Ä¡ È¿ï¿½ï¿½
+                vignetteController.TriggerColorGlitchEffect(glitchTime, flashCount) // 3ï¿½Ê°ï¿½ 3È¸ ï¿½Ýºï¿½ È­ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½È­
             );
         }
 
-        // ±âÁ¸ Ä³¸¯ÅÍ ºñÈ°¼ºÈ­ ¹× »õ·Î¿î Ä³¸¯ÅÍ È°¼ºÈ­
         if (currentPlayerNum == 1) {
             player1.SetEnable(false);
             player2.SetEnable(true);
             currentPlayer = player2;
-            player1UICanvas.targetDisplay = 1; // Player1 UI¸¦ Display 2·Î ÀüÈ¯
-            player2UICanvas.targetDisplay = 0; // Player2 UI¸¦ Display 1·Î ÀüÈ¯
+            player1UICanvas.targetDisplay = 1;
+            player2UICanvas.targetDisplay = 0;
             currentPlayerNum = 2;
             _miniMapObj.SetActive(false);
         }
@@ -109,44 +107,39 @@ public class PlayerSwapManager : MonoBehaviour {
             player1.SetEnable(true);
             currentPlayer = player1;
             currentPlayerNum = 1;
-            player1UICanvas.targetDisplay = 0; // Player1 UI¸¦ Display 1·Î ÀüÈ¯
-            player2UICanvas.targetDisplay = 1; // Player2 UI¸¦ Display 2·Î ÀüÈ¯
+            player1UICanvas.targetDisplay = 0;
+            player2UICanvas.targetDisplay = 1;
             _miniMapObj.SetActive(true);
         }
-        // µð½ºÇÃ·¹ÀÌ ¾÷µ¥ÀÌÆ®
+
         Canvas.ForceUpdateCanvases();
 
-        // Ä«¸Þ¶ó ÀüÈ¯
         Cinemachine.CinemachineVirtualCamera virtualCamera = FindObjectOfType<Cinemachine.CinemachineVirtualCamera>();
         if (virtualCamera != null) {
-            // Transposer °¡Á®¿À±â
             var transposer = virtualCamera.GetCinemachineComponent<Cinemachine.CinemachineTransposer>();
             if (transposer != null) {
-                // Damping °ªÀ» 0À¸·Î ¼³Á¤
                 transposer.m_XDamping = 0;
                 transposer.m_YDamping = 0;
             }
 
-            virtualCamera.Follow = currentPlayer.transform; // »õ·Î¿î Ä³¸¯ÅÍ·Î Ä«¸Þ¶ó ¸ñÇ¥ º¯°æ
+            virtualCamera.Follow = currentPlayer.transform;
         }
 
-
-        // Fog Of War ´Ù½Ã È°¼ºÈ­
         if (!fogTag) {
-            _cameraObj.GetComponent<FogOfWarGrid2D>().enabled = true; // ºñÈ°¼ºÈ­µÈ °æ¿ì È°¼ºÈ­
+            _cameraObj.GetComponent<FogOfWarGrid2D>().enabled = true;
         }
 
-        fogTag = !fogTag; // true -> false ¶Ç´Â false -> true·Î ÀüÈ¯
+        fogTag = !fogTag;
         await UniTask.Delay(TimeSpan.FromSeconds(0.2f));
-        // ±Û¸®Ä¡ È¿°ú°¡ ³¡³­ ÈÄ DampingÀ» ´Ù½Ã 1·Î ¼³Á¤
+
         if (virtualCamera != null) {
             var transposer = virtualCamera.GetCinemachineComponent<Cinemachine.CinemachineTransposer>();
             if (transposer != null) {
-                transposer.m_XDamping = 1; // Damping °ª º¹¿ø
-                transposer.m_YDamping = 1; // Damping °ª º¹¿ø
+                transposer.m_XDamping = 1;
+                transposer.m_YDamping = 1;
             }
         }
-        isGlitching = false; // ±Û¸®Ä¡ È¿°ú Á¾·á
+        isGlitching = false;
     }
 
     //To prevent Edgar targeting the player2 as the main player while doing map creating
@@ -156,4 +149,11 @@ public class PlayerSwapManager : MonoBehaviour {
         player2.gameObject.SetActive(true);
     }
 
+    public void SetCanSwap(bool value) {
+        canSwap = value; // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Î¸ï¿½ ï¿½ï¿½ï¿½ï¿½
+    }
+
+    public bool GetCanSwap() {
+        return canSwap; // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½È¯
+    }
 }

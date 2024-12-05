@@ -283,8 +283,8 @@ MonoBehaviour:
   - {fileID: 484672132381032437}
   - {fileID: 8984227434636613095}
   EditorData:
-    PanOffset: {x: -12.4786415, y: -5.7879305}
-    Zoom: 0.7346339
+    PanOffset: {x: -221.56035, y: -2.0104585}
+    Zoom: 0.80001634
   RoomType: Edgar.Unity.Examples.Gungeon.GungeonRoom
   ConnectionType: Edgar.Unity.Examples.Gungeon.GungeonConnection
   IsDirected: 0

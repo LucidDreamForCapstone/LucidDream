@@ -79,7 +79,7 @@ using UnityEngine.Playables;
 using Cysharp.Threading.Tasks;
 using System.Collections.Generic;
 
-public class TimelineManager : MonoBehaviour
+public class TimeLineManager : MonoBehaviour
 {
     [Header("Timeline Settings")]
     [SerializeField] private PlayableDirector timeline; // 타임라인 관리
