@@ -28,6 +28,8 @@ namespace Edgar.Unity.Examples.Gungeon
 
         public GameObject[] PuzzleRoomTemplates;
 
+        public GameObject[] BondrewdRoomTemplates;
+
         /// <summary>
         /// Get room templates for a given room.
         /// </summary>
@@ -66,6 +68,10 @@ namespace Edgar.Unity.Examples.Gungeon
 
                 case GungeonRoomType.Puzzle:
                     return PuzzleRoomTemplates;
+
+
+                case GungeonRoomType.Bondrewd:
+                    return BondrewdRoomTemplates;
 
                 default:
                     return BasicRoomTemplates;

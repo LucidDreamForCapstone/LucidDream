@@ -136,7 +136,7 @@ MonoBehaviour:
   _state: 0
   _started: 0
   _guid: ee39b96046f85544096d8f42f3181933
-  _position: {x: 103.84999, y: 468.40002}
+  _position: {x: 103.99998, y: 467.24432}
   _monster: {fileID: 0}
   description: "\uACF5\uACA9"
   attackIndex: 0

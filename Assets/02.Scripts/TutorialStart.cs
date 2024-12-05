@@ -1,3 +1,4 @@
+using Cysharp.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.Rendering;
 
@@ -23,8 +24,9 @@ public class TutorialStart : MonoBehaviour {
         }
         */
     }
-    /*
+
     protected async UniTask FadeInColor() {
+        /*
         if (colorAdjustments == null) return;
 
         float elapsedTime = 0f;
@@ -38,9 +40,11 @@ public class TutorialStart : MonoBehaviour {
 
         // Ensure the final color is precisely set
         colorAdjustments.colorFilter.value = targetColor;
+        */
     }
 
     protected async UniTask FadeInColor_unscaled() {
+        /*
         if (colorAdjustments == null) return;
 
         float elapsedTime = 0f;
@@ -54,6 +58,6 @@ public class TutorialStart : MonoBehaviour {
 
         // Ensure the final color is precisely set
         colorAdjustments.colorFilter.value = targetColor;
+        */
     }
-    */
 }

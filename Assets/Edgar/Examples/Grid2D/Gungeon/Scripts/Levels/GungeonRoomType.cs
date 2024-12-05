@@ -13,6 +13,7 @@
         Connector,
         Secret,
         Puzzle,
-        Tutorial
+        Tutorial,
+        Bondrewd
     }
 }

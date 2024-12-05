@@ -25,7 +25,7 @@ namespace Edgar.Unity.Examples.Gungeon
         // Shared instance of the random numbers generator
         public Random Random;
 
-        [Range(1, 4)]
+        [Range(1, 5)]
         public int Stage = 1;
 
         public LevelGraph CurrentLevelGraph;

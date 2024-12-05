@@ -7854,7 +7854,7 @@ MonoBehaviour:
   - _item: {fileID: 3579808356831541882, guid: 05b74ee39875fc14aae218c401ebe8f6, type: 3}
     _dropChance: 100
   _tree: {fileID: 11400000, guid: 20a7d107a7e404f489853be1ea86f655, type: 2}
-  _isRightDefault: 1
+  _isRightDefault: 0
   _patternNum: 6
   _attackStateList: 
   _isDead: 0
@@ -11119,6 +11119,7 @@ MonoBehaviour:
   player2UICanvas: {fileID: 67154485}
   _message: "\uC8FC\uC704\uC5D0 \uBAAC\uC2A4\uD130\uAC00 \uC874\uC7AC\uD558\uC5EC
     \uCE90\uB9AD\uD130 \uC2A4\uC651\uC774 \uBD88\uAC00\uB2A5\uD569\uB2C8\uB2E4."
+  _message2: 
   _messageColor: {r: 1, g: 0.3764706, b: 0.37254903, a: 1}
 --- !u!114 &1854174334
 MonoBehaviour:
