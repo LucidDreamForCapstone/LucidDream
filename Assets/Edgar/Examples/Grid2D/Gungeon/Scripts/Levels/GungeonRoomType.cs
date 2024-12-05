@@ -12,6 +12,7 @@
         Corridor,
         Connector,
         Secret,
+        Puzzle,
         Tutorial
     }
 }

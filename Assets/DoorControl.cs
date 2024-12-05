@@ -27,10 +27,7 @@ public class DoorControl : MonoBehaviour
 
     public void DoorOpenOnGameClear(bool cleared)
     {
-        if (cleared)
-        {
-            isdoorOpen = true;
-        }
+        isdoorOpen = cleared;
     }
 }
 

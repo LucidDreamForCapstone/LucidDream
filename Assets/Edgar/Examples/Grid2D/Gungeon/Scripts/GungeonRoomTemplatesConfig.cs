@@ -26,6 +26,8 @@ namespace Edgar.Unity.Examples.Gungeon
 
         public GameObject[] SecretRoomTemplates;
 
+        public GameObject[] PuzzleRoomTemplates;
+
         /// <summary>
         /// Get room templates for a given room.
         /// </summary>
@@ -61,6 +63,9 @@ namespace Edgar.Unity.Examples.Gungeon
 
                 case GungeonRoomType.Normal:
                     return BasicRoomTemplates;
+
+                case GungeonRoomType.Puzzle:
+                    return PuzzleRoomTemplates;
 
                 default:
                     return BasicRoomTemplates;
