@@ -1,18 +1,16 @@
 using UnityEngine;
 using UnityEngine.Rendering;
-using UnityEngine.Rendering.Universal;
-using Cysharp.Threading.Tasks;
 
-public class TutorialStart : MonoBehaviour
-{
+public class TutorialStart : MonoBehaviour {
     [SerializeField] private Volume postProcessingVolume; // Reference to Post Processing Volume
     [SerializeField] private float fadeDuration = 3f; // Fade-in duration (seconds)
 
     private Color startColor = new Color(0, 0, 0, 1); // Initial color (black)
     private Color targetColor = new Color(1, 1, 1, 1); // Target color (white)
-    private ColorAdjustments colorAdjustments;
+    //private ColorAdjustments colorAdjustments;
 
     private async void Start() {
+        /*
         // Try to get ColorAdjustments from the Post Processing Volume
         if (postProcessingVolume.profile.TryGet(out colorAdjustments)) {
             colorAdjustments.colorFilter.overrideState = true; // Enable color filter override
@@ -23,8 +21,9 @@ public class TutorialStart : MonoBehaviour
         else {
             Debug.LogError("Color Adjustments is not found in the Post Processing Volume.");
         }
+        */
     }
-
+    /*
     protected async UniTask FadeInColor() {
         if (colorAdjustments == null) return;
 
@@ -56,4 +55,5 @@ public class TutorialStart : MonoBehaviour
         // Ensure the final color is precisely set
         colorAdjustments.colorFilter.value = targetColor;
     }
+    */
 }
