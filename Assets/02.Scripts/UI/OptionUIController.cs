@@ -7,6 +7,7 @@ public class OptionUIController : UIBase {
     [SerializeField] private Slider _masterVolumeSlider;
     [SerializeField] private Slider _bgmVolumeSlider;
     [SerializeField] private Slider _sfxVolumeSlider;
+    [SerializeField] private Slider _brightnessSlider;
 
     #endregion // serializable field
 
@@ -15,6 +16,7 @@ public class OptionUIController : UIBase {
     private float _masterVolume;
     private float _bgmVolume;
     private float _sfxVolume;
+    private float _brightness;
 
     #endregion // private variables
 
@@ -22,15 +24,14 @@ public class OptionUIController : UIBase {
 
     public override void SetShow() {
         // 볼륨 슬라이더의 값 설정 및 리스너 연결
-        SetVolumeSlider();
+        LoadDataToSlider();
         AddSliderListeners();
 
         base.SetShow();
     }
 
     public override void SetHide() {
-        // 볼륨 저장 및 리스너 해제
-        SaveVolume();
+        //리스너 해제
         RemoveSliderListeners();
 
         base.SetHide();
@@ -60,22 +61,24 @@ public class OptionUIController : UIBase {
             SoundManager.Instance.SetSFXVolume(30 * (_sfxVolume - 1));
     }
 
+    public void SetBrightness() {
+        _brightness = _brightnessSlider.value;
+        OptionManager.Instance.SetBrightness(_brightness);
+    }
+
     #endregion // public funcs
 
     #region private funcs
 
-    private void SetVolumeSlider() {
-        // PlayerPrefs에서 저장된 볼륨 값을 가져와 슬라이더에 설정
-        _masterVolumeSlider.value = PlayerPrefsManager.Instance.GetMasterVolume();
-        _bgmVolumeSlider.value = PlayerPrefsManager.Instance.GetBGMVolume();
-        _sfxVolumeSlider.value = PlayerPrefsManager.Instance.GetSFXVolume();
+    private void LoadDataToSlider() {
+        _masterVolumeSlider.value = VolumeNormalize(SoundManager.Instance.GetMasterVolume());
+        _bgmVolumeSlider.value = VolumeNormalize(SoundManager.Instance.GetBGMVolume());
+        _sfxVolumeSlider.value = VolumeNormalize(SoundManager.Instance.GetSFXVolume());
+        _brightnessSlider.value = OptionManager.Instance.GetBrightness();
     }
 
-    private void SaveVolume() {
-        // 현재 슬라이더 값을 PlayerPrefs에 저장
-        PlayerPrefsManager.Instance.SaveMasterVolume(_masterVolumeSlider.value);
-        PlayerPrefsManager.Instance.SaveBGMVolume(_bgmVolumeSlider.value);
-        PlayerPrefsManager.Instance.SaveSFXVolume(_sfxVolumeSlider.value);
+    private float VolumeNormalize(float volume) {
+        return volume / 30 + 1;
     }
 
     private void AddSliderListeners() {
@@ -83,6 +86,8 @@ public class OptionUIController : UIBase {
         _masterVolumeSlider.onValueChanged.AddListener(delegate { SetMasterVolume(); });
         _bgmVolumeSlider.onValueChanged.AddListener(delegate { SetBGMVolume(); });
         _sfxVolumeSlider.onValueChanged.AddListener(delegate { SetSFXVolume(); });
+        _brightnessSlider.onValueChanged.AddListener(delegate { SetBrightness(); });
+
     }
 
     private void RemoveSliderListeners() {
@@ -90,6 +95,7 @@ public class OptionUIController : UIBase {
         _masterVolumeSlider.onValueChanged.RemoveAllListeners();
         _bgmVolumeSlider.onValueChanged.RemoveAllListeners();
         _sfxVolumeSlider.onValueChanged.RemoveAllListeners();
+        _brightnessSlider.onValueChanged.RemoveAllListeners();
     }
 
     #endregion // private funcs

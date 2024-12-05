@@ -5,40 +5,25 @@ using UnityEngine;
 
 public class TimeScaleManager : MonoBehaviour {
     private static TimeScaleManager _instance;
-    private float _timeScaleCache;
+    private Stack<float> _timeScaleStack;
     private List<Animator> _effectList = new List<Animator>();
 
     public static TimeScaleManager Instance { get { return _instance; } }
 
     private void Awake() {
         _instance = this;
-        _timeScaleCache = 1;
+        _timeScaleStack = new Stack<float>();
     }
-
-    /*
-    /// <param name="timeScale">must be [0, 1]</param>
-    public void TimeSlow(float timeScale) {
-        if (timeScale == 0) {
-            IsTimeFlow = false;
-        }
-        if (Time.timeScale > timeScale) {
-            _timeScaleCache = Time.timeScale;
-            Time.timeScale = timeScale;
-        }
-    }
-    */
 
     public void TimeStop() {
-        if (Time.timeScale > 0) {
-            _timeScaleCache = Time.timeScale;
-            SoundManager.Instance.PauseSFX();
-            PauseEffects();
-            Time.timeScale = 0;
-        }
+        _timeScaleStack.Push(Time.timeScale);
+        SoundManager.Instance.PauseSFX();
+        PauseEffects();
+        Time.timeScale = 0;
     }
 
     public void TimeRestore() {
-        Time.timeScale = _timeScaleCache;
+        Time.timeScale = _timeScaleStack.Pop();
         UnPauseEffects();
         SoundManager.Instance.UnPauseSFX();
     }

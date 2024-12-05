@@ -98,6 +98,7 @@ public class BossBondrewd : MonsterBase {
     bool _isRushReady;
     bool _isShootReady;
     bool _isMissileReady;
+    bool _isRushing;
     bool _isChainExplosionReady;
     bool _isChainExplosionActivated; //for prevent stun when chain explosion pattern
     bool _isChainExplosionWarning;
@@ -146,12 +147,20 @@ public class BossBondrewd : MonsterBase {
         _phantomTimer = 0;
         _currentActivatedChargerCount = 0;
         _groggyGauge = 100;
+        _isRushing = false;
         _timerTM.gameObject.SetActive(false);
         UpdateGroggySlider();
     }
     new private void Update() {
         base.Update();
         PhantomManage();
+        UpdateHpSlider();
+        UpdateGroggySlider();
+        UpdatePhantomGaugeSlider();
+    }
+    protected override void OnCollisionStay2D(Collision2D collision) {
+        if (collision.collider.CompareTag("Player") && !_isDead && _isSpawnComplete & _isRushing)
+            _playerScript.Damaged(_rushDamage);
     }
     #endregion
 
@@ -312,7 +321,7 @@ public class BossBondrewd : MonsterBase {
             _rushWarningEffect.SetActive(true);
             float rushWarningTime = _rushWarningTime - (_currentPhaseNum - 1) * 0.25f;
             float timer = 0;
-            int originBodyDamage = _bodyDamage;
+            //int originBodyDamage = _bodyDamage;
             try {
                 while (timer < rushWarningTime - 1) {
                     Vector2 tempDir = _playerScript.transform.position - transform.position;
@@ -321,20 +330,21 @@ public class BossBondrewd : MonsterBase {
                     timer += Time.deltaTime;
                     await UniTask.NextFrame(_cts.Token);
                 }
-
                 Vector2 rushDir = (_playerScript.transform.position - transform.position).normalized;
                 Vector2 endValue = (Vector2)transform.position + rushDir * _rushDist;
                 float duration = _rushDist / _moveSpeed;
                 await UniTask.Delay(TimeSpan.FromSeconds(1 - (_currentPhaseNum - 1) * 0.35f), cancellationToken: _cts.Token);
                 _rushWarningEffect.SetActive(false);
-                _bodyDamage = _rushDamage;
+                //_bodyDamage = _rushDamage;
                 _rushEffectList[currentPhaseNum - 1].transform.right = rushDir;
                 _rushEffectList[currentPhaseNum - 1].SetActive(true);
                 _rushEffectList[currentPhaseNum - 1].GetComponent<Animator>().SetFloat("Phantom", _phantomMultiplier);
 
                 SetFlipX(rushDir);
                 _animator.SetBool("Run", true);
+                _isRushing = true;
                 await DOTween.To(() => _rigid.position, x => _rigid.MovePosition(x), endValue, duration).WithCancellation(_cts.Token);
+                _isRushing = false;
             }
             catch (OperationCanceledException) {
                 _rushWarningEffect.SetActive(false);
@@ -346,7 +356,7 @@ public class BossBondrewd : MonsterBase {
                 _animator.SetBool("Run", false);
                 _rushEffectList[currentPhaseNum - 1].SetActive(false);
                 _rigid.velocity = Vector2.zero;
-                _bodyDamage = originBodyDamage;
+                //_bodyDamage = originBodyDamage;
             }
         }
         _attackStateList[2] = AttackState.Finished;
@@ -486,7 +496,7 @@ public class BossBondrewd : MonsterBase {
         _attackStateList[5] = AttackState.Ready;
     }
 
-    private async UniTaskVoid ChainExplosion() { //얘도 타이머 필요하겠다
+    private async UniTaskVoid ChainExplosion() {
         _attackStateList[5] = AttackState.Attacking;
         _isChainExplosionActivated = true;
         Vector2 chainExplosionCenterPos = _explosionCenterFlag.transform.position;

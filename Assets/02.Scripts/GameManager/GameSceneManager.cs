@@ -1,10 +1,8 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class GameSceneManager : MonoBehaviour
-{
+public class GameSceneManager : MonoBehaviour {
     #region private variable
 
     private static GameSceneManager _instance;
@@ -50,6 +48,10 @@ public class GameSceneManager : MonoBehaviour
 
 
     #region public funcs
+
+    public void LoadStartScene() {
+        SceneManager.LoadScene(_startScene);
+    }
 
     public void LoadMainScene() {
         SceneManager.LoadScene(_mainScene);

@@ -416,30 +416,32 @@ public class Player : MonoBehaviour {
     }
 
     private void PhantomGaugeManage() {
-        if (_isPhantomActivated) {
-            if (_currentPhantomGauge > 0)
-                _currentPhantomGauge -= _phantomGaugeUseAmount * Time.unscaledDeltaTime;
-            else {
-                _currentPhantomGauge = 0;
-                _phantomForceCancelTrigger = true;
-                _isPhantomLocked = true;
-            }
-        }
-        else {
-            if (_currentPhantomGauge < 100) {
-                _currentPhantomGauge += _phantomGaugeRecoverAmount * Time.unscaledDeltaTime;
+        if (Time.timeScale > 0) { //Prevent PhantomGauge Change in timeScale 0
+            if (_isPhantomActivated) {
+                if (_currentPhantomGauge > 0)
+                    _currentPhantomGauge -= _phantomGaugeUseAmount * Time.unscaledDeltaTime;
+                else {
+                    _currentPhantomGauge = 0;
+                    _phantomForceCancelTrigger = true;
+                    _isPhantomLocked = true;
+                }
             }
             else {
-                _currentPhantomGauge = 100;
-                _isPhantomLocked = false;
+                if (_currentPhantomGauge < 100) {
+                    _currentPhantomGauge += _phantomGaugeRecoverAmount * Time.unscaledDeltaTime;
+                }
+                else {
+                    _currentPhantomGauge = 100;
+                    _isPhantomLocked = false;
+                }
             }
+            UpdatePhantomGauge();
         }
-        UpdatePhantomGauge();
     }
 
     private async UniTaskVoid Phantom() {
-        // 팬텀 사용 가능 여부 확인
-        if (!PlayerTriggerManager.Instance.CanUsePhantom) {
+        // Check Phantom Enable
+        if (!PlayerTriggerManager.Instance.CanUsePhantom || Time.timeScale == 0) {
             return;
         }
 

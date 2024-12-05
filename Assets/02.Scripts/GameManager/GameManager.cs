@@ -1,5 +1,14 @@
 using UnityEngine;
 
 public class GameManager : MonoBehaviour {
-    //아직까지 안씀
+    private static GameManager _instance;
+    public static GameManager Instance { get { return _instance; } }
+
+    private void Awake() {
+        _instance = this;
+    }
+
+    public void GameQuit() {
+        Application.Quit();
+    }
 }

@@ -79,6 +79,21 @@ public class SoundManager : MonoBehaviour {
         SaveSoundData();
     }
 
+    public float GetMasterVolume() {
+        m_AudioMixer.GetFloat("Master", out float master);
+        return master;
+    }
+
+    public float GetBGMVolume() {
+        m_AudioMixer.GetFloat("BGM", out float bgm);
+        return bgm;
+    }
+
+    public float GetSFXVolume() {
+        m_AudioMixer.GetFloat("SFX", out float sfx);
+        return sfx;
+    }
+
     public void SetSFXPitch(float pitch) {
         m_AudioMixer.SetFloat("SFXpitch", pitch);
     }
@@ -109,7 +124,6 @@ public class SoundManager : MonoBehaviour {
             await UniTask.NextFrame();
         }
     }
-
     public void PauseSFX() {
         sfxSource_timeAffected.Pause();
         sfxSource_timeIgnore.Pause();
@@ -118,7 +132,6 @@ public class SoundManager : MonoBehaviour {
         sfxSource_timeAffected.UnPause();
         sfxSource_timeIgnore.UnPause();
     }
-
     #endregion // public funcs
 
     #region private funcs
@@ -133,8 +146,7 @@ public class SoundManager : MonoBehaviour {
         es3File.Save("sfxVolume", sfx);
         es3File.Sync();
     }
-
-    private void LoadSoundData() {
+    public void LoadSoundData() {
         float master, bgm, sfx;
         ES3File es3File = new ES3File("SoundData.es3");
         if (es3File.KeyExists("masterVolume"))

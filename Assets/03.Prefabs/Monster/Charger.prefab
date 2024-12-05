@@ -73,7 +73,7 @@ MonoBehaviour:
   _damage: 0
   _bodyDamage: 0
   _moveSpeed: 0
-  _maxHp: 3000
+  _maxHp: 1500
   _dieDelay: 0
   _damagedColor:
     serializedVersion: 2
@@ -84,6 +84,7 @@ MonoBehaviour:
   _hpRecoverAmount: 300
   _boss: {fileID: 0}
   _hpSlider: {fileID: 8899761037165240913}
+  _chargerQTE: {fileID: 0}
 --- !u!212 &348418431054849798
 SpriteRenderer:
   m_ObjectHideFlags: 0

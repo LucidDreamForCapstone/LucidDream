@@ -92,7 +92,7 @@ public class PritoQTE : MonoBehaviour { //Maplestory Prito Mini Game
         }
     }
 
-    private async UniTask<bool> ButtonSequence(int count) { //문제 맞추자마자 나가면 상승하는 유니테스크에 감소 유니테스크가 중첩되서 오류 발생
+    private async UniTask<bool> ButtonSequence(int count) {
         List<PressKey> keys = GetRandomButtonList(count);
         List<KeyBoard> keyBoards = new List<KeyBoard>();
         List<Image> keyBoardImages = new List<Image>();

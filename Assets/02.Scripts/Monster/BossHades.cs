@@ -170,6 +170,9 @@ public class BossHades : MonsterBase {
         inGameUI = GameObject.Find("InGameUI");
     }
 
+    protected override void OnCollisionStay2D(Collision2D collision) {
+    }
+
     #endregion
 
 
