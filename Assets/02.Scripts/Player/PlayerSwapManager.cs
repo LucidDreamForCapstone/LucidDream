@@ -1,9 +1,9 @@
 using Cysharp.Threading.Tasks;
 using Edgar.Unity; // TextMeshPro 관련 네임스페이스 추가
 using System;
-using System.Collections;
-using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
+
 
 public class PlayerSwapManager : MonoBehaviour {
     [SerializeField] private Player player1; // 첫 번째 캐릭터
@@ -20,7 +20,8 @@ public class PlayerSwapManager : MonoBehaviour {
     [SerializeField] private Canvas player2UICanvas; // Player2 UI Canvas
 
     // UI 텍스트
-    [SerializeField] private TextMeshProUGUI messageText; // TextMeshProUGUI 컴포넌트
+    [SerializeField] string _message;
+    [SerializeField] Color _messageColor;
 
     private void Start() {
         if (Display.displays.Length > 1) Display.displays[1].Activate(); // Display 2 활성화
@@ -30,7 +31,6 @@ public class PlayerSwapManager : MonoBehaviour {
         Player2ActiveDelay(2).Forget();
         glitchController = FindObjectOfType<GlitchController>(); // GlitchController 찾기
         vignetteController = FindObjectOfType<VignetteController>();
-        messageText.gameObject.SetActive(false); // 시작할 때 메시지 숨김
         if (Display.displays.Length > 1) Display.displays[1].Activate(); // Display 2 활성화
     }
 
@@ -40,7 +40,7 @@ public class PlayerSwapManager : MonoBehaviour {
                 SwapCharacter().Forget();
             }
             else {
-                ShowMessage("주위에 몬스터가 있어서 불가능합니다."); // 메시지 표시
+                SystemMessageManager.Instance.PushSystemMessage(_message, _messageColor);
             }
         }
     }
@@ -51,19 +51,25 @@ public class PlayerSwapManager : MonoBehaviour {
             return false; // 플레이어가 할당되지 않은 경우
         }
         // 플레이어 주변의 Enemy를 체크합니다.
-        LayerMask enemyLayer = LayerMask.GetMask("Enemy"); // Enemy 레이어 마스크 가져오기
-        Collider2D[] colliders = Physics2D.OverlapCircleAll(player1.transform.position, 20f, enemyLayer); // 반지름 20, enemyLayer만 감지
-        foreach (var collider in colliders) {
-            Debug.Log($"Detected collider: {collider.gameObject.name} with tag: {collider.tag}"); // 감지된 콜라이더 출력
-            if (collider.CompareTag("Enemy")) {
-                Debug.Log("Enemy found! Cannot swap character.");
-                return false; // Enemy가 있을 경우 스왑 불가능
+        if (!IsFinalBossScene()) {
+            LayerMask enemyLayer = LayerMask.GetMask("Enemy"); // Enemy 레이어 마스크 가져오기
+            Collider2D[] colliders = Physics2D.OverlapCircleAll(player1.transform.position, 20f, enemyLayer); // 반지름 20, enemyLayer만 감지
+            foreach (var collider in colliders) {
+                Debug.Log($"Detected collider: {collider.gameObject.name} with tag: {collider.tag}"); // 감지된 콜라이더 출력
+                if (collider.CompareTag("Enemy")) {
+                    Debug.Log("Enemy found! Cannot swap character.");
+                    return false; // Enemy가 있을 경우 스왑 불가능
+                }
             }
         }
         Debug.Log("No enemies nearby. Can swap character.");
         return true; // 스왑 가능
     }
 
+    private bool IsFinalBossScene() {
+        string finalBossScene = "BossTestScene";//after change it
+        return SceneManager.GetActiveScene().name == finalBossScene;
+    }
 
 
     private async UniTaskVoid SwapCharacter() {
@@ -75,9 +81,16 @@ public class PlayerSwapManager : MonoBehaviour {
 
         // 글리치 효과를 시작합니다.
         if (glitchController != null) {
+            float glitchTime = 3;
+            int flashCount = 3;
+            if (IsFinalBossScene()) {
+                glitchTime = 1;
+                flashCount = 2;
+            }
+
             await UniTask.WhenAll(
-                glitchController.TriggerGlitchEffect(), // 글리치 효과
-                vignetteController.TriggerColorGlitchEffect(3f, 3) // 3초간 3회 반복 화면 밝기 변화
+                glitchController.TriggerGlitchEffect(glitchTime), // 글리치 효과
+                vignetteController.TriggerColorGlitchEffect(glitchTime, flashCount) // 3초간 3회 반복 화면 밝기 변화
             );
         }
 
@@ -134,17 +147,6 @@ public class PlayerSwapManager : MonoBehaviour {
             }
         }
         isGlitching = false; // 글리치 효과 종료
-    }
-
-    private void ShowMessage(string message) {
-        messageText.text = message; // 메시지 텍스트 업데이트
-        messageText.gameObject.SetActive(true); // 메시지 표시
-        StartCoroutine(HideMessage()); // 메시지 숨기기 코루틴 호출
-    }   
-
-    private IEnumerator HideMessage() {
-        yield return new WaitForSeconds(2f); // 2초 후
-        messageText.gameObject.SetActive(false); // 메시지 숨김
     }
 
     //To prevent Edgar targeting the player2 as the main player while doing map creating

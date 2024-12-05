@@ -1,10 +1,9 @@
-using Cysharp.Threading.Tasks;
-using System;
 using UnityEngine;
 
 
 public class Chest_Shop : Chest {
     #region serialize field
+    [SerializeField] private string _message;
     [SerializeField] private int _requiredCoins = 100;
     [SerializeField] protected AudioClip effectSound;
     #endregion //serialize field
@@ -15,10 +14,21 @@ public class Chest_Shop : Chest {
 
     #region private field
     private InGameUIController inGameUIController;
+    private bool _isPrinting;
 
 
     #endregion //serialize field
 
+
+
+
+    #region mono funcs
+    new private void Start() {
+        base.Start();
+        inGameUIController = FindObjectOfType<InGameUIController>();
+        _isPrinting = false;
+    }
+    #endregion //mono
 
 
 
@@ -39,21 +49,12 @@ public class Chest_Shop : Chest {
                 }
                 else {
                     // 코인이 부족할 때 알림 메시지 표시
-                    inGameUIController.ShowNotification("코인이 부족합니다.", 2f);
+                    SystemMessageManager.Instance.PushSystemMessage(_message, Color.red);
                 }
             }
         }
     }
 
-    #endregion //protected funcs
+    #endregion //protected func
 
-
-    #region mono funcs
-    new private void Start() {
-        base.Start();
-        inGameUIController = FindObjectOfType<InGameUIController>();
-    }
-
-
-    #endregion //mono
 }

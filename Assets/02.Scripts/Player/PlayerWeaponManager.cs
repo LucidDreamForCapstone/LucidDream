@@ -1,5 +1,3 @@
-using System.Collections;
-using TMPro;
 using UnityEngine;
 
 public class PlayerWeaponManager : MonoBehaviour {
@@ -21,8 +19,8 @@ public class PlayerWeaponManager : MonoBehaviour {
     //[SerializeField] Vector2 _weaponPos;
 
     [SerializeField] private InGameUIController _inGameUIController;
-    [SerializeField] private TMP_Text cooldownWarningText;
-    [SerializeField] private CanvasGroup cooldownTextCanvasGroup; // 텍스트에 추가한 CanvasGroup
+    [SerializeField] string _warningMessage;
+    [SerializeField] Color _cooldownWarningTextColor;
 
     #endregion //serialized field 
 
@@ -33,9 +31,7 @@ public class PlayerWeaponManager : MonoBehaviour {
     #region private variable
 
     private Player _playerScript;
-    private float warningDisplayDuration = 1.0f;
-    private float fadeDuration = 0.5f; // Fade 효과 시간
-    private bool isTextShowing = false; // 텍스트가 표시 중인지 확인하는 플래그
+
     #endregion //private variable
 
 
@@ -60,52 +56,19 @@ public class PlayerWeaponManager : MonoBehaviour {
 
     private void Start() {
         _playerScript = GameObject.Find("Player").GetComponent<Player>();
-        cooldownWarningText.gameObject.SetActive(false);
-        cooldownTextCanvasGroup.alpha = 0; // CanvasGroup 알파값을 0으로 설정
     }
 
     private void Update() {
         ActivateSkill();
     }
-    private IEnumerator ShowCooldownWarning() {
-        isTextShowing = true; // 텍스트가 표시 중임을 기록
-        cooldownWarningText.gameObject.SetActive(true);
-        // Fade In
-        yield return StartCoroutine(FadeText(0, 1, fadeDuration));
-        yield return new WaitForSeconds(warningDisplayDuration);
-        // Fade Out
-        yield return StartCoroutine(FadeText(1, 0, fadeDuration));
-        cooldownWarningText.gameObject.SetActive(false);
-        isTextShowing = false; // 텍스트가 사라진 후 다시 표시 가능
-    }
-
-    // 텍스트의 알파값을 변화시키는 Fade 코루틴
-    private IEnumerator FadeText(float startAlpha, float endAlpha, float duration) {
-        float elapsedTime = 0f;
-
-        // 텍스트의 알파값을 startAlpha에서 endAlpha로 변화
-        while (elapsedTime < duration) {
-            elapsedTime += Time.deltaTime;
-            cooldownTextCanvasGroup.alpha = Mathf.Lerp(startAlpha, endAlpha, elapsedTime / duration);
-            yield return null;
-        }
-
-        cooldownTextCanvasGroup.alpha = endAlpha;
-    }
-    #endregion // mono funcs
-
-
-
-
+    #endregion
 
 
     #region public funcs
 
     public void WeaponChanged(WeaponBase changedWeapon) {
         if (!AreAllCooldownsComplete()) {
-            if (!isTextShowing) {
-                StartCoroutine(ShowCooldownWarning());
-            }
+            SystemMessageManager.Instance.PushSystemMessage(_warningMessage, _cooldownWarningTextColor);
             return;
         }
         DropEquippedWeapon();

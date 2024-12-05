@@ -25,6 +25,8 @@ public class Player : MonoBehaviour {
     [SerializeField] private float _phantomGaugeUseAmount;
     [SerializeField] private float _phantomGaugeRecoverAmount;
     [SerializeField] private Slider _phantomSlider;
+    [SerializeField] private Color32 _phantomGaugeColor;
+    [SerializeField] private Color32 _phantomGaugeReboundColor;
     [SerializeField] private GameObject _phantomGhostObj;
     [SerializeField] private Animator _phantomVolumeAnimator;
     [SerializeField] private Color _phantomGhostColor;
@@ -86,6 +88,8 @@ public class Player : MonoBehaviour {
     private int _chargeCount;
     private InGameUIController _controller;
     private bool _playerEnabled;
+    private bool _isMessagePrinting;
+    private Image _phantomSliderFill;
     #endregion // private variable
 
 
@@ -129,7 +133,9 @@ public class Player : MonoBehaviour {
         _stunTime = 0;
         _slowRate = 0;
         _controller = FindObjectOfType<InGameUIController>();
+        _phantomSliderFill = _phantomSlider.fillRect.GetComponent<Image>();
         _playerEnabled = true;
+        _isMessagePrinting = false;
     }
 
     private void FixedUpdate() {
@@ -345,7 +351,7 @@ public class Player : MonoBehaviour {
 
     public void ChargeGaugeUp() {
         if (_chargeCount < 5) {
-            _chargeGauge[_chargeCount++].DOColor(_chargeColor, 0.1f).SetUpdate(true);
+            _chargeGauge[_chargeCount++].DOColor(_chargeColor, 0.07f).SetUpdate(true);
             if (_chargeCount == 5) {
                 for (int i = 0; i < 5; i++)
                     _chargeGauge[i].DOColor(_chargeMaxColor, 0.1f).SetUpdate(true);
@@ -356,7 +362,7 @@ public class Player : MonoBehaviour {
 
     public void ResetChargeGauge() {
         for (int i = 0; i < 5; i++) {
-            _chargeGauge[i].DOColor(_chargeOriginColor, 1).SetUpdate(true);
+            _chargeGauge[i].DOColor(_chargeOriginColor, 0.35f).SetUpdate(true);
             _chargeCount = 0;
         }
     }
@@ -414,30 +420,36 @@ public class Player : MonoBehaviour {
     }
 
     private void PhantomGaugeManage() {
-        if (_isPhantomActivated) {
-            if (_currentPhantomGauge > 0)
-                _currentPhantomGauge -= _phantomGaugeUseAmount * Time.unscaledDeltaTime;
-            else {
-                _currentPhantomGauge = 0;
-                _phantomForceCancelTrigger = true;
-                _isPhantomLocked = true;
-            }
-        }
-        else {
-            if (_currentPhantomGauge < 100) {
-                _currentPhantomGauge += _phantomGaugeRecoverAmount * Time.unscaledDeltaTime;
+        if (Time.timeScale > 0) { //Prevent PhantomGauge Change in timeScale 0
+            if (_isPhantomActivated) {
+                if (_currentPhantomGauge > 0)
+                    _currentPhantomGauge -= _phantomGaugeUseAmount * Time.unscaledDeltaTime;
+                else {
+                    _currentPhantomGauge = 0;
+                    _phantomSliderFill.color = _phantomGaugeReboundColor;
+                    _phantomForceCancelTrigger = true;
+                    _isPhantomLocked = true;
+                }
             }
             else {
-                _currentPhantomGauge = 100;
-                _isPhantomLocked = false;
+                if (_currentPhantomGauge < 100) {
+                    _currentPhantomGauge += _phantomGaugeRecoverAmount * Time.unscaledDeltaTime;
+                }
+                else {
+                    _currentPhantomGauge = 100;
+                    if (_isPhantomLocked) {
+                        _phantomSliderFill.color = _phantomGaugeColor;
+                    }
+                    _isPhantomLocked = false;
+                }
             }
+            UpdatePhantomGauge();
         }
-        UpdatePhantomGauge();
     }
 
     private async UniTaskVoid Phantom() {
-        // 팬텀 사용 가능 여부 확인
-        if (!PlayerTriggerManager.Instance.CanUsePhantom) {
+        // Check Phantom Enable
+        if (!PlayerTriggerManager.Instance.CanUsePhantom || Time.timeScale == 0) {
             return;
         }
 
@@ -465,8 +477,9 @@ public class Player : MonoBehaviour {
             _isPhantomReady = true;
             Debug.Log("**Phantom Ready**");
         }
-        else if (_isPhantomLocked) {
-            Debug.Log("팬텀 리바운드 상태이므로 팬텀 사용이 불가능합니다.");
+        else if (_isPhantomLocked && Input.GetKey(KeyCode.Space)) {
+            string message = "팬텀 리바운드 상태이므로 팬텀을 사용할 수 없습니다.";
+            SystemMessageManager.Instance.PushSystemMessage(message, Color.red);
         }
     }
 
@@ -495,7 +508,6 @@ public class Player : MonoBehaviour {
         await sr.DOFade(0, _ghostLastTime).SetUpdate(true);
         ObjectPool.Instance.ReturnObject(ghostEffect);
     }
-
 
     /*
     private async UniTaskVoid Roll() {

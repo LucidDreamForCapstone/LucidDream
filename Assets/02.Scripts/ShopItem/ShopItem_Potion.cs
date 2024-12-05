@@ -10,7 +10,7 @@ public class ShopItem_Potion : ShopItemBase {
     protected override bool CanPurchase() {
         // 플레이어의 현재 체력과 최대 체력을 비교하여 구매 가능 여부 판단
         if (PlayerDataManager.Instance.Status._hp >= PlayerDataManager.Instance.Status._maxHp) {
-            inGameUIController.ShowNotification("이미 체력이 최대입니다.", 2f); // 2초 동안 문구 표시
+            SystemMessageManager.Instance.PushSystemMessage(_warningMessage, Color.red);
             return false; // 구매 불가
         }
         return true; // 구매 가능

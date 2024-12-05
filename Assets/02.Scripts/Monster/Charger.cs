@@ -8,6 +8,7 @@ public class Charger : MonsterBase {
     [SerializeField] int _hpRecoverAmount;
     [SerializeField] BossBondrewd _boss;
     [SerializeField] Slider _hpSlider;
+    [SerializeField] ButtonPressQTE _chargerQTE;
     CapsuleCollider2D _chargerCollider;
     CircleCollider2D _shieldCollider;
     SpriteRenderer _shieldSr;
@@ -45,6 +46,8 @@ public class Charger : MonsterBase {
         }
     }
 
+
+
     protected async override UniTaskVoid ChangeColor() {
         if (!_isColorChanged) {
             _isColorChanged = true;
@@ -62,6 +65,7 @@ public class Charger : MonsterBase {
 
     protected async override UniTaskVoid Die() {
         _hp = 0;
+        PlayerDataManager.Instance.SetFeverGauge(_feverAmount);
         UpdateHpSlider();
         await UniTask.Delay(TimeSpan.FromSeconds(1));
         ChargerOff();
@@ -76,6 +80,7 @@ public class Charger : MonsterBase {
         _shieldAnimator.SetTrigger("Pop");
         await UniTask.Delay(TimeSpan.FromSeconds(0.8f));
         _shieldSr.gameObject.SetActive(false);
+        _chargerQTE.UpdateShieldState(_chargerIndex, false);
         _chargerCollider.enabled = true;
         _shieldCollider.enabled = false;
         _isShieldActivated = false;
@@ -83,6 +88,7 @@ public class Charger : MonsterBase {
 
     private void GenerateShield() {
         _shieldSr.gameObject.SetActive(true);
+        _chargerQTE.UpdateShieldState(_chargerIndex, true);
         _isShieldActivated = true;
         _chargerCollider.enabled = false;
         _shieldCollider.enabled = true;
@@ -90,11 +96,13 @@ public class Charger : MonsterBase {
 
     private void ChargerOn() {
         _animator.SetTrigger("Up");
+        _chargerQTE.UpdateChargingState(_chargerIndex, true);
         _boss.ChargerCntIncrease(_chargerIndex);
     }
 
     private void ChargerOff() {
         _animator.SetTrigger("Down");
+        _chargerQTE.UpdateChargingState(_chargerIndex, false);
         _boss.ChargerCntDecrease(_chargerIndex);
         RecoverHp().Forget();
     }

@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class BondrewdMissile : HomingBullet {
     bool _isSelfTargetPrevented;
+    int _groggyDecreaseAmount;
     float _preventTime = 2.0f;
     protected override void OnEnable() {
         PreventExplosionSelf().Forget();
@@ -58,7 +59,7 @@ public class BondrewdMissile : HomingBullet {
                         if (_slowDebuff)
                             boss.Slow(_slowRate, _slowTime).Forget();
 
-                        boss.DecreaseGroggyGauge();
+                        boss.DecreaseGroggyGauge(_groggyDecreaseAmount);
                     }
                     else if (possibleTargets[i].CompareTag("Player")) {
                         if (_stunDebuff)
@@ -73,6 +74,10 @@ public class BondrewdMissile : HomingBullet {
         }
         ShockWaveEffect();
         ObjectPool.Instance.ReturnObject(gameObject);
+    }
+
+    public void SetGroggyDecreaseAmount(int decreaseAmount) {
+        _groggyDecreaseAmount = decreaseAmount;
     }
 
     private async UniTaskVoid PreventExplosionSelf() {

@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: -4214482879870298802}
   - component: {fileID: 2128403838987545142}
   - component: {fileID: 2008323044701374281}
+  - component: {fileID: 5836459784259185217}
   - component: {fileID: 6026586742765396011}
   m_Layer: 0
   m_Name: ShopItem_Potion
@@ -51,6 +52,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _price: 20
   _name: "\uD68C\uBCF5\uD3EC\uC158"
+  _warningMessage: "\uC774\uBBF8 \uCCB4\uB825\uC774 \uCD5C\uB300\uC785\uB2C8\uB2E4."
   _recoveryAmount: 30
   potionSound: {fileID: 8300000, guid: f4fad9329c5f93d48b39ce4caa93062f, type: 3}
 --- !u!212 &2128403838987545142
@@ -150,6 +152,41 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.73, y: 0.23}
   m_EdgeRadius: 0
+--- !u!58 &5836459784259185217
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1213858276333295106}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  serializedVersion: 2
+  m_Radius: 0.5
 --- !u!50 &6026586742765396011
 Rigidbody2D:
   serializedVersion: 4
@@ -253,7 +290,7 @@ MeshRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 422267223
-  m_SortingLayer: 10
+  m_SortingLayer: 11
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
 --- !u!114 &6336530361720724542
@@ -424,7 +461,7 @@ MeshRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 422267223
-  m_SortingLayer: 10
+  m_SortingLayer: 11
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
 --- !u!114 &4783344772329576063

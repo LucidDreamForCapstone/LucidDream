@@ -387,18 +387,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f927ca1c2666db441aeb827654556651, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _textSound: {fileID: 8300000, guid: bf9e970047d667e48ae1979a08d1b36d, type: 3}
   _textUI: {fileID: 3149227912586133994}
-  _wordList:
-  - _word: "\uC0B0..."
-    _charWaitTime: 0.2
-    _wordWaitTime: 0.4
-  - _word: "\uB098.."
-    _charWaitTime: 0.2
-    _wordWaitTime: 0.4
-  - _word: "\uBE44.."
-    _charWaitTime: 0.2
-    _wordWaitTime: 0.4
+  _sentenceList: []
   _fontSize: 36
   _fontColor: {r: 1, g: 0, b: 0, a: 1}
 --- !u!82 &6756065712673017459
@@ -411,7 +401,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: bf9e970047d667e48ae1979a08d1b36d, type: 3}
+  m_audioClip: {fileID: 8300000, guid: 751ee98f73976b449967a127dd307f60, type: 3}
   m_PlayOnAwake: 1
   m_Volume: 1
   m_Pitch: 1

@@ -7,7 +7,7 @@ public class ShopItem_Key : ShopItemBase {
         // 플레이어가 이미 Key 아이템을 가지고 있는지 확인
         if (InventoryManager.Instance.HasItem(ItemType.Key)) {
             // 이미 Key 아이템을 가지고 있으면 구매 불가
-            inGameUIController.ShowNotification("이미 열쇠 아이템을 가지고 있습니다.", 1f); // 2초 동안 문구 표시
+            SystemMessageManager.Instance.PushSystemMessage(_warningMessage, Color.red);
             return false;
         }
         return true; // Key 아이템이 없으면 구매 가능

@@ -1,17 +1,17 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Rendering;
 
-public class MainUIController : UIBase
-{
+public class MainUIController : UIBase {
     #region serializable field
 
     [SerializeField] private OptionUIController _optionUIController;
-
     #endregion //serializable field
 
 
+    private void Update() {
+        if (Input.GetKeyDown(KeyCode.Escape)) {
+            GameManager.Instance.GameQuit();
+        }
+    }
 
     #region public funcs
 

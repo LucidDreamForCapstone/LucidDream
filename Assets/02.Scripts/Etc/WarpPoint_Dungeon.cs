@@ -3,6 +3,8 @@ using UnityEngine;
 
 public class WarpPoint_Dungeon : MonoBehaviour, Interactable {
     // Start is called before the first frame update
+    [SerializeField] string _message;
+    [SerializeField] Color _messageColor;
     void Start() {
 
     }
@@ -10,8 +12,8 @@ public class WarpPoint_Dungeon : MonoBehaviour, Interactable {
         if (collision.gameObject.CompareTag("Player") && InteractManager.Instance.CheckInteractable(this)) {
             if (GungeonGameManager.Instance != null) {
                 GungeonGameManager.Instance.SetIsGenerating(true);
+                SystemMessageManager.Instance.PushSystemMessage(_message, _messageColor, false, 1.5f);
                 Debug.Log("isGenerating set to true");
-
             }
             else {
                 Debug.LogError("GGM instance is null");

@@ -109,7 +109,7 @@ public abstract class WeaponBase : ItemBase {
         if (_isBasicReady) {
             BasicAttackAnimation();
             _isBasicReady = false;
-            await UniTask.Delay(TimeSpan.FromSeconds(_basicCoolTime));
+            await UniTask.Delay(TimeSpan.FromSeconds(_basicCoolTime), ignoreTimeScale: true);
             _isBasicReady = true;
         }
     }
@@ -150,7 +150,8 @@ public abstract class WeaponBase : ItemBase {
 
             // 적이 없으면 스킬 실행 중단 및 문구 출력
             if (targetCount == 0) {
-                inGameUIController.ShowNotification("범위 내에 적이 없습니다.", 1f); // 2초 동안 문구 표시
+                string message = "범위 내에 적이 없습니다."; //Bum wi nae ae juk e up sup ni da.
+                SystemMessageManager.Instance.PushSystemMessage(message, Color.red);
                 return; // 스킬 실행 중단, Fever 게이지 유지
             }
 

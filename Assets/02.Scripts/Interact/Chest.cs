@@ -26,7 +26,7 @@ public class Chest : DropableBase {
         _animator = GetComponent<Animator>();
     }
 
-    protected void OnCollisionStay2D(Collision2D collision) {
+    private void OnTriggerStay2D(Collider2D collision) {
         if (collision.gameObject.CompareTag("Player"))
             ChestOpen();
     }

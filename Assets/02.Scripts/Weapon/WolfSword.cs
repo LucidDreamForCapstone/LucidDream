@@ -262,7 +262,6 @@ public class WolfSword : WeaponBase {
         if (_playerScript.MoveDir.x > 0)
             sr.flipX = true;
         skillEffect.transform.position = _playerScript.transform.position + Vector3.up * offsetY;
-        Debug.Log(skillEffect);
         await UniTask.Delay(TimeSpan.FromSeconds(1.2), ignoreTimeScale: true);
         Destroy(skillEffect);
     }
@@ -271,7 +270,6 @@ public class WolfSword : WeaponBase {
         GameObject skillEffect = Instantiate(_skillEffect2);
         skillEffect.transform.right = lookAt;
         skillEffect.transform.position = _playerScript.transform.position;
-        Debug.Log(skillEffect);
         await UniTask.Delay(TimeSpan.FromSeconds(0.6f), ignoreTimeScale: true);
         Destroy(skillEffect);
     }

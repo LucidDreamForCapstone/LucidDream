@@ -1,5 +1,3 @@
-using Cysharp.Threading.Tasks;
-using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
@@ -215,14 +213,6 @@ public class InGameUIController : MonoBehaviour {
         // ��ȿ���� ���� �ε����� ��� 0�� ��ȯ
         return 0f;
     }
-    // ���� ǥ�� �޼���
-    public void ShowNotification(string message, float duration) {
-        if (fadeCoroutine != null) {
-            StopCoroutine(fadeCoroutine); // ���� �ڷ�ƾ�� ������ ����
-        }
-
-        fadeCoroutine = StartCoroutine(ShowNotificationRoutine(message, duration));
-    }
 
     public void ShowGuard() {
         if (InventoryManager.Instance.HasItem(ItemType.Guard)) {
@@ -276,48 +266,6 @@ public class InGameUIController : MonoBehaviour {
         // ��Ÿ���� ������ ���� ��Ÿ���� 0���� ����
         remainingCooldownTimes[skillIndex] = 0f;
         skillCooldownImages[skillIndex].fillAmount = 1f;
-    } 
-
-
-    private IEnumerator ShowNotificationRoutine(string message, float displayDuration) {
-        // �ؽ�Ʈ ���� �� �ʱ� ���İ� ���� (����)
-        notificationText.text = message;
-        Color color = notificationText.color;
-        color.a = 0f;
-        notificationText.color = color;
-
-        // Fade in (0 -> 1)
-        float fadeInDuration = 0.2f; // fade in �ð�
-        for (float t = 0; t < fadeInDuration; t += Time.deltaTime) {
-            color.a = Mathf.Lerp(0f, 1f, t / fadeInDuration);
-            notificationText.color = color;
-            yield return null;
-        }
-
-        // ���İ��� 1�� ����
-        color.a = 1f;
-        notificationText.color = color;
-
-        // ������ �ð� ���� �ؽ�Ʈ ǥ��
-        yield return new WaitForSeconds(displayDuration);
-
-        // Fade out (1 -> 0)
-        float fadeOutDuration = 0.2f; // fade out �ð�
-        for (float t = 0; t < fadeOutDuration; t += Time.deltaTime) {
-            color.a = Mathf.Lerp(1f, 0f, t / fadeOutDuration);
-            notificationText.color = color;
-            yield return null;
-        }
-
-        // ���İ��� 0���� ���� (�ؽ�Ʈ ����)
-        color.a = 0f;
-        notificationText.color = color;
-
-        fadeCoroutine = null; // �ڷ�ƾ ���� �� null�� ����
-    }
-
-    private async UniTask WaitTime(float waitTime) {
-        await UniTask.Delay(TimeSpan.FromSeconds(waitTime), ignoreTimeScale: true);
     }
 
     #endregion // private funcs

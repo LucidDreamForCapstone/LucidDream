@@ -17,6 +17,10 @@ public class Explosion : MonoBehaviour {
 
     }
 
+    public void WarningTrigger() {
+        _animator.SetTrigger("Show");
+    }
+
     public void Explode() {
         Debug.Log("Exploding");
         var target = Physics2D.OverlapCircle(transform.position, _radius, _playerLayer);
