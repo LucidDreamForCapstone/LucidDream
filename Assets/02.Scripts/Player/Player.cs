@@ -449,7 +449,7 @@ public class Player : MonoBehaviour {
 
     private async UniTaskVoid Phantom() {
         // Check Phantom Enable
-        if (!PlayerTriggerManager.Instance.CanUsePhantom || Time.timeScale == 0) {
+        if (!PhantomTrigger.Instance.CanUsePhantom || Time.timeScale == 0) {
             return;
         }
 

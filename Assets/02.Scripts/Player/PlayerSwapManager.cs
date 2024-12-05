@@ -21,6 +21,7 @@ public class PlayerSwapManager : MonoBehaviour {
 
     // UI �ؽ�Ʈ
     [SerializeField] string _message;
+    [SerializeField] string _message2;
     [SerializeField] Color _messageColor;
     private bool canSwap = true; // �÷��̾� ���� ���� ����
 
@@ -45,7 +46,7 @@ public class PlayerSwapManager : MonoBehaviour {
             }
         }
         else if (Input.GetKeyDown(KeyCode.F) && !canSwap) {
-            ShowMessage("���� �÷��̾ ������ �� �����ϴ�."); // ���� �Ұ��� �޽��� ǥ��
+            SystemMessageManager.Instance.PushSystemMessage(_message2, _messageColor);
         }
     }
 
