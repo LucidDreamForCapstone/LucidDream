@@ -198,6 +198,12 @@ MonoBehaviour:
   _phantomGaugeUseAmount: 16
   _phantomGaugeRecoverAmount: 8
   _phantomSlider: {fileID: 0}
+  _phantomGaugeColor:
+    serializedVersion: 2
+    rgba: 4294901889
+  _phantomGaugeReboundColor:
+    serializedVersion: 2
+    rgba: 4278452335
   _phantomGhostObj: {fileID: 6024089705646008288, guid: 6655b0effe23aca4aa9b651fd6a08362, type: 3}
   _phantomVolumeAnimator: {fileID: 8047837748155434033}
   _phantomGhostColor: {r: 0.8862745, g: 0.63529414, b: 1, a: 0.79607844}

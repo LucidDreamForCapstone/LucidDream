@@ -25,6 +25,8 @@ public class Player : MonoBehaviour {
     [SerializeField] private float _phantomGaugeUseAmount;
     [SerializeField] private float _phantomGaugeRecoverAmount;
     [SerializeField] private Slider _phantomSlider;
+    [SerializeField] private Color32 _phantomGaugeColor;
+    [SerializeField] private Color32 _phantomGaugeReboundColor;
     [SerializeField] private GameObject _phantomGhostObj;
     [SerializeField] private Animator _phantomVolumeAnimator;
     [SerializeField] private Color _phantomGhostColor;
@@ -87,6 +89,7 @@ public class Player : MonoBehaviour {
     private InGameUIController _controller;
     private bool _playerEnabled;
     private bool _isMessagePrinting;
+    private Image _phantomSliderFill;
     #endregion // private variable
 
 
@@ -130,6 +133,7 @@ public class Player : MonoBehaviour {
         _stunTime = 0;
         _slowRate = 0;
         _controller = FindObjectOfType<InGameUIController>();
+        _phantomSliderFill = _phantomSlider.fillRect.GetComponent<Image>();
         _playerEnabled = true;
         _isMessagePrinting = false;
     }
@@ -422,6 +426,7 @@ public class Player : MonoBehaviour {
                     _currentPhantomGauge -= _phantomGaugeUseAmount * Time.unscaledDeltaTime;
                 else {
                     _currentPhantomGauge = 0;
+                    _phantomSliderFill.color = _phantomGaugeReboundColor;
                     _phantomForceCancelTrigger = true;
                     _isPhantomLocked = true;
                 }
@@ -432,6 +437,9 @@ public class Player : MonoBehaviour {
                 }
                 else {
                     _currentPhantomGauge = 100;
+                    if (_isPhantomLocked) {
+                        _phantomSliderFill.color = _phantomGaugeColor;
+                    }
                     _isPhantomLocked = false;
                 }
             }
