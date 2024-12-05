@@ -13,7 +13,7 @@ public class LaserManager : MonoBehaviour
     [SerializeField]
     private GameObject dispenser;
     [SerializeField]
-    private Destination destination;
+    private List<Destination> destinations;
     [SerializeField]
     private float maxLaserLength = 10;
     [SerializeField]
@@ -45,11 +45,10 @@ public class LaserManager : MonoBehaviour
     void Update()
     {
         UpdateLasers();
-        if (isGameClear())
-        {
-            doorController.DoorOpenOnGameClear(true);
-        }
-        destination.DestCount = initialTargetLaserCount;
+        bool clear = isGameClear();
+        //Debug.Log(clear);
+        doorController.DoorOpenOnGameClear(clear);
+        ResetDestinations();
     }
 
     void SeparateLaser(List<Vector2> reflectDirections, Vector2 reflectorPosition, float magnitude)
@@ -132,6 +131,27 @@ public class LaserManager : MonoBehaviour
 
     public bool isGameClear()
     {
-        return destination.DestCount <= 0;
+        for (int i = 0; i < destinations.Count; i++)
+        {
+            // Debug.Log(i + "th destCnt is " + destinations[i].DestCount);
+        }
+        for (int i = 0; i < destinations.Count; i++)
+        {
+            //Debug.Log(i + "th destCnt is " + destinations[i].DestCount);
+            //Debug.Log(dest.DestCount);
+            if (destinations[i].DestCount >= 1)
+            {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    public void ResetDestinations()
+    {
+        foreach (Destination dest in destinations)
+        {
+            dest.DestCount = dest.TargetCount1;
+        }
     }
 }

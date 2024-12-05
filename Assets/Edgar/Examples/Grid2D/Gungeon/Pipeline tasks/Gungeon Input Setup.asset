@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f2b5b0d06428d324ea102b6e0f9672a0, type: 3}
   m_Name: Gungeon Input Setup
   m_EditorClassIdentifier: 
-  LevelGraph: {fileID: 11400000, guid: 37dc581fe87792744870c74ad44f33c3, type: 2}
+  LevelGraph: {fileID: 11400000, guid: e779be756bebf574ebdee9c2e257f3da, type: 2}
   UseRandomLevelGraph: 1
   Stage: 1
   Stage1LevelGraphs:
@@ -60,5 +60,7 @@ MonoBehaviour:
     - {fileID: 4281413025099981253, guid: 1dbd6a947114a6e43b8819ed72c246d2, type: 3}
     SecretRoomTemplates:
     - {fileID: 5887829826076179551, guid: 2480eef6a69cfd1419e429a8b8b66a18, type: 3}
+    PuzzleRoomTemplates:
+    - {fileID: 4281413025099981253, guid: 92a2ff90504ae46469ed0be950804097, type: 3}
   SecretRoomChance: 0.9
   SecretRoomDeadEndChance: 0.5

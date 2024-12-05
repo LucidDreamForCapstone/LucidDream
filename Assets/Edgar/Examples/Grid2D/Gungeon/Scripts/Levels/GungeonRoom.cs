@@ -45,6 +45,9 @@ namespace Edgar.Unity.Examples.Gungeon
                 case GungeonRoomType.Reward:
                     backgroundColor = new Color(102 / 256f, 0 / 256f, 204 / 256f);
                     break;
+                case GungeonRoomType.Puzzle:
+                    backgroundColor = new Color(102 / 256f, 0 / 256f, 204 / 256f);
+                    break;
             }
 
             style.BackgroundColor = backgroundColor;

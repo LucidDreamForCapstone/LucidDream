@@ -55,6 +55,7 @@ namespace Puzzle
                 // Debug.DrawRay(nextPos, nextDir * laserLength, Color.red, 0.1f);
                 if (hit)
                 {
+                    //Destination에 부딪혔을때
                     Destination dest = hit.transform.GetComponent<Destination>();
                     if (dest)
                     {
@@ -63,9 +64,11 @@ namespace Puzzle
                         laserPoints.Add(hit.transform.position);
                         break;
                     }
+
                     ReflectorInformation info = hit.transform.gameObject.GetComponent<ReflectorInformation>();
                     if (info != null && info.IsUsed == false)//거울에 부딪히면
                     {
+                        info.IsUsed = true;
                         Collider2D collider = hit.collider;
                         Vector2 reflectorPosition = hit.transform.position; //충돌 거울의 위치
                         ReflectorInformation reflector = hit.transform.gameObject.GetComponent<ReflectorInformation>();
@@ -81,7 +84,6 @@ namespace Puzzle
                             nextPos = LaserUtil.ToBoundary(reflectorPosition, reflectDirs[0], (collider.bounds.extents.magnitude));
                             nextDir = reflectDirs[0];
                         }
-                        info.IsUsed = true;
                     }
                 }
                 else //거울에 부딪히지 않으면
