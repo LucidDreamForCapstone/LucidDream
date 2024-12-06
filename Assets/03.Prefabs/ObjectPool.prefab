@@ -119,4 +119,6 @@ MonoBehaviour:
     _poolAmount: 100
   - _poolObj: {fileID: 952376227452689569, guid: 87227546723202f41b84539dbddee9d4, type: 3}
     _poolAmount: 200
+  - _poolObj: {fileID: 1797967961498958471, guid: 20744db310367894f8abee0065f5d86e, type: 3}
+    _poolAmount: 12
   _parent: {fileID: 8065133806954576645}

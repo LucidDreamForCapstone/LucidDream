@@ -15,6 +15,10 @@ public class TimeScaleManager : MonoBehaviour {
         _timeScaleStack = new Stack<float>();
     }
 
+    private void Update() {
+        Debug.Log("ÇöÀç TimeScale : " + Time.timeScale);
+    }
+
     public void TimeStop() {
         _timeScaleStack.Push(Time.timeScale);
         SoundManager.Instance.PauseSFX();

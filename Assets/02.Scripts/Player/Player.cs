@@ -472,6 +472,7 @@ public class Player : MonoBehaviour {
             SoundManager.Instance.SetSFXPitchLerp(1, _phantomLerpTime).Forget();
             _phantomVolumeAnimator.SetTrigger("End");
             await TimeScaleManager.Instance.TimeRestoreLerp(_phantomLerpTime);
+            await UniTask.Delay(TimeSpan.FromSeconds(0.5f - _phantomLerpTime));
             _phantomVolumeAnimator.gameObject.SetActive(false);
             Debug.Log("Phantom OFF");
             _isPhantomReady = true;

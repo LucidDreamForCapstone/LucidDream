@@ -225,7 +225,7 @@ MonoBehaviour:
   _monster: {fileID: 0}
   description: "\uD50C\uB808\uC774\uC5B4 \uCD94\uC801"
   _searchDist: 11
-  _attackDist: 6
+  _attackDist: 3
 --- !u!114 &6165308931858370620
 MonoBehaviour:
   m_ObjectHideFlags: 0

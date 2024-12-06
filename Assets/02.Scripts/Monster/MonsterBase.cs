@@ -106,7 +106,8 @@ public abstract class MonsterBase : DropableBase {
             }
             else {
                 ChangeColor().Forget();
-                _animator.SetTrigger("Damaged");
+                if (dmg > 0)
+                    _animator.SetTrigger("Damaged");
                 _hp -= dmg;
                 PlayRandomSound();
             }
