@@ -185,7 +185,7 @@ public class BossHades : MonsterBase {
 
     public static void ReturnGolemPosUsing(int index) { _isPosUsing[index] = false; }
 
-    public override void Damaged(int dmg, bool isCrit)//플레이어 공격에 데미지를 입음
+    public override void Damaged(int dmg, bool isCrit, bool isPoison = false)//플레이어 공격에 데미지를 입음
     {
         if (!_isSpawnComplete) {
             PlaySound(audioSource_awakeSound);

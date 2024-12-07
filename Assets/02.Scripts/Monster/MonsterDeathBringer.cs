@@ -51,7 +51,7 @@ public class MonsterDeathBringer : MonsterBase {
 
     #region public funcs
 
-    public override void Damaged(int dmg, bool isCrit) {
+    public override void Damaged(int dmg, bool isCrit, bool isPoison = false) {
         if (!_isDead && _isSpawnComplete) {
             FloatingDamageManager.Instance.ShowDamage(this.gameObject, dmg, false, isCrit, false);
 

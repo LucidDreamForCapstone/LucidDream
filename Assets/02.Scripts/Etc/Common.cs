@@ -19,13 +19,6 @@ public enum StageType {
     Fourth,
 }
 
-public enum MonsterType {
-    Monster1, // 전부 임시 내용
-    Monster2,
-    Monster3,
-    Monster4,
-}
-
 public enum CardRank {
     Normal,
     Rare,
@@ -66,8 +59,8 @@ public enum StateType {
     Fear,
     HealGreen,
     Paralysis,
-    Poision1,
-    Poision2,
+    Poison1,
+    Poison2,
     PowerUp,
     Relieve,
     ShinyStar,
@@ -105,6 +98,16 @@ public enum RoomLinkDir {
 
 public enum PressKey {
     Q, W, E, R, Space
+}
+
+public enum WeaponEssence {
+    None,
+    BloodSuck,
+    Ice,
+    Stun,
+    Poision,
+    AttFear,
+    DefFear
 }
 
 #endregion Definations

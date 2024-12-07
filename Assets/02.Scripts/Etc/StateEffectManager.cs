@@ -7,6 +7,7 @@ public class StateEffectManager : MonoBehaviour {
     private static StateEffectManager _instance;
 
     [SerializeField] List<GameObject> _stateObjs;
+    [SerializeField] Material _coldMat;
 
 
     #region properties
@@ -38,6 +39,10 @@ public class StateEffectManager : MonoBehaviour {
         }
         await UniTask.Delay(TimeSpan.FromSeconds(lastTime));
         Destroy(stateEffect);
+    }
+
+    public Material GetColdMat() {
+        return _coldMat;
     }
 
     #endregion

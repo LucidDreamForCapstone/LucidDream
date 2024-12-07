@@ -49,6 +49,10 @@ public abstract class ItemBase : MonoBehaviour, Interactable {
            .SetEase(Ease.OutCubic);
     }
 
+    /// <summary>
+    /// You MUST Override this function when you want this item as EQUIPMENT.
+    /// </summary>
+    /// <returns></returns>
     virtual public bool IsInteractBlock() {
         return true;
     }

@@ -46,7 +46,7 @@ public class FloatingDamageManager : MonoBehaviour {
 
     #region public funcs
 
-    public void ShowDamage(GameObject vr, int damage, bool isMine, bool isCrit, bool isHeal) {
+    public void ShowDamage(GameObject vr, int damage, bool isMine, bool isCrit, bool isHeal = false, bool isPoison = false) {
         //GameObject txtObject = ObjectPool.Instance.GetObject(_text);
         GameObject txtObject = Instantiate(_text);
         Vector3 uiPosition = Camera.main.WorldToScreenPoint(vr.transform.position);
@@ -54,7 +54,7 @@ public class FloatingDamageManager : MonoBehaviour {
         txtObject.transform.SetParent(GameObject.Find("Player1Canvas").transform);
         txtObject.transform.SetAsFirstSibling();
         txtObject.SetActive(true);
-        txtObject.GetComponent<FloatingText>().ShowDamage(damage, isMine, isCrit, isHeal);
+        txtObject.GetComponent<FloatingText>().ShowDamage(damage, isMine, isCrit, isHeal, isPoison);
     }
 
     #endregion // public funcs

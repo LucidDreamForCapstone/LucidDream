@@ -213,15 +213,9 @@ public class Player : MonoBehaviour {
         }
 
         monster.Damaged((int)(dmg * multiplier), isCrit);
-    }
 
-    // ���� 04.Dungeon���� �ٽ� �ε��ϴ� �Լ�
-    public void ReturnToDungeon() {
-        if (GungeonGameManager.Instance != null) {
-            GungeonGameManager.Instance.SetIsGenerating(true);
-            GungeonGameManager.Instance.Stage = 0;
-        }
-        GameSceneManager.Instance.LoadStageScene(1);
+        EssenceData essenceData = PlayerWeaponManager.Instance.GetEquippedEssence().GetEssenceData();
+        monster.ApplyEssenceFunc(essenceData);
     }
 
     public void NormalMagicalAttack(MonsterBase monster, float multiplier) {
@@ -233,6 +227,9 @@ public class Player : MonoBehaviour {
             dmg = 0;
 
         monster.Damaged((int)(dmg * multiplier), false);
+
+        EssenceData essenceData = PlayerWeaponManager.Instance.GetEquippedEssence().GetEssenceData();
+        monster.ApplyEssenceFunc(essenceData);
     }
 
     public void SpecialMagicalAttack(MonsterBase monster, float multiplier) {
@@ -257,8 +254,19 @@ public class Player : MonoBehaviour {
             dmg = 0;
 
         monster.Damaged((int)(dmg * multiplier), isCrit);
+
+        EssenceData essenceData = PlayerWeaponManager.Instance.GetEquippedEssence().GetEssenceData();
+        monster.ApplyEssenceFunc(essenceData);
     }
 
+    // ���� 04.Dungeon���� �ٽ� �ε��ϴ� �Լ�
+    public void ReturnToDungeon() {
+        if (GungeonGameManager.Instance != null) {
+            GungeonGameManager.Instance.SetIsGenerating(true);
+            GungeonGameManager.Instance.Stage = 0;
+        }
+        GameSceneManager.Instance.LoadStageScene(1);
+    }
     public void GetExp(int gainedExp) {
         int currentExp = PlayerDataManager.Instance.Status._exp;
         int level = PlayerDataManager.Instance.Status._playerLevel;

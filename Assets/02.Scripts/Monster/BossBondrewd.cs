@@ -179,7 +179,7 @@ public class BossBondrewd : MonsterBase {
         }
     }
 
-    public override void Damaged(int dmg, bool isCrit)//플레이어 공격에 데미지를 입음
+    public override void Damaged(int dmg, bool isCrit, bool isPoison = false)//플레이어 공격에 데미지를 입음
     {
         base.Damaged(dmg, isCrit);
         DecreaseGroggyGauge(_normalGroggyDecreaseAmount);
@@ -210,6 +210,10 @@ public class BossBondrewd : MonsterBase {
         else {
             SystemMessageManager.Instance.PushSystemMessage("보스가 일시적으로 스턴에 걸리지 않습니다.", Color.yellow);
         }
+    }
+
+    public async override UniTaskVoid Slow(float minusRate, float lastTime) {
+        await UniTask.NextFrame();
     }
 
     protected override async UniTaskVoid Die() {
