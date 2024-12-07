@@ -31,6 +31,7 @@ public class Bullet : MonoBehaviour {
     protected float _stunTime;
     protected float _slowTime;
     protected float _slowRate;
+    protected bool _isDead;
 
     #endregion //private variable
 
@@ -44,6 +45,7 @@ public class Bullet : MonoBehaviour {
         _rigid = GetComponent<Rigidbody2D>();
         _rigid.velocity = transform.right * _fireSpeed;
         _timer = 0;
+        _isDead = false;
     }
     private void Update() {
         Timer();
@@ -119,6 +121,7 @@ public class Bullet : MonoBehaviour {
 
 
     virtual protected void Die() {
+        _isDead = true;
         ObjectPool.Instance.ReturnObject(gameObject);
     }
     #endregion

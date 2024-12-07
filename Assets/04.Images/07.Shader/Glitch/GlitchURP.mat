@@ -44,7 +44,7 @@ Material:
     - _ColorDrift: 0.5
     - _EnableExternalAlpha: 0
     - _GlitchStrength: 0.5
-    - _Intensity: 0.0031131506
+    - _Intensity: 0.0031993985
     m_Colors:
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _Flip: {r: 1, g: 1, b: 1, a: 1}

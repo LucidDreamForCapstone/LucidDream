@@ -8280,7 +8280,7 @@ MonoBehaviour:
   _missileInterval: 2
   _missileCount: 3
   _missileSpeed: 8
-  _missileLastTime: 7
+  _missileLastTime: 7.4
   _homingStartTime: 1
   _homingLastTime: 5
   _missileDamage: 80

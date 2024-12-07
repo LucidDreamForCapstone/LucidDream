@@ -183,7 +183,7 @@ MonoBehaviour:
   _feverAmount: 25
   _missileObj: {fileID: 1797967961498958471, guid: 20744db310367894f8abee0065f5d86e, type: 3}
   _fireSpeed: 8
-  _fireLastTime: 7
+  _fireLastTime: 7.5
   _fireCoolTime: 10
   _homingStartTime: 1
   _homingLastTime: 5

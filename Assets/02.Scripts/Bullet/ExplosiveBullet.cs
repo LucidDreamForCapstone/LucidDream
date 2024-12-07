@@ -23,6 +23,7 @@ public class ExplosiveBullet : Bullet {
     }
 
     protected override void Die() {
+        _isDead = true;
         if (_targetType == TargetType.Monster) {
             var possibleTargets = Physics2D.OverlapCircleAll(transform.position, _explodeRadius, _monsterLayer);
             int i, length = possibleTargets.Length;
