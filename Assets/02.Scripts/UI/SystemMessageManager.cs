@@ -20,6 +20,7 @@ public class SystemMessageManager : MonoBehaviour {
     [SerializeField] AudioClip _dialogEndSound;
 
     List<string> _messages = new List<string>();
+    bool _isReady;
 
     private void Awake() {
         _messages.Add("네 정체가 무엇인지...");
@@ -31,6 +32,7 @@ public class SystemMessageManager : MonoBehaviour {
         _systemMessageTM.color = new Color(0, 0, 0, 0);
         _messageList = new List<SystemMessageData>();
         _isPrinting = false;
+        _isReady = true;
     }
 
     private void Update() {
@@ -58,8 +60,9 @@ public class SystemMessageManager : MonoBehaviour {
 
 
     public void PushSystemMessage(string message, Color color, bool withSound = true, float lastTime = 1.0f, float fadeTime = 0.6f) {
-        if (_messageList.Count == 0 || (_messageList.Count > 0 && _messageList.Last()._message != message)) {
+        if (_isReady && (_messageList.Count == 0 || (_messageList.Count > 0 && _messageList.Last()._message != message))) {
             _messageList.Add(new SystemMessageData(message, color, withSound, lastTime, fadeTime));
+            PushWait().Forget();
         }
     }
 
@@ -90,5 +93,11 @@ public class SystemMessageManager : MonoBehaviour {
             _dialogMessageTM.text += words[i] + " ";
             await UniTask.Delay(TimeSpan.FromSeconds(delay), ignoreTimeScale: true);
         }
+    }
+
+    private async UniTaskVoid PushWait() {
+        _isReady = false;
+        await UniTask.Delay(TimeSpan.FromSeconds(0.2f));
+        _isReady = true;
     }
 }

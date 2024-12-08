@@ -8,7 +8,7 @@ public class Pillar : MonsterBase {
 
     #region mono funcs
 
-    private void Update() {
+    new private void Update() {
         ChangeLayer();
         UpdatePillarState();
     }
