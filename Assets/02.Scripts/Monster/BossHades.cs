@@ -251,6 +251,34 @@ public class BossHades : MonsterBase {
         _cts = null;
         PlayerDataManager.Instance.SetFeverGauge(PlayerDataManager.Instance.Status._feverGauge + _feverAmount);
     }
+
+    public async override UniTaskVoid Stun(float lastTime, float offsetY = 4f, float scale = 2) {
+        SystemMessageManager.Instance.PushSystemMessage("상대의 격이 높아 스턴이 유효하지 않습니다.", Color.yellow);
+        await UniTask.NextFrame();
+    }
+
+    public async override UniTaskVoid Cold(float minusRate, float lastTime, float scale = 3) {
+        await UniTask.NextFrame();
+    }
+
+    public async override UniTaskVoid AttFear(float minusRate, float lastTime, float offsetY = 0, float scale = 3) {
+        base.AttFear(minusRate, lastTime, 3, 3).Forget();
+        await UniTask.NextFrame();
+    }
+    public async override UniTaskVoid DefFear(float minusRate, float lastTime, float offsetY = 0, float scale = 3) {
+        base.DefFear(minusRate, lastTime, 3, 3).Forget();
+        await UniTask.NextFrame();
+    }
+
+    public async override UniTaskVoid Poison(int tickDamage, int tickCount, float tickTime, float scale = 4) {
+        base.Poison(tickDamage, tickCount, tickTime, 4).Forget();
+        await UniTask.NextFrame();
+    }
+
+    public async override UniTaskVoid BloodSuck(float healPercent, float offsetY = 1, float scale = 3) {
+        base.BloodSuck(healPercent, 3, 3).Forget();
+        await UniTask.NextFrame();
+    }
     #endregion
 
 

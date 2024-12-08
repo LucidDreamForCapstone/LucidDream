@@ -57,6 +57,7 @@ public enum StateType {
     FastHeal,
     FastSpeed,
     Fear,
+    Fear2,
     HealGreen,
     Paralysis,
     Poison1,

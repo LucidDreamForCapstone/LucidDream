@@ -77,6 +77,7 @@ public class PlayerDataManager : MonoBehaviour {
         int currentHp = _status._hp;
         int afterHp = currentHp + healAmount;
         int maxHp = _status._maxHp;
+        StateEffectManager.Instance.SummonEffect(_player.transform, StateType.FastHeal, 0, 1).Forget();
         if (afterHp > maxHp) {
             afterHp = maxHp;
             FloatingDamageManager.Instance.ShowDamage(_player, maxHp - currentHp, true, false, true);
@@ -92,6 +93,7 @@ public class PlayerDataManager : MonoBehaviour {
         int currentMaxHp = _status._maxHp;
         int healAmount = (int)(currentMaxHp * percent * 0.01f);
         int afterHp = currentHp + healAmount;
+        StateEffectManager.Instance.SummonEffect(_player.transform, StateType.FastHeal, 0, 1).Forget();
         if (afterHp > currentMaxHp) {
             afterHp = currentMaxHp;
             FloatingDamageManager.Instance.ShowDamage(_player, currentMaxHp - currentHp, true, false, true);

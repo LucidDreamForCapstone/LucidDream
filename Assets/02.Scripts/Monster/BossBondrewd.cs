@@ -198,10 +198,10 @@ public class BossBondrewd : MonsterBase {
         UpdateHpSlider();
     }
 
-    public async override UniTaskVoid Stun(float lastTime, float offsetY = 2) {
+    public async override UniTaskVoid Stun(float lastTime, float offsetY = 2.5f, float scale = 2) {
         if (!_isChainExplosionActivated) {
             _cts.Cancel();
-            base.Stun(lastTime, 2).Forget();
+            base.Stun(lastTime, 2.5f, 2).Forget();
             await UniTask.Delay(TimeSpan.FromSeconds(lastTime));
             _cts.Dispose();
             _cts = null;
@@ -212,7 +212,26 @@ public class BossBondrewd : MonsterBase {
         }
     }
 
-    public async override UniTaskVoid Slow(float minusRate, float lastTime) {
+    public async override UniTaskVoid Cold(float minusRate, float lastTime, float scale = 3) {
+        await UniTask.NextFrame();
+    }
+
+    public async override UniTaskVoid AttFear(float minusRate, float lastTime, float offsetY = 0, float scale = 3) {
+        base.AttFear(minusRate, lastTime, 0, 3).Forget();
+        await UniTask.NextFrame();
+    }
+    public async override UniTaskVoid DefFear(float minusRate, float lastTime, float offsetY = 0, float scale = 3) {
+        base.DefFear(minusRate, lastTime, 0, 3).Forget();
+        await UniTask.NextFrame();
+    }
+
+    public async override UniTaskVoid Poison(int tickDamage, int tickCount, float tickTime, float scale = 4) {
+        base.Poison(tickDamage, tickCount, tickTime, 4).Forget();
+        await UniTask.NextFrame();
+    }
+
+    public async override UniTaskVoid BloodSuck(float healPercent, float offsetY = 1, float scale = 3) {
+        base.BloodSuck(healPercent, 1, 3).Forget();
         await UniTask.NextFrame();
     }
 

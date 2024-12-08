@@ -129,26 +129,26 @@ public abstract class MonsterBase : DropableBase {
             _playerScript.Damaged(_bodyDamage);
     }
 
-    virtual public async UniTaskVoid Stun(float lastTime, float offsetY = 1) {
+    virtual public async UniTaskVoid Stun(float lastTime, float offsetY = 1, float scale = 1) {
         _isStun = true;
         if (_stunCache.Count > 0)
             _stunCache.Push(true);
         else
             _stunCache.Push(false);
-        StateEffectManager.Instance.SummonEffect(transform, StateType.Stuned, offsetY, lastTime).Forget();
+        StateEffectManager.Instance.SummonEffect(transform, StateType.Stuned, offsetY, lastTime, scale).Forget();
         await UniTask.Delay(TimeSpan.FromSeconds(lastTime));
         _isStun = _stunCache.Pop();
     }
 
-    virtual public async UniTaskVoid Slow(float minusRate, float lastTime) {
+    virtual public async UniTaskVoid Slow(float minusRate, float lastTime, float scale = 1) {
         float minusSpeed = _moveSpeed * minusRate * 0.01f;
         _slowCache.Push(_moveSpeed);
         _moveSpeed -= minusSpeed;
-        StateEffectManager.Instance.SummonEffect(transform, StateType.SlowDown, 0, lastTime).Forget();
+        StateEffectManager.Instance.SummonEffect(transform, StateType.SlowDown, 0, lastTime, scale).Forget();
         await UniTask.Delay(TimeSpan.FromSeconds(lastTime));
         _moveSpeed = _slowCache.Pop();
     }
-    public async UniTaskVoid Cold(float minusRate, float lastTime) {
+    virtual public async UniTaskVoid Cold(float minusRate, float lastTime, float scale = 1) {
         float minusSpeed = _moveSpeed * minusRate * 0.01f;
         _slowCache.Push(_moveSpeed);
         if (_spriteRenderer != null) {
@@ -156,7 +156,7 @@ public abstract class MonsterBase : DropableBase {
             _spriteRenderer.material = StateEffectManager.Instance.GetColdMat();
         }
         _moveSpeed -= minusSpeed;
-        StateEffectManager.Instance.SummonEffect(transform, StateType.ColdSnow, 0, lastTime).Forget();
+        StateEffectManager.Instance.SummonEffect(transform, StateType.ColdSnow, 0, lastTime, scale).Forget();
         await UniTask.Delay(TimeSpan.FromSeconds(lastTime));
         if (_spriteRenderer != null) {
             _spriteRenderer.material = _coldCache.Pop();
@@ -165,35 +165,35 @@ public abstract class MonsterBase : DropableBase {
     }
 
 
-    public async UniTaskVoid AttFear(float minusRate, float lastTime, float offsetY = 1) {
+    virtual public async UniTaskVoid AttFear(float minusRate, float lastTime, float offsetY = 1, float scale = 1) {
         float minusAtt = _damage * minusRate * 0.01f;
         _attCache.Push(_damage);
         _damage -= (int)minusAtt;
-        StateEffectManager.Instance.SummonEffect(transform, StateType.Fear, offsetY, lastTime).Forget();
+        StateEffectManager.Instance.SummonEffect(transform, StateType.Fear2, offsetY, lastTime, scale).Forget();
         await UniTask.Delay(TimeSpan.FromSeconds(lastTime));
         _damage = _attCache.Pop();
     }
-    public async UniTaskVoid DefFear(float minusRate, float lastTime, float offsetY = 1) {
+    virtual public async UniTaskVoid DefFear(float minusRate, float lastTime, float offsetY = 1, float scale = 1) {
         float minusAtt = _def * minusRate * 0.01f;
         _defCache.Push(_def);
         _def -= (int)minusAtt;
-        StateEffectManager.Instance.SummonEffect(transform, StateType.Fear, offsetY, lastTime).Forget();
+        StateEffectManager.Instance.SummonEffect(transform, StateType.Fear, offsetY, lastTime, scale).Forget();
         await UniTask.Delay(TimeSpan.FromSeconds(lastTime));
         _def = _defCache.Pop();
     }
 
-    public async UniTaskVoid Poison(int tickDamage, int tickCount, float tickTime, float offsetY = 1) {
-        StateEffectManager.Instance.SummonEffect(transform, StateType.Poison1, offsetY, tickTime * tickCount).Forget();
+    virtual public async UniTaskVoid Poison(int tickDamage, int tickCount, float tickTime, float scale = 1) {
+        StateEffectManager.Instance.SummonEffect(transform, StateType.Poison1, 0, tickTime * tickCount, scale).Forget();
         for (int i = 0; i < tickCount; i++) {
             Damaged(tickDamage, false, true);
             await UniTask.Delay(TimeSpan.FromSeconds(tickTime));
         }
     }
 
-    public async UniTaskVoid BloodSuck(float healPercent, float offsetY = 1) {
-        StateEffectManager.Instance.SummonEffect(transform, StateType.BloodRage, offsetY, 1.5f).Forget();
+    virtual public async UniTaskVoid BloodSuck(float healPercent, float offsetY = 1, float scale = 1) {
+        StateEffectManager.Instance.SummonEffect(transform, StateType.BloodRage, offsetY, 1.5f, scale).Forget();
         await UniTask.Delay(TimeSpan.FromSeconds(1));
-        StateEffectManager.Instance.SummonEffect(_playerScript.transform, StateType.SuckBlood, 0, 0.7f).Forget();
+        StateEffectManager.Instance.SummonEffect(_playerScript.transform, StateType.SuckBlood, 0, 0.7f, scale).Forget();
         PlayerDataManager.Instance.HealPercent((int)healPercent);
     }
 
