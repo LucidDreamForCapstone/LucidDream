@@ -127,7 +127,7 @@ public class Turret : MonsterBase {
         _useTree = false;
         _animator.SetTrigger("GroggyStart");
         StateEffectManager.Instance.SummonEffect(transform, StateType.Confusion, 0.5f, 10).Forget();
-        _def -= 9800;
+        _def = 200;
     }
 
     private void UpdateGroggySlider() {
