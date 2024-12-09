@@ -8,11 +8,12 @@ public class FloatingText : MonoBehaviour {
     [SerializeField] TMP_FontAsset _critFont;
     [SerializeField] TMP_FontAsset _damagedFont;
     [SerializeField] TMP_FontAsset _healFont;
+    [SerializeField] TMP_FontAsset _poisonFont;
     [SerializeField] float _lastTime;
 
 
 
-    public void ShowDamage(int damage, bool isMine, bool isCrit, bool isHeal) {
+    public void ShowDamage(int damage, bool isMine, bool isCrit, bool isHeal, bool isPoison) {
         if (isMine) {
             if (isHeal)
                 _text.font = _healFont;
@@ -28,6 +29,11 @@ public class FloatingText : MonoBehaviour {
             else
                 _text.font = _noCritFont;
         }
+
+        if (isPoison) {
+            _text.font = _poisonFont;
+        }
+
         _text.text = damage.ToString();
 
     }

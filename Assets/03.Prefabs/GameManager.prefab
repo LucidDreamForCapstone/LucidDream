@@ -154,6 +154,7 @@ MonoBehaviour:
   - {fileID: 6283534012883352750, guid: f187fdd8ef452c840a23b8d6ce067b93, type: 3}
   - {fileID: 4306228554085981334, guid: 016afa9ba6078f843b4b5e909920dc85, type: 3}
   - {fileID: 702981894718865960, guid: f2c45c8ee47dc9148a3b2c1e104f0d43, type: 3}
+  - {fileID: 702981894718865960, guid: c929ee5e8c5cec44da8753dc4a9be9ab, type: 3}
   - {fileID: 904651187185394017, guid: 4dd331fb59a25234dbec6c9e87083bcc, type: 3}
   - {fileID: 5326185835649482493, guid: 98bece6d1828bfc469437cfbc1241023, type: 3}
   - {fileID: 6092117211213480904, guid: a18e3a522541b4ade984b6ed092f2e99, type: 3}
@@ -166,6 +167,7 @@ MonoBehaviour:
   - {fileID: 792317746891172702, guid: 1035a68f2489f42a3b88c70cca0d5435, type: 3}
   - {fileID: 4618771074998799583, guid: 619d0cf90a7ea3541a7fcab33fad7968, type: 3}
   - {fileID: 841143154332405800, guid: fbe02ab71561c8240b1d53c97c898aa3, type: 3}
+  _coldMat: {fileID: 2100000, guid: 66410b03b9683884894631a67ff16aa7, type: 2}
 --- !u!114 &3466549801065252712
 MonoBehaviour:
   m_ObjectHideFlags: 0

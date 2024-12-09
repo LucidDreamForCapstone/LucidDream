@@ -56,7 +56,15 @@ public abstract class MonsterBase : DropableBase {
     #endregion //protected variable
 
 
+    #region private variable
 
+    Stack<bool> _stunCache = new Stack<bool>();
+    Stack<float> _slowCache = new Stack<float>();
+    Stack<Material> _coldCache = new Stack<Material>();
+    Stack<int> _attCache = new Stack<int>();
+    Stack<int> _defCache = new Stack<int>();
+
+    #endregion
 
     #region mono funcs
 
@@ -97,16 +105,17 @@ public abstract class MonsterBase : DropableBase {
 
     #region public funcs
 
-    virtual public void Damaged(int dmg, bool isCrit) {
+    virtual public void Damaged(int dmg, bool isCrit, bool isPoison = false) {
         if (!_isDead && _isSpawnComplete) {
-            FloatingDamageManager.Instance.ShowDamage(this.gameObject, dmg, false, isCrit, false);
+            FloatingDamageManager.Instance.ShowDamage(this.gameObject, dmg, false, isCrit, isPoison);
 
             if (_hp <= dmg) {
                 Die().Forget();
             }
             else {
                 ChangeColor().Forget();
-                _animator.SetTrigger("Damaged");
+                if (dmg > 0)
+                    _animator.SetTrigger("Damaged");
                 _hp -= dmg;
                 PlayRandomSound();
             }
@@ -120,19 +129,100 @@ public abstract class MonsterBase : DropableBase {
             _playerScript.Damaged(_bodyDamage);
     }
 
-    virtual public async UniTaskVoid Stun(float lastTime, float offsetY = 1) {
+    virtual public async UniTaskVoid Stun(float lastTime, float offsetY = 1, float scale = 1) {
         _isStun = true;
-        StateEffectManager.Instance.SummonEffect(transform, StateType.Stuned, offsetY, lastTime).Forget();
+        if (_stunCache.Count > 0)
+            _stunCache.Push(true);
+        else
+            _stunCache.Push(false);
+        StateEffectManager.Instance.SummonEffect(transform, StateType.Stuned, offsetY, lastTime, scale).Forget();
         await UniTask.Delay(TimeSpan.FromSeconds(lastTime));
-        _isStun = false;
+        _isStun = _stunCache.Pop();
     }
 
-    public async UniTaskVoid Slow(float minusRate, float lastTime) {
+    virtual public async UniTaskVoid Slow(float minusRate, float lastTime, float scale = 1) {
         float minusSpeed = _moveSpeed * minusRate * 0.01f;
+        _slowCache.Push(_moveSpeed);
         _moveSpeed -= minusSpeed;
-        StateEffectManager.Instance.SummonEffect(transform, StateType.SlowDown, 0, lastTime).Forget();
+        StateEffectManager.Instance.SummonEffect(transform, StateType.SlowDown, 0, lastTime, scale).Forget();
         await UniTask.Delay(TimeSpan.FromSeconds(lastTime));
-        _moveSpeed += minusSpeed;
+        _moveSpeed = _slowCache.Pop();
+    }
+    virtual public async UniTaskVoid Cold(float minusRate, float lastTime, float scale = 1) {
+        float minusSpeed = _moveSpeed * minusRate * 0.01f;
+        _slowCache.Push(_moveSpeed);
+        if (_spriteRenderer != null) {
+            _coldCache.Push(_spriteRenderer.material);
+            _spriteRenderer.material = StateEffectManager.Instance.GetColdMat();
+        }
+        _moveSpeed -= minusSpeed;
+        StateEffectManager.Instance.SummonEffect(transform, StateType.ColdSnow, 0, lastTime, scale).Forget();
+        await UniTask.Delay(TimeSpan.FromSeconds(lastTime));
+        if (_spriteRenderer != null) {
+            _spriteRenderer.material = _coldCache.Pop();
+        }
+        _moveSpeed = _slowCache.Pop();
+    }
+
+
+    virtual public async UniTaskVoid AttFear(float minusRate, float lastTime, float offsetY = 1, float scale = 1) {
+        float minusAtt = _damage * minusRate * 0.01f;
+        _attCache.Push(_damage);
+        _damage -= (int)minusAtt;
+        StateEffectManager.Instance.SummonEffect(transform, StateType.Fear2, offsetY, lastTime, scale).Forget();
+        await UniTask.Delay(TimeSpan.FromSeconds(lastTime));
+        _damage = _attCache.Pop();
+    }
+    virtual public async UniTaskVoid DefFear(float minusRate, float lastTime, float offsetY = 1, float scale = 1) {
+        float minusAtt = _def * minusRate * 0.01f;
+        _defCache.Push(_def);
+        _def -= (int)minusAtt;
+        StateEffectManager.Instance.SummonEffect(transform, StateType.Fear, offsetY, lastTime, scale).Forget();
+        await UniTask.Delay(TimeSpan.FromSeconds(lastTime));
+        _def = _defCache.Pop();
+    }
+
+    virtual public async UniTaskVoid Poison(int tickDamage, int tickCount, float tickTime, float scale = 1) {
+        StateEffectManager.Instance.SummonEffect(transform, StateType.Poison1, 0, tickTime * tickCount, scale).Forget();
+        for (int i = 0; i < tickCount; i++) {
+            Damaged(tickDamage, false, true);
+            await UniTask.Delay(TimeSpan.FromSeconds(tickTime));
+        }
+    }
+
+    virtual public async UniTaskVoid BloodSuck(float healPercent, float offsetY = 1, float scale = 1) {
+        StateEffectManager.Instance.SummonEffect(transform, StateType.BloodRage, offsetY, 1.5f, scale).Forget();
+        await UniTask.Delay(TimeSpan.FromSeconds(1));
+        StateEffectManager.Instance.SummonEffect(_playerScript.transform, StateType.SuckBlood, 0, 0.7f, scale).Forget();
+        PlayerDataManager.Instance.HealPercent((int)healPercent);
+    }
+
+    public void ApplyEssenceFunc(EssenceData data) {
+        bool success = UnityEngine.Random.Range(0.0f, 100.0f) < data.chance;
+        if (success) {
+            switch (data.type) {
+                case WeaponEssence.None:
+                    break;
+                case WeaponEssence.Stun:
+                    Stun(data.lastTime).Forget();
+                    break;
+                case WeaponEssence.Ice:
+                    Cold(data.ratio, data.lastTime).Forget();
+                    break;
+                case WeaponEssence.AttFear:
+                    AttFear(data.ratio, data.lastTime).Forget();
+                    break;
+                case WeaponEssence.DefFear:
+                    DefFear(data.ratio, data.lastTime).Forget();
+                    break;
+                case WeaponEssence.BloodSuck:
+                    BloodSuck(data.ratio).Forget();
+                    break;
+                case WeaponEssence.Poision:
+                    Poison(data.tickDamage, data.tickCount, data.tickTime).Forget();
+                    break;
+            }
+        }
     }
 
     public bool CheckBoss() { return _isBoss; }

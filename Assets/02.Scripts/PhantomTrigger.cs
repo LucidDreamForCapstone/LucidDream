@@ -1,7 +1,6 @@
 using UnityEngine;
 
-public class PhantomTrigger : MonoBehaviour
-{
+public class PhantomTrigger : MonoBehaviour {
     public static PhantomTrigger Instance { get; private set; }
 
     private bool _canUsePhantom = false; // ÆÒÅÒ »ç¿ë °¡´É ¿©ºÎ

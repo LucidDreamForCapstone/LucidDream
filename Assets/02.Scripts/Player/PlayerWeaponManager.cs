@@ -16,8 +16,7 @@ public class PlayerWeaponManager : MonoBehaviour {
     #region serialized field
 
     [SerializeField] WeaponBase _equippedWeapon;
-    //[SerializeField] Vector2 _weaponPos;
-
+    [SerializeField] Essence _equippedEssence;
     [SerializeField] private InGameUIController _inGameUIController;
     [SerializeField] string _warningMessage;
     [SerializeField] Color _cooldownWarningTextColor;
@@ -116,6 +115,26 @@ public class PlayerWeaponManager : MonoBehaviour {
         }
     }
 
+    public void EssenceChanged(Essence changedEssence) {
+        DropEquippedEssence();
+        //새 스톤 장착.
+        _equippedEssence = changedEssence;
+        changedEssence.transform.SetParent(transform);
+        changedEssence.tag = "Untagged";
+        changedEssence.gameObject.SetActive(false);
+        changedEssence.SetEquipState(true);
+    }
+
+    public void DropEquippedEssence() {
+        _equippedEssence.transform.SetParent(null);
+        _equippedEssence.transform.rotation = Quaternion.identity;
+        _equippedEssence.tag = "PooledItem";
+        _equippedEssence.gameObject.SetActive(true);
+        _equippedEssence.Drop();
+        _equippedEssence.SetEquipState(false);
+    }
+
+
     public void BasicAttack() { //Animation Event에 연동하는 용도
         _equippedWeapon.BasicAttack();
     }
@@ -133,6 +152,8 @@ public class PlayerWeaponManager : MonoBehaviour {
     }
 
     public WeaponBase GetEquippedWeapon() { return _equippedWeapon; }
+
+    public Essence GetEquippedEssence() { return _equippedEssence; }
 
     #endregion //public funcs
 

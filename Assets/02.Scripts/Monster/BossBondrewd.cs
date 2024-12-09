@@ -179,7 +179,7 @@ public class BossBondrewd : MonsterBase {
         }
     }
 
-    public override void Damaged(int dmg, bool isCrit)//플레이어 공격에 데미지를 입음
+    public override void Damaged(int dmg, bool isCrit, bool isPoison = false)//플레이어 공격에 데미지를 입음
     {
         base.Damaged(dmg, isCrit);
         DecreaseGroggyGauge(_normalGroggyDecreaseAmount);
@@ -198,10 +198,10 @@ public class BossBondrewd : MonsterBase {
         UpdateHpSlider();
     }
 
-    public async override UniTaskVoid Stun(float lastTime, float offsetY = 2) {
+    public async override UniTaskVoid Stun(float lastTime, float offsetY = 2.5f, float scale = 2) {
         if (!_isChainExplosionActivated) {
             _cts.Cancel();
-            base.Stun(lastTime, 2).Forget();
+            base.Stun(lastTime, 2.5f, 2).Forget();
             await UniTask.Delay(TimeSpan.FromSeconds(lastTime));
             _cts.Dispose();
             _cts = null;
@@ -210,6 +210,29 @@ public class BossBondrewd : MonsterBase {
         else {
             SystemMessageManager.Instance.PushSystemMessage("보스가 일시적으로 스턴에 걸리지 않습니다.", Color.yellow);
         }
+    }
+
+    public async override UniTaskVoid Cold(float minusRate, float lastTime, float scale = 3) {
+        await UniTask.NextFrame();
+    }
+
+    public async override UniTaskVoid AttFear(float minusRate, float lastTime, float offsetY = 0, float scale = 3) {
+        base.AttFear(minusRate, lastTime, 0, 3).Forget();
+        await UniTask.NextFrame();
+    }
+    public async override UniTaskVoid DefFear(float minusRate, float lastTime, float offsetY = 0, float scale = 3) {
+        base.DefFear(minusRate, lastTime, 0, 3).Forget();
+        await UniTask.NextFrame();
+    }
+
+    public async override UniTaskVoid Poison(int tickDamage, int tickCount, float tickTime, float scale = 4) {
+        base.Poison(tickDamage, tickCount, tickTime, 4).Forget();
+        await UniTask.NextFrame();
+    }
+
+    public async override UniTaskVoid BloodSuck(float healPercent, float offsetY = 1, float scale = 3) {
+        base.BloodSuck(healPercent, 1, 3).Forget();
+        await UniTask.NextFrame();
     }
 
     protected override async UniTaskVoid Die() {

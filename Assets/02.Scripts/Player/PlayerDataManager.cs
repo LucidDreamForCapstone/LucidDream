@@ -1,6 +1,4 @@
 using UnityEngine;
-using Cysharp.Threading.Tasks;
-using System;
 
 public class PlayerDataManager : MonoBehaviour {
     #region private variable
@@ -79,6 +77,7 @@ public class PlayerDataManager : MonoBehaviour {
         int currentHp = _status._hp;
         int afterHp = currentHp + healAmount;
         int maxHp = _status._maxHp;
+        StateEffectManager.Instance.SummonEffect(_player.transform, StateType.FastHeal, 0, 1).Forget();
         if (afterHp > maxHp) {
             afterHp = maxHp;
             FloatingDamageManager.Instance.ShowDamage(_player, maxHp - currentHp, true, false, true);
@@ -91,12 +90,13 @@ public class PlayerDataManager : MonoBehaviour {
 
     public void HealPercent(int percent) {
         int currentHp = _status._hp;
-        int healAmount = (int)(currentHp * percent * 0.01f);
+        int currentMaxHp = _status._maxHp;
+        int healAmount = (int)(currentMaxHp * percent * 0.01f);
         int afterHp = currentHp + healAmount;
-        int maxHp = _status._maxHp;
-        if (afterHp > maxHp) {
-            afterHp = maxHp;
-            FloatingDamageManager.Instance.ShowDamage(_player, maxHp - currentHp, true, false, true);
+        StateEffectManager.Instance.SummonEffect(_player.transform, StateType.FastHeal, 0, 1).Forget();
+        if (afterHp > currentMaxHp) {
+            afterHp = currentMaxHp;
+            FloatingDamageManager.Instance.ShowDamage(_player, currentMaxHp - currentHp, true, false, true);
         }
         else {
             FloatingDamageManager.Instance.ShowDamage(_player, healAmount, true, false, true);

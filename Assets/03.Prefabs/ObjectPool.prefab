@@ -119,4 +119,30 @@ MonoBehaviour:
     _poolAmount: 100
   - _poolObj: {fileID: 952376227452689569, guid: 87227546723202f41b84539dbddee9d4, type: 3}
     _poolAmount: 200
+  - _poolObj: {fileID: 1797967961498958471, guid: 20744db310367894f8abee0065f5d86e, type: 3}
+    _poolAmount: 12
+  - _poolObj: {fileID: 6047745925622623069, guid: c3c13dc95228db1499e0b859239b8dcb, type: 3}
+    _poolAmount: 10
+  - _poolObj: {fileID: 3500716517051964995, guid: e357dc7db8b5b1941af3dbc0bba78400, type: 3}
+    _poolAmount: 10
+  - _poolObj: {fileID: 2743696471722709249, guid: 469e23093e83070488b59e5bc0def50a, type: 3}
+    _poolAmount: 10
+  - _poolObj: {fileID: 4793146494071163640, guid: e4c0267f783e6074280783641776148d, type: 3}
+    _poolAmount: 10
+  - _poolObj: {fileID: 7417691414287874527, guid: 39b802baf553bd6418a63f8270ec40bd, type: 3}
+    _poolAmount: 10
+  - _poolObj: {fileID: 7951606440251269879, guid: 7092ee46376f71e45946e90582cecc50, type: 3}
+    _poolAmount: 10
+  - _poolObj: {fileID: 7291689205965388434, guid: fc3fb9986f6f8f945974a053d6796183, type: 3}
+    _poolAmount: 10
+  - _poolObj: {fileID: 6889080081183237366, guid: a1e83aca65afb404d8061da96c5031ab, type: 3}
+    _poolAmount: 10
+  - _poolObj: {fileID: 3193260048699378823, guid: 5883a8f670de02f4a909fc98f0bd7403, type: 3}
+    _poolAmount: 10
+  - _poolObj: {fileID: 1234095826422286388, guid: d03fa1358fa90534c85bdb36d4e88e72, type: 3}
+    _poolAmount: 10
+  - _poolObj: {fileID: 8731645434347314065, guid: 3debcdfbdfb2d2c41ba21f161b8b56de, type: 3}
+    _poolAmount: 10
+  - _poolObj: {fileID: 6316021950744477793, guid: 4818a41a862a6fa488c5b637e01217f1, type: 3}
+    _poolAmount: 10
   _parent: {fileID: 8065133806954576645}

@@ -117,7 +117,6 @@ public class InteractManager : MonoBehaviour {
         }
         else {
             _interactTarget = null;
-
             if (currentWeaponItem != null) {
                 currentWeaponItem.HideText();
                 currentWeaponItem = null;

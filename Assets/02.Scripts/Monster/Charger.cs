@@ -30,7 +30,7 @@ public class Charger : MonsterBase {
         }
     }
 
-    public override void Damaged(int dmg, bool isCrit) {
+    public override void Damaged(int dmg, bool isCrit, bool isPoison = false) {
         if (_isShieldActivated) {
             dmg = 0;
         }
