@@ -24,6 +24,10 @@ public class OptionManager : MonoBehaviour {
         return _brightnessVolume.weight;
     }
 
+    public Volume GetBrightnessVolume() {
+        return _brightnessVolume;
+    }
+
     private void SaveOptionData() {
         ES3File es3File = new ES3File("OptionData.es3");
         es3File.Save("brightness", _brightnessVolume.weight);
