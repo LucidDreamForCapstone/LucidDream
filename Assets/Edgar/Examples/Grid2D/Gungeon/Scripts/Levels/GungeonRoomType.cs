@@ -14,6 +14,7 @@
         Secret,
         Puzzle,
         Tutorial,
-        Bondrewd
+        Bondrewd,
+        Statue
     }
 }

@@ -218,7 +218,7 @@ public abstract class MonsterBase : DropableBase {
                 case WeaponEssence.BloodSuck:
                     BloodSuck(data.ratio).Forget();
                     break;
-                case WeaponEssence.Poision:
+                case WeaponEssence.Poison:
                     Poison(data.tickDamage, data.tickCount, data.tickTime).Forget();
                     break;
             }

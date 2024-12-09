@@ -45,6 +45,12 @@ public class InGameUIController : MonoBehaviour {
 
     [SerializeField] private Sprite lockedSkillImage;
 
+    [SerializeField] Image _essenceImage;
+    [SerializeField] GameObject _essenceDescriptionUI;
+    [SerializeField] TextMeshProUGUI _essenceDescriptionTM;
+    [SerializeField] TextMeshProUGUI _essenceTitleTM;
+    [SerializeField] List<Color> _essenceTextColorList;
+
 
     #endregion // serialized field
 
@@ -242,6 +248,14 @@ public class InGameUIController : MonoBehaviour {
             TimeScaleManager.Instance.TimeRestore();
             _cardUIController.SetHide();
         }
+    }
+
+    public void UpdateEssenceUI() {
+        Essence essence = PlayerWeaponManager.Instance.GetEquippedEssence();
+        _essenceImage.sprite = essence.GetMainEssenceSprite();
+        _essenceTitleTM.text = essence.GetEssenceTitle();
+        _essenceTitleTM.color = _essenceTextColorList[(int)essence.GetEssenceData().rank];
+        _essenceDescriptionTM.text = essence.GetEssenceDescription();
     }
 
 

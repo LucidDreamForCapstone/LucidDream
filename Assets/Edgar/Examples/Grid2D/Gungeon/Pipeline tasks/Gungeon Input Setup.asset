@@ -66,5 +66,7 @@ MonoBehaviour:
     - {fileID: 4281413025099981253, guid: 92a2ff90504ae46469ed0be950804097, type: 3}
     BondrewdRoomTemplates:
     - {fileID: 0}
+    StatueRoomTemplates:
+    - {fileID: 4281413025099981253, guid: 66e37fd4c401bc44ebf0796892972429, type: 3}
   SecretRoomChance: 0.9
   SecretRoomDeadEndChance: 0.5

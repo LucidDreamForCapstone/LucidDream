@@ -106,7 +106,7 @@ public enum WeaponEssence {
     BloodSuck,
     Ice,
     Stun,
-    Poision,
+    Poison,
     AttFear,
     DefFear
 }

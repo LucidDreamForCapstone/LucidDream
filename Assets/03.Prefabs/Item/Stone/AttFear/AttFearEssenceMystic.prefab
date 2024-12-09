@@ -150,7 +150,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8b5c66e5f11bd7549b91c1ab020182cb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _attribute: 5
+  _type: 5
   _rank: 4
   _chance: 30
   _lastTime: 15
@@ -160,6 +160,7 @@ MonoBehaviour:
   _tickCount: 0
   _isEquipped: 0
   _textObj: {fileID: 1645188778178643386}
+  _mainSprite: {fileID: -783780367, guid: 8b5ec59fb54049f4d9acf60075f554ad, type: 3}
 --- !u!212 &85884012205173778
 SpriteRenderer:
   m_ObjectHideFlags: 0
