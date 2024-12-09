@@ -6,7 +6,6 @@ using Cysharp.Threading.Tasks;
 public class VignetteController : GlitchController
 {
     [SerializeField] private Player player;        // Player 스크립트 참조
-    [SerializeField] private Volume postProcessingVolume;  // 포스트 프로세싱 볼륨
     private Vignette vignette;                     // Vignette 효과
     private ColorAdjustments colorAdjustments;     // Color Adjustments 효과
 
@@ -14,12 +13,13 @@ public class VignetteController : GlitchController
     private float minVignetteIntensity = 0.5f;     // Vignette Intensity의 최소값
 
     private void Start() {
+        Volume volume = OptionManager.Instance.GetBrightnessVolume();
         // Post-processing Volume에서 Vignette와 Color Adjustments 컴포넌트를 가져옴
-        if (postProcessingVolume.profile.TryGet<Vignette>(out vignette)) {
+        if (volume.profile.TryGet<Vignette>(out vignette)) {
             vignette.intensity.value = minVignetteIntensity;  // 초기 Intensity 설정
         }
 
-        if (postProcessingVolume.profile.TryGet<ColorAdjustments>(out colorAdjustments)) {
+        if (volume.profile.TryGet<ColorAdjustments>(out colorAdjustments)) {
             colorAdjustments.colorFilter.value = Color.white; // 초기 Color Filter 값 설정
         }
     }

@@ -2,6 +2,7 @@ using Edgar.Unity;
 using Edgar.Unity.Examples.Gungeon;
 using UnityEngine;
 using UnityEngine.Rendering;
+using UnityEngine.Rendering.Universal;
 
 public class CutSceneDreaming : MonoBehaviour {
     [SerializeField] private TimeLineManager timelineManager; // Timeline Manager
@@ -23,22 +24,17 @@ public class CutSceneDreaming : MonoBehaviour {
 
     private FogOfWarGrid2D fogComponent; // FogOfWarGrid2D 컴포넌트
     private bool hasExecutedTimeline = false; // 타임라인 실행 여부 플래그
-    //private ColorAdjustments colorAdjustments; // ColorAdjustments 컴포넌트
+    private ColorAdjustments colorAdjustments; // ColorAdjustments 컴포넌트
 
     private void Start() {
+        Volume volume = OptionManager.Instance.GetBrightnessVolume();
         if (fogObject != null) {
             fogComponent = fogObject.GetComponent<FogOfWarGrid2D>();
         }
-
-        /*
         // ColorAdjustments 가져오기
         if (postProcessingVolume != null && postProcessingVolume.profile.TryGet<ColorAdjustments>(out var colorAdjustmentsComponent)) {
             colorAdjustments = colorAdjustmentsComponent;
         }
-        else {
-            Debug.LogError("ColorAdjustments component not found in the Volume!");
-        }
-        */
     }
 
     private void Update() {
@@ -66,7 +62,7 @@ public class CutSceneDreaming : MonoBehaviour {
             Debug.LogError("Timeline Manager is not assigned!");
         }
 
-        /*
+        
         // Hue Shift와 Saturation 값 변경
         if (colorAdjustments != null) {
             colorAdjustments.hueShift.value = 179f; // Hue Shift 설정
@@ -76,7 +72,7 @@ public class CutSceneDreaming : MonoBehaviour {
         else {
             Debug.LogError("ColorAdjustments component is not available!");
         }
-        */
+        
     }
 
     /// <summary>
