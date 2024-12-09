@@ -12141,10 +12141,6 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1642633908}
     - target: {fileID: 6660471644841417567, guid: e94958180e5464f49a814b9bec5cab78, type: 3}
-      propertyPath: _phantomLerpTime
-      value: 0.2
-      objectReference: {fileID: 0}
-    - target: {fileID: 6660471644841417567, guid: e94958180e5464f49a814b9bec5cab78, type: 3}
       propertyPath: deathUIController
       value: 
       objectReference: {fileID: 208103955}
@@ -41442,7 +41438,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e5cbb8e55a249654da5c2e95ad80846a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  volume: {fileID: 2144016295}
   player: {fileID: 1904816293}
   postProcessingVolume: {fileID: 2144016295}
 --- !u!114 &2144016295

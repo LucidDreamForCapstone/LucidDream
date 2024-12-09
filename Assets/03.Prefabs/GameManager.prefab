@@ -103,7 +103,6 @@ MonoBehaviour:
   _startScene: 01.Start
   _mainScene: 02.Main
   _stageScenes:
-  - 03.Stage
   - 04.Dungeon
 --- !u!114 &8551180981966025855
 MonoBehaviour:

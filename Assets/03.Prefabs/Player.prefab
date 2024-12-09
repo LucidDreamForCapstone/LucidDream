@@ -193,7 +193,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _invincibleLastTime: 1.5
   _phantomTimeScale: 0.2
-  _phantomLerpTime: 0.5
+  _phantomLerpTime: 0.2
   _phantomSpeedBonus: 400
   _phantomGaugeUseAmount: 16
   _phantomGaugeRecoverAmount: 8
