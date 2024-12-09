@@ -12,9 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f2b5b0d06428d324ea102b6e0f9672a0, type: 3}
   m_Name: Gungeon Input Setup
   m_EditorClassIdentifier: 
-  LevelGraph: {fileID: 11400000, guid: e779be756bebf574ebdee9c2e257f3da, type: 2}
+  LevelGraph: {fileID: 11400000, guid: 37dc581fe87792744870c74ad44f33c3, type: 2}
   UseRandomLevelGraph: 1
-  Stage: 1
+  Stage: 4
   Stage1LevelGraphs:
   - {fileID: 11400000, guid: 22bbd706dc04a964186d0701547c9821, type: 2}
   - {fileID: 11400000, guid: e779be756bebf574ebdee9c2e257f3da, type: 2}
@@ -26,6 +26,8 @@ MonoBehaviour:
   - {fileID: 11400000, guid: ba1cf8886cf88594d9a5374a42ea92ef, type: 2}
   Stage4LevelGraphs:
   - {fileID: 11400000, guid: 37dc581fe87792744870c74ad44f33c3, type: 2}
+  BondrewdLevelGarphs:
+  - {fileID: 11400000, guid: 1d6eee750ea8ac0458eb8f2537438c6f, type: 2}
   RoomTemplates:
     BasicRoomTemplates:
     - {fileID: 3390800798792341029, guid: e013e59a75851d74cb290f1e6c73e7ea, type: 3}
@@ -62,5 +64,7 @@ MonoBehaviour:
     - {fileID: 5887829826076179551, guid: 2480eef6a69cfd1419e429a8b8b66a18, type: 3}
     PuzzleRoomTemplates:
     - {fileID: 4281413025099981253, guid: 92a2ff90504ae46469ed0be950804097, type: 3}
+    BondrewdRoomTemplates:
+    - {fileID: 0}
   SecretRoomChance: 0.9
   SecretRoomDeadEndChance: 0.5

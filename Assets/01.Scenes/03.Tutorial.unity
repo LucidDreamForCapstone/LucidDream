@@ -192,22 +192,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c1a2f721c7dd4184a8951c8e33a88487, type: 3}
---- !u!225 &30141242 stripped
-CanvasGroup:
-  m_CorrespondingSourceObject: {fileID: 1666859778306362016, guid: aac7bedbbcbfff449b85a763e9af3024, type: 3}
-  m_PrefabInstance: {fileID: 840934878}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &30141245 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 3139018274148310647, guid: aac7bedbbcbfff449b85a763e9af3024, type: 3}
-  m_PrefabInstance: {fileID: 840934878}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &46313345
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -19800,6 +19784,7 @@ MonoBehaviour:
   defaultCamera: {fileID: 185807762}
   timelineManager: {fileID: 148706940}
   isResumeTimeLine: 1
+  isCameraMove: 0
 --- !u!114 &640755239 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 4152372944325490960, guid: 207945cd43c5579468fee037f57e015d, type: 3}
@@ -19935,7 +19920,7 @@ PrefabInstance:
     - target: {fileID: 6660471644841417567, guid: e94958180e5464f49a814b9bec5cab78, type: 3}
       propertyPath: _phantomSlider
       value: 
-      objectReference: {fileID: 1102519072}
+      objectReference: {fileID: 0}
     - target: {fileID: 6660471644841417567, guid: e94958180e5464f49a814b9bec5cab78, type: 3}
       propertyPath: deathUIController
       value: 
@@ -19959,11 +19944,11 @@ PrefabInstance:
     - target: {fileID: 7977112887763442605, guid: e94958180e5464f49a814b9bec5cab78, type: 3}
       propertyPath: cooldownWarningText
       value: 
-      objectReference: {fileID: 30141245}
+      objectReference: {fileID: 0}
     - target: {fileID: 7977112887763442605, guid: e94958180e5464f49a814b9bec5cab78, type: 3}
       propertyPath: cooldownTextCanvasGroup
       value: 
-      objectReference: {fileID: 30141242}
+      objectReference: {fileID: 0}
     - target: {fileID: 8094239982966228032, guid: e94958180e5464f49a814b9bec5cab78, type: 3}
       propertyPath: _basicSkillShadeUI
       value: 
@@ -20158,17 +20143,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   postProcessingVolume: {fileID: 671481261}
   fadeDuration: 3
---- !u!114 &716231698 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 5617811572705532704, guid: aac7bedbbcbfff449b85a763e9af3024, type: 3}
-  m_PrefabInstance: {fileID: 840934878}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 67db9e8f0e2ae9c40bc1e2b64352a6b4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &718286753 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 420251340831167253, guid: aac7bedbbcbfff449b85a763e9af3024, type: 3}
@@ -22999,17 +22973,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1084417154}
   m_CullTransparentMesh: 1
---- !u!114 &1102519072 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 5617811572705532704, guid: aac7bedbbcbfff449b85a763e9af3024, type: 3}
-  m_PrefabInstance: {fileID: 840934878}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 67db9e8f0e2ae9c40bc1e2b64352a6b4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1119702953
 GameObject:
   m_ObjectHideFlags: 0
@@ -24946,6 +24909,7 @@ MonoBehaviour:
   defaultCamera: {fileID: 185807762}
   timelineManager: {fileID: 148706940}
   isResumeTimeLine: 0
+  isCameraMove: 0
 --- !u!114 &1469579584
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -28740,6 +28704,7 @@ MonoBehaviour:
   defaultCamera: {fileID: 185807762}
   timelineManager: {fileID: 148706940}
   isResumeTimeLine: 0
+  isCameraMove: 0
 --- !u!114 &1956717886
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -70768,6 +70733,7 @@ MonoBehaviour:
   defaultCamera: {fileID: 185807762}
   timelineManager: {fileID: 148706940}
   isResumeTimeLine: 0
+  isCameraMove: 0
 --- !u!1 &2042884072 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 2584678932687537808, guid: 7854683fcb0019e4592a51316204f2fd, type: 3}
@@ -70829,6 +70795,7 @@ MonoBehaviour:
   defaultCamera: {fileID: 185807762}
   timelineManager: {fileID: 148706940}
   isResumeTimeLine: 0
+  isCameraMove: 0
 --- !u!61 &2053201240
 BoxCollider2D:
   m_ObjectHideFlags: 0

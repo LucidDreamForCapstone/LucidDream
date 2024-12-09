@@ -12,7 +12,7 @@ namespace Edgar.Unity.Examples.Gungeon
 
         public bool UseRandomLevelGraph;
 
-        [Range(1, 4)]
+        [Range(1, 5)]
         public int Stage = 1;
 
         public LevelGraph[] Stage1LevelGraphs;
@@ -22,6 +22,8 @@ namespace Edgar.Unity.Examples.Gungeon
         public LevelGraph[] Stage3LevelGraphs;
 
         public LevelGraph[] Stage4LevelGraphs;
+
+        public LevelGraph[] BondrewdLevelGarphs;
 
         public GungeonRoomTemplatesConfig RoomTemplates;
 
@@ -54,6 +56,9 @@ namespace Edgar.Unity.Examples.Gungeon
                         break;
                     case 4:
                         levelGraphs = Stage4LevelGraphs;
+                        break;
+                    case 5:
+                        levelGraphs = BondrewdLevelGarphs;
                         break;
                     default:
                         throw new InvalidOperationException("Invalid stage number");

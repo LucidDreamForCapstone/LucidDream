@@ -96,7 +96,7 @@ namespace Edgar.Unity.Examples.Gungeon
 
         #region hide
 
-        private void SetupFogOfWar(DungeonGeneratorLevelGrid2D level)
+        /*private void SetupFogOfWar(DungeonGeneratorLevelGrid2D level)
         {
             // To setup the FogOfWar component, we need to get the root game object that holds the level.
             var generatedLevelRoot = level.RootGameObject;
@@ -126,12 +126,48 @@ namespace Edgar.Unity.Examples.Gungeon
             // We use revealImmediately: true so that the first room is revealed instantly,
             // but it is optional.
             FogOfWarGrid2D.Instance?.RevealRoom(spawnRoom, revealImmediately: true);
+        }*/
+
+        private void SetupFogOfWar(DungeonGeneratorLevelGrid2D level) {
+            // To setup the FogOfWar component, we need to get the root game object that holds the level.
+            var generatedLevelRoot = level.RootGameObject;
+
+            // If we use the Wave mode, we must specify the point from which the wave spreads as we reveal a room.
+            // The easiest way to do so is to get the player game object and use its transform as the wave origin.
+            // Change this line if your player game object does not have the "Player" tag.
+            var player = GameObject.FindGameObjectWithTag("Player");
+
+            // Now we can setup the FogOfWar component.
+            // To make it easier to work with the component, the class is a singleton and provides the Instance property.
+            FogOfWarGrid2D.Instance?.Setup(generatedLevelRoot, player.transform);
+
+            // Try to find the Entrance room first.
+            var spawnRoom = level
+                .RoomInstances
+                .SingleOrDefault(x => ((GungeonRoom)x.Room).Type == GungeonRoomType.Entrance);
+
+            // If Entrance does not exist, use Bondrewd as fallback.
+            if (spawnRoom == null) {
+                spawnRoom = level
+                    .RoomInstances
+                    .SingleOrDefault(x => ((GungeonRoom)x.Room).Type == GungeonRoomType.Bondrewd);
+            }
+
+            // If neither Entrance nor Bondrewd exist, throw an exception.
+            if (spawnRoom == null) {
+                throw new InvalidOperationException("There must be at least one room with the type 'Entrance' or 'Bondrewd' for this example to work.");
+            }
+
+            // When we have the spawn room instance, we can reveal the room from the fog.
+            // We use revealImmediately: true so that the first room is revealed instantly,
+            // but it is optional.
+            FogOfWarGrid2D.Instance?.RevealRoom(spawnRoom, revealImmediately: true);
         }
 
         /// <summary>
         /// Move the player to the spawn position
         /// </summary>
-        private void MovePlayerToSpawn(DungeonGeneratorLevelGrid2D level)
+        /*private void MovePlayerToSpawn(DungeonGeneratorLevelGrid2D level)
         {
             foreach (var roomInstance in level.RoomInstances)
             {
@@ -139,13 +175,30 @@ namespace Edgar.Unity.Examples.Gungeon
                 var roomTemplateInstance = roomInstance.RoomTemplateInstance;
 
                 // Get spawn position if Entrance
-                if (room.Type == GungeonRoomType.Entrance)
+                if (room.Type == GungeonRoomType.Entrance || room.Type == GungeonRoomType.Bondrewd)
                 {
                     var spawnPosition = roomTemplateInstance.transform.Find("SpawnPosition");
                     var player = GameObject.FindWithTag("Player");
                     player.transform.position = spawnPosition.position;
                 }
             }
+        }*/
+        private void MovePlayerToSpawn(DungeonGeneratorLevelGrid2D level) {
+            foreach (var roomInstance in level.RoomInstances) {
+                var room = (GungeonRoom)roomInstance.Room;
+                var roomTemplateInstance = roomInstance.RoomTemplateInstance;
+
+                // Get spawn position if Entrance or Bondrewd
+                if (room.Type == GungeonRoomType.Entrance || room.Type == GungeonRoomType.Bondrewd) {
+                    var spawnPosition = roomTemplateInstance.transform.Find("SpawnPosition");
+                    var player = GameObject.FindWithTag("Player");
+                    player.transform.position = spawnPosition.position;
+                    return; // Ensure the player is only moved once.
+                }
+            }
+
+            // If no Entrance or Bondrewd room was found, log a warning.
+            Debug.LogWarning("No Entrance or Bondrewd room found to move the player.");
         }
 
         #endregion

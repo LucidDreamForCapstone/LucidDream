@@ -8333,7 +8333,7 @@ MonoBehaviour:
   - _item: {fileID: 3579808356831541882, guid: 05b74ee39875fc14aae218c401ebe8f6, type: 3}
     _dropChance: 100
   _tree: {fileID: 11400000, guid: 20a7d107a7e404f489853be1ea86f655, type: 2}
-  _isRightDefault: 1
+  _isRightDefault: 0
   _patternNum: 6
   _attackStateList: 
   _isDead: 0
