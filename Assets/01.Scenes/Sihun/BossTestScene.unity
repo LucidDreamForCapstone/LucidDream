@@ -6441,6 +6441,18 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 313147286}
     m_Modifications:
+    - target: {fileID: 3453287243531551241, guid: b41021c0defe65c48b138de300a259bd, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 313147288}
+    - target: {fileID: 3453287243531551241, guid: b41021c0defe65c48b138de300a259bd, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: PlayerRevive
+      objectReference: {fileID: 0}
+    - target: {fileID: 3453287243531551241, guid: b41021c0defe65c48b138de300a259bd, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: PlayerRevival, Assembly-CSharp
+      objectReference: {fileID: 0}
     - target: {fileID: 6721187030576458709, guid: b41021c0defe65c48b138de300a259bd, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -12058,6 +12070,10 @@ PrefabInstance:
       propertyPath: _phantomSlider
       value: 
       objectReference: {fileID: 1642633908}
+    - target: {fileID: 6660471644841417567, guid: e94958180e5464f49a814b9bec5cab78, type: 3}
+      propertyPath: _playerRevival
+      value: 
+      objectReference: {fileID: 313147288}
     - target: {fileID: 6660471644841417567, guid: e94958180e5464f49a814b9bec5cab78, type: 3}
       propertyPath: _phantomLerpTime
       value: 0.1
@@ -41490,7 +41506,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 1904816293}
-  postProcessingVolume: {fileID: 2144016295}
 --- !u!114 &2144016295
 MonoBehaviour:
   m_ObjectHideFlags: 0

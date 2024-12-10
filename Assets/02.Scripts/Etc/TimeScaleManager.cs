@@ -18,13 +18,13 @@ public class TimeScaleManager : MonoBehaviour {
     public void TimeStop() {
         _timeScaleStack.Push(Time.timeScale);
         SoundManager.Instance.PauseSFX();
-        PauseEffects();
+        //PauseEffects();
         Time.timeScale = 0;
     }
 
     public void TimeRestore() {
         Time.timeScale = _timeScaleStack.Pop();
-        UnPauseEffects();
+        //UnPauseEffects();
         SoundManager.Instance.UnPauseSFX();
     }
 
