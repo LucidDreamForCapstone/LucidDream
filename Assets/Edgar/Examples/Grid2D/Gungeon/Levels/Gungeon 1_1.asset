@@ -1,21 +1,5 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!114 &-8331770988847024655
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d354c88719b466e4b96f228f2876b29b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  From: {fileID: 7588476818348702017}
-  To: {fileID: 624753061717449534}
-  RoomTemplates: []
-  IsLocked: 0
 --- !u!114 &-8202538791751120096
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -214,22 +198,6 @@ MonoBehaviour:
   To: {fileID: -6932019205657456059}
   RoomTemplates: []
   IsLocked: 0
---- !u!114 &-606866742000114418
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d354c88719b466e4b96f228f2876b29b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  From: {fileID: 8984227434636613095}
-  To: {fileID: -6932019205657456059}
-  RoomTemplates: []
-  IsLocked: 0
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -256,10 +224,10 @@ MonoBehaviour:
   - {fileID: -4381582656657280023}
   - {fileID: 8322643310678078635}
   - {fileID: -7867717778324403565}
-  - {fileID: -8331770988847024655}
   - {fileID: -5684618951921261919}
   - {fileID: 283461623469935523}
-  - {fileID: -606866742000114418}
+  - {fileID: 8818633323382188105}
+  - {fileID: 6584076298309062211}
   CorridorIndividualRoomTemplates: []
   CorridorRoomTemplateSets: []
   DefaultIndividualRoomTemplates: []
@@ -281,10 +249,10 @@ MonoBehaviour:
   - {fileID: 7717910816363566268}
   - {fileID: 134383804763370499}
   - {fileID: 484672132381032437}
-  - {fileID: 8984227434636613095}
+  - {fileID: 8448986068743199847}
   EditorData:
-    PanOffset: {x: -221.56035, y: -2.0104585}
-    Zoom: 0.80001634
+    PanOffset: {x: 26.61082, y: -49.36883}
+    Zoom: 0.7608076
   RoomType: Edgar.Unity.Examples.Gungeon.GungeonRoom
   ConnectionType: Edgar.Unity.Examples.Gungeon.GungeonConnection
   IsDirected: 0
@@ -480,6 +448,22 @@ MonoBehaviour:
   To: {fileID: -4281352821607870928}
   RoomTemplates: []
   IsLocked: 0
+--- !u!114 &6584076298309062211
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d354c88719b466e4b96f228f2876b29b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  From: {fileID: 624753061717449534}
+  To: {fileID: 8448986068743199847}
+  RoomTemplates: []
+  IsLocked: 0
 --- !u!114 &7588476818348702017
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -492,7 +476,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3db3deff57bcd2d4bacb91056ad7f14a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Position: {x: 336, y: 144}
+  Position: {x: 336, y: 112}
   Type: 1
 --- !u!114 &7717910816363566268
 MonoBehaviour:
@@ -554,7 +538,7 @@ MonoBehaviour:
   To: {fileID: 4306265455397908276}
   RoomTemplates: []
   IsLocked: 0
---- !u!114 &8984227434636613095
+--- !u!114 &8448986068743199847
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -566,5 +550,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3db3deff57bcd2d4bacb91056ad7f14a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Position: {x: 560, y: 144}
+  Position: {x: 336, y: 160}
   Type: 12
+--- !u!114 &8818633323382188105
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d354c88719b466e4b96f228f2876b29b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  From: {fileID: 7588476818348702017}
+  To: {fileID: 8448986068743199847}
+  RoomTemplates: []
+  IsLocked: 0
