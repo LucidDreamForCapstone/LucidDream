@@ -53,6 +53,10 @@ public class PritoQTE : MonoBehaviour { //Maplestory Prito Mini Game
         }
     }
 
+    public void SetBoss(BossBondrewd boss) {
+        _boss = boss; ;
+    }
+
 
     private async UniTaskVoid ButtonQTE() {
         if (!_isEventOnProcess && _isPlayerConnected && _isReady && _boss.CheckExplosionWarning()) {

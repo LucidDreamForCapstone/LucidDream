@@ -6,8 +6,6 @@ using UnityEngine.UI;
 using Random = UnityEngine.Random;
 
 public class ButtonPressQTE : MonoBehaviour {
-
-    [SerializeField] BossBondrewd _boss;
     [SerializeField] List<Charger> _chargers;
     [SerializeField] Slider _progressSlider;
     [SerializeField] List<KeyBoard> _keyBoards;

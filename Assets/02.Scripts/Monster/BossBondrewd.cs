@@ -23,8 +23,8 @@ public class BossBondrewd : MonsterBase {
     [SerializeField] GameObject _explosionObj;
     [SerializeField] GameObject _explosionCenterFlag;
     [SerializeField] GameObject _phantomGhostObj;
-    [SerializeField] List<GameObject> _chargerList;
-
+    [SerializeField] AudioClip _bossBGM;
+    [SerializeField] CircleCollider2D _wakeUpCollider;
     //[SerializeField] AudioClip _dashSound;
     [SerializeField] SpriteRenderer _legSr;
     [SerializeField] GameObject _bossUI;
@@ -129,7 +129,7 @@ public class BossBondrewd : MonsterBase {
     private void Start() {
         _cts = new CancellationTokenSource();
         _bondrewdCollider = GetComponent<BoxCollider2D>();
-        _isSpawnComplete = true;
+        GameObject.Find("PritoQTE").GetComponent<PritoQTE>().SetBoss(this);
         _attackFuncList.Add(BackStepTask);
         _attackFuncList.Add(ChaseTask);
         _attackFuncList.Add(RushTask);
@@ -150,6 +150,7 @@ public class BossBondrewd : MonsterBase {
         _isRushing = false;
         _timerTM.gameObject.SetActive(false);
         UpdateGroggySlider();
+        _bossUI.SetActive(false);
     }
     new private void Update() {
         base.Update();
@@ -161,6 +162,12 @@ public class BossBondrewd : MonsterBase {
     protected override void OnCollisionStay2D(Collision2D collision) {
         if (collision.collider.CompareTag("Player") && !_isDead && _isSpawnComplete & _isRushing)
             _playerScript.Damaged(_rushDamage);
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision) {
+        if (collision.CompareTag("Player") && !_isSpawnComplete) {
+            WakeUp();
+        }
     }
     #endregion
 
@@ -787,6 +794,13 @@ public class BossBondrewd : MonsterBase {
     }
     private void UpdateGroggySlider() {
         _groggySlider.value = _groggyGauge / 100.0f;
+    }
+
+    public void WakeUp() {
+        SoundManager.Instance.PlayBGM(_bossBGM.name);
+        _bossUI.SetActive(true);
+        _wakeUpCollider.enabled = false;
+        _isSpawnComplete = true;
     }
     #endregion
 }
