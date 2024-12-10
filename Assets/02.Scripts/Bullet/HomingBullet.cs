@@ -19,10 +19,10 @@ public class HomingBullet : ExplosiveBullet {
         await UniTask.Delay(TimeSpan.FromSeconds(_homingStartTime));
         while (timer < _homingLastTime && !_isDead) {
             Vector2 lookAt = _playerScript.transform.position - transform.position;
-            float t = timer * 0.01f;
+            float t = timer * 0.007f;
             transform.right = Vector3.Slerp(transform.right, lookAt, t);
             _rigid.velocity = transform.right * _fireSpeed;
-            timer += 0.01f;
+            timer += 0.006f;
             await UniTask.Delay(TimeSpan.FromSeconds(Time.unscaledDeltaTime));
         }
     }

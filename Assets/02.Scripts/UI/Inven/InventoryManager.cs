@@ -1,4 +1,3 @@
-using Edgar.Unity.Examples;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -29,10 +28,14 @@ public class InventoryManager : MonoBehaviour {
 
     #region mono funcs
 
-    void Start()
-    {
-        DontDestroyOnLoad(this.gameObject);
-        _instance = this;
+    void Start() {
+        if (_instance != null) {
+            Destroy(gameObject);
+        }
+        else {
+            _instance = this;
+            DontDestroyOnLoad(gameObject);
+        }
     }
 
     #endregion // mono funcs
@@ -43,23 +46,19 @@ public class InventoryManager : MonoBehaviour {
 
     #region public funcs
 
-    public void AddItem(ItemType item)
-    {
+    public void AddItem(ItemType item) {
         _items.Add(item);
     }
 
-    public bool UseItem(ItemType item)
-    {
-        if (_items.Contains(item))
-        {
+    public bool UseItem(ItemType item) {
+        if (_items.Contains(item)) {
             _items.Remove(item);
             return true;
         }
         return false;
     }
 
-    public bool HasItem(ItemType item)
-    {
+    public bool HasItem(ItemType item) {
         // 해당 아이템을 가지고있는지 여부 반환
         // *** 사용 예시 ***
         // if ( inventorymanager.instance.hasitem(itemtype.key)){
@@ -68,11 +67,9 @@ public class InventoryManager : MonoBehaviour {
 
         return _items.Contains(item);
     }
-    public bool RemoveItem(ItemType item)
-    {
+    public bool RemoveItem(ItemType item) {
         // 단순히 아이템을 제거하는 메서드
-        if (_items.Contains(item))
-        {
+        if (_items.Contains(item)) {
             _items.Remove(item);
             return true;
         }

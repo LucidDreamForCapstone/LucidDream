@@ -6,10 +6,12 @@ public class PauseUIController : MonoBehaviour {
 
     private void Update() {
         if (Input.GetKeyDown(KeyCode.Escape) || Input.GetKeyDown(KeyCode.P)) {
-            if (!_pauseUI.activeSelf)
-                GamePause();
-            else
-                GameResume();
+            if (PlayerDataManager.Instance.Status._hp > 0) {
+                if (!_pauseUI.activeSelf)
+                    GamePause();
+                else
+                    GameResume();
+            }
         }
     }
 

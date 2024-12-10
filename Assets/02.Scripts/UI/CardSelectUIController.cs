@@ -5,6 +5,7 @@ public class CardSelectUIController : UIBase {
     #region serialized field
 
     [SerializeField] private List<CardUI> _cards;
+    [SerializeField] GameObject _pauseUI;
 
     #endregion // serialized field
 
@@ -55,14 +56,14 @@ public class CardSelectUIController : UIBase {
     #region private funcs
 
     private void SelectCardWithKey() {
-        if (Input.GetKeyDown(KeyCode.Alpha1))
-            _cards[0].OnClick_Card();
-        else if (Input.GetKeyDown(KeyCode.Alpha2))
-            _cards[1].OnClick_Card();
-        else if (Input.GetKeyDown(KeyCode.Alpha3))
-            _cards[2].OnClick_Card();
-
-        Debug.Log("test");
+        if (!_pauseUI.activeSelf) {
+            if (Input.GetKeyDown(KeyCode.Alpha1))
+                _cards[0].OnClick_Card();
+            else if (Input.GetKeyDown(KeyCode.Alpha2))
+                _cards[1].OnClick_Card();
+            else if (Input.GetKeyDown(KeyCode.Alpha3))
+                _cards[2].OnClick_Card();
+        }
     }
 
     #endregion // private funcs

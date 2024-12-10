@@ -1,10 +1,9 @@
+using Cysharp.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.Rendering;
 using UnityEngine.Rendering.Universal;
-using Cysharp.Threading.Tasks;
 
-public class VignetteController : GlitchController
-{
+public class VignetteController : MonoBehaviour {
     [SerializeField] private Player player;        // Player 스크립트 참조
     [SerializeField] private Volume postProcessingVolume;  // 포스트 프로세싱 볼륨
     private Vignette vignette;                     // Vignette 효과

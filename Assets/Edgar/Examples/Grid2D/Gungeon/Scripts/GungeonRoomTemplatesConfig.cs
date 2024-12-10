@@ -1,11 +1,9 @@
 ﻿using System;
 using UnityEngine;
 
-namespace Edgar.Unity.Examples.Gungeon
-{
+namespace Edgar.Unity.Examples.Gungeon {
     [Serializable]
-    public class GungeonRoomTemplatesConfig
-    {
+    public class GungeonRoomTemplatesConfig {
         public GameObject[] BasicRoomTemplates;
 
         public GameObject[] BossFoyersRoomTemplates;
@@ -30,15 +28,15 @@ namespace Edgar.Unity.Examples.Gungeon
 
         public GameObject[] BondrewdRoomTemplates;
 
+        public GameObject[] StatueRoomTemplates;
+
         /// <summary>
         /// Get room templates for a given room.
         /// </summary>
         /// <param name="room"></param>
         /// <returns></returns>
-        public GameObject[] GetRoomTemplates(GungeonRoom room)
-        {
-            switch (room.Type)
-            {
+        public GameObject[] GetRoomTemplates(GungeonRoom room) {
+            switch (room.Type) {
                 case GungeonRoomType.Boss:
                     return BossRoomTemplates;
 
@@ -69,9 +67,11 @@ namespace Edgar.Unity.Examples.Gungeon
                 case GungeonRoomType.Puzzle:
                     return PuzzleRoomTemplates;
 
-
                 case GungeonRoomType.Bondrewd:
                     return BondrewdRoomTemplates;
+
+                case GungeonRoomType.Statue:
+                    return StatueRoomTemplates;
 
                 default:
                     return BasicRoomTemplates;

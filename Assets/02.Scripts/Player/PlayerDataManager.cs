@@ -27,8 +27,13 @@ public class PlayerDataManager : MonoBehaviour {
     #region mono funcs
 
     private void Awake() {
-        DontDestroyOnLoad(this.gameObject);
-        _instance = this;
+        if (_instance != null) {
+            Destroy(gameObject);
+        }
+        else {
+            _instance = this;
+            DontDestroyOnLoad(gameObject);
+        }
     }
 
     private void Update() {
@@ -222,7 +227,6 @@ public class PlayerDataManager : MonoBehaviour {
     public void ShowCardSelectUI(int levelUpCount) {
         if (0 < levelUpCount) {
             _ingameUIController.ShowCardSelect(CardManage.Instance.DrawCards(), levelUpCount);
-            TimeScaleManager.Instance.TimeStop();
         }
     }
 

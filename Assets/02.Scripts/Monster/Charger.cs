@@ -9,8 +9,10 @@ public class Charger : MonsterBase {
     [SerializeField] BossBondrewd _boss;
     [SerializeField] Slider _hpSlider;
     [SerializeField] ButtonPressQTE _chargerQTE;
+    [SerializeField] float _layerBorder;
     CapsuleCollider2D _chargerCollider;
     CircleCollider2D _shieldCollider;
+    SpriteRenderer _sr;
     SpriteRenderer _shieldSr;
     Animator _shieldAnimator;
     bool _isShieldActivated;
@@ -18,16 +20,15 @@ public class Charger : MonsterBase {
     private void Start() {
         _chargerCollider = GetComponent<CapsuleCollider2D>();
         _shieldCollider = GetComponent<CircleCollider2D>();
+        _sr = GetComponent<SpriteRenderer>();
         _shieldAnimator = transform.GetChild(0).GetComponent<Animator>();
         _shieldSr = transform.GetChild(0).GetComponent<SpriteRenderer>();
         InitializeCharger(_chargerIndex + 1).Forget();
         UpdateHpSlider();
     }
 
-    private void OnTriggerStay2D(Collider2D collider) {
-        if (collider.CompareTag("Player")) {
-            //shockwave
-        }
+    new private void Update() {
+        ChangeChargerSortingLayer();
     }
 
     public override void Damaged(int dmg, bool isCrit, bool isPoison = false) {
@@ -134,6 +135,12 @@ public class Charger : MonsterBase {
     }
 
     protected override void OnCollisionStay2D(Collision2D collision) {
-        //Nothing
+    }
+
+    private void ChangeChargerSortingLayer() {
+        if (_playerScript.transform.position.y - transform.position.y > _layerBorder)
+            _sr.sortingOrder = 8;
+        else
+            _sr.sortingOrder = 4;
     }
 }

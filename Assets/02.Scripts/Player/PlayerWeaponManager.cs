@@ -123,6 +123,7 @@ public class PlayerWeaponManager : MonoBehaviour {
         changedEssence.tag = "Untagged";
         changedEssence.gameObject.SetActive(false);
         changedEssence.SetEquipState(true);
+        _inGameUIController.UpdateEssenceUI();
     }
 
     public void DropEquippedEssence() {

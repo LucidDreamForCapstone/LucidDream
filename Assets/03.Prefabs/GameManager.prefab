@@ -10,14 +10,14 @@ GameObject:
   m_Component:
   - component: {fileID: 1601079280105536282}
   - component: {fileID: 4645033308570180254}
-  - component: {fileID: 5812282011915787221}
+  - component: {fileID: 8954173049316209334}
   - component: {fileID: 2156863785378605862}
   - component: {fileID: 8551180981966025855}
   - component: {fileID: 6948731609219969509}
   - component: {fileID: 6439640744000891764}
   - component: {fileID: 3466549801065252712}
   - component: {fileID: 6845397652821216590}
-  - component: {fileID: 8954173049316209334}
+  - component: {fileID: 8942428458096039693}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -76,7 +76,7 @@ MonoBehaviour:
     _maxFeverGauge: 100
     _coin: 0
     _dream: 0
---- !u!114 &5812282011915787221
+--- !u!114 &8954173049316209334
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -85,7 +85,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 6019060939435797515}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dfcda7056f8aeed4ea724fb4b0598045, type: 3}
+  m_Script: {fileID: 11500000, guid: 8c8a009f1274b734ca56a0c8b62c12b7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!114 &2156863785378605862
@@ -103,7 +103,6 @@ MonoBehaviour:
   _startScene: 01.Start
   _mainScene: 02.Main
   _stageScenes:
-  - 03.Stage
   - 04.Dungeon
 --- !u!114 &8551180981966025855
 MonoBehaviour:
@@ -192,7 +191,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe2e1f9e1d3081e4ba42bbbb47f357b7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &8954173049316209334
+--- !u!114 &8942428458096039693
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -201,6 +200,6 @@ MonoBehaviour:
   m_GameObject: {fileID: 6019060939435797515}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8c8a009f1274b734ca56a0c8b62c12b7, type: 3}
+  m_Script: {fileID: 11500000, guid: 0b9b631f13c54634ca1eee9ec863fc36, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 

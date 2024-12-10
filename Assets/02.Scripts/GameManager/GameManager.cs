@@ -5,7 +5,13 @@ public class GameManager : MonoBehaviour {
     public static GameManager Instance { get { return _instance; } }
 
     private void Awake() {
-        _instance = this;
+        if (_instance != null) {
+            Destroy(gameObject);
+        }
+        else {
+            _instance = this;
+            DontDestroyOnLoad(gameObject);
+        }
     }
 
     public void GameQuit() {
