@@ -9,7 +9,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1601079280105536282}
-  - component: {fileID: 4645033308570180254}
   - component: {fileID: 8954173049316209334}
   - component: {fileID: 2156863785378605862}
   - component: {fileID: 8551180981966025855}
@@ -40,42 +39,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &4645033308570180254
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6019060939435797515}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7e0ee5dd0d68b1145b2afc9e4461923f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _status:
-    _nickName: 
-    _playerLevel: 1
-    _maxLevel: 30
-    _hp: 300
-    _maxHp: 300
-    _exp: 0
-    _moveSpeed: 6
-    _ad: 30
-    _ap: 30
-    _adPlusRate: 0
-    _apPlusRate: 0
-    _def: 0
-    _critChance: 0
-    _critDamage: 5
-    _weaponAdBonus: 0
-    _weaponApBonus: 0
-    _weaponMoveSpeedBonus: 0
-    _weaponCritChanceBonus: 0
-    _weaponCritDamageBonus: 0
-    _feverGauge: 0
-    _maxFeverGauge: 100
-    _coin: 0
-    _dream: 0
 --- !u!114 &8954173049316209334
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -102,6 +65,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _startScene: 01.Start
   _mainScene: 02.Main
+  _tutorialScene: 03.Tutorial
   _stageScenes:
   - 04.Dungeon
 --- !u!114 &8551180981966025855

@@ -1,5 +1,3 @@
-using Cysharp.Threading.Tasks;
-using System;
 using UnityEngine;
 
 public class PlayerDataManager : MonoBehaviour {
@@ -67,12 +65,6 @@ public class PlayerDataManager : MonoBehaviour {
 
     public void ResetGame() {
         _status = new PlayerStatus();
-        SetPlayer().Forget();
-    }
-
-    private async UniTaskVoid SetPlayer() {
-        await UniTask.Delay(TimeSpan.FromSeconds(8));
-        _player ??= GameObject.Find("Player");
     }
 
     public void InitializeIngameUI(InGameUIController inGameUIController, System.Action callback) {

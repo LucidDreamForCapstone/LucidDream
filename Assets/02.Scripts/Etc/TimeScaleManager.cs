@@ -28,6 +28,10 @@ public class TimeScaleManager : MonoBehaviour {
         SoundManager.Instance.UnPauseSFX();
     }
 
+    public void ClearTimeStack() {
+        _timeScaleStack.Clear();
+        Time.timeScale = 1;
+    }
 
 
     public async UniTask TimeSlowLerp(float timeScale, float lerpTime) {

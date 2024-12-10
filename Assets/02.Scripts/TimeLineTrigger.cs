@@ -30,7 +30,7 @@ public class TimeLineTrigger : TutorialStart {
         // Switch to target camera
         ActivateCamera(targetCamera);
 
-        //await FadeInColor_unscaled(); // Assume this is a color fade-in effect
+        await FadeInColor_unscaled(); // Assume this is a color fade-in effect
         //timelineManager.ResumeTimeline(); // Resume the timeline
 
         // Wait for 2 seconds (ignores time scale)

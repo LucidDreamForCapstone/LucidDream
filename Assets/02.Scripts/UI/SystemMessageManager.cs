@@ -19,15 +19,9 @@ public class SystemMessageManager : MonoBehaviour {
     [SerializeField] AudioClip _dialogStartSound;
     [SerializeField] AudioClip _dialogEndSound;
 
-    List<string> _messages = new List<string>();
     bool _isReady;
 
     private void Awake() {
-        _messages.Add("네 정체가 무엇인지...");
-        _messages.Add("<size=40>왜 아가씨가 \n너와 동행하는지...</size>");
-        _messages.Add("궁금한 건 아주 많다만, <size=40>묻진 않겠다.</size>");
-        _messages.Add("<size=40>우린 호기심을 가져선 안되거든.</size>");
-        _messages.Add("<size=60>어명을 집행하겠다.</size>");
         _instance = this;
         _systemMessageTM.color = new Color(0, 0, 0, 0);
         _messageList = new List<SystemMessageData>();
@@ -37,10 +31,6 @@ public class SystemMessageManager : MonoBehaviour {
 
     private void Update() {
         PrintSystemMessage().Forget();
-
-        if (Input.GetKeyDown(KeyCode.T)) {
-            ShowDialogBox("???", _messages).Forget();
-        }
     }
 
     public static SystemMessageManager Instance { get { return _instance; } }

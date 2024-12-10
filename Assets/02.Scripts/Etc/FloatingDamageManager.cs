@@ -49,8 +49,6 @@ public class FloatingDamageManager : MonoBehaviour {
     public void ShowDamage(GameObject vr, int damage, bool isMine, bool isCrit, bool isHeal = false, bool isPoison = false) {
         //GameObject txtObject = ObjectPool.Instance.GetObject(_text);
         GameObject txtObject = Instantiate(_text);
-        Debug.Log(vr + "은 vr인데 잘 살아있음");
-        Debug.Log(Camera.main + "은 카메라.main인데 잘 살아있음");
         Vector3 uiPosition = Camera.main.WorldToScreenPoint(vr.transform.position);
         txtObject.transform.localPosition = uiPosition;
         txtObject.transform.SetParent(GameObject.Find("Player1Canvas").transform);

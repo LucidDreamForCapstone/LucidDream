@@ -8814,96 +8814,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
---- !u!1 &1427528655
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1427528657}
-  - component: {fileID: 1427528656}
-  - component: {fileID: 1427528658}
-  m_Layer: 0
-  m_Name: PlayerTrigger
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &1427528656
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1427528655}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6f4a7628dd37dcb4b8020175d7775141, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!4 &1427528657
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1427528655}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -6.28, y: 2.53, z: -2.5853043}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!61 &1427528658
-BoxCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1427528655}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_ForceSendLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ForceReceiveLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ContactCaptureLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_CallbackLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_IsTrigger: 1
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0, y: 0}
-    oldSize: {x: 0, y: 0}
-    newSize: {x: 0, y: 0}
-    adaptiveTilingThreshold: 0
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  serializedVersion: 2
-  m_Size: {x: 1, y: 1}
-  m_EdgeRadius: 0
 --- !u!213 &1433874947
 Sprite:
   m_ObjectHideFlags: 0
@@ -11498,6 +11408,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1854174335}
+  - component: {fileID: 1854174337}
   - component: {fileID: 1854174334}
   - component: {fileID: 1854174333}
   - component: {fileID: 1854174336}
@@ -11578,6 +11489,42 @@ MonoBehaviour:
   _dialogMessageTM: {fileID: 174575829}
   _dialogStartSound: {fileID: 8300000, guid: 9328b9217cce52b4abb979acdd325165, type: 3}
   _dialogEndSound: {fileID: 8300000, guid: 60405be52dc3c1e4d8e60e2391e3810d, type: 3}
+--- !u!114 &1854174337
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1854174332}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7e0ee5dd0d68b1145b2afc9e4461923f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _status:
+    _nickName: "\uD14C\uC2A4\uD2B8"
+    _playerLevel: 1
+    _maxLevel: 30
+    _hp: 300
+    _maxHp: 300
+    _exp: 0
+    _moveSpeed: 6
+    _ad: 30
+    _ap: 30
+    _adPlusRate: 0
+    _apPlusRate: 0
+    _def: 10
+    _critChance: 0
+    _critDamage: 5
+    _weaponAdBonus: 0
+    _weaponApBonus: 0
+    _weaponMoveSpeedBonus: 5
+    _weaponCritChanceBonus: 0
+    _weaponCritDamageBonus: 0
+    _feverGauge: 0
+    _maxFeverGauge: 100
+    _coin: 0
+    _dream: 0
 --- !u!213 &1874003972
 Sprite:
   m_ObjectHideFlags: 0
@@ -42104,7 +42051,6 @@ SceneRoots:
   - {fileID: 654761436}
   - {fileID: 418367940}
   - {fileID: 835890023}
-  - {fileID: 1427528657}
   - {fileID: 1973205077}
   - {fileID: 1854174335}
   - {fileID: 1837288974}
