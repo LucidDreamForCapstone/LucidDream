@@ -20,7 +20,7 @@ public class CutSceneDreaming : MonoBehaviour {
     private GameObject fogObject; // FogOfWarGrid2D가 연결된 오브젝트
 
     [SerializeField]
-    private Volume postProcessingVolume; // 포스트 프로세싱 볼륨
+    //private Volume postProcessingVolume; // 포스트 프로세싱 볼륨
 
     private FogOfWarGrid2D fogComponent; // FogOfWarGrid2D 컴포넌트
     private bool hasExecutedTimeline = false; // 타임라인 실행 여부 플래그
@@ -32,7 +32,7 @@ public class CutSceneDreaming : MonoBehaviour {
             fogComponent = fogObject.GetComponent<FogOfWarGrid2D>();
         }
         // ColorAdjustments 가져오기
-        if (postProcessingVolume != null && postProcessingVolume.profile.TryGet<ColorAdjustments>(out var colorAdjustmentsComponent)) {
+        if (volume!= null && volume.profile.TryGet<ColorAdjustments>(out var colorAdjustmentsComponent)) {
             colorAdjustments = colorAdjustmentsComponent;
         }
     }
