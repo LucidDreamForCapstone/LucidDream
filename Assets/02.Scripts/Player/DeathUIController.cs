@@ -16,6 +16,10 @@ public class DeathUIController : MonoBehaviour {
 
     public async UniTaskVoid ShowDeathUI() {
         // 플레이어가 죽으면 이미지와 메시지 페이드 효과 시작
+        _deadImage.DOFade(0, 0f).ToUniTask().Forget();
+        _dyingMessage.DOFade(0, 0f).ToUniTask().Forget();
+        _dyingMessage1.DOFade(0, 0f).ToUniTask().Forget();
+
         _deadImage.gameObject.SetActive(true);
         _deadImage.DOFade(1, 1.5f).ToUniTask().Forget();
         await _dyingMessage.DOFade(1, 1.5f);

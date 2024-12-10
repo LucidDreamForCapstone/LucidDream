@@ -209,6 +209,7 @@ MonoBehaviour:
   _phantomGhostColor: {r: 0.8862745, g: 0.63529414, b: 1, a: 0.79607844}
   _ghostLastTime: 1
   _ghostInterval: 0.1
+  _playerRevival: {fileID: 0}
   _itemSearchRadius: 2
   _itemMagneticSpeed: 5
   _itemLayer:
@@ -248,8 +249,8 @@ MonoBehaviour:
   guardEffectPrefab: {fileID: 5405011876134803075, guid: a08d282987b94834898bd587081ff727, type: 3}
   avoidSound: {fileID: 0}
   GuardSound: {fileID: 0}
-  dyingSound1: {fileID: 0}
-  dyingSound2: {fileID: 0}
+  dyingSound1: {fileID: 8300000, guid: f35c938e146770d48a5fceb119902a08, type: 3}
+  dyingSound2: {fileID: 8300000, guid: 1c7e18df881e1814a8469249c2d06db9, type: 3}
   dyingEffectSound: {fileID: 0}
   deathUIController: {fileID: 0}
 --- !u!114 &1519231970995128663
@@ -1313,11 +1314,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4389329873884928986, guid: 72633dd16d0b3e142a5e229331ecf0e9, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -3.64
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4389329873884928986, guid: 72633dd16d0b3e142a5e229331ecf0e9, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1.72
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4389329873884928986, guid: 72633dd16d0b3e142a5e229331ecf0e9, type: 3}
       propertyPath: m_LocalPosition.z

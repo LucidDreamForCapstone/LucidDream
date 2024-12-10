@@ -2290,7 +2290,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Navigation:
-    m_Mode: 3
+    m_Mode: 0
     m_WrapAround: 0
     m_SelectOnUp: {fileID: 0}
     m_SelectOnDown: {fileID: 0}
@@ -3068,7 +3068,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &4645397573324354203
 RectTransform:
   m_ObjectHideFlags: 0
@@ -3111,7 +3111,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0, g: 0, b: 0, a: 1}
+  m_Color: {r: 0, g: 0, b: 0, a: 0}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -3530,7 +3530,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Navigation:
-    m_Mode: 3
+    m_Mode: 0
     m_WrapAround: 0
     m_SelectOnUp: {fileID: 0}
     m_SelectOnDown: {fileID: 0}
@@ -4191,8 +4191,9 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "\uC218\uD638\uC758 \uAE43\uBC1C:   \uCCB4\uB825\uC774 0\uC774 \uB420 \uB54C,
-    \uC989\uC2DC 30%\uC758 \uCCB4\uB825\uC744 \uD68C\uBCF5\uD55C\uB2E4."
+  m_text: "[\uC218\uD638\uC758 \uAE43\uBC1C]\\n\uCCB4\uB825\uC774\\n0\uC774 \uB420
+    \uB54C,\\n\uC989\uC2DC \uCCB4\uB825 30%\uC744 \uD68C\uBCF5\uD558\uBA70 \uBD80\uD65C\\n(\uC18C\uBAA8\uC131
+    \uC544\uC774\uD15C)"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: d887971345ee72a4aa0f03f8c501c103, type: 2}
   m_sharedMaterial: {fileID: 4985760020309454812, guid: d887971345ee72a4aa0f03f8c501c103, type: 2}
@@ -4577,7 +4578,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Navigation:
-    m_Mode: 3
+    m_Mode: 0
     m_WrapAround: 0
     m_SelectOnUp: {fileID: 0}
     m_SelectOnDown: {fileID: 0}
@@ -5672,7 +5673,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: '"Press ''G'' to Restart"'
+  m_text: '"Press ''X'' to Restart"'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: d887971345ee72a4aa0f03f8c501c103, type: 2}
   m_sharedMaterial: {fileID: 4985760020309454812, guid: d887971345ee72a4aa0f03f8c501c103, type: 2}
@@ -6640,7 +6641,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -1041.5, y: -908.4}
+  m_AnchoredPosition: {x: -1160, y: -982}
   m_SizeDelta: {x: 50, y: 50}
   m_Pivot: {x: 1, y: 1}
 --- !u!222 &3364790337371545163
@@ -6695,7 +6696,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tooltipPanel: {fileID: 4373818852148740748}
   tooltipText: {fileID: 2555355086774433616}
-  skillDescription: 0
+  skillDescription: "[\uC218\uD638\uC758 \uAE43\uBC1C]\\n\uCCB4\uB825\uC774\\n0\uC774
+    \uB420 \uB54C,\\n\uC989\uC2DC \uCCB4\uB825 30%\uC744 \uD68C\uBCF5\uD558\uBA70
+    \uBD80\uD65C\\n(\uC18C\uBAA8\uC131 \uC544\uC774\uD15C)"
 --- !u!114 &6896303298821318615
 MonoBehaviour:
   m_ObjectHideFlags: 0

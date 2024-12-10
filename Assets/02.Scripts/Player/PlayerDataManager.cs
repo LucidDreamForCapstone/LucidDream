@@ -27,8 +27,13 @@ public class PlayerDataManager : MonoBehaviour {
     #region mono funcs
 
     private void Awake() {
-        DontDestroyOnLoad(this.gameObject);
-        _instance = this;
+        if (_instance != null) {
+            Destroy(gameObject);
+        }
+        else {
+            _instance = this;
+            DontDestroyOnLoad(gameObject);
+        }
     }
 
     private void Update() {

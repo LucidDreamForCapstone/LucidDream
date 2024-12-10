@@ -70,7 +70,7 @@ MonoBehaviour:
   _deathSound: {fileID: 0}
   _searchDist: 0
   _attackDist: 0
-  _def: 0
+  _def: 200
   _damage: 0
   _bodyDamage: 0
   _moveSpeed: 0
@@ -86,6 +86,7 @@ MonoBehaviour:
   _boss: {fileID: 0}
   _hpSlider: {fileID: 8899761037165240913}
   _chargerQTE: {fileID: 0}
+  _layerBorder: 0
 --- !u!212 &348418431054849798
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -124,9 +125,9 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: -583337129
-  m_SortingLayer: 6
-  m_SortingOrder: 0
+  m_SortingLayerID: -712625307
+  m_SortingLayer: 7
+  m_SortingOrder: 4
   m_Sprite: {fileID: 1429277645, guid: 94e21744eb19edf4688ab42aa0bea40f, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0

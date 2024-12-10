@@ -32,6 +32,7 @@ public class Player : MonoBehaviour {
     [SerializeField] private Color _phantomGhostColor;
     [SerializeField] private float _ghostLastTime;
     [SerializeField] private float _ghostInterval;
+    [SerializeField] private PlayerRevival _playerRevival;
     //[SerializeField] private float _rollLastTime;
     //[SerializeField] private float _rollCoolTime;
     //[SerializeField] private float _rollDist;
@@ -57,7 +58,6 @@ public class Player : MonoBehaviour {
     [SerializeField] protected AudioClip GuardSound;
     [SerializeField] protected AudioClip dyingSound1;
     [SerializeField] protected AudioClip dyingSound2;
-    [SerializeField] private AudioClip dyingEffectSound;
     [SerializeField] private DeathUIController deathUIController; // DeathUIController ����
     #endregion // serialized field 
 
@@ -265,7 +265,7 @@ public class Player : MonoBehaviour {
             GungeonGameManager.Instance.SetIsGenerating(true);
             GungeonGameManager.Instance.Stage = 0;
         }
-        GameSceneManager.Instance.LoadStageScene(1);
+        GameSceneManager.Instance.LoadStageScene(0);
     }
     public void GetExp(int gainedExp) {
         int currentExp = PlayerDataManager.Instance.Status._exp;
@@ -576,12 +576,15 @@ public class Player : MonoBehaviour {
             PlaySound(GuardSound);
             PlayerDataManager.Instance.HealByMaxPercent(30);
             if (guardEffectPrefab != null) {
-                Vector3 effect0Position = this.transform.position + new Vector3(0, 0.7f, 0);
+                Vector3 effect0Position = transform.position + new Vector3(0, 0.7f, 0);
                 GameObject effectInstance = Instantiate(guardEffectPrefab, effect0Position, Quaternion.identity);
-                effectInstance.transform.SetParent(this.transform);
+                effectInstance.transform.SetParent(transform);
             }
             _controller.offGuard();
             InventoryManager.Instance.RemoveItem(ItemType.Guard);
+        }
+        else if (_playerRevival.CheckRevivalAvailable()) {
+            _playerRevival.OpenRevivalPanel();
         }
         else {
             _isDead = true;

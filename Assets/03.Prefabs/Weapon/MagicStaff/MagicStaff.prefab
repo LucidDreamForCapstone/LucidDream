@@ -92,7 +92,7 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
-  - {fileID: 0}
+  - {fileID: 21300000, guid: f6bc6e425a03e8648b5b186cc21a167c, type: 3}
   _basicSkillEffect: {fileID: 0}
   _skillEffect1: {fileID: 0}
   _skillEffect2: {fileID: 0}
