@@ -28,4 +28,13 @@ public class PauseUIController : MonoBehaviour {
     public void OnClick_Option() {
         _optionUIController.SetShow();
     }
+
+    public void GoToMain() {
+        GameManager.Instance.InitializeSetting();
+        GameSceneManager.Instance.LoadStartScene();
+    }
+
+    public void GameExit() {
+        GameManager.Instance.GameQuit();
+    }
 }

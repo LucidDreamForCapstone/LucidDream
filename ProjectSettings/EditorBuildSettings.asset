@@ -11,9 +11,9 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/01.Scenes/02.Main.unity
     guid: 0a729032b8f706a428de702868fe14ef
-  - enabled: 0
-    path: Assets/01.Scenes/03.Stage.unity
-    guid: a4c79b3da2c24dd478ee1d1544f2ebd2
+  - enabled: 1
+    path: Assets/01.Scenes/03.Tutorial.unity
+    guid: 4ed21166542531c4e944d69cba08181d
   - enabled: 1
     path: Assets/01.Scenes/04.Dungeon.unity
     guid: 1b515d7be25d4bd48b7d60d8f2c3bc4a

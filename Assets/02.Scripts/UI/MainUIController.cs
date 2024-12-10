@@ -16,7 +16,12 @@ public class MainUIController : UIBase {
     #region public funcs
 
     public void OnClick_GameStart() {
-        GameSceneManager.Instance.LoadStageScene(0);
+        if (GameManager.Instance.CheckFirstPlay()) {
+            GameSceneManager.Instance.LoadTutorialScene();
+        }
+        else {
+            GameSceneManager.Instance.LoadStageScene(0);
+        }
     }
 
     public void OnClick_Option() {

@@ -10,17 +10,6 @@ public class BGMManager : MonoBehaviour {
 
     private int currentStage; // 현재 Stage 값을 저장
 
-    private void Awake() {
-        if (Instance == null) {
-            Instance = this;
-            DontDestroyOnLoad(gameObject);  // BGM 유지
-        }
-        else {
-            Destroy(gameObject);
-            return;
-        }
-    }
-
     private void Start() {
         SoundManager.Instance.PlayBGM(defaultBGM.name);
         g_gameManager = FindObjectOfType<GungeonGameManager>(); // GungeonGameManager 찾기

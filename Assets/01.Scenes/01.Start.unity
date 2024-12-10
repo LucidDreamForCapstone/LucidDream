@@ -494,9 +494,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1751651165}
-        m_TargetAssemblyTypeName: GameSceneManager, Assembly-CSharp
-        m_MethodName: LoadMainScene
+      - m_Target: {fileID: 913399159}
+        m_TargetAssemblyTypeName: StartSceneManager, Assembly-CSharp
+        m_MethodName: GoToMain
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -680,17 +680,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b6f9ad93ce8ca1b43b89e942958a018e, type: 3}
---- !u!114 &1751651165 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 2156863785378605862, guid: bd8e2cae69c02d544accfc903dd465af, type: 3}
-  m_PrefabInstance: {fileID: 3319187168948532422}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: aac94b423e6cd5f40bdda94958071328, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1820663765
 GameObject:
   m_ObjectHideFlags: 0
@@ -931,6 +920,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4645033308570180254, guid: bd8e2cae69c02d544accfc903dd465af, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4645033308570180254, guid: bd8e2cae69c02d544accfc903dd465af, type: 3}
       propertyPath: _status._ad
       value: 1200
       objectReference: {fileID: 0}
@@ -966,7 +959,8 @@ PrefabInstance:
       propertyPath: m_Name
       value: GameManager
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 4645033308570180254, guid: bd8e2cae69c02d544accfc903dd465af, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []

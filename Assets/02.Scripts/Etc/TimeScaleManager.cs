@@ -18,16 +18,20 @@ public class TimeScaleManager : MonoBehaviour {
     public void TimeStop() {
         _timeScaleStack.Push(Time.timeScale);
         SoundManager.Instance.PauseSFX();
-        PauseEffects();
+        //PauseEffects();
         Time.timeScale = 0;
     }
 
     public void TimeRestore() {
         Time.timeScale = _timeScaleStack.Pop();
-        UnPauseEffects();
+        //UnPauseEffects();
         SoundManager.Instance.UnPauseSFX();
     }
 
+    public void ClearTimeStack() {
+        _timeScaleStack.Clear();
+        Time.timeScale = 1;
+    }
 
 
     public async UniTask TimeSlowLerp(float timeScale, float lerpTime) {

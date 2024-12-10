@@ -2,7 +2,6 @@ using Cysharp.Threading.Tasks;
 using Edgar.Unity; // TextMeshPro ���� ���ӽ����̽� �߰�
 using System;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 
 public class PlayerSwapManager : MonoBehaviour {
@@ -55,7 +54,7 @@ public class PlayerSwapManager : MonoBehaviour {
             Debug.LogError("Player reference is not assigned.");
             return false; // �÷��̾ �Ҵ���� ���� ���
         }
-        if (!IsFinalBossScene()) {
+        if (!IsFinalBossStage()) {
             LayerMask enemyLayer = LayerMask.GetMask("Enemy"); // Enemy ���̾� ����ũ ��������
             Collider2D[] colliders = Physics2D.OverlapCircleAll(player1.transform.position, 20f, enemyLayer); // ������ 20, enemyLayer�� ����
             foreach (var collider in colliders) {
@@ -67,9 +66,9 @@ public class PlayerSwapManager : MonoBehaviour {
         return true; // ���� ����
     }
 
-    private bool IsFinalBossScene() {
-        string finalBossScene = "BossTestScene";//after change it
-        return SceneManager.GetActiveScene().name == finalBossScene;
+    private bool IsFinalBossStage() {
+        GameObject bondrewd = GameObject.Find("BossBondrewd");
+        return bondrewd != null;
     }
 
 
@@ -83,7 +82,7 @@ public class PlayerSwapManager : MonoBehaviour {
         if (glitchController != null) {
             float glitchTime = 3;
             int flashCount = 3;
-            if (IsFinalBossScene()) {
+            if (IsFinalBossStage()) {
                 glitchTime = 1;
                 flashCount = 2;
             }

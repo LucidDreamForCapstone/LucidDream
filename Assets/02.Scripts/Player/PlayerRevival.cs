@@ -9,26 +9,32 @@ public class PlayerRevival : MonoBehaviour {
     [SerializeField] TextMeshProUGUI _timerTM;
     [SerializeField] TextMeshProUGUI _countTM;
     [SerializeField] GameObject _guardEffect;
+    bool _isUsing = false;
+
 
     public bool CheckRevivalAvailable() {
         return _revivalCount > 0;
     }
 
     public void OpenRevivalPanel() {
-        _revivalPanel.SetActive(true);
-        TimeScaleManager.Instance.TimeStop();
-        UpdateRevivalCountUI();
-        Countdown().Forget();
+        if (!_isUsing) {
+            _isUsing = true;
+            _revivalPanel.SetActive(true);
+            TimeScaleManager.Instance.TimeStop();
+            UpdateRevivalCountUI();
+            Countdown().Forget();
+        }
     }
 
     public void PlayerRevive() {
         if (_revivalCount > 0) {
             _revivalCount--;
+            Player player = PlayerDataManager.Instance.Player;
+            player.CustomInvincible(3).Forget();
             PlayerDataManager.Instance.HealByMaxPercent(100);
-            Transform playerTransform = PlayerDataManager.Instance.Player.gameObject.transform;
-            Vector3 effectPosition = playerTransform.position + new Vector3(0, 0.7f, 0);
+            Vector3 effectPosition = player.transform.position + new Vector3(0, 0.7f, 0);
             GameObject effectInstance = Instantiate(_guardEffect, effectPosition, Quaternion.identity);
-            effectInstance.transform.SetParent(playerTransform);
+            effectInstance.transform.SetParent(player.transform);
             CloseRevivalPanel();
         }
         else {
@@ -54,5 +60,6 @@ public class PlayerRevival : MonoBehaviour {
     private void CloseRevivalPanel() {
         _revivalPanel.SetActive(false);
         TimeScaleManager.Instance.TimeRestore();
+        _isUsing = false;
     }
 }

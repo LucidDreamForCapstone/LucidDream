@@ -3724,7 +3724,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &7585854387614084953
 RectTransform:
   m_ObjectHideFlags: 0
@@ -5897,7 +5897,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &8683681388579801381
 RectTransform:
   m_ObjectHideFlags: 0
@@ -5945,7 +5945,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: '"Press ''G'' to Restart"'
+  m_text: '"Press ''X'' to Restart"'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: d887971345ee72a4aa0f03f8c501c103, type: 2}
   m_sharedMaterial: {fileID: 4985760020309454812, guid: d887971345ee72a4aa0f03f8c501c103, type: 2}
@@ -6196,6 +6196,7 @@ RectTransform:
   m_Children:
   - {fileID: 9186677026357204817}
   - {fileID: 3200845463299957650}
+  - {fileID: 1099835027791472184}
   m_Father: {fileID: 4476371215615088610}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 1}

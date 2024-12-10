@@ -9,4 +9,8 @@ public class StartSceneManager : MonoBehaviour {
         _fadingText.DOFade(0, 1).SetLoops(-1, LoopType.Yoyo);
         SoundManager.Instance.PlayBGM(_mainBGM.name);
     }
+
+    public void GoToMain() {
+        GameSceneManager.Instance.LoadMainScene();
+    }
 }

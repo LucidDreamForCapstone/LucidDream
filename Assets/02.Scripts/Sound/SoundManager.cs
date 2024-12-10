@@ -94,6 +94,10 @@ public class SoundManager : MonoBehaviour {
         return sfx;
     }
 
+    public void SetBGMPitch(float pitch) {
+        m_AudioMixer.SetFloat("BGMpitch", pitch);
+    }
+
     public void SetSFXPitch(float pitch) {
         m_AudioMixer.SetFloat("SFXpitch", pitch);
     }

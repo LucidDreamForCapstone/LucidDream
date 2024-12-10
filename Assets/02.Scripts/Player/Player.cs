@@ -76,6 +76,7 @@ public class Player : MonoBehaviour {
     private bool _isPhantomLocked;
     private bool _isPhantomActivated;
     private bool _phantomForceCancelTrigger;
+    private bool _isPhantomForceLocked;
     protected bool _isAttacking;
     private bool _beforeFlipX;
     protected bool _isStun;
@@ -392,6 +393,14 @@ public class Player : MonoBehaviour {
             _phantomForceCancelTrigger = true;
     }
 
+    public void PhantomForceLock() {
+        _isPhantomForceLocked = true;
+    }
+
+    public void PhantomForceUnLock() {
+        _isPhantomForceLocked = false;
+    }
+
     #endregion //public funcs
 
 
@@ -452,12 +461,7 @@ public class Player : MonoBehaviour {
     }
 
     private async UniTaskVoid Phantom() {
-        // Check Phantom Enable
-        if (!PhantomTrigger.Instance.CanUsePhantom || Time.timeScale == 0) {
-            return;
-        }
-
-        if (Input.GetKey(KeyCode.Space) && _isPhantomReady && !_isPhantomLocked && !_isStun && !_isPause && !_isDead && _playerEnabled) {
+        if (Input.GetKey(KeyCode.Space) && _isPhantomReady && !_isPhantomLocked && !_isPhantomForceLocked && !_isStun && !_isPause && !_isDead && _playerEnabled && Time.timeScale > 0) {
             Debug.Log("Phantom ON");
             PhantomGhostEffect().Forget();
             _isPhantomReady = false;

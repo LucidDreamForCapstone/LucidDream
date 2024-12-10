@@ -27,6 +27,7 @@ public class GameSceneManager : MonoBehaviour {
 
     [SerializeField] private string _startScene;
     [SerializeField] private string _mainScene;
+    [SerializeField] private string _tutorialScene;
     [SerializeField] private List<string> _stageScenes;
 
     #endregion
@@ -57,9 +58,12 @@ public class GameSceneManager : MonoBehaviour {
         SceneManager.LoadScene(_mainScene);
     }
 
+    public void LoadTutorialScene() {
+        SceneManager.LoadScene(_tutorialScene);
+    }
+
     public void LoadStageScene(int stage) {
         if (null != _stageScenes[stage]) {
-            PlayerDataManager.Instance.ResetGame();
             SceneManager.LoadScene(_stageScenes[stage]);
         }
     }

@@ -21,6 +21,7 @@ public class Charger : MonsterBase {
         _chargerCollider = GetComponent<CapsuleCollider2D>();
         _shieldCollider = GetComponent<CircleCollider2D>();
         _sr = GetComponent<SpriteRenderer>();
+        _chargerQTE = GameObject.Find("ButtonPressQTE").GetComponent<ButtonPressQTE>();
         _shieldAnimator = transform.GetChild(0).GetComponent<Animator>();
         _shieldSr = transform.GetChild(0).GetComponent<SpriteRenderer>();
         InitializeCharger(_chargerIndex + 1).Forget();

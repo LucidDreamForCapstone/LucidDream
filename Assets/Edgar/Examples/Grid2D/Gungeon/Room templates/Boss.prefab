@@ -29308,6 +29308,10 @@ PrefabInstance:
       propertyPath: m_margin.y
       value: -25.08667
       objectReference: {fileID: 0}
+    - target: {fileID: 3404560357468094892, guid: 37ee6b8a7ac578142bba9ece9894f89b, type: 3}
+      propertyPath: m_VerticalAlignment
+      value: 256
+      objectReference: {fileID: 0}
     - target: {fileID: 4262101963593116714, guid: 37ee6b8a7ac578142bba9ece9894f89b, type: 3}
       propertyPath: m_Name
       value: BossTimer
@@ -29378,7 +29382,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8182783654338642265, guid: 37ee6b8a7ac578142bba9ece9894f89b, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -100
+      value: -1
       objectReference: {fileID: 0}
     - target: {fileID: 8182783654338642265, guid: 37ee6b8a7ac578142bba9ece9894f89b, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x

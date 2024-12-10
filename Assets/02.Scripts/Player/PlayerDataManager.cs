@@ -32,7 +32,6 @@ public class PlayerDataManager : MonoBehaviour {
         }
         else {
             _instance = this;
-            DontDestroyOnLoad(gameObject);
         }
     }
 
