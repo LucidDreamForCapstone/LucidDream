@@ -171,6 +171,29 @@ MonoBehaviour:
   m_Loop: 0
   m_Version: 1
   m_Rotation: {x: 0, y: 0, z: 0, w: 1}
+--- !u!114 &-3966037823712855529
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ba10a2d741784344d9650eaae71d5e78, type: 3}
+  m_Name: Show Dialog Box Track
+  m_EditorClassIdentifier: 
+  m_Version: 3
+  m_AnimClip: {fileID: 0}
+  m_Locked: 0
+  m_Muted: 0
+  m_CustomPlayableFullTypename: 
+  m_Curves: {fileID: 0}
+  m_Parent: {fileID: 11400000}
+  m_Children: []
+  m_Clips: []
+  m_Markers:
+    m_Objects: []
 --- !u!114 &-3821204523416941662
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -805,6 +828,7 @@ MonoBehaviour:
   - {fileID: 3475715093938928023}
   - {fileID: 881648223086178956}
   - {fileID: -3821204523416941662}
+  - {fileID: -3966037823712855529}
   m_FixedDuration: 0
   m_EditorSettings:
     m_Framerate: 60

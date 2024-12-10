@@ -19,7 +19,7 @@ public class TutorialStart : MonoBehaviour
         if (volume.profile.TryGet(out colorAdjustments)) {
             colorAdjustments.colorFilter.overrideState = true; // Enable color filter override
             colorAdjustments.colorFilter.value = startColor; // Set initial color
-
+                
             await FadeInColor(); // Start the fade-in effect
         }
         else {

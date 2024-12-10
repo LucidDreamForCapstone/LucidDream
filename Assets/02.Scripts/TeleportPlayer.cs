@@ -5,7 +5,6 @@ using UnityEngine.Rendering.Universal;
 public class PlayerTeleporter : MonoBehaviour {
     [SerializeField] private GameObject player;
     [SerializeField] private GameObject target;
-    [SerializeField] private Volume postProcessingVolume; // Post-Processing Volume
     private ColorAdjustments colorAdjustments; // ColorAdjustments 컴포넌트
     /// <summary>
     /// 플레이어를 특정 오브젝트 위치로 순간 이동시킵니다.
@@ -16,7 +15,7 @@ public class PlayerTeleporter : MonoBehaviour {
     private void Start() {
         Volume volume = OptionManager.Instance.GetBrightnessVolume();
         // ColorAdjustments 컴포넌트 가져오기
-        if (postProcessingVolume != null && postProcessingVolume.profile.TryGet(out ColorAdjustments adjustments)) {
+        if (volume!= null && volume.profile.TryGet(out ColorAdjustments adjustments)) {
             colorAdjustments = adjustments;
         }
         else {
