@@ -59,7 +59,7 @@ public class InGameUIController : MonoBehaviour {
 
     #region private variables
 
-    private int _levelUpCount = 0;
+    private int _levelUpCount;
     //private bool[] skillLocks = new bool[4];  // �� ��ų ��� ���¸� ����
     private float[] skillCooldownTimes = new float[4];  // ��ų�� ��ٿ� �ð�
     private float[] skillMaxCooldowns = new float[4];   // ��ų�� �ִ� ��Ÿ�� ����.
@@ -84,6 +84,7 @@ public class InGameUIController : MonoBehaviour {
         });
         InitializeCardUI();
         inventoryManager = FindObjectOfType<InventoryManager>();
+        _levelUpCount = 0;
     }
 
     public void Update() {
@@ -143,10 +144,11 @@ public class InGameUIController : MonoBehaviour {
         _texts[(int)TextType.PlayerStatus].text = statusText;
     }
 
-    public void ShowCardSelect(List<Card> cards, int levelUpCount) { // ī�� ���� UI ȣ�� �Լ�
-        _levelUpCount = levelUpCount;
+    public void ShowCardSelect(List<Card> cards, int levelUpCountPlus) { // ī�� ���� UI ȣ�� �Լ�
+        if (_levelUpCount == 0)
+            TimeScaleManager.Instance.TimeStop();
+        _levelUpCount += levelUpCountPlus;
         _cardUIController.SetShow(cards);
-        --_levelUpCount;
     }
     public void ResetFeverFill() {
         feverFillImage.fillAmount = 0;  // Fill Amount�� 0���� ����
@@ -229,9 +231,8 @@ public class InGameUIController : MonoBehaviour {
     public void offGuard() {
         _showGuard.SetActive(false);
     }
+
     #region private funcs
-
-
 
     private void InitializeCardUI() {
         _cardUIController.Initialize(OnClick_Card);
@@ -240,9 +241,9 @@ public class InGameUIController : MonoBehaviour {
 
     private void OnClick_Card(Card card) {
         CardManage.Instance.ApplyCard(card);
-
+        _levelUpCount--;
         if (1 <= _levelUpCount) {
-            ShowCardSelect(CardManage.Instance.DrawCards(), _levelUpCount);
+            ShowCardSelect(CardManage.Instance.DrawCards(), 0);
         }
         else {
             TimeScaleManager.Instance.TimeRestore();

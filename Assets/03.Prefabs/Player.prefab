@@ -251,7 +251,6 @@ MonoBehaviour:
   GuardSound: {fileID: 0}
   dyingSound1: {fileID: 8300000, guid: f35c938e146770d48a5fceb119902a08, type: 3}
   dyingSound2: {fileID: 8300000, guid: 1c7e18df881e1814a8469249c2d06db9, type: 3}
-  dyingEffectSound: {fileID: 0}
   deathUIController: {fileID: 0}
 --- !u!114 &1519231970995128663
 MonoBehaviour:

@@ -273,29 +273,25 @@ public class Player : MonoBehaviour {
         int firstLevel = level;
         int levelExp = PlayerDataManager.Instance.Status.GetMaxExp();
         if (levelExp == -1) {
-            Debug.Log("�߸��� �÷��̾� ������");
+            Debug.Log("Wrong Level");
             return;
         }
 
         PlayerDataManager.Instance.SetExp(currentExp + gainedExp);
 
         if (level == PlayerDataManager.Instance.Status._maxLevel) {
-            Debug.Log("�ִ� �����̹Ƿ� ����ġ�� ȹ���� �� �����ϴ�.");
+            Debug.Log("Max Level Can't gain Exp");
         }
         else {
             while (PlayerDataManager.Instance.Status._exp >= levelExp) {
-                Debug.Log(level + "->" + (level + 1) + "�� ������");
+                Debug.Log(level + "->" + (level + 1));
                 PlayerDataManager.Instance.SetLevel(++level);
                 PlayerDataManager.Instance.SetExp(PlayerDataManager.Instance.Status._exp - levelExp);
                 PlayerDataManager.Instance.SetMaxFeverGauge();
                 levelExp = PlayerDataManager.Instance.Status.GetMaxExp();
             }
 
-            int levelUpCount = 0;
-
-            for (int i = 0; i < level - firstLevel; i++) {
-                levelUpCount++;
-            }
+            int levelUpCount = level - firstLevel;
             PlayerDataManager.Instance.ShowCardSelectUI(levelUpCount);
         }
     }
@@ -470,7 +466,7 @@ public class Player : MonoBehaviour {
             SoundManager.Instance.SetSFXPitchLerp(_phantomTimeScale, _phantomLerpTime).Forget();
             SoundManager.Instance.SetBGMPitchLerp(0.5f, _phantomLerpTime).Forget();
             await TimeScaleManager.Instance.TimeSlowLerp(_phantomTimeScale, _phantomLerpTime);
-            while (!Input.GetKey(KeyCode.Space) && !_phantomForceCancelTrigger && !_isStun) {
+            while (!(Input.GetKey(KeyCode.Space) && Time.timeScale > 0) && !_phantomForceCancelTrigger && !_isStun) {
                 await UniTask.NextFrame();
             }
             _isPhantomActivated = false;

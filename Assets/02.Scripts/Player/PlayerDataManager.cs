@@ -227,7 +227,6 @@ public class PlayerDataManager : MonoBehaviour {
     public void ShowCardSelectUI(int levelUpCount) {
         if (0 < levelUpCount) {
             _ingameUIController.ShowCardSelect(CardManage.Instance.DrawCards(), levelUpCount);
-            TimeScaleManager.Instance.TimeStop();
         }
     }
 
