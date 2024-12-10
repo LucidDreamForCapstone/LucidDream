@@ -19,9 +19,8 @@ MonoBehaviour:
   DefaultRoomTemplateSets: []
   Rooms:
   - {fileID: 7588476818348702017}
-  - {fileID: 8385712489821708097}
   EditorData:
-    PanOffset: {x: -41.434414, y: 188.38792}
+    PanOffset: {x: -169.23648, y: 231.50186}
     Zoom: 0.7422196
   RoomType: Edgar.Unity.Examples.Gungeon.GungeonRoom
   ConnectionType: Edgar.Unity.Examples.Gungeon.GungeonConnection
@@ -38,19 +37,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3db3deff57bcd2d4bacb91056ad7f14a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Position: {x: 592, y: 32}
+  Position: {x: 560, y: 112}
   Type: 14
---- !u!114 &8385712489821708097
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3db3deff57bcd2d4bacb91056ad7f14a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Position: {x: 1136, y: -128}
-  Type: 0
