@@ -85,6 +85,8 @@ public class BossBondrewd : MonsterBase {
     [SerializeField] int _phantomGaugeIncreaseAmount;
     [SerializeField] int _phantomGaugeDecreaseAmount;
     [SerializeField] float _phantomGaugeUpdateInterval;
+    [SerializeField] AudioClip _phantomOnSound;
+    [SerializeField] AudioClip _phantomOffSound;
     [Header("\nGroggy State")]
     [SerializeField] int _normalGroggyDecreaseAmount;
     [SerializeField] float _groggyLastTime;
@@ -539,6 +541,11 @@ public class BossBondrewd : MonsterBase {
             SetFlipX(Vector2.left);
             _chargingEffect.GetComponent<SpriteRenderer>().color = Color.white;
             _chargingEffect.SetActive(true);
+            List<string> messages = new List<string>();
+            messages.Add("연구소장이 <color=red><size=50>연쇄 폭발</color></size>을 일으킬거야.\n내가 메인 시스템을 해킹해서\n폭발이 일어날 곳을 알려줄게!");
+            SystemMessageManager.Instance.ShowDialogBox("연구원", messages, 6).Forget();
+            await UniTask.Delay(TimeSpan.FromSeconds(6), ignoreTimeScale: true);
+            SystemMessageManager.Instance.PushSystemMessage("F를 눌러 연구원 시점으로 전환하여 메인 시스템을 해킹하세요.", Color.yellow, lastTime: 10);
             List<Vector2> excludePosList = new List<Vector2>();
             for (int i = 0; i < _excludeCount; i++) {
                 int x = Random.Range(-(int)_explosionSizeHalf.x, (int)_explosionSizeHalf.x + 1);
@@ -625,6 +632,7 @@ public class BossBondrewd : MonsterBase {
             case PhantomState.DeActivated:
                 if (_phantomGauge > 100) {
                     _phantomTimer = 0;
+                    SoundManager.Instance.PlaySFX(_phantomOnSound.name, true);
                     _currentPhantomState = PhantomState.Activated;
                     _phantomGauge = 100;
                     _phantomGaugeSlider.fillRect.GetComponent<Image>().color = _phantomGaugeActivateColor;
@@ -649,6 +657,7 @@ public class BossBondrewd : MonsterBase {
             case PhantomState.Activated:
                 if (_phantomGauge < 0) {
                     _phantomTimer = 0;
+                    SoundManager.Instance.PlaySFX(_phantomOffSound.name, false);
                     _currentPhantomState = PhantomState.DeActivated;
                     _phantomGauge = 0;
                     _phantomGaugeSlider.fillRect.GetComponent<Image>().color = _phantomGaugeDeactivateColor;
@@ -708,6 +717,11 @@ public class BossBondrewd : MonsterBase {
         _isGroggy = true;
         _cts.Cancel();
         _useTree = false;
+        List<string> messages = new List<string>();
+        messages.Add("연구소장이 그로기 상태에 진입했어.\n그가 깨어나기 전에\n<size=50><color=red>영혼 가속기의 보호막</size></color>을 해제해야해!");
+        SystemMessageManager.Instance.ShowDialogBox("연구원", messages, 6).Forget();
+        await UniTask.Delay(TimeSpan.FromSeconds(6), ignoreTimeScale: true);
+        SystemMessageManager.Instance.PushSystemMessage("F를 눌러 연구원 시점으로 전환하여 보호막의 전력을 차단하세요.", Color.yellow, lastTime: 10);
         _groggyEffect.SetActive(true);
         StateEffectManager.Instance.SummonEffect(transform, StateType.Confusion, 3, _groggyLastTime, 3).Forget();
         float timer = 0;
@@ -745,6 +759,18 @@ public class BossBondrewd : MonsterBase {
     #endregion
 
     #region Util funcs
+
+    public void WakeUp() {
+        SoundManager.Instance.PlayBGM(_bossBGM.name);
+        _bossUI.SetActive(true);
+        _wakeUpCollider.enabled = false;
+        _isSpawnComplete = true;
+    }
+
+    public bool CheckBossWakeUp() {
+        return _isSpawnComplete;
+    }
+
     private float CalculateManhattanDist(Vector2 a, Vector2 b) {
         return Mathf.Abs(a.x - b.x) + Mathf.Abs(a.y - b.y);
     }
@@ -794,13 +820,6 @@ public class BossBondrewd : MonsterBase {
     }
     private void UpdateGroggySlider() {
         _groggySlider.value = _groggyGauge / 100.0f;
-    }
-
-    public void WakeUp() {
-        SoundManager.Instance.PlayBGM(_bossBGM.name);
-        _bossUI.SetActive(true);
-        _wakeUpCollider.enabled = false;
-        _isSpawnComplete = true;
     }
     #endregion
 }

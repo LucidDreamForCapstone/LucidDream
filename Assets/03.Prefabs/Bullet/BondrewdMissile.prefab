@@ -53,7 +53,7 @@ MonoBehaviour:
   _slowDebuff: 0
   _shockWaveObj: {fileID: 3846065944111756103, guid: a50dcad6b7f2f0243afa5597d9ad5133, type: 3}
   _shockWaveColor: {r: 0.21960784, g: 0.7137255, b: 0.3882353, a: 1}
-  _explositionClip: {fileID: 0}
+  _explositionClip: {fileID: 8300000, guid: 58073753bfaad1f4a963375ca4431744, type: 3}
 --- !u!212 &3391475335412423250
 SpriteRenderer:
   m_ObjectHideFlags: 0

@@ -107,6 +107,11 @@ public class ButtonPressQTE : MonoBehaviour {
                 _currentGauge = 0;
                 _sliderFill.color = Color.green;
                 _keyBoards[(int)randomKey].gameObject.SetActive(false);
+                List<string> messages = new List<string>();
+                messages.Add("좋아, 영혼 가속기의 보호막을 해제했으니\n<color=red><size=50>이를 파괴해서</color></size>\n연구소장이 힘을 쓰지 못하게 막아!");
+                SystemMessageManager.Instance.ShowDialogBox("연구원", messages, 6).Forget();
+                await UniTask.Delay(TimeSpan.FromSeconds(6), ignoreTimeScale: true);
+                SystemMessageManager.Instance.PushSystemMessage("F를 눌러 주인공 시점으로 전환하여 전투로 복귀하세요.", Color.yellow, lastTime: 10);
                 await UniTask.Delay(TimeSpan.FromSeconds(_eventDelay));
                 _isShieldDestroyReady = true;
                 UpdateSlider();

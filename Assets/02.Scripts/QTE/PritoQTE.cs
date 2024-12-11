@@ -81,6 +81,11 @@ public class PritoQTE : MonoBehaviour { //Maplestory Prito Mini Game
                 SoundManager.Instance.PlaySFX(_successSound.name, true);
                 _sliderFill.color = Color.green;
                 _boss.ShowExplosionWarning(); //make warning effect visible
+                List<string> messages = new List<string>();
+                messages.Add("어...??\n갑자기 연구실 전체에\n이상한 표식이 일렁거리기 시작했어!");
+                SystemMessageManager.Instance.ShowDialogBox("주인공", messages).Forget();
+                UniTask.Delay(TimeSpan.FromSeconds(3), ignoreTimeScale: true).Forget();
+                SystemMessageManager.Instance.PushSystemMessage("F를 눌러 주인공 시점으로 전환하여 연구소장의 연쇄 폭발을 피하세요.", Color.yellow, lastTime: 6);
                 await UniTask.Delay(TimeSpan.FromSeconds(_eventDelay));
                 _progressSlider.gameObject.SetActive(false);
                 DecreaseGauge(false).Forget();

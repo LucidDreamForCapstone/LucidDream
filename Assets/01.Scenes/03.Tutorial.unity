@@ -20061,7 +20061,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   fadeDuration: 3
-  _tutorialBGM: {fileID: 8300000, guid: 5b6db2e97b41d6745b99d9aacb29330d, type: 3}
 --- !u!1 &746994839
 GameObject:
   m_ObjectHideFlags: 0
@@ -25721,6 +25720,7 @@ GameObject:
   - component: {fileID: 1593478957}
   - component: {fileID: 1593478956}
   - component: {fileID: 1593478958}
+  - component: {fileID: 1593478959}
   m_Layer: 0
   m_Name: IngameManager
   m_TagString: Untagged
@@ -25798,6 +25798,19 @@ MonoBehaviour:
   _dialogMessageTM: {fileID: 0}
   _dialogStartSound: {fileID: 8300000, guid: 9328b9217cce52b4abb979acdd325165, type: 3}
   _dialogEndSound: {fileID: 8300000, guid: 60405be52dc3c1e4d8e60e2391e3810d, type: 3}
+--- !u!114 &1593478959
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1593478955}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 67fd0c9e987d01b4f99cf357dd3395b3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _tutorialBGM: {fileID: 8300000, guid: b515ad4a5b715ae4b9a165ac35df4807, type: 3}
 --- !u!1 &1615995440
 GameObject:
   m_ObjectHideFlags: 0
