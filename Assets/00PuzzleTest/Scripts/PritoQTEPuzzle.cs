@@ -6,7 +6,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using Random = UnityEngine.Random;
 
-public class PritoQTEPuzzle : MonoBehaviour
+public class PritoQTEPuzzle : PuzzleBase, Interactable
 {
     [SerializeField] Canvas _keyboardCanvas;
     [SerializeField] Slider _progressSlider;
@@ -17,15 +17,19 @@ public class PritoQTEPuzzle : MonoBehaviour
     [SerializeField] float _eventDelay;
     [SerializeField] AudioClip _successSound;
     [SerializeField] AudioClip _failSound;
+    [SerializeField] bool _interactable;
 
+    public bool Interactable { get { return _interactable; } set { _interactable = value; } }
     //BoxCollider2D _triggerCollider;
+    [SerializeField] public Action<float> BlinkWall;
     private bool _isPlayerConnected; //check if player2 collider is on the event trigger collider
     private bool _isEventOnProcess;
     private bool _isReady;
     private float _currentGauge;
     private Image _sliderFill;
 
-    private void Start() {
+    private void Start()
+    {
         _currentGauge = 0;
         UpdateSlider();
         _isPlayerConnected = false;
@@ -35,28 +39,36 @@ public class PritoQTEPuzzle : MonoBehaviour
         _progressSlider.gameObject.SetActive(false);
     }
 
-    private void Update() {
+    private void Update()
+    {
         ButtonQTE().Forget();
     }
 
-    private void OnTriggerEnter2D(Collider2D collision) {
-        if (collision.CompareTag("Player")) {
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.CompareTag("Player") && !IsInteractBlock())
+        {
             Debug.Log("Prito QTE Zone Entered");
             _isPlayerConnected = true;
         }
     }
 
-    private void OnTriggerExit2D(Collider2D collision) {
-        if (collision.CompareTag("Player")) {
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        if (collision.CompareTag("Player"))
+        {
             Debug.Log("Prito QTE Zone Exited");
             _isPlayerConnected = false;
+            _progressSlider.gameObject.SetActive(false);
         }
     }
 
 
 
-    private async UniTaskVoid ButtonQTE() {
-        if (!_isEventOnProcess && _isPlayerConnected && _isReady) {
+    private async UniTaskVoid ButtonQTE()
+    {
+        if (!_isEventOnProcess && _isPlayerConnected && _isReady)
+        {
             _isEventOnProcess = true;
             _isReady = false;
             _progressSlider.gameObject.SetActive(true);
@@ -64,25 +76,34 @@ public class PritoQTEPuzzle : MonoBehaviour
             _currentGauge = 0;
             UpdateSlider();
             int i, patternCount = _buttonCountList.Count;
-            for (i = 0; i < patternCount; i++) {
+            for (i = 0; i < patternCount; i++)
+            {
                 bool isProblemDetected = await ButtonSequence(_buttonCountList[i]);
-                if (isProblemDetected) {
+                if (isProblemDetected)
+                {
                     break;
                 }
-                else {
+                else
+                {
                     IncreaseGauge(i).Forget();
                 }
             }
 
-            if (i == patternCount) { //Mission Complete
+            if (i == patternCount)
+            { //Mission Complete
+                Cleared = true;
                 SoundManager.Instance.PlaySFX(_successSound.name, true);
                 _sliderFill.color = Color.green;
-                await UniTask.Delay(TimeSpan.FromSeconds(_eventDelay));
+                await UniTask.Delay(TimeSpan.FromSeconds(_eventDelay * 0.85));
+                BlinkWall.Invoke(_eventDelay * 0.3f);
+                await UniTask.Delay(TimeSpan.FromSeconds(_eventDelay * 0.15f));
+                Cleared = false;
                 _progressSlider.gameObject.SetActive(false);
                 DecreaseGauge(false).Forget();
                 _isReady = true;
             }
-            else {
+            else
+            {
                 DecreaseGauge().Forget();
                 _isReady = true;
             }
@@ -92,26 +113,32 @@ public class PritoQTEPuzzle : MonoBehaviour
         }
     }
 
-    private async UniTask<bool> ButtonSequence(int count) {
+    private async UniTask<bool> ButtonSequence(int count)
+    {
         List<PressKey> keys = GetRandomButtonList(count);
         List<KeyBoard> keyBoards = new List<KeyBoard>();
         List<Image> keyBoardImages = new List<Image>();
         int progressPointer = 0;
         bool canInteract = true;
-        for (int j = 0; j < keys.Count; j++) {
+        for (int j = 0; j < keys.Count; j++)
+        {
             keyBoards.Add(Instantiate(_keyBoardObjList[(int)keys[j]], _keyboardCanvas.gameObject.transform).GetComponent<KeyBoard>());
             keyBoardImages.Add(keyBoards[j].GetComponent<Image>());
         }
 
-        while (_isPlayerConnected && _isEventOnProcess && progressPointer < count) {
+        while (_isPlayerConnected && _isEventOnProcess && progressPointer < count)
+        {
             KeyCode targetKeycode = ParseKeyCode((int)keys[progressPointer]);
-            if (Input.anyKeyDown) {
-                if (canInteract && Input.GetKeyDown(targetKeycode)) { //Pressed Right Button
+            if (Input.anyKeyDown)
+            {
+                if (canInteract && Input.GetKeyDown(targetKeycode))
+                { //Pressed Right Button
                     keyBoards[progressPointer].Pressed();
                     keyBoardImages[progressPointer].DOFade(0.4f, 0.5f).ToUniTask().Forget();
                     progressPointer++;
                 }
-                else if (!Input.GetKeyDown(targetKeycode)) { //Pressed Wrong Button
+                else if (!Input.GetKeyDown(targetKeycode))
+                { //Pressed Wrong Button
                     progressPointer = 0;
                     canInteract = false;
                     SoundManager.Instance.PlaySFX(_failSound.name, true);
@@ -126,29 +153,36 @@ public class PritoQTEPuzzle : MonoBehaviour
             await UniTask.NextFrame();
         }
 
-        if (_isPlayerConnected) {
-            for (int j = 0; j < keyBoards.Count; j++) {
+        if (_isPlayerConnected)
+        {
+            for (int j = 0; j < keyBoards.Count; j++)
+            {
                 keyBoards[j].gameObject.SetActive(false);
             }
             return false;
         }
-        else {
+        else
+        {
             return true;
         }
     }
 
-    private List<PressKey> GetRandomButtonList(int count) {
+    private List<PressKey> GetRandomButtonList(int count)
+    {
         List<PressKey> buttonList = new List<PressKey>();
-        for (int i = 0; i < count; i++) {
+        for (int i = 0; i < count; i++)
+        {
             PressKey randomKey = (PressKey)Random.Range(0, (int)PressKey.Space + 1);
             buttonList.Add(randomKey);
         }
         return buttonList;
     }
 
-    private KeyCode ParseKeyCode(int key) {
+    private KeyCode ParseKeyCode(int key)
+    {
         KeyCode selectedKey = KeyCode.None;
-        switch (key) {
+        switch (key)
+        {
             case 0:
                 selectedKey = KeyCode.Q;
                 break;
@@ -168,9 +202,11 @@ public class PritoQTEPuzzle : MonoBehaviour
         return selectedKey;
     }
 
-    private async UniTaskVoid IncreaseGauge(int index) {
+    private async UniTaskVoid IncreaseGauge(int index)
+    {
         float targetGauge = (float)(index + 1) / _buttonCountList.Count * 100.0f;
-        while (_currentGauge < targetGauge) {
+        while (_currentGauge < targetGauge)
+        {
             _currentGauge += _plusAmount * Time.deltaTime;
             UpdateSlider();
             await UniTask.NextFrame();
@@ -178,8 +214,10 @@ public class PritoQTEPuzzle : MonoBehaviour
         _currentGauge = targetGauge;
     }
 
-    private async UniTaskVoid DecreaseGauge(bool sliderUpdateEnable = true) {
-        while (_currentGauge > 0) {
+    private async UniTaskVoid DecreaseGauge(bool sliderUpdateEnable = true)
+    {
+        while (_currentGauge > 0)
+        {
             _currentGauge -= _minusAmount * Time.deltaTime;
             if (sliderUpdateEnable)
                 UpdateSlider();
@@ -188,13 +226,26 @@ public class PritoQTEPuzzle : MonoBehaviour
         _currentGauge = 0;
     }
 
-    private void DestroyAllKeyObjects() {
-        foreach (Transform child in _keyboardCanvas.transform) {
+    private void DestroyAllKeyObjects()
+    {
+        foreach (Transform child in _keyboardCanvas.transform)
+        {
             Destroy(child.gameObject);
         }
     }
 
-    private void UpdateSlider() {
+    private void UpdateSlider()
+    {
         _progressSlider.value = _currentGauge / 100;
+    }
+
+    public bool IsInteractBlock()
+    {
+        return !_interactable;
+    }
+
+    public string GetInteractText()
+    {
+        return "PritoPuzzle";
     }
 }

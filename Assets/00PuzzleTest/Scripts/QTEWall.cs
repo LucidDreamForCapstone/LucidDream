@@ -1,6 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
@@ -8,6 +6,10 @@ public class QTEWall : MonoBehaviour
 {
     [SerializeField]
     ButtonPressQTEPuzzle buttonpressQTE;
+    [SerializeField]
+    PritoQTEPuzzle pritoQTEPuzzle;
+    [SerializeField]
+    PuzzleBase targetPuzzle;
     [SerializeField]
     bool visible = false;
     [SerializeField]
@@ -23,24 +25,50 @@ public class QTEWall : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        Random.InitState((int)System.DateTime.Now.Ticks);
         tilemapRenderer = gameObject.GetComponent<TilemapRenderer>();
         tilemapRenderer.enabled = false;
         visible = false;
+
         buttonpressQTE = GameObject.Find("ButtonPressQTEPuzzle").GetComponent<ButtonPressQTEPuzzle>();
+        pritoQTEPuzzle = GameObject.Find("PritoQTEPuzzle").GetComponent<PritoQTEPuzzle>();
+        SpriteRenderer pritoRenderer = pritoQTEPuzzle.gameObject.GetComponent<SpriteRenderer>();
+        SpriteRenderer buttonpressRenderer = buttonpressQTE.gameObject.GetComponent<SpriteRenderer>();
+        MakeTransParent(pritoRenderer, 1.0f);
+        MakeTransParent(buttonpressRenderer, 1.0f);
+        int type = Random.Range(0, 2);
+        Debug.Log("type is : " + type);
+        switch (type)
+        {
+            case 0:
+                targetPuzzle = buttonpressQTE;
+                buttonpressQTE.Interactable = true;
+                MakeTransParent(pritoRenderer, 0.3f);
+                pritoQTEPuzzle.Interactable = false;
+                break;
+            case 1:
+                targetPuzzle = pritoQTEPuzzle;
+                pritoQTEPuzzle.Interactable = true;
+                MakeTransParent(buttonpressRenderer, 0.3f);
+                buttonpressQTE.Interactable = false;
+                break;
+        }
         tilemapMaterial = tilemapRenderer.material;
         originalColor = tilemapMaterial.color;
-        buttonpressQTE.BlinkWall -= StartBlinkAndPause;
+        pritoQTEPuzzle.BlinkWall = null;
+        pritoQTEPuzzle.BlinkWall += StartBlinkAndPause;
+        buttonpressQTE.BlinkWall = null;
         buttonpressQTE.BlinkWall += StartBlinkAndPause;
-        
+
     }
 
     // Update is called once per frame
     void Update()
     {
-        visible = buttonpressQTE.GetComponent<PuzzleBase>().Cleared;
-        if (buttonpressQTE == null)
+        visible = targetPuzzle.Cleared;
+        if (targetPuzzle == null)
         {
-            Debug.LogError("buttonpressQTE is null [QTEWall]");
+            Debug.LogError("targetPuzzle is null [QTEWall]");
             return;
         }
         tilemapRenderer.enabled = visible;
@@ -78,5 +106,12 @@ public class QTEWall : MonoBehaviour
 
         // 깜빡임이 끝난 후 동작 (코드 진행 가능)
         Debug.Log("Blinking finished. Resuming code.");
+    }
+
+    public void MakeTransParent(SpriteRenderer spriteRenderer, float amount)
+    {
+        Color color = spriteRenderer.color;
+        color.a = amount;
+        spriteRenderer.color = color;
     }
 }
