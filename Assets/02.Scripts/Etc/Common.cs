@@ -43,6 +43,7 @@ public enum ChestRank {
 public enum ItemType {
     Guard,
     Key,
+    SwapItem,
 }
 
 public enum StateType {

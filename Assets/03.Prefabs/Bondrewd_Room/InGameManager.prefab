@@ -1,0 +1,191 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &1807632651676554906
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3724799218204033914}
+  - component: {fileID: 6704119549006851272}
+  - component: {fileID: 66637806324519503}
+  - component: {fileID: 5009799186013830597}
+  - component: {fileID: 7753302811598959362}
+  - component: {fileID: 7429479331442086437}
+  - component: {fileID: 6994140819608857991}
+  m_Layer: 0
+  m_Name: InGameManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3724799218204033914
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1807632651676554906}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &6704119549006851272
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1807632651676554906}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7e0ee5dd0d68b1145b2afc9e4461923f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _status:
+    _nickName: "\uD14C\uC2A4\uD2B8"
+    _playerLevel: 1
+    _maxLevel: 30
+    _hp: 300
+    _maxHp: 300
+    _exp: 0
+    _moveSpeed: 6
+    _ad: 30
+    _ap: 30
+    _adPlusRate: 0
+    _apPlusRate: 0
+    _def: 10
+    _critChance: 0
+    _critDamage: 5
+    _weaponAdBonus: 0
+    _weaponApBonus: 0
+    _weaponMoveSpeedBonus: 5
+    _weaponCritChanceBonus: 0
+    _weaponCritDamageBonus: 0
+    _feverGauge: 0
+    _maxFeverGauge: 100
+    _coin: 0
+    _dream: 0
+--- !u!114 &66637806324519503
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1807632651676554906}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 58590bce2cc7aeb4a91410a3c374a5b8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Canvas: {fileID: 0}
+  Stage: 1
+  CurrentLevelGraph: {fileID: 11400000, guid: 8da11bfbdd7d10b4b84cd075bef4b8d3, type: 2}
+--- !u!114 &5009799186013830597
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1807632651676554906}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 64417391f05d3a5419e76be9f39b0d74, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  volume: {fileID: 0}
+--- !u!114 &7753302811598959362
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1807632651676554906}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f33d1650f379e7c47992b5de02f766b5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  player1: {fileID: 0}
+  player2: {fileID: 0}
+  _miniMapObj: {fileID: 0}
+  _cameraObj: {fileID: 0}
+  player1UICanvas: {fileID: 0}
+  player2UICanvas: {fileID: 0}
+  _message: "\uC8FC\uC704\uC5D0 \uBAAC\uC2A4\uD130\uAC00 \uC874\uC7AC\uD558\uC5EC
+    \uCE90\uB9AD\uD130 \uC2A4\uC651\uC774 \uBD88\uAC00\uB2A5\uD569\uB2C8\uB2E4."
+  _message2: "\uD604\uC7AC \uD50C\uB808\uC774\uC5B4\uB97C \uC2A4\uC651\uD560 \uC218
+    \uC5C6\uC2B5\uB2C8\uB2E4."
+  _messageColor: {r: 1, g: 0.3764706, b: 0.37254903, a: 1}
+  swapFlag: 0
+--- !u!114 &7429479331442086437
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1807632651676554906}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5652fc6d5a6350d4482365201d6919ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _systemMessageTM: {fileID: 0}
+  _warningSound: {fileID: 8300000, guid: 746072977aca3dc4cb910ce255183f1f, type: 3}
+  _dialogBox: {fileID: 0}
+  _dialogNameTM: {fileID: 0}
+  _dialogMessageTM: {fileID: 0}
+  _dialogStartSound: {fileID: 8300000, guid: 9328b9217cce52b4abb979acdd325165, type: 3}
+  _dialogEndSound: {fileID: 8300000, guid: 60405be52dc3c1e4d8e60e2391e3810d, type: 3}
+--- !u!114 &6994140819608857991
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1807632651676554906}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e52de21a22b6dd44c9cc19f810c65059, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Events:
+    m_Signals:
+    - {fileID: 11400000, guid: df357fe89ad6a5f468a4f887a59685de, type: 2}
+    - {fileID: 11400000, guid: 4277036a0a075e040a25cc6caa92a8b8, type: 2}
+    m_Events:
+    - m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 5009799186013830597}
+          m_TargetAssemblyTypeName: GlitchController, Assembly-CSharp
+          m_MethodName: Glitch
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+    - m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 0}
+          m_TargetAssemblyTypeName: PlayerTeleporter, Assembly-CSharp
+          m_MethodName: SignalTP
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2

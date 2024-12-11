@@ -2,7 +2,7 @@ using Puzzle;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class LaserManager : MonoBehaviour
+public class LaserManager : PuzzleBase
 {
     [SerializeField]
     private int poolSize = 20; // Adjust as needed
@@ -18,6 +18,10 @@ public class LaserManager : MonoBehaviour
     private float maxLaserLength = 10;
     [SerializeField]
     DoorControl doorController;
+
+
+
+
 
     private Queue<GameObject> laserPool = new Queue<GameObject>();
     private List<GameObject> activeLasers = new List<GameObject>();
@@ -45,9 +49,8 @@ public class LaserManager : MonoBehaviour
     void Update()
     {
         UpdateLasers();
-        bool clear = isGameClear();
-        //Debug.Log(clear);
-        doorController.DoorOpenOnGameClear(clear);
+        cleared = isGameClear();
+        doorController.DoorOpenOnGameClear(cleared);
         ResetDestinations();
     }
 

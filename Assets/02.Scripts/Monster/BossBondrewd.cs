@@ -88,6 +88,7 @@ public class BossBondrewd : MonsterBase {
     [Header("\nGroggy State")]
     [SerializeField] int _normalGroggyDecreaseAmount;
     [SerializeField] float _groggyLastTime;
+    [SerializeField] TimeLineManager _timeLineManager;
     #endregion
 
     #region Private variables
@@ -259,7 +260,7 @@ public class BossBondrewd : MonsterBase {
         await UniTask.Delay(TimeSpan.FromSeconds(2));
         _cts.Dispose();
         _cts = null;
-
+        _timeLineManager.ResumeTimeline();
     }
 
     #endregion

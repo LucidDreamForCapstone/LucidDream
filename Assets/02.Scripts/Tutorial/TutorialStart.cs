@@ -5,14 +5,14 @@ using UnityEngine.Rendering.Universal;
 
 public class TutorialStart : MonoBehaviour {
     [SerializeField] private float fadeDuration = 3f; // Fade-in duration (seconds)
-    [SerializeField] AudioClip _tutorialBGM;
+    //[SerializeField] AudioClip _tutorialBGM;
 
     private Color startColor = new Color(0, 0, 0, 1); // Initial color (black)
     private Color targetColor = new Color(1, 1, 1, 1); // Target color (white)
     private ColorAdjustments colorAdjustments;
 
     private void Awake() {
-        SoundManager.Instance.PlayBGM(_tutorialBGM.name);
+       // SoundManager.Instance.PlayBGM(_tutorialBGM.name);
     }
 
     private async void Start() {

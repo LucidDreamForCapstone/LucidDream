@@ -1,5 +1,6 @@
 using Cinemachine;
 using Cysharp.Threading.Tasks;
+using DG.Tweening;
 using System;
 using UnityEngine;
 using UnityEngine.Experimental.Rendering.Universal;
@@ -22,7 +23,7 @@ public class CameraManager : MonoBehaviour {
     #endregion
 
 
-
+    
     #region public funcs
 
     public async UniTask CameraFocus(Transform targetTransform, int offset, float focusTime) {
@@ -39,6 +40,5 @@ public class CameraManager : MonoBehaviour {
         player.PlayerUnPause();
         _virtualCamera.Follow = originTarget;
     }
-
     #endregion
 }
