@@ -12,12 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f2b5b0d06428d324ea102b6e0f9672a0, type: 3}
   m_Name: Gungeon Input Setup
   m_EditorClassIdentifier: 
-  LevelGraph: {fileID: 11400000, guid: 1d6eee750ea8ac0458eb8f2537438c6f, type: 2}
+  LevelGraph: {fileID: 11400000, guid: 22bbd706dc04a964186d0701547c9821, type: 2}
   UseRandomLevelGraph: 1
-  Stage: 5
+  Stage: 1
   Stage1LevelGraphs:
   - {fileID: 11400000, guid: 22bbd706dc04a964186d0701547c9821, type: 2}
-  - {fileID: 11400000, guid: e779be756bebf574ebdee9c2e257f3da, type: 2}
   Stage2LevelGraphs:
   - {fileID: 11400000, guid: 0ef968e3d473ffa46b60d650fe903a5e, type: 2}
   - {fileID: 11400000, guid: 1a284592d0302134bb72a0b9e9a471ef, type: 2}
@@ -64,6 +63,8 @@ MonoBehaviour:
     - {fileID: 5887829826076179551, guid: 2480eef6a69cfd1419e429a8b8b66a18, type: 3}
     PuzzleRoomTemplates:
     - {fileID: 4281413025099981253, guid: 92a2ff90504ae46469ed0be950804097, type: 3}
+    QTEPuzzleRoomTemplates:
+    - {fileID: 6180981981340039013, guid: 50f0a55657abba24a8a63bf314255759, type: 3}
     BondrewdRoomTemplates:
     - {fileID: 5214456140728570034, guid: 290a40933694f40499c714551aaa0f56, type: 3}
     StatueRoomTemplates:

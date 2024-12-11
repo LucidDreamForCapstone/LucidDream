@@ -49,8 +49,8 @@ public class LaserManager : PuzzleBase
     void Update()
     {
         UpdateLasers();
-        cleared = isGameClear();
-        doorController.DoorOpenOnGameClear(cleared);
+        Cleared = isGameClear();
+        doorController.DoorOpenOnGameClear(Cleared);
         ResetDestinations();
     }
 
