@@ -11,11 +11,20 @@ public class TurretMissile : HomingBullet {
         base.OnEnable();
     }
     protected override void OnTriggerEnter2D(Collider2D collision) {
-        if (collision.CompareTag("Wall"))
+        if (collision.CompareTag("Wall") && !_forLab) {
             Die();
+        }
         else if (_targetType == TargetType.Both) {
-            if (collision.CompareTag("Player") && !_playerScript.CheckInvincible())
-                Die();
+            if (collision.CompareTag("Player")) {
+                if (_forLab) {
+                    if (!_player2.CheckInvincible())
+                        Die();
+                }
+                else {
+                    if (!_playerScript.CheckInvincible())
+                        Die();
+                }
+            }
             else if (collision.CompareTag("Enemy") && !_isSelfTargetPrevented)
                 Die();
         }
@@ -63,12 +72,16 @@ public class TurretMissile : HomingBullet {
                         turret.DecreaseGroggyGauge(_groggyDecreaseAmount).Forget();
                     }
                     else if (possibleTargets[i].CompareTag("Player")) {
-                        if (_stunDebuff)
-                            _playerScript.Stun(_stunTime);
-                        if (_slowDebuff)
-                            _playerScript.Slow(_slowRate, _slowTime);
-
-                        _playerScript.Damaged(_dmg);
+                        if (!_forLab) {
+                            if (_stunDebuff)
+                                _playerScript.Stun(_stunTime);
+                            if (_slowDebuff)
+                                _playerScript.Slow(_slowRate, _slowTime);
+                            _playerScript.Damaged(_dmg);
+                        }
+                        else {
+                            _player2.Damaged(_dmg);
+                        }
                     }
                 }
             }

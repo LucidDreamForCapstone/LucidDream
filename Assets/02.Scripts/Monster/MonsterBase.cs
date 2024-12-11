@@ -22,6 +22,7 @@ public abstract class MonsterBase : DropableBase {
     [HideInInspector] public bool _isStun;
     [HideInInspector] public bool _isSpawnComplete;
     [HideInInspector] public Player _playerScript;
+    [HideInInspector] public Player_2 _player2;
     [HideInInspector] public Rigidbody2D _rigid;
     public SpriteRenderer _spriteRenderer; //manual put
     public Animator _animator;//manual put
@@ -74,6 +75,7 @@ public abstract class MonsterBase : DropableBase {
         _isStun = false;
         _isColorChanged = false;
         _playerScript = GameObject.Find("Player").GetComponent<Player>();
+        _player2 = GameObject.Find("Player_2").GetComponent<Player_2>();
         _rigid = GetComponent<Rigidbody2D>();
         _isSpawnComplete = false;
         if (_useTree) {

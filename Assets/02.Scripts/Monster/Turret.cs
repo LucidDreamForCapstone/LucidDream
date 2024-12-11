@@ -5,19 +5,20 @@ using UnityEngine.UI;
 
 public class Turret : MonsterBase {
     #region serialize field
-    [SerializeField] private GameObject _missileObj;
-    [SerializeField] private float _fireSpeed;
-    [SerializeField] private float _fireLastTime;
+
+    [SerializeField] protected GameObject _missileObj;
+    [SerializeField] protected float _fireSpeed;
+    [SerializeField] protected float _fireLastTime;
     [SerializeField] private float _fireCoolTime;
-    [SerializeField] private float _homingStartTime;
-    [SerializeField] private float _homingLastTime;
-    [SerializeField] private float _explodeRadius;
-    [SerializeField] private int _missileGroggyGaugeDecreaseAmount;
+    [SerializeField] protected float _homingStartTime;
+    [SerializeField] protected float _homingLastTime;
+    [SerializeField] protected float _explodeRadius;
+    [SerializeField] protected int _missileGroggyGaugeDecreaseAmount;
     [SerializeField] private int _groggyGaugeDecreaseAmount;
     [SerializeField] private AudioClip attackSound;
     [SerializeField] private Slider _groggySlider;
-    private GameObject _firePosObj;
-    private Vector2[] _firePosVec = { new Vector2(0.59f, 0.17f), new Vector2(-0.59f, 0.17f) };
+    protected GameObject _firePosObj;
+    protected Vector2[] _firePosVec = { new Vector2(0.59f, 0.17f), new Vector2(-0.59f, 0.17f) };
 
     #endregion //serialize field
 
@@ -83,7 +84,7 @@ public class Turret : MonsterBase {
         _attackStateList[0] = AttackState.CoolTime;
     }
 
-    private void FireHomingExplosive() {
+    virtual protected void FireHomingExplosive() {
         GameObject projectile = ObjectPool.Instance.GetObject(_missileObj);
         TurretMissile projectileScript = projectile.GetComponent<TurretMissile>();
         Vector2 targetDir = _playerScript.transform.position - transform.position;
@@ -122,7 +123,7 @@ public class Turret : MonsterBase {
         }
     }
 
-    private void Groggy() {
+    virtual protected void Groggy() {
         _isGroggy = true;
         _useTree = false;
         _animator.SetTrigger("GroggyStart");

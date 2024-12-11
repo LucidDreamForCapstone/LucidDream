@@ -2,6 +2,7 @@ using UnityEngine;
 
 public class ChaseNode : ActionNode {
     //Player _player;
+    public bool _forLab;
     public float _searchDist;
     public float _attackDist;
     protected override void OnStart() {
@@ -18,6 +19,8 @@ public class ChaseNode : ActionNode {
     protected override State OnUpdate() {
         Vector2 monsterPos = _monster.transform.position;
         Vector2 playerPos = _monster._playerScript.transform.position;
+        if (_forLab)
+            playerPos = _monster._player2.transform.position;
         Vector2 moveVec = playerPos - monsterPos;
         _monster._rigid.velocity = moveVec.normalized * _monster._moveSpeed;
 
