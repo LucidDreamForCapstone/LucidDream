@@ -3,7 +3,8 @@ using Edgar.Unity.Examples.Gungeon;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class PuzzlePortal : MonoBehaviour, Interactable {
+public class PuzzlePortal : MonoBehaviour, Interactable
+{
     [SerializeField] string _message;
     [SerializeField] Color _messageColor;
     [SerializeField] PuzzleBase puzzle;
@@ -32,9 +33,9 @@ public class PuzzlePortal : MonoBehaviour, Interactable {
             TeleportPlayerToTarget_Final(player, finalSpawnPoint);
         }
 
-        if (puzzle.Cleared&&puzzleManager.CurrentPuzzleIndex!=0&&!clearedOnce) {
+        if (puzzle.Cleared && puzzleManager.CurrentPuzzleIndex != 0 && !clearedOnce) {
             SystemMessageManager.Instance.PushSystemMessage("퍼즐 클리어!", Color.green, false, 2f);
-            clearedOnce=true;
+            clearedOnce = true;
         }
     }
 
@@ -43,14 +44,13 @@ public class PuzzlePortal : MonoBehaviour, Interactable {
         if (collision.gameObject.CompareTag("Player")) {
             Debug.Log($"Player is Colliding to Portal {isEntering}");
             //puzzleManager.IsInteractingToPortal = isEntering;
-            if (GungeonGameManager.Instance != null&& puzzle.Cleared&&Input.GetKey(KeyCode.G)&&!isInputDisabled) {
+            if (GungeonGameManager.Instance != null && puzzle.Cleared && Input.GetKey(KeyCode.G) && !isInputDisabled) {
                 isInputDisabled = true;
                 puzzleManager.CurrentPuzzle.DoorController.IsInteractedOnce = true;
                 Debug.Log("GPressed!");
                 GungeonGameManager.Instance.SetIsGenerating(isEntering);
                 Debug.Log($"isGenerating set to {isEntering}");
-                if(!preventPuzzleStageUpdate)
-                {
+                if (!preventPuzzleStageUpdate) {
                     puzzleManager.ChangePuzzle();
                     preventPuzzleStageUpdate = true;
                 }
@@ -62,21 +62,12 @@ public class PuzzlePortal : MonoBehaviour, Interactable {
         }
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        if (puzzleManager.CurrentPuzzleIndex == 0)
-        {
-            puzzleManager.ChangePuzzle();
-            Debug.Log(puzzleManager.CurrentPuzzle.transform.name);
-            puzzle = puzzleManager.CurrentPuzzle;
-        }
-        HandleTrigger(collision, true);
+    private void OnTriggerEnter2D(Collider2D collision) {
     }
 
-    private void OnTriggerStay2D(Collider2D collision)
-    {
-        if (puzzleManager.CurrentPuzzleIndex == 0)
-        {
+    private void OnTriggerStay2D(Collider2D collision) {
+        if (puzzleManager.CurrentPuzzleIndex == 0) {
+            puzzleManager.CurrentPuzzle.DoorController.IsDoorOpen = true;
             puzzleManager.ChangePuzzle();
             Debug.Log(puzzleManager.CurrentPuzzle.transform.name);
             puzzle = puzzleManager.CurrentPuzzle;
@@ -101,8 +92,7 @@ public class PuzzlePortal : MonoBehaviour, Interactable {
 
     public string GetInteractText() => "이동 (G)";
 
-    private IEnumerator DisableInputForSeconds(float duration)
-    {
+    private IEnumerator DisableInputForSeconds(float duration) {
         isInputDisabled = true;
         playerAction.Disable();
         yield return new WaitForSecondsRealtime(duration);

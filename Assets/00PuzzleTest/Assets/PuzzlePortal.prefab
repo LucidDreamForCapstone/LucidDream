@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 5658950045311634049}
   - component: {fileID: 335050448688167498}
   - component: {fileID: 1070108376867431934}
-  m_Layer: 17
+  m_Layer: 0
   m_Name: PuzzlePortal
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -190,3 +190,12 @@ MonoBehaviour:
   clearedOnce: 0
   gungeonGameManager: {fileID: 0}
   player: {fileID: 0}
+  playerAction:
+    m_Name: Player
+    m_Type: 0
+    m_ExpectedControlType: 
+    m_Id: 26576d62-22d4-4873-afe2-542eeddc0e32
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings: []
+    m_Flags: 0
