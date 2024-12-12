@@ -46,6 +46,7 @@ public class Turret : MonsterBase {
         UpdateGroggySlider();
     }
     new private void OnEnable() {
+        _isEmbedded = true;
         base.OnEnable();
         _attackFuncList.Add(FireTask);
         _isFiring = false;
@@ -134,7 +135,6 @@ public class Turret : MonsterBase {
     private void UpdateGroggySlider() {
         _groggySlider.value = _groggyGauge / 100.0f;
     }
-
 
     #endregion //private funcs
 }

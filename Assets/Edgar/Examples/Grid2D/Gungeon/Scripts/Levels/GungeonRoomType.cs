@@ -15,6 +15,7 @@
         Puzzle,
         Tutorial,
         Bondrewd,
-        Statue
+        Statue,
+        Turret
     }
 }

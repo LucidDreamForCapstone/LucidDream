@@ -11,10 +11,7 @@ public class TurretMissile : HomingBullet {
         base.OnEnable();
     }
     protected override void OnTriggerEnter2D(Collider2D collision) {
-        if (collision.CompareTag("Wall") && !_forLab) {
-            Die();
-        }
-        else if (_targetType == TargetType.Both) {
+        if (_targetType == TargetType.Both) {
             if (collision.CompareTag("Player")) {
                 if (_forLab) {
                     if (!_player2.CheckInvincible())

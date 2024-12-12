@@ -13,12 +13,12 @@ MonoBehaviour:
   m_Name: RepeatNode
   m_EditorClassIdentifier: 
   _state: 0
-  _started: 0
+  _started: 1
   _guid: 4d56dd56c6c84b640ab1bf919f5d4c34
-  _position: {x: 1, y: 94}
+  _position: {x: 2, y: 93}
   _monster: {fileID: 0}
   description: 
-  _child: {fileID: 1461025230087565266}
+  _child: {fileID: 4675442014421400369}
 --- !u!114 &-8713405326641151871
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -55,7 +55,7 @@ MonoBehaviour:
   _state: 0
   _started: 0
   _guid: 134676c8ef045ad4280ae3a1ee81c9fa
-  _position: {x: 2, y: 377}
+  _position: {x: 2, y: 378}
   _monster: {fileID: 0}
   description: 
   _child: {fileID: -8713405326641151871}
@@ -77,6 +77,7 @@ MonoBehaviour:
   _position: {x: -97, y: 602}
   _monster: {fileID: 0}
   description: 
+  _forLab: 0
   _searchDist: 11
   _attackDist: 10
 --- !u!114 &11400000
@@ -95,12 +96,12 @@ MonoBehaviour:
   _nodes:
   - {fileID: 3478830345845294550}
   - {fileID: -8967571435559498333}
-  - {fileID: 1461025230087565266}
   - {fileID: 6906555157454718061}
   - {fileID: -6965184019126250684}
   - {fileID: 187179524400232294}
   - {fileID: -8713405326641151871}
   - {fileID: -3943183865059864016}
+  - {fileID: 4675442014421400369}
   _treeState: 0
   _monster: {fileID: 0}
 --- !u!114 &187179524400232294
@@ -122,25 +123,6 @@ MonoBehaviour:
   _monster: {fileID: 0}
   description: 
   attackIndex: 0
---- !u!114 &1461025230087565266
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 92a8f6256dd48ed48a2e722788b28600, type: 3}
-  m_Name: CheckSpawnNode
-  m_EditorClassIdentifier: 
-  _state: 0
-  _started: 0
-  _guid: d45a60e298c5ff24c8213a6b0ac83a7c
-  _position: {x: 2, y: 186}
-  _monster: {fileID: 0}
-  description: 
-  _child: {fileID: 6906555157454718061}
 --- !u!114 &3478830345845294550
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -154,12 +136,31 @@ MonoBehaviour:
   m_Name: RootNode
   m_EditorClassIdentifier: 
   _state: 0
-  _started: 0
+  _started: 1
   _guid: bb880f60fa6c7164baea10358c2d574c
   _position: {x: 0, y: 0}
   _monster: {fileID: 0}
   description: 
   _child: {fileID: -8967571435559498333}
+--- !u!114 &4675442014421400369
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 92a8f6256dd48ed48a2e722788b28600, type: 3}
+  m_Name: CheckSpawnNode
+  m_EditorClassIdentifier: 
+  _state: 0
+  _started: 1
+  _guid: d278442473cf5fc4380706f08cc4740e
+  _position: {x: 1, y: 185}
+  _monster: {fileID: 0}
+  description: 
+  _child: {fileID: 6906555157454718061}
 --- !u!114 &6906555157454718061
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -173,9 +174,9 @@ MonoBehaviour:
   m_Name: CheckAliveNode
   m_EditorClassIdentifier: 
   _state: 0
-  _started: 0
+  _started: 1
   _guid: 5fd1e91b23141744fa24a592f3384824
-  _position: {x: 2, y: 283}
+  _position: {x: 1, y: 284}
   _monster: {fileID: 0}
   description: 
   _child: {fileID: -6965184019126250684}

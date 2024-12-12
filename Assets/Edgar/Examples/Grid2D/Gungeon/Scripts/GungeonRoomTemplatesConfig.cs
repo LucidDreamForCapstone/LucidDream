@@ -30,6 +30,8 @@ namespace Edgar.Unity.Examples.Gungeon {
 
         public GameObject[] StatueRoomTemplates;
 
+        public GameObject[] TurretRoomTemplates;
+
         /// <summary>
         /// Get room templates for a given room.
         /// </summary>
@@ -72,7 +74,8 @@ namespace Edgar.Unity.Examples.Gungeon {
 
                 case GungeonRoomType.Statue:
                     return StatueRoomTemplates;
-
+                case GungeonRoomType.Turret:
+                    return TurretRoomTemplates;
                 default:
                     return BasicRoomTemplates;
             }

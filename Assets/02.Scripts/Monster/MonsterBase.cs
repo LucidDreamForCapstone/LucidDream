@@ -51,6 +51,7 @@ public abstract class MonsterBase : DropableBase {
     [SerializeField] protected Color32 _damagedColor;
     [SerializeField] protected int _exp;
     [SerializeField] protected int _feverAmount;
+    protected bool _isEmbedded = false;
     protected int _hp;
     protected static float _colorChanageLastTime = 0.3f;
     protected bool _isColorChanged;
@@ -75,9 +76,10 @@ public abstract class MonsterBase : DropableBase {
         _isStun = false;
         _isColorChanged = false;
         _playerScript = GameObject.Find("Player").GetComponent<Player>();
-        _player2 = GameObject.Find("Player_2").GetComponent<Player_2>();
+        //_player2 = GameObject.Find("Player_2").GetComponent<Player_2>();
         _rigid = GetComponent<Rigidbody2D>();
         _isSpawnComplete = false;
+        SetPlayer2Async().Forget();
         if (_useTree) {
             for (int i = 0; i < _patternNum; i++) {
                 _attackStateList.Add(AttackState.Ready);
@@ -306,6 +308,30 @@ public abstract class MonsterBase : DropableBase {
 
     protected float GetDistSquare(Vector2 a, Vector2 b) {
         return (a - b).sqrMagnitude;
+    }
+
+    protected async UniTask SetDungeonEmbeddedMonsterAsync() {
+        if (_isEmbedded) {
+            bool temp = false;
+            if (_useTree) {
+                temp = true;
+                _useTree = false;
+            }
+            await UniTask.Delay(TimeSpan.FromSeconds(5));
+            _useTree = temp;
+            for (int i = 0; i < _patternNum; i++) {
+                _attackStateList.Add(AttackState.Ready);
+            }
+
+            _tree._monster = this;
+            Debug.Log(_tree._monster);
+            _tree = _tree.Clone();
+        }
+    }
+
+    private async UniTaskVoid SetPlayer2Async() {
+        await UniTask.Delay(TimeSpan.FromSeconds(3));
+        _player2 = GameObject.Find("Player_2").GetComponent<Player_2>();
     }
 
     #endregion //protected funcs
