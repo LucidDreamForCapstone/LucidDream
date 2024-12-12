@@ -90,6 +90,7 @@ public class Player : MonoBehaviour {
     private int _chargeCount;
     private InGameUIController _controller;
     private bool _playerEnabled;
+    private bool _isAttackable;
     private bool _isMessagePrinting;
     private Image _phantomSliderFill;
     #endregion // private variable
@@ -137,6 +138,7 @@ public class Player : MonoBehaviour {
         _controller = FindObjectOfType<InGameUIController>();
         _phantomSliderFill = _phantomSlider.fillRect.GetComponent<Image>();
         _playerEnabled = true;
+        _isAttackable = true;
         _isMessagePrinting = false;
     }
 
@@ -330,6 +332,14 @@ public class Player : MonoBehaviour {
 
     public bool CheckDead() {
         return _isDead;
+    }
+
+    public bool CheckAttackable() {
+        return _isAttackable;
+    }
+
+    public void SetAttackable(bool state) {
+        _isAttackable = state;
     }
 
     public bool CheckEnabled() {
