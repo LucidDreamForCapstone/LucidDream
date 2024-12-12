@@ -93,12 +93,8 @@ public class PlayerSwapManager : MonoBehaviour {
         }
 
         if (glitchController != null) {
-            float glitchTime = 3;
-            int flashCount = 3;
-            if (IsFinalBossStage()) {
-                glitchTime = 1;
-                flashCount = 2;
-            }
+            float glitchTime = 1;
+            int flashCount = 2;
 
             await UniTask.WhenAll(
                 glitchController.TriggerGlitchEffect(glitchTime), // �۸�ġ ȿ��

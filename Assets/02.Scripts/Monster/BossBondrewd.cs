@@ -720,13 +720,13 @@ public class BossBondrewd : MonsterBase {
         _isGroggy = true;
         _cts.Cancel();
         _useTree = false;
+        _groggyEffect.SetActive(true);
+        StateEffectManager.Instance.SummonEffect(transform, StateType.Confusion, 3, _groggyLastTime, 3).Forget();
         List<string> messages = new List<string>();
         messages.Add("연구소장이 그로기 상태에 진입했어.\n그가 깨어나기 전에\n<size=50><color=red>영혼 가속기의 보호막</size></color>을 해제해야해!");
         SystemMessageManager.Instance.ShowDialogBox("연구원", messages, 6).Forget();
-        await UniTask.Delay(TimeSpan.FromSeconds(6), ignoreTimeScale: true);
         SystemMessageManager.Instance.PushSystemMessage("F를 눌러 연구원 시점으로 전환하여 보호막의 전력을 차단하세요.", Color.yellow, lastTime: 10);
-        _groggyEffect.SetActive(true);
-        StateEffectManager.Instance.SummonEffect(transform, StateType.Confusion, 3, _groggyLastTime, 3).Forget();
+
         float timer = 0;
         while (timer < _groggyLastTime) {
             _groggyGauge += 100 / _groggyLastTime * Time.deltaTime;
