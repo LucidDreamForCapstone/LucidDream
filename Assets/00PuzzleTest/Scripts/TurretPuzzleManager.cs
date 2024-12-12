@@ -14,6 +14,7 @@ public class TurretPuzzleManager : PuzzleBase {
     private void Update() {
         cleared = IsGameClear();
         _doorControl.DoorOpenOnGameClear(cleared);
+        _doorControl.IsInteractingToPortal = isInteractingToPortal;
     }
 
     public void DecreaseTurretCount() {

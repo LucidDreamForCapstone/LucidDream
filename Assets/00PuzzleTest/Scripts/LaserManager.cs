@@ -51,6 +51,7 @@ public class LaserManager : PuzzleBase
         UpdateLasers();
         Cleared = isGameClear();
         doorController.DoorOpenOnGameClear(Cleared);
+        doorController.IsInteractingToPortal = isInteractingToPortal;
         ResetDestinations();
     }
 

@@ -12,6 +12,7 @@ public class PuzzlePortal : MonoBehaviour, Interactable
     [SerializeField] private GameObject player;
     private GameObject finalSpawnPoint;
     private bool stageChecked = false;
+    private bool preventPuzzleStageUpdate = false;
 
     void Start() {
         gungeonGameManager = GungeonGameManager.Instance;
@@ -20,24 +21,37 @@ public class PuzzlePortal : MonoBehaviour, Interactable
         finalSpawnPoint = GameObject.Find("FinalSpawnPoint");
     }
 
+
+
     void Update() {
         if (!stageChecked && gungeonGameManager.Stage == 4) {
             stageChecked = true;
             TeleportPlayerToTarget_Final(player, finalSpawnPoint);
         }
 
-        if (puzzle.Cleared && !clearedOnce) {
+        if (puzzle.Cleared&&gungeonGameManager.Stage!=1&&!clearedOnce) {
             SystemMessageManager.Instance.PushSystemMessage("퍼즐 클리어!", Color.green, false, 2f);
-            puzzleManager.ChangePuzzle();
-            clearedOnce = true;
+            clearedOnce=true;
         }
     }
 
     private void HandleTrigger(Collider2D collision, bool isEntering) {
         if (collision.gameObject.CompareTag("Player")) {
-            if (GungeonGameManager.Instance != null) {
+            Debug.Log($"Player is Colliding to Portal {isEntering}");
+            puzzleManager.IsInteractingToPortal = isEntering;
+            if (puzzleManager.CurrentPuzzleIndex == 0)
+            {
+                puzzleManager.ChangePuzzle();
+                puzzle = puzzleManager.CurrentPuzzle;
+            }
+            if (GungeonGameManager.Instance != null&& puzzle.Cleared) {
                 GungeonGameManager.Instance.SetIsGenerating(isEntering);
                 Debug.Log($"isGenerating set to {isEntering}");
+                if(!preventPuzzleStageUpdate)
+                {
+                    puzzleManager.ChangePuzzle();
+                    preventPuzzleStageUpdate = true;
+                }
             }
             else {
                 Debug.LogError("GGM instance is null");
@@ -60,7 +74,7 @@ public class PuzzlePortal : MonoBehaviour, Interactable
         Debug.Log($"Player {player.name} teleported to {targetObject.name} at position {targetObject.transform.position}");
     }
 
-    public bool IsInteractBlock() => !clearedOnce;
+    public bool IsInteractBlock() => !puzzle.Cleared;
 
     public string GetInteractText() => "이동 (G)";
 }

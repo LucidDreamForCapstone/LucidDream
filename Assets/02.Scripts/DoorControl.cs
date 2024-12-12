@@ -5,10 +5,12 @@ public class DoorControl : MonoBehaviour
     [SerializeField] private bool isdoorOpen;
     [SerializeField] private GameObject labDoor; // ´ÝÈù ¹®
     [SerializeField] private GameObject openDoor; // ¿­¸° ¹®
+    [SerializeField] private bool isInteractingToPortal = false;
+    public bool IsInteractingToPortal { get { return isInteractingToPortal; } set { isInteractingToPortal = value; } }
 
     protected void OnCollisionStay2D(Collision2D collision)
     {
-        if (collision.gameObject.CompareTag("Player") && isdoorOpen)
+        if (collision.gameObject.CompareTag("Player") && isdoorOpen&&isInteractingToPortal)
             DoorOpen();
     }
 
@@ -24,6 +26,7 @@ public class DoorControl : MonoBehaviour
             }
         }
     }
+
 
     public void DoorOpenOnGameClear(bool cleared)
     {

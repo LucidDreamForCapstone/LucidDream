@@ -9,8 +9,12 @@ public class PuzzleManager : MonoBehaviour
     PuzzleBase currentPuzzle;
     [SerializeField]
     int currentPuzzleIndex;
+    [SerializeField]
+    bool _isInteractingToPortal = false;
 
     public PuzzleBase CurrentPuzzle { get => currentPuzzle; }
+    public bool IsInteractingToPortal { get { return _isInteractingToPortal; } set { _isInteractingToPortal = value; }  }
+    public int CurrentPuzzleIndex { get { return currentPuzzleIndex; }  }
     void Start()
     {
         if (puzzleList.Count > 0)
@@ -22,14 +26,18 @@ public class PuzzleManager : MonoBehaviour
 
     void Update()
     {
+        currentPuzzle.IsInteractingToPortal = IsInteractingToPortal;
     }
 
     public void ChangePuzzle()
     {
         if (currentPuzzleIndex < puzzleList.Count - 1)
         {
-            currentPuzzleIndex++;
-            currentPuzzle = puzzleList[currentPuzzleIndex];
+            if(IsInteractingToPortal)
+            { 
+                currentPuzzleIndex++;
+                currentPuzzle = puzzleList[currentPuzzleIndex];
+            }
         }
     }
 }
