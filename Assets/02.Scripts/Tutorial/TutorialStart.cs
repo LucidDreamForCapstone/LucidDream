@@ -62,4 +62,8 @@ public class TutorialStart : MonoBehaviour {
         // Ensure the final color is precisely set
         colorAdjustments.colorFilter.value = targetColor;
     }
+
+    public void FadeinSignal() {
+        FadeInColor().Forget();
+    }
 }
