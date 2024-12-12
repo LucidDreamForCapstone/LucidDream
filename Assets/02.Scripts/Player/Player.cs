@@ -49,6 +49,7 @@ public class Player : MonoBehaviour {
     [SerializeField] private SpriteRenderer _leftArmRenderer;
     [SerializeField] private SpriteRenderer _rightArmRenderer;
     [SerializeField] List<SpriteRenderer> _chargeGauge;
+    [SerializeField] private TextBubbleRealTime _textBubbleRealTime;
     [SerializeField] GameObject _chargeGuageParent;
     [SerializeField] private Color32 _chargeOriginColor;
     [SerializeField] private Color32 _chargeColor;
@@ -154,6 +155,14 @@ public class Player : MonoBehaviour {
         SlowState();
         if (_isDead && Input.GetKeyDown(KeyCode.X)) {
             ReturnToDungeon();
+        }
+
+        List<string> sentenceList = new List<string>();
+        sentenceList.Add("마실수록 더 큰 혜택, 더벤티 멤버십");
+        sentenceList.Add("전국 더벤티 매장에서");
+        sentenceList.Add("스탬프 적립, 쿠폰 사용 가능");
+        if (Input.GetKeyDown(KeyCode.Y)) {
+            _textBubbleRealTime.PrintSentenceSequence(sentenceList, afterDelay: 1);
         }
     }
 

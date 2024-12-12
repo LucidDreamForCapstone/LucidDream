@@ -115,7 +115,7 @@ public class PritoQTEPuzzle : PuzzleBase, Interactable {
             keyBoardImages.Add(keyBoards[j].GetComponent<Image>());
         }
 
-        while (_isPlayerConnected && _isEventOnProcess && progressPointer < count) {
+        while (_isPlayerConnected && _isEventOnProcess && progressPointer < count && !PlayerSwapManager.Instance.CurrentPlayerIsOne()) {
             KeyCode targetKeycode = ParseKeyCode((int)keys[progressPointer]);
             if (Input.anyKeyDown) {
                 if (canInteract && Input.GetKeyDown(targetKeycode)) { //Pressed Right Button
@@ -138,7 +138,7 @@ public class PritoQTEPuzzle : PuzzleBase, Interactable {
             await UniTask.NextFrame();
         }
 
-        if (_isPlayerConnected) {
+        if (_isPlayerConnected && !PlayerSwapManager.Instance.CurrentPlayerIsOne()) {
             for (int j = 0; j < keyBoards.Count; j++) {
                 keyBoards[j].gameObject.SetActive(false);
             }
