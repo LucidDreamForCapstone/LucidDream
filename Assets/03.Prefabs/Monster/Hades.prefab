@@ -99,6 +99,7 @@ MonoBehaviour:
   _isStun: 0
   _isSpawnComplete: 0
   _playerScript: {fileID: 0}
+  _player2: {fileID: 0}
   _rigid: {fileID: 0}
   _spriteRenderer: {fileID: 0}
   _animator: {fileID: 8105634427388154863}

@@ -67,6 +67,7 @@ public class BossBondrewd : MonsterBase {
     [SerializeField] float _missileLastTime;
     [SerializeField] float _homingStartTime;
     [SerializeField] float _homingLastTime;
+    [SerializeField] float _homingStrength;
     [SerializeField] int _missileDamage;
     [SerializeField] float _explodeRadius;
     [SerializeField] int _groggyDecreaseAmount;
@@ -515,6 +516,7 @@ public class BossBondrewd : MonsterBase {
         projectileScript.SetLastTime(_missileLastTime);
         projectileScript.SetHomingStartTime(_homingStartTime);
         projectileScript.SetHomingLastTime(_homingLastTime);
+        projectileScript.SetHomingStrength(_homingStrength);
         projectileScript.SetGroggyDecreaseAmount(_groggyDecreaseAmount);
         projectile.SetActive(true);
     }

@@ -13,6 +13,7 @@ public class Turret : MonsterBase {
     [SerializeField] protected float _homingStartTime;
     [SerializeField] protected float _homingLastTime;
     [SerializeField] protected float _explodeRadius;
+    [SerializeField] protected float _homingStrength;
     [SerializeField] protected int _missileGroggyGaugeDecreaseAmount;
     [SerializeField] private int _groggyGaugeDecreaseAmount;
     [SerializeField] private AudioClip attackSound;
@@ -104,6 +105,7 @@ public class Turret : MonsterBase {
         projectileScript.SetLastTime(_fireLastTime);
         projectileScript.SetHomingStartTime(_homingStartTime);
         projectileScript.SetHomingLastTime(_homingLastTime);
+        projectileScript.SetHomingStrength(_homingStrength);
         projectileScript.SetGroggyDecreaseAmount(_missileGroggyGaugeDecreaseAmount);
         projectile.SetActive(true);
     }
