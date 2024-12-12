@@ -393,7 +393,7 @@ SpriteRenderer:
   m_SortingLayerID: -583337129
   m_SortingLayer: 6
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: ee77e5d908cc8314d89f1187c4d29af5, type: 3}
+  m_Sprite: {fileID: 21300000, guid: b5a698e08a515da42a265e3e2a484e78, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -470,12 +470,13 @@ MonoBehaviour:
   - {fileID: 5303778820427387024, guid: c444fac4fc5e2a54c84f931573799d69, type: 3}
   - {fileID: 6000063369550386379, guid: 7702c07273661ab4c80ce270cf80207c, type: 3}
   - {fileID: 2310526484866185912, guid: ce2338ba9d204294c806e0e8e580ad16, type: 3}
-  _buttonCountList: 0400000005000000060000000700000008000000
+  _buttonCountList: 0400000004000000050000000500000006000000
   _plusAmount: 75
   _minusAmount: 100
   _eventDelay: 10
   _successSound: {fileID: 8300000, guid: ac417b54a7417774f8668065985da5f7, type: 3}
   _failSound: {fileID: 8300000, guid: e4daa5f10af607b4d8b814270623acca, type: 3}
+  _interactable: 0
 --- !u!1 &6397325846949231958
 GameObject:
   m_ObjectHideFlags: 0
