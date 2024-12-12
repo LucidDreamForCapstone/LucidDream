@@ -5,8 +5,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using Random = UnityEngine.Random;
 
-public class ButtonPressQTEPuzzle : PuzzleBase, Interactable
-{
+public class ButtonPressQTEPuzzle : PuzzleBase, Interactable {
     [SerializeField] List<Charger> _chargers;
     [SerializeField] Slider _progressSlider;
     [SerializeField] List<KeyBoard> _keyBoards;
@@ -33,8 +32,7 @@ public class ButtonPressQTEPuzzle : PuzzleBase, Interactable
     public Action<float> BlinkWall;
     public float EventDelay { get { return _eventDelay; } }
     //public bool Cleared { get { return base.Cleared; } }
-    private void Awake()
-    {
+    private void Awake() {
         _currentGauge = 0;
         UpdateSlider();
         _keyBoards.ForEach(key => key.gameObject.SetActive(false));
@@ -50,25 +48,20 @@ public class ButtonPressQTEPuzzle : PuzzleBase, Interactable
         //}
     }
 
-    private void Update()
-    {
+    private void Update() {
         GaugeDecrease();
         ButtonQTE().Forget();
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        if (collision.CompareTag("Player") && !IsInteractBlock())
-        {
+    private void OnTriggerEnter2D(Collider2D collision) {
+        if (collision.CompareTag("Player") && !IsInteractBlock()) {
             Debug.Log("ButtonPress QTE Zone Entered");
             _isPlayerConnected = true;
         }
     }
 
-    private void OnTriggerExit2D(Collider2D collision)
-    {
-        if (collision.CompareTag("Player"))
-        {
+    private void OnTriggerExit2D(Collider2D collision) {
+        if (collision.CompareTag("Player")) {
             Debug.Log("ButtonPress QTE Zone Exited");
             _isPlayerConnected = false;
             _keyBoards[(int)randomKey].gameObject.SetActive(false);
@@ -77,23 +70,18 @@ public class ButtonPressQTEPuzzle : PuzzleBase, Interactable
     }
 
 
-    public void GaugeDecrease()
-    {
-        if (_currentGauge > 0)
-        {
+    public void GaugeDecrease() {
+        if (_currentGauge > 0) {
             _currentGauge -= _minusAmount * Time.unscaledDeltaTime;
             UpdateSlider();
         }
-        if (_currentGauge < 10)
-        {
+        if (_currentGauge < 10) {
             Debug.Log("good");
         }
     }
 
-    private async UniTaskVoid ButtonQTE()
-    {
-        if (!_isEventOnProcess && _isPlayerConnected)
-        {
+    private async UniTaskVoid ButtonQTE() {
+        if (!_isEventOnProcess && _isPlayerConnected) {
             _keyBoards.ForEach(key => key.gameObject.SetActive(false));
             _isEventOnProcess = true;
             _sliderFill.color = Color.red;
@@ -101,8 +89,7 @@ public class ButtonPressQTEPuzzle : PuzzleBase, Interactable
             randomKey = (PressKey)Random.Range(0, (int)PressKey.Space + 1);
             Debug.Log(randomKey.ToString());
             KeyCode selectedKey = KeyCode.None;
-            switch (randomKey)
-            {
+            switch (randomKey) {
                 case PressKey.Q:
                     selectedKey = KeyCode.Q;
                     break;
@@ -121,22 +108,24 @@ public class ButtonPressQTEPuzzle : PuzzleBase, Interactable
             }
             _keyBoards[(int)randomKey].gameObject.SetActive(true);
 
-            while (_currentGauge < 100 && _isPlayerConnected)
-            {
-                if (Input.GetKeyDown(selectedKey))
-                {
+            while (_currentGauge < 100 && _isPlayerConnected) {
+                if (Input.GetKeyDown(selectedKey)) {
                     _currentGauge += _plusAmount;
                     _keyBoards[(int)randomKey].Pressed();
                 }
                 await UniTask.NextFrame();
             }
 
-            if (_currentGauge >= 100)
-            { //Mission Complete
+            if (_currentGauge >= 100) { //Mission Complete
                 Cleared = true;
                 SoundManager.Instance.PlaySFX(_successSound.name, true);
                 _currentGauge = 0;
                 _sliderFill.color = Color.green;
+                List<string> messages = new List<string>();
+                messages.Add("좋아, 대충 두드렸더니 해결된 것 같군.\n 이제 다시 벽이 보일거야.");
+                SystemMessageManager.Instance.ShowDialogBox("???", messages, 6).Forget();
+                await UniTask.Delay(TimeSpan.FromSeconds(6), ignoreTimeScale: true);
+                SystemMessageManager.Instance.PushSystemMessage("F를 눌러 주인공 시점으로 전환하여 통로를 탈출하세요.", Color.yellow, lastTime: 5);
                 _keyBoards[(int)randomKey].gameObject.SetActive(false);
                 await UniTask.Delay(TimeSpan.FromSeconds(_eventDelay * 0.85f));
                 BlinkWall.Invoke(_eventDelay * 0.3f);
@@ -146,25 +135,21 @@ public class ButtonPressQTEPuzzle : PuzzleBase, Interactable
                 _progressSlider.gameObject.SetActive(false);
                 _isEventOnProcess = false;
             }
-            else
-            {
+            else {
                 _isEventOnProcess = false;
             }
         }
     }
 
-    private void UpdateSlider()
-    {
+    private void UpdateSlider() {
         _progressSlider.value = _currentGauge / 100;
     }
 
-    public bool IsInteractBlock()
-    {
+    public bool IsInteractBlock() {
         return !_interactable;
     }
 
-    public string GetInteractText()
-    {
+    public string GetInteractText() {
         return "ButtonPuzzle";
     }
 }

@@ -49,6 +49,7 @@ public class Player : MonoBehaviour {
     [SerializeField] private SpriteRenderer _leftArmRenderer;
     [SerializeField] private SpriteRenderer _rightArmRenderer;
     [SerializeField] List<SpriteRenderer> _chargeGauge;
+    [SerializeField] private TextBubbleRealTime _textBubbleRealTime;
     [SerializeField] GameObject _chargeGuageParent;
     [SerializeField] private Color32 _chargeOriginColor;
     [SerializeField] private Color32 _chargeColor;
@@ -89,6 +90,7 @@ public class Player : MonoBehaviour {
     private int _chargeCount;
     private InGameUIController _controller;
     private bool _playerEnabled;
+    private bool _isAttackable;
     private bool _isMessagePrinting;
     private Image _phantomSliderFill;
     #endregion // private variable
@@ -136,6 +138,7 @@ public class Player : MonoBehaviour {
         _controller = FindObjectOfType<InGameUIController>();
         _phantomSliderFill = _phantomSlider.fillRect.GetComponent<Image>();
         _playerEnabled = true;
+        _isAttackable = true;
         _isMessagePrinting = false;
     }
 
@@ -154,6 +157,14 @@ public class Player : MonoBehaviour {
         SlowState();
         if (_isDead && Input.GetKeyDown(KeyCode.X)) {
             ReturnToDungeon();
+        }
+
+        List<string> sentenceList = new List<string>();
+        sentenceList.Add("마실수록 더 큰 혜택, 더벤티 멤버십");
+        sentenceList.Add("전국 더벤티 매장에서");
+        sentenceList.Add("스탬프 적립, 쿠폰 사용 가능");
+        if (Input.GetKeyDown(KeyCode.Y)) {
+            _textBubbleRealTime.PrintSentenceSequence(sentenceList, afterDelay: 1);
         }
     }
 
@@ -323,6 +334,14 @@ public class Player : MonoBehaviour {
         return _isDead;
     }
 
+    public bool CheckAttackable() {
+        return _isAttackable;
+    }
+
+    public void SetAttackable(bool state) {
+        _isAttackable = state;
+    }
+
     public bool CheckEnabled() {
         return _playerEnabled;
     }
@@ -361,7 +380,6 @@ public class Player : MonoBehaviour {
                 for (int i = 0; i < 5; i++)
                     _chargeGauge[i].DOColor(_chargeMaxColor, 0.1f).SetUpdate(true);
             }
-
         }
     }
 

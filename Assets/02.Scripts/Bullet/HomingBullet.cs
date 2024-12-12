@@ -24,19 +24,25 @@ public class HomingBullet : ExplosiveBullet {
     }
 
     private async UniTaskVoid Homing() {
-        float timer = 0;
-        await UniTask.Delay(TimeSpan.FromSeconds(_homingStartTime));
-        while (timer < _homingLastTime && !_isDead) {
+        float startTime = Time.time; // 시작 시간 기록
+        float endTime = startTime + _homingLastTime; // 종료 시간 계산
+        await UniTask.Delay(TimeSpan.FromSeconds(_homingStartTime)); // 호밍 시작 지연
+
+        while (Time.time < endTime && !_isDead) {
             if (Time.timeScale > 0) {
                 Vector2 lookAt;
                 if (_forLab)
                     lookAt = _player2.transform.position - transform.position;
                 else
                     lookAt = _playerScript.transform.position - transform.position;
-                float t = timer * 0.005f;
+
+                // t를 현재 경과 시간에 기반하도록 수정
+                float elapsedTime = Time.time - startTime;
+                float t = elapsedTime * 0.008f;
+
+                // Slerp로 방향 전환
                 transform.right = Vector3.Slerp(transform.right, lookAt, t);
                 _rigid.velocity = transform.right * _fireSpeed;
-                timer += Time.deltaTime;
             }
             await UniTask.NextFrame();
         }

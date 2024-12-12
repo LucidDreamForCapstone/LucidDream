@@ -1,8 +1,7 @@
 using Edgar.Unity.Examples.Gungeon;
 using UnityEngine;
 
-public class PuzzlePortal : MonoBehaviour, Interactable
-{
+public class PuzzlePortal : MonoBehaviour, Interactable {
     [SerializeField] string _message;
     [SerializeField] Color _messageColor;
     [SerializeField] PuzzleBase puzzle;
