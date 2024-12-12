@@ -141,7 +141,7 @@ MonoBehaviour:
   _itemSearchRadius: 2
   _hpSlider: {fileID: 8819392063375534083}
   _maxHp: 500
-  _healAmount: 20
+  _healAmount: 100
 --- !u!212 &5326423248489283051
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -183,7 +183,7 @@ SpriteRenderer:
   m_SortingLayerID: -712625307
   m_SortingLayer: 7
   m_SortingOrder: 5
-  m_Sprite: {fileID: -1041981242, guid: 6adb8bc07f2d9194e81ed68de7587f6d, type: 3}
+  m_Sprite: {fileID: 1228873918, guid: d538e4f3ba03e9744b148dc6028fdf14, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -231,7 +231,7 @@ Animator:
   m_GameObject: {fileID: 246331417045181228}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 10fb65470ba0f1b48ae5e9bf6efcca69, type: 2}
+  m_Controller: {fileID: 9100000, guid: c364121ed03bd3141871734c725bcff2, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
