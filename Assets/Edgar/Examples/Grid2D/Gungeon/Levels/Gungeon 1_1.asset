@@ -182,6 +182,20 @@ MonoBehaviour:
   To: {fileID: 155756909772681526}
   RoomTemplates: []
   IsLocked: 0
+--- !u!114 &-3021327763715669988
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3db3deff57bcd2d4bacb91056ad7f14a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Position: {x: 688, y: 400}
+  Type: 16
 --- !u!114 &-2751591316405871006
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -245,6 +259,7 @@ MonoBehaviour:
   - {fileID: 1197315796702029177}
   - {fileID: 4631670709011590915}
   - {fileID: -9191821273970901304}
+  - {fileID: 2460335205210509435}
   CorridorIndividualRoomTemplates: []
   CorridorRoomTemplateSets: []
   DefaultIndividualRoomTemplates: []
@@ -268,9 +283,10 @@ MonoBehaviour:
   - {fileID: 484672132381032437}
   - {fileID: 8448986068743199847}
   - {fileID: 2167759863567398043}
+  - {fileID: -3021327763715669988}
   EditorData:
-    PanOffset: {x: 60.163918, y: -37.861176}
-    Zoom: 1.0126349
+    PanOffset: {x: -115.06437, y: -131.78238}
+    Zoom: 1.0963101
   RoomType: Edgar.Unity.Examples.Gungeon.GungeonRoom
   ConnectionType: Edgar.Unity.Examples.Gungeon.GungeonConnection
   IsDirected: 0
@@ -420,6 +436,22 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Position: {x: 336, y: 144}
   Type: 13
+--- !u!114 &2460335205210509435
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d354c88719b466e4b96f228f2876b29b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  From: {fileID: -3021327763715669988}
+  To: {fileID: 8107751178549073703}
+  RoomTemplates: []
+  IsLocked: 0
 --- !u!114 &3072439051844107551
 MonoBehaviour:
   m_ObjectHideFlags: 0
