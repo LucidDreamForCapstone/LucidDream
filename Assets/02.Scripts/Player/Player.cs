@@ -380,7 +380,6 @@ public class Player : MonoBehaviour {
                 for (int i = 0; i < 5; i++)
                     _chargeGauge[i].DOColor(_chargeMaxColor, 0.1f).SetUpdate(true);
             }
-
         }
     }
 
