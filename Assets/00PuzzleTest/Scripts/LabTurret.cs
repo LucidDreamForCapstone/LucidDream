@@ -39,6 +39,7 @@ public class LabTurret : Turret {
         projectileScript.SetLastTime(_fireLastTime);
         projectileScript.SetHomingStartTime(_homingStartTime);
         projectileScript.SetHomingLastTime(_homingLastTime);
+        projectileScript.SetHomingStrength(_homingStrength);
         projectileScript.SetGroggyDecreaseAmount(_missileGroggyGaugeDecreaseAmount);
         projectile.SetActive(true);
     }

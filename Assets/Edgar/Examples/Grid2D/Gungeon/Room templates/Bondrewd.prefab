@@ -620,6 +620,7 @@ MonoBehaviour:
   _isStun: 0
   _isSpawnComplete: 0
   _playerScript: {fileID: 0}
+  _player2: {fileID: 0}
   _rigid: {fileID: 0}
   _spriteRenderer: {fileID: 3469667228588682341}
   _animator: {fileID: 8859452283833541527}
@@ -697,6 +698,7 @@ MonoBehaviour:
   _missileLastTime: 7.4
   _homingStartTime: 1
   _homingLastTime: 5
+  _homingStrength: 11
   _missileDamage: 80
   _explodeRadius: 4
   _groggyDecreaseAmount: 15
@@ -713,8 +715,11 @@ MonoBehaviour:
   _phantomGaugeIncreaseAmount: 15
   _phantomGaugeDecreaseAmount: 20
   _phantomGaugeUpdateInterval: 0.05
+  _phantomOnSound: {fileID: 0}
+  _phantomOffSound: {fileID: 0}
   _normalGroggyDecreaseAmount: 3
   _groggyLastTime: 15
+  _timeLineManager: {fileID: 0}
 --- !u!212 &3469667228588682341
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -27691,6 +27696,7 @@ MonoBehaviour:
   _isStun: 0
   _isSpawnComplete: 0
   _playerScript: {fileID: 0}
+  _player2: {fileID: 0}
   _rigid: {fileID: 0}
   _spriteRenderer: {fileID: 8765156149303449151}
   _animator: {fileID: 4372337941232983471}
@@ -27717,6 +27723,8 @@ MonoBehaviour:
   _hpSlider: {fileID: 8857306179029620562}
   _chargerQTE: {fileID: 0}
   _layerBorder: 0
+  _chargerOnSound: {fileID: 0}
+  _chargerOffSound: {fileID: 0}
 --- !u!212 &8765156149303449151
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -28866,6 +28874,7 @@ MonoBehaviour:
   _isStun: 0
   _isSpawnComplete: 0
   _playerScript: {fileID: 0}
+  _player2: {fileID: 0}
   _rigid: {fileID: 0}
   _spriteRenderer: {fileID: 3780169523756298983}
   _animator: {fileID: 3529696140121903789}
@@ -28892,6 +28901,8 @@ MonoBehaviour:
   _hpSlider: {fileID: 4137753685250822404}
   _chargerQTE: {fileID: 0}
   _layerBorder: 0
+  _chargerOnSound: {fileID: 0}
+  _chargerOffSound: {fileID: 0}
 --- !u!212 &3780169523756298983
 SpriteRenderer:
   m_ObjectHideFlags: 0

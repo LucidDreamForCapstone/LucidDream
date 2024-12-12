@@ -535,6 +535,7 @@ MonoBehaviour:
   _isStun: 0
   _isSpawnComplete: 0
   _playerScript: {fileID: 0}
+  _player2: {fileID: 0}
   _rigid: {fileID: 0}
   _spriteRenderer: {fileID: 1728627184325400071}
   _animator: {fileID: 9139398599864358395}
@@ -562,12 +563,12 @@ MonoBehaviour:
   _homingStartTime: 1
   _homingLastTime: 5
   _explodeRadius: 4
+  _homingStrength: 8
   _missileGroggyGaugeDecreaseAmount: 35
   _groggyGaugeDecreaseAmount: 50
   attackSound: {fileID: 0}
   _groggySlider: {fileID: 6816719437518483610}
   _puzzleManager: {fileID: 0}
-  _player2: {fileID: 0}
 --- !u!212 &1728627184325400071
 SpriteRenderer:
   m_ObjectHideFlags: 0

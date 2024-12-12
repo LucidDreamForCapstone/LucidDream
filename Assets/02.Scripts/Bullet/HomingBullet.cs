@@ -7,6 +7,7 @@ public class HomingBullet : ExplosiveBullet {
     protected Player_2 _player2;
     float _homingStartTime;
     float _homingLastTime;
+    float _homingStrength;
 
     protected override void OnEnable() {
         base.OnEnable();
@@ -15,6 +16,7 @@ public class HomingBullet : ExplosiveBullet {
 
     public void SetHomingStartTime(float starttime) { _homingStartTime = starttime; }
     public void SetHomingLastTime(float lasttime) { _homingLastTime = lasttime; }
+    public void SetHomingStrength(float strength) { _homingStrength = strength; }
 
     public void SetPlayer2(Player_2 player2) {
         _player2 = player2;
@@ -38,7 +40,7 @@ public class HomingBullet : ExplosiveBullet {
 
                 // t를 현재 경과 시간에 기반하도록 수정
                 float elapsedTime = Time.time - startTime;
-                float t = elapsedTime * 0.008f;
+                float t = elapsedTime * _homingStrength * 0.001f;
 
                 // Slerp로 방향 전환
                 transform.right = Vector3.Slerp(transform.right, lookAt, t);
