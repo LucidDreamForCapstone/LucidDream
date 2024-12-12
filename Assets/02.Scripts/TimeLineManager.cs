@@ -1,79 +1,3 @@
-/*using UnityEngine;
-using UnityEngine.Playables;
-using Cysharp.Threading.Tasks;
-
-public class TimelineManager : MonoBehaviour
-{
-    [Header("Timeline Settings")]
-    [SerializeField] private PlayableDirector timeline; // 타임라인 관리
-    [SerializeField] private float timelineDuration; // 타임라인 진행 시간
-
-    private bool isTimelineRunning = false; // 타임라인이 실행 중인지 확인
-    private bool isTimelinePaused = false; // 타임라인이 멈췄는지 확인
-
-    private void Start()
-    {
-        if (timeline == null)
-        {
-            Debug.LogError("TimelineManager: No timeline assigned!");
-            return;
-        }
-
-        // 타임라인 시작
-        PlayTimeline(timelineDuration).Forget();
-    }
-
-    /// <summary>
-    /// 특정 시간 동안 타임라인을 실행 후 정지
-    /// </summary>
-    public async UniTask PlayTimeline(float duration)
-    {
-        if (isTimelineRunning)
-        {
-            Debug.LogWarning("TimelineManager: Timeline is already running!");
-            return;
-        }
-
-        isTimelineRunning = true;
-        isTimelinePaused = false;
-        timeline.gameObject.SetActive(true); // 타임라인 활성화
-        timeline.time = 0; // 타임라인 시작 시간 설정
-        timeline.Play(); // 타임라인 실행
-
-        // 지정된 시간 동안 대기
-        await UniTask.Delay(System.TimeSpan.FromSeconds(duration));
-
-        // 타임라인 멈춤
-        timeline.Pause();
-        timeline.gameObject.SetActive(false); // 타임라인 비활성화
-        isTimelineRunning = false;
-        isTimelinePaused = true;
-
-        Debug.Log("Timeline paused and player can move now.");
-    }
-
-    /// <summary>
-    /// 타임라인 재개
-    /// </summary>
-    public void ResumeTimeline()
-    {
-        if (!isTimelinePaused)
-        {
-            Debug.LogWarning("TimelineManager: Timeline is not paused!");
-            return;
-        }
-
-        isTimelineRunning = true;
-        isTimelinePaused = false;
-
-        timeline.gameObject.SetActive(true); // 타임라인 활성화
-        timeline.Play(); // 타임라인 재생
-
-        Debug.Log("Timeline resumed.");
-    }
-}
-*/
-
 using UnityEngine;
 using UnityEngine.Playables;
 using Cysharp.Threading.Tasks;
@@ -84,11 +8,13 @@ public class TimeLineManager : MonoBehaviour
     [Header("Timeline Settings")]
     [SerializeField] private PlayableDirector timeline; // 타임라인 관리
     [SerializeField] private List<float> timelineDurations; // 타임라인 진행 시간 리스트
-
+    [SerializeField] private Canvas player1UICanvas; // Player1 UI Canvas
+    [SerializeField] private Canvas player2UICanvas; // Player2 UI Canvas
+    [SerializeField] private PlayerSwapManager playerSwapManager; // PlayerSwapManager 참조
     private int currentIndex = 0; // 현재 타임라인 구간 인덱스
     private bool isTimelineRunning = false; // 타임라인이 실행 중인지 확인
     private float lastSavedTime = 0f; // 이전 구간의 종료 시간
-
+    [SerializeField] private Player _player;
     private void Start() {
         if (timeline == null) {
             Debug.LogError("TimelineManager: No timeline assigned!");
@@ -114,9 +40,10 @@ public class TimeLineManager : MonoBehaviour
         }
 
         isTimelineRunning = true;
-
+        playerSwapManager.SetCanSwap(false); // 타임라인 중 글리치 및 스왑 불가능
         float targetTime = timelineDurations[currentIndex]; // 현재 구간의 종료 시간
-
+        _player.PlayerPause();
+        SwitchToPlayer2UI(); // Player2 UI로 전환
         timeline.gameObject.SetActive(true); // 타임라인 활성화
         timeline.time = lastSavedTime; // 이전 구간의 종료 시간부터 시작
         timeline.Play();
@@ -128,16 +55,20 @@ public class TimeLineManager : MonoBehaviour
 
         // 타임라인 멈춤
         timeline.Pause();
+        _player.PlayerUnPause();    
         lastSavedTime = targetTime; // 현재 구간 종료 시간 저장
         isTimelineRunning = false;
-        timeline.gameObject.SetActive(false); 
+        timeline.gameObject.SetActive(false);
+        SwitchToPlayer1UI(); // Player1 UI로 다시 전환
+        playerSwapManager.SetCanSwap(true); // 타임라인 종료 후 글리치 및 스왑 가능
         Debug.Log($"Timeline paused at {targetTime} (Segment {currentIndex}).");
     }
 
     /// <summary>
-    /// 타임라인 재개 (다음 구간 실행)
+    /// 타임라인 재개 (다음 구간 실행)  
     /// </summary>
     public void ResumeTimeline() {
+
         if (isTimelineRunning || currentIndex >= timelineDurations.Count - 1) {
             Debug.LogWarning("TimelineManager: No more timeline segments to resume!");
             return;
@@ -147,6 +78,24 @@ public class TimeLineManager : MonoBehaviour
         PlayTimeline().Forget();
 
         Debug.Log($"Timeline resumed to segment {currentIndex}.");
+    }
+
+    /// <summary>
+    /// Player2 UI로 전환
+    /// </summary>
+    private void SwitchToPlayer2UI() {
+        player1UICanvas.targetDisplay = 1;
+        player2UICanvas.targetDisplay = 0;
+        Debug.Log("Switched to Player2 UI.");
+    }
+
+    /// <summary>
+    /// Player1 UI로 전환
+    /// </summary>
+    private void SwitchToPlayer1UI() {
+        player1UICanvas.targetDisplay = 0;
+        player2UICanvas.targetDisplay = 1;
+        Debug.Log("Switched back to Player1 UI.");
     }
 }
 
