@@ -431,7 +431,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Position: {x: 688, y: 336}
-  Type: 2
+  Type: 13
 --- !u!114 &3421194788355188292
 MonoBehaviour:
   m_ObjectHideFlags: 0

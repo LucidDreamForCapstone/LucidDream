@@ -3,7 +3,7 @@ using UnityEngine;
 public class PuzzleBase : MonoBehaviour
 {
     [SerializeField]
-    public bool cleared = false;
+    private bool cleared = false;
 
-    public bool Cleared { get => cleared; }
+    public bool Cleared { get { return cleared; } set { cleared=value; } }
 }

@@ -26,6 +26,8 @@ namespace Edgar.Unity.Examples.Gungeon {
 
         public GameObject[] PuzzleRoomTemplates;
 
+        public GameObject[] QTEPuzzleRoomTemplates;
+
         public GameObject[] BondrewdRoomTemplates;
 
         public GameObject[] StatueRoomTemplates;
@@ -68,6 +70,9 @@ namespace Edgar.Unity.Examples.Gungeon {
 
                 case GungeonRoomType.Puzzle:
                     return PuzzleRoomTemplates;
+
+                case GungeonRoomType.QTEPuzzle:
+                    return QTEPuzzleRoomTemplates;
 
                 case GungeonRoomType.Bondrewd:
                     return BondrewdRoomTemplates;

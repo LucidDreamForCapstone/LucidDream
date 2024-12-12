@@ -13,6 +13,7 @@
         Connector,
         Secret,
         Puzzle,
+        QTEPuzzle,
         Tutorial,
         Bondrewd,
         Statue,

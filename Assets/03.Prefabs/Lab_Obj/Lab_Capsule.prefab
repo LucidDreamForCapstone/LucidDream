@@ -238,4 +238,3 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _layerBorder: 0.1
-  targetPlayer: {fileID: 0}
