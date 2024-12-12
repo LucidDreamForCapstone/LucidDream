@@ -688,7 +688,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 595.408, y: 24.396423}
+  m_AnchoredPosition: {x: 600, y: 110}
   m_SizeDelta: {x: 1000, y: 400}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &106126604
@@ -1186,7 +1186,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 595.408, y: 24.396423}
+  m_AnchoredPosition: {x: 645, y: 86}
   m_SizeDelta: {x: 1000, y: 400}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &222622418
@@ -1468,6 +1468,82 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 299093366}
   m_CullTransparentMesh: 1
+--- !u!1 &301219208
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 301219209}
+  - component: {fileID: 301219211}
+  - component: {fileID: 301219210}
+  m_Layer: 0
+  m_Name: TutorialStart
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &301219209
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 301219208}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1626900965}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &301219210
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 301219208}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e52de21a22b6dd44c9cc19f810c65059, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Events:
+    m_Signals:
+    - {fileID: 11400000, guid: 84138805ade2d0446a14902e91f3acfc, type: 2}
+    m_Events:
+    - m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 301219211}
+          m_TargetAssemblyTypeName: TutorialStart, Assembly-CSharp
+          m_MethodName: FadeinSignal
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+--- !u!114 &301219211
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 301219208}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 76ffa7229645d404dbea3b71d20c5258, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fadeDuration: 3
 --- !u!114 &305044945 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 2928520788872735216, guid: aac7bedbbcbfff449b85a763e9af3024, type: 3}
@@ -19714,7 +19790,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   fadeDuration: 3
-  _tutorialBGM: {fileID: 0}
   targetCamera: {fileID: 1908367913}
   defaultCamera: {fileID: 185807762}
   timelineManager: {fileID: 148706940}
@@ -19853,6 +19928,10 @@ PrefabInstance:
       propertyPath: deathUIController
       value: 
       objectReference: {fileID: 1926726910}
+    - target: {fileID: 6660471644841417567, guid: e94958180e5464f49a814b9bec5cab78, type: 3}
+      propertyPath: _phantomGaugeColor.rgba
+      value: 4283870697
+      objectReference: {fileID: 0}
     - target: {fileID: 6769953479932585774, guid: e94958180e5464f49a814b9bec5cab78, type: 3}
       propertyPath: m_TagString
       value: Item
@@ -20313,7 +20392,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 595.408, y: 24.396423}
+  m_AnchoredPosition: {x: 654, y: 109}
   m_SizeDelta: {x: 1000, y: 400}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &766524673
@@ -21589,7 +21668,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 595.408, y: -130.60358}
+  m_AnchoredPosition: {x: 619, y: -76}
   m_SizeDelta: {x: 1000, y: 400}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &846263074
@@ -22624,7 +22703,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 595.408, y: 24.396423}
+  m_AnchoredPosition: {x: 631, y: 86}
   m_SizeDelta: {x: 1000, y: 400}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &949549485
@@ -24587,7 +24666,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 595.408, y: 24.396423}
+  m_AnchoredPosition: {x: 643, y: 91}
   m_SizeDelta: {x: 1000, y: 400}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1376082164
@@ -25231,7 +25310,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   fadeDuration: 3
-  _tutorialBGM: {fileID: 0}
   targetCamera: {fileID: 2093371539}
   defaultCamera: {fileID: 185807762}
   timelineManager: {fileID: 148706940}
@@ -25325,7 +25403,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 595.408, y: 24.396423}
+  m_AnchoredPosition: {x: 626, y: 74}
   m_SizeDelta: {x: 1000, y: 400}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1542683288
@@ -26010,6 +26088,7 @@ Transform:
   - {fileID: 2032300101}
   - {fileID: 2053201237}
   - {fileID: 500869477}
+  - {fileID: 301219209}
   m_Father: {fileID: 1119702955}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!66 &1626900966
@@ -27962,6 +28041,8 @@ PlayableDirector:
     value: {fileID: 1143419225}
   - key: {fileID: 5224592853141605587, guid: 93776feeb6a49eb44a46ca10f12b2109, type: 2}
     value: {fileID: 495686898}
+  - key: {fileID: -1268221523125033580, guid: 93776feeb6a49eb44a46ca10f12b2109, type: 2}
+    value: {fileID: 301219210}
   m_ExposedReferences:
     m_References:
     - 3e8ee91fa3fb62c4e95413100ce4c150: {fileID: 495686893}
@@ -28125,7 +28206,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 1292.408, y: -56.603577}
+  m_AnchoredPosition: {x: 1319, y: 89}
   m_SizeDelta: {x: 1000, y: 400}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1697169304
@@ -29024,7 +29105,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   fadeDuration: 3
-  _tutorialBGM: {fileID: 0}
   targetCamera: {fileID: 916321318}
   defaultCamera: {fileID: 185807762}
   timelineManager: {fileID: 148706940}
@@ -71053,7 +71133,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   fadeDuration: 3
-  _tutorialBGM: {fileID: 0}
   targetCamera: {fileID: 1182723994}
   defaultCamera: {fileID: 185807762}
   timelineManager: {fileID: 148706940}
@@ -71172,7 +71251,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   fadeDuration: 3
-  _tutorialBGM: {fileID: 0}
   targetCamera: {fileID: 51091010}
   defaultCamera: {fileID: 185807762}
   timelineManager: {fileID: 148706940}
