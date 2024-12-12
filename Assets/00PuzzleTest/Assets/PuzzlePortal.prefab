@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 5658950045311634049}
   - component: {fileID: 335050448688167498}
   - component: {fileID: 1070108376867431934}
-  m_Layer: 0
+  m_Layer: 17
   m_Name: PuzzlePortal
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -184,7 +184,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _message: "'G'\uB97C \uB20C\uB7EC \uB2E4\uC74C \uC2A4\uD14C\uC774\uC9C0\uB85C \uC774\uB3D9"
-  _messageColor: {r: 1, g: 0, b: 0, a: 0}
+  _messageColor: {r: 1, g: 0, b: 0, a: 1}
   puzzle: {fileID: 0}
   puzzleManager: {fileID: 0}
   clearedOnce: 0
+  gungeonGameManager: {fileID: 0}
+  player: {fileID: 0}
