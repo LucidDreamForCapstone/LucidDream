@@ -1,5 +1,6 @@
 using Cysharp.Threading.Tasks;
 using Edgar.Unity; // TextMeshPro ���� ���ӽ����̽� �߰�
+using Edgar.Unity.Examples.Gungeon;
 using System;
 using UnityEngine;
 
@@ -49,10 +50,7 @@ public class PlayerSwapManager : MonoBehaviour {
 
     private void Update() {
         if (Input.GetKeyDown(KeyCode.F) && !isGlitching && canSwap && swapFlag) { // �۸�ġ ���� �ƴϸ� ���� ������ ����
-            if (CheckPortalNear()) {
-                SystemMessageManager.Instance.PushSystemMessage("포탈 근처에서는 캐릭터 스왑이 불가능합니다.", Color.red);
-            }
-            else if (CanSwapCharacter()) {
+            if (CanSwapCharacter()) {
                 SwapCharacter().Forget();
             }
             else {
@@ -116,6 +114,7 @@ public class PlayerSwapManager : MonoBehaviour {
             player2UICanvas.targetDisplay = 0;
             currentPlayerNum = 2;
             _miniMapObj.SetActive(false);
+            GungeonGameManager.Instance.SetIsGenerating(false);
         }
         else if (currentPlayerNum == 2) {
             player2.SetEnable(false);
@@ -172,10 +171,11 @@ public class PlayerSwapManager : MonoBehaviour {
         return canSwap && swapFlag; // ���� ���� ���� ���� ��ȯ
     }
 
-    public bool CheckPortalNear() {
-        if (Physics2D.OverlapCircle(player1.transform.position, _portalSearchRadius, _portalLayer)) {
+    public bool CurrentPlayerIsOne() {
+        if (currentPlayer == player1)
             return true;
-        }
+
         return false;
     }
+
 }
