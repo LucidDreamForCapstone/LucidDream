@@ -188,3 +188,14 @@ MonoBehaviour:
   puzzle: {fileID: 0}
   puzzleManager: {fileID: 0}
   clearedOnce: 0
+  gungeonGameManager: {fileID: 0}
+  player: {fileID: 0}
+  playerAction:
+    m_Name: Player
+    m_Type: 0
+    m_ExpectedControlType: 
+    m_Id: 6dabe398-9187-45e8-92c6-4904cea1fc26
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings: []
+    m_Flags: 0
