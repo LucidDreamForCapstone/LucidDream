@@ -11,10 +11,10 @@ public class TutorialStart : MonoBehaviour {
     private ColorAdjustments colorAdjustments;
 
     private async void Start() {
-        // OptionManager ½Ì±ÛÅæÀ» »ç¿ëÇÏ¿© Volume °¡Á®¿À±â
+        // OptionManager ï¿½Ì±ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Ï¿ï¿½ Volume ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
         Volume volume = OptionManager.Instance.GetBrightnessVolume();
 
-        // Volume¿¡¼­ ColorAdjustments °¡Á®¿À±â
+        // Volumeï¿½ï¿½ï¿½ï¿½ ColorAdjustments ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
         if (volume.profile.TryGet(out colorAdjustments)) {
             colorAdjustments.colorFilter.overrideState = true; // Enable color filter override
             colorAdjustments.colorFilter.value = startColor; // Set initial color
@@ -56,5 +56,9 @@ public class TutorialStart : MonoBehaviour {
 
         // Ensure the final color is precisely set
         colorAdjustments.colorFilter.value = targetColor;
+    }
+
+    public void FadeinSignal() {
+        FadeInColor().Forget();
     }
 }

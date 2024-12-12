@@ -1,6 +1,7 @@
 using Cinemachine;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
+using UnityEngine.Rendering.Universal;
 
 public class TimeLineTrigger : TutorialStart {
     [SerializeField] private CinemachineVirtualCamera targetCamera; // Target Cinemachine Virtual Camera
@@ -8,6 +9,7 @@ public class TimeLineTrigger : TutorialStart {
     [SerializeField] private TimeLineManager timelineManager; // Timeline Manager
     private bool hasTriggered = false; // Check if the player has already triggered the event
     private CinemachineBrain cinemachineBrain; // Reference to the Cinemachine Brain
+    [SerializeField] private bool isResumeTimeLine;
 
     private void Start() {
         cinemachineBrain = Camera.main.GetComponent<CinemachineBrain>();
@@ -22,6 +24,8 @@ public class TimeLineTrigger : TutorialStart {
         }
 
         hasTriggered = true;
+        if (isResumeTimeLine)
+            timelineManager.ResumeTimeline();
 
         // Temporarily set Manual Update for Cinemachine
         if (cinemachineBrain != null) {
@@ -64,4 +68,5 @@ public class TimeLineTrigger : TutorialStart {
             defaultCamera.Priority = 10; // Set the default camera's priority
         }
     }
+
 }

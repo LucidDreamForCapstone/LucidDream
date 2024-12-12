@@ -19713,6 +19713,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bb79598301cb0594f823b09734aa435f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  fadeDuration: 3
+  _tutorialBGM: {fileID: 0}
+  targetCamera: {fileID: 1908367913}
+  defaultCamera: {fileID: 185807762}
+  timelineManager: {fileID: 148706940}
+  isResumeTimeLine: 1
+  isCameraMove: 1
 --- !u!114 &641121466 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 2555355086774433616, guid: aac7bedbbcbfff449b85a763e9af3024, type: 3}
@@ -20816,6 +20823,18 @@ PrefabInstance:
       propertyPath: _cardUIController
       value: 
       objectReference: {fileID: 1275233488}
+    - target: {fileID: 2618619422945412448, guid: aac7bedbbcbfff449b85a763e9af3024, type: 3}
+      propertyPath: m_Color.b
+      value: 0.33865267
+      objectReference: {fileID: 0}
+    - target: {fileID: 2618619422945412448, guid: aac7bedbbcbfff449b85a763e9af3024, type: 3}
+      propertyPath: m_Color.g
+      value: 0.67731905
+      objectReference: {fileID: 0}
+    - target: {fileID: 2618619422945412448, guid: aac7bedbbcbfff449b85a763e9af3024, type: 3}
+      propertyPath: m_Color.r
+      value: 0.9137466
+      objectReference: {fileID: 0}
     - target: {fileID: 2827734952717412854, guid: aac7bedbbcbfff449b85a763e9af3024, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
       value: 1
@@ -20972,6 +20991,14 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3957495114358973040, guid: aac7bedbbcbfff449b85a763e9af3024, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 28
+      objectReference: {fileID: 0}
+    - target: {fileID: 3957495114358973040, guid: aac7bedbbcbfff449b85a763e9af3024, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -6
+      objectReference: {fileID: 0}
     - target: {fileID: 4008108738098359605, guid: aac7bedbbcbfff449b85a763e9af3024, type: 3}
       propertyPath: m_AnchorMax.y
       value: 1
@@ -21120,9 +21147,25 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4479736756059364390, guid: aac7bedbbcbfff449b85a763e9af3024, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 28
+      objectReference: {fileID: 0}
+    - target: {fileID: 4479736756059364390, guid: aac7bedbbcbfff449b85a763e9af3024, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -6
+      objectReference: {fileID: 0}
     - target: {fileID: 4645397573324354203, guid: aac7bedbbcbfff449b85a763e9af3024, type: 3}
       propertyPath: m_LocalScale.x
       value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 4676077466127620001, guid: aac7bedbbcbfff449b85a763e9af3024, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 314
+      objectReference: {fileID: 0}
+    - target: {fileID: 4676077466127620001, guid: aac7bedbbcbfff449b85a763e9af3024, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 73
       objectReference: {fileID: 0}
     - target: {fileID: 4783278718967016888, guid: aac7bedbbcbfff449b85a763e9af3024, type: 3}
       propertyPath: m_AnchorMax.y
@@ -21139,6 +21182,26 @@ PrefabInstance:
     - target: {fileID: 4783278718967016888, guid: aac7bedbbcbfff449b85a763e9af3024, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4989462305269645152, guid: aac7bedbbcbfff449b85a763e9af3024, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: d1a0e0d05ced0284c952eed3e0bd452f, type: 3}
+    - target: {fileID: 4989462305269645152, guid: aac7bedbbcbfff449b85a763e9af3024, type: 3}
+      propertyPath: m_Color.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4989462305269645152, guid: aac7bedbbcbfff449b85a763e9af3024, type: 3}
+      propertyPath: m_Color.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4989462305269645152, guid: aac7bedbbcbfff449b85a763e9af3024, type: 3}
+      propertyPath: m_Color.r
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4989462305269645152, guid: aac7bedbbcbfff449b85a763e9af3024, type: 3}
+      propertyPath: m_PreserveAspect
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5326801719664099897, guid: aac7bedbbcbfff449b85a763e9af3024, type: 3}
       propertyPath: m_IsActive
@@ -21423,6 +21486,14 @@ PrefabInstance:
     - target: {fileID: 8164392642080105954, guid: aac7bedbbcbfff449b85a763e9af3024, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8220850129311612075, guid: aac7bedbbcbfff449b85a763e9af3024, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 8220850129311612075, guid: aac7bedbbcbfff449b85a763e9af3024, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 8415143547994181714, guid: aac7bedbbcbfff449b85a763e9af3024, type: 3}
       propertyPath: m_IsActive
@@ -23616,7 +23687,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 23
+  orthographic size: 9.642858
   m_Depth: 0
   m_CullingMask:
     serializedVersion: 2
@@ -25159,6 +25230,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bb79598301cb0594f823b09734aa435f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  fadeDuration: 3
+  _tutorialBGM: {fileID: 0}
+  targetCamera: {fileID: 2093371539}
+  defaultCamera: {fileID: 185807762}
+  timelineManager: {fileID: 148706940}
+  isResumeTimeLine: 0
+  isCameraMove: 1
 --- !u!114 &1469579584
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -28945,6 +29023,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bb79598301cb0594f823b09734aa435f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  fadeDuration: 3
+  _tutorialBGM: {fileID: 0}
+  targetCamera: {fileID: 916321318}
+  defaultCamera: {fileID: 185807762}
+  timelineManager: {fileID: 148706940}
+  isResumeTimeLine: 0
+  isCameraMove: 1
 --- !u!114 &1956717886
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -70967,6 +71052,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bb79598301cb0594f823b09734aa435f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  fadeDuration: 3
+  _tutorialBGM: {fileID: 0}
+  targetCamera: {fileID: 1182723994}
+  defaultCamera: {fileID: 185807762}
+  timelineManager: {fileID: 148706940}
+  isResumeTimeLine: 0
+  isCameraMove: 1
 --- !u!1 &2042884072 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 2584678932687537808, guid: 7854683fcb0019e4592a51316204f2fd, type: 3}
@@ -71079,6 +71171,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bb79598301cb0594f823b09734aa435f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  fadeDuration: 3
+  _tutorialBGM: {fileID: 0}
+  targetCamera: {fileID: 51091010}
+  defaultCamera: {fileID: 185807762}
+  timelineManager: {fileID: 148706940}
+  isResumeTimeLine: 0
+  isCameraMove: 1
 --- !u!61 &2053201240
 BoxCollider2D:
   m_ObjectHideFlags: 0

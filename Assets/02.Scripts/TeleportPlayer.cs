@@ -74,4 +74,16 @@ public class PlayerTeleporter : MonoBehaviour {
         }
         TeleportPlayerToTarget(player, target);
     }
+
+    public void BondrewdSignalTP() {
+        GameObject responsePoint = GameObject.Find("FinalSpawnPoint");
+        if (responsePoint != null) {
+            target = responsePoint; // target¿¡ ÇÒ´ç
+            Debug.Log($"ResponsePoint found and assigned as target: {responsePoint.name}");
+        }
+        else {
+            Debug.LogError("ResponsePoint not found in the scene!");
+        }
+        TeleportPlayerToTarget(player, target);
+    }
 }
