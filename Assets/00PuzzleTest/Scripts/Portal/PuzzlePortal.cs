@@ -3,67 +3,64 @@ using UnityEngine;
 
 public class PuzzlePortal : MonoBehaviour, Interactable
 {
-    // Start is called before the first frame update
     [SerializeField] string _message;
     [SerializeField] Color _messageColor;
     [SerializeField] PuzzleBase puzzle;
     [SerializeField] PuzzleManager puzzleManager;
     [SerializeField] bool clearedOnce = false;
+    [SerializeField] GungeonGameManager gungeonGameManager;
+    [SerializeField] private GameObject player;
+    private GameObject finalSpawnPoint;
+    private bool stageChecked = false;
 
-    void Start()
-    {
+    void Start() {
+        gungeonGameManager = GungeonGameManager.Instance;
         puzzleManager = GameObject.Find("PuzzleManager").GetComponent<PuzzleManager>();
         puzzle = puzzleManager.CurrentPuzzle;
+        finalSpawnPoint = GameObject.Find("FinalSpawnPoint");
     }
 
-    void Update()
-    {
-        if (puzzle.Cleared && clearedOnce == false)
-        {
+    void Update() {
+        if (!stageChecked && gungeonGameManager.Stage == 4) {
+            stageChecked = true;
+            TeleportPlayerToTarget_Final(player, finalSpawnPoint);
+        }
+
+        if (puzzle.Cleared && !clearedOnce) {
+            SystemMessageManager.Instance.PushSystemMessage("퍼즐 클리어!", Color.green, false, 2f);
             puzzleManager.ChangePuzzle();
             clearedOnce = true;
         }
     }
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        if (collision.gameObject.CompareTag("Player") && InteractManager.Instance.CheckInteractable(this))
-        {
-            if (GungeonGameManager.Instance != null)
-            {
-                GungeonGameManager.Instance.SetIsGenerating(true);
-                SystemMessageManager.Instance.PushSystemMessage(_message, _messageColor, false, 1.5f);
-                Debug.Log("isGenerating set to true");
+
+    private void HandleTrigger(Collider2D collision, bool isEntering) {
+        if (collision.gameObject.CompareTag("Player")) {
+            if (GungeonGameManager.Instance != null) {
+                GungeonGameManager.Instance.SetIsGenerating(isEntering);
+                Debug.Log($"isGenerating set to {isEntering}");
             }
-            else
-            {
-                Debug.LogError("GGM instance is null");
-            }
-        }
-    }
-    private void OnTriggerExit2D(Collider2D collision)
-    {
-        if (collision.gameObject.CompareTag("Player"))
-        {
-            if (GungeonGameManager.Instance != null)
-            {
-                GungeonGameManager.Instance.SetIsGenerating(false);
-                Debug.Log("isGenerating set to false");
-            }
-            else
-            {
+            else {
                 Debug.LogError("GGM instance is null");
             }
         }
     }
 
-    public bool IsInteractBlock()
-    {
-        return !clearedOnce;
-        //상호작용을 막아야하는 상황이 오면 여기다가 그 조건을 넣을 것
+    private void OnTriggerEnter2D(Collider2D collision) => HandleTrigger(collision, true);
+    private void OnTriggerExit2D(Collider2D collision) => HandleTrigger(collision, false);
+
+    private void TeleportPlayerToTarget_Final(GameObject player, GameObject targetObject) {
+        if (player == null || targetObject == null) {
+            Debug.LogError("Player or Target object is null!");
+            return;
+        }
+
+        player.transform.position = targetObject.transform.position;
+        player.transform.rotation = targetObject.transform.rotation;
+
+        Debug.Log($"Player {player.name} teleported to {targetObject.name} at position {targetObject.transform.position}");
     }
 
-    public string GetInteractText()
-    {
-        return "이동 (G)";
-    }
+    public bool IsInteractBlock() => !clearedOnce;
+
+    public string GetInteractText() => "이동 (G)";
 }
