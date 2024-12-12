@@ -16,8 +16,6 @@ public class LaserManager : PuzzleBase
     private List<Destination> destinations;
     [SerializeField]
     private float maxLaserLength = 10;
-    [SerializeField]
-    DoorControl doorController;
 
 
 
@@ -50,7 +48,10 @@ public class LaserManager : PuzzleBase
     {
         UpdateLasers();
         Cleared = isGameClear();
-        doorController.DoorOpenOnGameClear(Cleared);
+        DoorController.DoorOpenOnGameClear(Cleared);
+        //doorController.IsInteractingToPortal = isInteractingToPortal;
+        if(isInteractingToPortal)
+            DoorController.IsInteractedOnce = true;
         ResetDestinations();
     }
 
