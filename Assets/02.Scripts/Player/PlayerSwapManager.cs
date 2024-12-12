@@ -12,6 +12,7 @@ public class PlayerSwapManager : MonoBehaviour {
     [SerializeField] private Player player1; // ù ��° ĳ����
     [SerializeField] private Player_2 player2; // �� ��° ĳ����
     [SerializeField] GameObject _miniMapObj;
+    [SerializeField] GungeonGameManager _dungeonManager;
     [SerializeField] float _portalSearchRadius;
     private MonoBehaviour currentPlayer; // ���� ���� ���� ĳ����
     private int currentPlayerNum;
@@ -80,8 +81,7 @@ public class PlayerSwapManager : MonoBehaviour {
     }
 
     private bool IsFinalBossStage() {
-        GameObject bondrewd = GameObject.Find("BossBondrewd");
-        return bondrewd != null;
+        return _dungeonManager.Stage == 5;
     }
 
 
@@ -93,12 +93,8 @@ public class PlayerSwapManager : MonoBehaviour {
         }
 
         if (glitchController != null) {
-            float glitchTime = 3;
-            int flashCount = 3;
-            if (IsFinalBossStage()) {
-                glitchTime = 1;
-                flashCount = 2;
-            }
+            float glitchTime = 1;
+            int flashCount = 2;
 
             await UniTask.WhenAll(
                 glitchController.TriggerGlitchEffect(glitchTime), // �۸�ġ ȿ��
