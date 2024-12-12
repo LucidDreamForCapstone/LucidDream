@@ -1,9 +1,8 @@
 using UnityEngine;
 
-public class PuzzleBase : MonoBehaviour
-{
+public class PuzzleBase : MonoBehaviour {
     [SerializeField]
-    private bool cleared = false;
+    protected bool cleared = false;
 
-    public bool Cleared { get { return cleared; } set { cleared=value; } }
+    public bool Cleared { get { return cleared; } set { cleared = value; } }
 }
