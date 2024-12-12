@@ -1,5 +1,7 @@
+using System.Collections;
 using Edgar.Unity.Examples.Gungeon;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class PuzzlePortal : MonoBehaviour, Interactable
 {
@@ -10,9 +12,11 @@ public class PuzzlePortal : MonoBehaviour, Interactable
     [SerializeField] bool clearedOnce = false;
     [SerializeField] GungeonGameManager gungeonGameManager;
     [SerializeField] private GameObject player;
+    [SerializeField] public InputAction playerAction;
     private GameObject finalSpawnPoint;
     private bool stageChecked = false;
     private bool preventPuzzleStageUpdate = false;
+    private bool isInputDisabled = false;
 
     void Start() {
         gungeonGameManager = GungeonGameManager.Instance;
@@ -29,22 +33,21 @@ public class PuzzlePortal : MonoBehaviour, Interactable
             TeleportPlayerToTarget_Final(player, finalSpawnPoint);
         }
 
-        if (puzzle.Cleared&&gungeonGameManager.Stage!=1&&!clearedOnce) {
+        if (puzzle.Cleared&&puzzleManager.CurrentPuzzleIndex!=0&&!clearedOnce) {
             SystemMessageManager.Instance.PushSystemMessage("퍼즐 클리어!", Color.green, false, 2f);
             clearedOnce=true;
         }
     }
 
     private void HandleTrigger(Collider2D collision, bool isEntering) {
+        puzzleManager.IsInteractingToPortal = false;
         if (collision.gameObject.CompareTag("Player")) {
             Debug.Log($"Player is Colliding to Portal {isEntering}");
-            puzzleManager.IsInteractingToPortal = isEntering;
-            if (puzzleManager.CurrentPuzzleIndex == 0)
-            {
-                puzzleManager.ChangePuzzle();
-                puzzle = puzzleManager.CurrentPuzzle;
-            }
-            if (GungeonGameManager.Instance != null&& puzzle.Cleared) {
+            //puzzleManager.IsInteractingToPortal = isEntering;
+            if (GungeonGameManager.Instance != null&& puzzle.Cleared&&Input.GetKey(KeyCode.G)&&!isInputDisabled) {
+                isInputDisabled = true;
+                puzzleManager.CurrentPuzzle.DoorController.IsInteractedOnce = true;
+                Debug.Log("GPressed!");
                 GungeonGameManager.Instance.SetIsGenerating(isEntering);
                 Debug.Log($"isGenerating set to {isEntering}");
                 if(!preventPuzzleStageUpdate)
@@ -56,10 +59,31 @@ public class PuzzlePortal : MonoBehaviour, Interactable
             else {
                 Debug.LogError("GGM instance is null");
             }
+            //puzzleManager.IsInteractingToPortal = isEntering;
         }
     }
 
-    private void OnTriggerEnter2D(Collider2D collision) => HandleTrigger(collision, true);
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (puzzleManager.CurrentPuzzleIndex == 0)
+        {
+            puzzleManager.ChangePuzzle();
+            Debug.Log(puzzleManager.CurrentPuzzle.transform.name);
+            puzzle = puzzleManager.CurrentPuzzle;
+        }
+        HandleTrigger(collision, true);
+    }
+
+    private void OnTriggerStay2D(Collider2D collision)
+    {
+        if (puzzleManager.CurrentPuzzleIndex == 0)
+        {
+            puzzleManager.ChangePuzzle();
+            Debug.Log(puzzleManager.CurrentPuzzle.transform.name);
+            puzzle = puzzleManager.CurrentPuzzle;
+        }
+        HandleTrigger(collision, true);
+    }
     private void OnTriggerExit2D(Collider2D collision) => HandleTrigger(collision, false);
 
     private void TeleportPlayerToTarget_Final(GameObject player, GameObject targetObject) {
@@ -77,4 +101,13 @@ public class PuzzlePortal : MonoBehaviour, Interactable
     public bool IsInteractBlock() => !puzzle.Cleared;
 
     public string GetInteractText() => "이동 (G)";
+
+    private IEnumerator DisableInputForSeconds(float duration)
+    {
+        isInputDisabled = true;
+        playerAction.Disable();
+        yield return new WaitForSecondsRealtime(duration);
+        playerAction.Enable();
+        isInputDisabled = false;
+    }
 }

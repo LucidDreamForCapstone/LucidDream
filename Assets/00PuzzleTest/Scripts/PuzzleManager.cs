@@ -33,11 +33,8 @@ public class PuzzleManager : MonoBehaviour
     {
         if (currentPuzzleIndex < puzzleList.Count - 1)
         {
-            if(IsInteractingToPortal)
-            { 
                 currentPuzzleIndex++;
                 currentPuzzle = puzzleList[currentPuzzleIndex];
-            }
         }
     }
 }
