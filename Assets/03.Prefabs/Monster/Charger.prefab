@@ -87,6 +87,8 @@ MonoBehaviour:
   _hpSlider: {fileID: 8899761037165240913}
   _chargerQTE: {fileID: 0}
   _layerBorder: 0
+  _chargerOnSound: {fileID: 8300000, guid: 5038cf90630fe6444a1d10df881fd9dd, type: 3}
+  _chargerOffSound: {fileID: 8300000, guid: 3b4dfb8a0013a604b82118936422f13c, type: 3}
 --- !u!212 &348418431054849798
 SpriteRenderer:
   m_ObjectHideFlags: 0

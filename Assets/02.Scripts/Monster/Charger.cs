@@ -10,6 +10,8 @@ public class Charger : MonsterBase {
     [SerializeField] Slider _hpSlider;
     [SerializeField] ButtonPressQTE _chargerQTE;
     [SerializeField] float _layerBorder;
+    [SerializeField] AudioClip _chargerOnSound;
+    [SerializeField] AudioClip _chargerOffSound;
     CapsuleCollider2D _chargerCollider;
     CircleCollider2D _shieldCollider;
     SpriteRenderer _sr;
@@ -100,12 +102,15 @@ public class Charger : MonsterBase {
         _animator.SetTrigger("Up");
         _chargerQTE.UpdateChargingState(_chargerIndex, true);
         _boss.ChargerCntIncrease(_chargerIndex);
+        SoundManager.Instance.PlaySFX(_chargerOnSound.name, false);
+        SystemMessageManager.Instance.PushSystemMessage("영혼 가속기가 활성화 되어 연구소장의 팬텀 게이지가 더욱 빠르게 상승합니다.", Color.red, lastTime: 2);
     }
 
     private void ChargerOff() {
         _animator.SetTrigger("Down");
         _chargerQTE.UpdateChargingState(_chargerIndex, false);
         _boss.ChargerCntDecrease(_chargerIndex);
+        SoundManager.Instance.PlaySFX(_chargerOffSound.name, false);
         RecoverHp().Forget();
     }
 
@@ -120,6 +125,8 @@ public class Charger : MonsterBase {
     }
 
     private async UniTaskVoid InitializeCharger(float delay) {
+        _isShieldActivated = true;
+        await UniTask.WaitUntil(() => _boss.CheckBossWakeUp());
         _hp = 1;
         GenerateShield();
         while (_hp < _maxHp) {

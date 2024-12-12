@@ -68,5 +68,7 @@ MonoBehaviour:
     - {fileID: 5214456140728570034, guid: 290a40933694f40499c714551aaa0f56, type: 3}
     StatueRoomTemplates:
     - {fileID: 4281413025099981253, guid: 66e37fd4c401bc44ebf0796892972429, type: 3}
+    TurretRoomTemplates:
+    - {fileID: 7170233771574198550, guid: 7886013c2a4a95948b435d71aca23358, type: 3}
   SecretRoomChance: 0
   SecretRoomDeadEndChance: 0.5

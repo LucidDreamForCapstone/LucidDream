@@ -1,12 +1,22 @@
+using Cysharp.Threading.Tasks;
+using DG.Tweening;
+using System;
+using System.Collections.Generic;
 using UnityEngine;
-public class Player_2 : MonoBehaviour
-{
+using UnityEngine.UI;
+public class Player_2 : MonoBehaviour {
     #region serialized field
+    [SerializeField] private float _invincibleLastTime;
+    [SerializeField] private Color32 _originColor;
+    [SerializeField] private Color32 _invincibleColor;
     [SerializeField] private Rigidbody2D _rigid;
     [SerializeField] private SpriteRenderer _spriteRenderer;
     [SerializeField] private Animator _animator;
     [SerializeField] private float _moveSpeed; // 기본 이동 속도
     [SerializeField] private float _itemSearchRadius;
+    [SerializeField] Slider _hpSlider;
+    [SerializeField] float _maxHp;
+    [SerializeField] int _healAmount;
     #endregion // serialized field
 
     #region private variable
@@ -15,6 +25,7 @@ public class Player_2 : MonoBehaviour
     private bool _isAttacking;
     private Vector2 _moveDir; // 이동 방향
     private bool _playerEnabled;
+    private float _hp;
     #endregion // private variable
 
     #region property
@@ -27,6 +38,8 @@ public class Player_2 : MonoBehaviour
         _isInvincible = false;
         _playerEnabled = false;
         MoveDir = Vector2.down;
+        _hp = _maxHp;
+        UpdateHpSlider();
     }
 
     private void FixedUpdate() {
@@ -42,13 +55,15 @@ public class Player_2 : MonoBehaviour
 
     public void Damaged(int dmg) {
         if (!_isInvincible && !_isDead) {
-            // 피해 처리 로직
-            // 예: 플레이어 HP 감소 및 사망 처리
+            FloatingDamageManager.Instance.ShowDamage(this.gameObject, dmg, true, false, false);
+            if (_hp <= dmg)
+                Die();
+            else {
+                _hp -= dmg;
+                Invincibility().Forget();
+            }
+            UpdateHpSlider();
         }
-    }
-
-    public void ReturnToDungeon() {
-        // 던전으로 돌아가는 로직 구현
     }
 
     public bool CheckEnabled() {
@@ -59,6 +74,18 @@ public class Player_2 : MonoBehaviour
         _playerEnabled = enabled;
     }
 
+    public bool CheckInvincible() {
+        return _isInvincible;
+    }
+
+    public async UniTaskVoid HealMax() {
+        while (_hp < _maxHp) {
+            _hp += _healAmount * Time.deltaTime;
+            UpdateHpSlider();
+            await UniTask.NextFrame();
+        }
+        _hp = _maxHp;
+    }
     #endregion // public funcs
 
     #region private funcs
@@ -96,6 +123,23 @@ public class Player_2 : MonoBehaviour
 
         _animator.SetInteger("horizontal", (int)horizontal);
         _animator.SetInteger("vertical", (int)vertical);
+    }
+    private async UniTaskVoid Invincibility() {
+        _isInvincible = true;
+        _spriteRenderer.DOColor(_invincibleColor, 0.1f).ToUniTask().Forget();
+        await UniTask.Delay(TimeSpan.FromSeconds(_invincibleLastTime));
+        _isInvincible = false;
+        _spriteRenderer.DOColor(_originColor, 0.1f).ToUniTask().Forget();
+    }
+    private void Die() {
+        HealMax().Forget();
+        List<string> messages = new List<string>();
+        messages.Add("이번만 봐드립니다.");
+        SystemMessageManager.Instance.ShowDialogBox("개발자Y", messages).Forget();
+    }
+
+    private void UpdateHpSlider() {
+        _hpSlider.value = _hp / _maxHp;
     }
     #endregion // private funcs
 }
