@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: d538e4f3ba03e9744b148dc6028fdf14
+guid: b8180def79d76384aa9e19f9bb290880
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -123,64 +123,169 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: p2_down_idle_0
+      name: p2_side_0
       rect:
         serializedVersion: 2
-        x: 49
-        y: 3
-        width: 16
+        x: 3
+        y: 0
+        width: 17
         height: 30
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 4bb9a3c42ac55a74897f25850e3fdb9f
-      internalID: 1228873918
+      spriteID: b55a1d4fdf5be4f42a49b24439197241
+      internalID: 40088171
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: p2_down_idle_1
+      name: p2_side_1
       rect:
         serializedVersion: 2
-        x: 69
-        y: 3
-        width: 16
-        height: 29
+        x: 22
+        y: 0
+        width: 17
+        height: 30
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: c9070ef505b29b940a9d9bb3ff7cbaa8
-      internalID: 1657657283
+      spriteID: 0096b2fd079cb1442af84b10fa74fcd2
+      internalID: 683015749
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: p2_down_idle_2
+      name: p2_side_2
       rect:
         serializedVersion: 2
-        x: 89
-        y: 3
-        width: 16
-        height: 29
+        x: 41
+        y: 0
+        width: 17
+        height: 30
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 381375d33cefd734eafda10a03f1ffc1
-      internalID: -1146353982
+      spriteID: 19eae11567dcee248bb1973c3aad525d
+      internalID: -1860830328
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: p2_side_3
+      rect:
+        serializedVersion: 2
+        x: 60
+        y: 0
+        width: 17
+        height: 30
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a637b65e5e7c6d64baade6322e895fac
+      internalID: -1221601326
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: p2_side_4
+      rect:
+        serializedVersion: 2
+        x: 79
+        y: 0
+        width: 17
+        height: 30
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: bec71908480c08d4694c257043e0ede0
+      internalID: -1761227759
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: p2_side_5
+      rect:
+        serializedVersion: 2
+        x: 100
+        y: 0
+        width: 17
+        height: 30
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6f3e68452226a3448915b668a3615274
+      internalID: -1962455138
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: p2_side_6
+      rect:
+        serializedVersion: 2
+        x: 123
+        y: 0
+        width: 17
+        height: 30
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e62b7636a45984646a24d01f47627b87
+      internalID: -1250709386
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: p2_side_7
+      rect:
+        serializedVersion: 2
+        x: 144
+        y: 0
+        width: 17
+        height: 30
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 25a2bbd4808771b4ebfd98d937e1a4eb
+      internalID: -605935033
       vertices: []
       indices: 
       edges: []
@@ -196,9 +301,14 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      p2_down_idle_0: 1228873918
-      p2_down_idle_1: 1657657283
-      p2_down_idle_2: -1146353982
+      p2_side_0: 40088171
+      p2_side_1: 683015749
+      p2_side_2: -1860830328
+      p2_side_3: -1221601326
+      p2_side_4: -1761227759
+      p2_side_5: -1962455138
+      p2_side_6: -1250709386
+      p2_side_7: -605935033
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

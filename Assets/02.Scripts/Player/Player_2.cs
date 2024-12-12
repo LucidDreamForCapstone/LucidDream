@@ -96,6 +96,8 @@ public class Player_2 : MonoBehaviour {
             float horizontal = Input.GetAxisRaw("Horizontal");
             float vertical = Input.GetAxisRaw("Vertical");
 
+            PlayerMoveAnimation(horizontal, vertical); // 애니메이션 호출
+
             moveVec = new Vector2(horizontal, vertical);
 
             // 이동 방향 업데이트
@@ -104,7 +106,6 @@ public class Player_2 : MonoBehaviour {
             }
 
             _rigid.velocity = moveVec.normalized * _moveSpeed; // Rigidbody에 속도 설정
-            PlayerMoveAnimation(horizontal, vertical); // 애니메이션 호출
         }
         else {
             _rigid.velocity = Vector2.zero; // 정지 상태

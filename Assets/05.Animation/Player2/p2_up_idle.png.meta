@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: d538e4f3ba03e9744b148dc6028fdf14
+guid: 6f32bb92c3c6f00478864126edcf92f6
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -123,64 +123,64 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: p2_down_idle_0
+      name: p2_up_idle_0
       rect:
         serializedVersion: 2
-        x: 49
-        y: 3
+        x: 48
+        y: 0
         width: 16
         height: 30
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 4bb9a3c42ac55a74897f25850e3fdb9f
-      internalID: 1228873918
+      spriteID: 42109fe8902ec4c47b8ba267b8f0ef81
+      internalID: 1716842045
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: p2_down_idle_1
+      name: p2_up_idle_1
       rect:
         serializedVersion: 2
-        x: 69
-        y: 3
+        x: 68
+        y: 0
         width: 16
-        height: 29
+        height: 30
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: c9070ef505b29b940a9d9bb3ff7cbaa8
-      internalID: 1657657283
+      spriteID: 6e59cefc357716943a17eadd2b96e211
+      internalID: 1033491200
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: p2_down_idle_2
+      name: p2_up_idle_2
       rect:
         serializedVersion: 2
-        x: 89
-        y: 3
+        x: 88
+        y: 0
         width: 16
-        height: 29
+        height: 30
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 381375d33cefd734eafda10a03f1ffc1
-      internalID: -1146353982
+      spriteID: b957c6a128a5d5e45a57a87b7017255a
+      internalID: -1833223573
       vertices: []
       indices: 
       edges: []
@@ -196,9 +196,9 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      p2_down_idle_0: 1228873918
-      p2_down_idle_1: 1657657283
-      p2_down_idle_2: -1146353982
+      p2_up_idle_0: 1716842045
+      p2_up_idle_1: 1033491200
+      p2_up_idle_2: -1833223573
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

@@ -65274,6 +65274,7 @@ MonoBehaviour:
   _phantomOffSound: {fileID: 0}
   _normalGroggyDecreaseAmount: 3
   _groggyLastTime: 15
+  _timeLineManager: {fileID: 0}
 --- !u!212 &4440419737140592889
 SpriteRenderer:
   m_ObjectHideFlags: 0
