@@ -51,7 +51,7 @@ public class GameSceneManager : MonoBehaviour {
     #region public funcs
 
     public void LoadStartScene() {
-        SceneManager.LoadScene(_startScene);
+        LoadingSceneManager.LoadSceneWithLoading(_startScene);
     }
 
     public void LoadMainScene() {
@@ -59,12 +59,12 @@ public class GameSceneManager : MonoBehaviour {
     }
 
     public void LoadTutorialScene() {
-        SceneManager.LoadScene(_tutorialScene);
+        LoadingSceneManager.LoadSceneWithLoading(_tutorialScene);
     }
 
     public void LoadStageScene(int stage) {
         if (null != _stageScenes[stage]) {
-            SceneManager.LoadScene(_stageScenes[stage]);
+            LoadingSceneManager.LoadSceneWithLoading(_stageScenes[stage]);
         }
     }
 
