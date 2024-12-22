@@ -12985,17 +12985,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 6665183066572737380, guid: 83c8144c78d76bb459a10f36b745692e, type: 3}
   m_PrefabInstance: {fileID: 1363600751}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1371675204 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 6739014494505554730, guid: aac7bedbbcbfff449b85a763e9af3024, type: 3}
-  m_PrefabInstance: {fileID: 208103942}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1381208397
 GameObject:
   m_ObjectHideFlags: 0
@@ -14619,6 +14608,63 @@ MonoBehaviour:
   m_InstancedGameObject: {fileID: 0}
   m_Flags: 3
   m_ColliderType: 1
+--- !u!1001 &1526666539
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 2768875804194373922, guid: bfc408d256d1d3b4cbb2d274a6f061c8, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -25.000404
+      objectReference: {fileID: 0}
+    - target: {fileID: 2768875804194373922, guid: bfc408d256d1d3b4cbb2d274a6f061c8, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 8.233656
+      objectReference: {fileID: 0}
+    - target: {fileID: 2768875804194373922, guid: bfc408d256d1d3b4cbb2d274a6f061c8, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0.031756908
+      objectReference: {fileID: 0}
+    - target: {fileID: 2768875804194373922, guid: bfc408d256d1d3b4cbb2d274a6f061c8, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2768875804194373922, guid: bfc408d256d1d3b4cbb2d274a6f061c8, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2768875804194373922, guid: bfc408d256d1d3b4cbb2d274a6f061c8, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2768875804194373922, guid: bfc408d256d1d3b4cbb2d274a6f061c8, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2768875804194373922, guid: bfc408d256d1d3b4cbb2d274a6f061c8, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2768875804194373922, guid: bfc408d256d1d3b4cbb2d274a6f061c8, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2768875804194373922, guid: bfc408d256d1d3b4cbb2d274a6f061c8, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4678066843946943828, guid: bfc408d256d1d3b4cbb2d274a6f061c8, type: 3}
+      propertyPath: m_Name
+      value: EssenceStatue
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: bfc408d256d1d3b4cbb2d274a6f061c8, type: 3}
 --- !u!1 &1532802127
 GameObject:
   m_ObjectHideFlags: 0
@@ -34366,6 +34412,8 @@ MonoBehaviour:
   player1: {fileID: 1904816293}
   player2: {fileID: 1640275571}
   _miniMapObj: {fileID: 1287373352}
+  _dungeonManager: {fileID: 0}
+  _portalSearchRadius: 0
   _cameraObj: {fileID: 1474205038}
   player1UICanvas: {fileID: 1420516003}
   player2UICanvas: {fileID: 67154485}
@@ -34415,7 +34463,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5652fc6d5a6350d4482365201d6919ff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _systemMessageTM: {fileID: 1371675204}
+  _systemMessageTM: {fileID: 0}
   _warningSound: {fileID: 8300000, guid: 746072977aca3dc4cb910ce255183f1f, type: 3}
   _dialogBox: {fileID: 1750171375}
   _dialogNameTM: {fileID: 1851047640}
@@ -65254,6 +65302,7 @@ MonoBehaviour:
   _missileLastTime: 7.4
   _homingStartTime: 1
   _homingLastTime: 5
+  _homingStrength: 0
   _missileDamage: 80
   _explodeRadius: 4
   _groggyDecreaseAmount: 15
@@ -66735,3 +66784,4 @@ SceneRoots:
   - {fileID: 4282640195111711393}
   - {fileID: 2037806373}
   - {fileID: 1197061070}
+  - {fileID: 1526666539}

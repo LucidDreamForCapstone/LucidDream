@@ -455,6 +455,7 @@ MonoBehaviour:
   _cost: 50
   _message: "\uAFC8\uC870\uAC01\uC774 \uBD80\uC871\uD569\uB2C8\uB2E4."
   _layerBorder: -0.5
+  _praySound: {fileID: 8300000, guid: 0667b8d8115890c4982ce42c59dccce6, type: 3}
 --- !u!212 &6346076269900658575
 SpriteRenderer:
   m_ObjectHideFlags: 0
