@@ -92,6 +92,8 @@ public class BehaviourTree : ScriptableObject {
         }
     }
 
+
+#endif
     public List<Node> GetChildren(Node parent) {
         List<Node> children = new List<Node>();
 
@@ -112,8 +114,6 @@ public class BehaviourTree : ScriptableObject {
 
         return children;
     }
-#endif
-
     public void Traverse(Node node, System.Action<Node> visiter) {
         if (node) {
             visiter.Invoke(node);
