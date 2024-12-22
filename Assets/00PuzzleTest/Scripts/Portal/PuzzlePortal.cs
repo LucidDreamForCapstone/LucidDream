@@ -22,16 +22,17 @@ public class PuzzlePortal : MonoBehaviour, Interactable
         gungeonGameManager = GungeonGameManager.Instance;
         puzzleManager = GameObject.Find("PuzzleManager").GetComponent<PuzzleManager>();
         puzzle = puzzleManager.CurrentPuzzle;
-        finalSpawnPoint = GameObject.Find("FinalSpawnPoint");
+        finalSpawnPoint = GameObject.Find("SpawnPosition");
+        player = InteractManager.Instance.gameObject;
     }
 
 
 
     void Update() {
-        if (!stageChecked && gungeonGameManager.Stage == 4) {
-            stageChecked = true;
-            TeleportPlayerToTarget_Final(player, finalSpawnPoint);
-        }
+        //if (!stageChecked && gungeonGameManager.Stage == 4) {
+        //    stageChecked = true;
+        //    TeleportPlayerToTarget_Final(player, finalSpawnPoint);
+        //}
 
         if (puzzle.Cleared && puzzleManager.CurrentPuzzleIndex != 0 && !clearedOnce) {
             SystemMessageManager.Instance.PushSystemMessage("ÆÛÁñ Å¬¸®¾î!", Color.green, false, 2f);
@@ -42,6 +43,7 @@ public class PuzzlePortal : MonoBehaviour, Interactable
     private void HandleTrigger(Collider2D collision, bool isEntering) {
         puzzleManager.IsInteractingToPortal = false;
         if (collision.gameObject.CompareTag("Player")) {
+            if(gungeonGameManager.Stage==4) TeleportPlayerToTarget_Final(player, finalSpawnPoint);
             Debug.Log($"Player is Colliding to Portal {isEntering}");
             //puzzleManager.IsInteractingToPortal = isEntering;
             if (GungeonGameManager.Instance != null && puzzle.Cleared && Input.GetKey(KeyCode.G) && !isInputDisabled) {
