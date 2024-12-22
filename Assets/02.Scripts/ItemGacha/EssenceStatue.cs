@@ -8,6 +8,7 @@ public class EssenceStatue : DropableBase {
     [SerializeField] int _cost;
     [SerializeField] string _message;
     [SerializeField] float _layerBorder;
+    [SerializeField] AudioClip _praySound;
     Animator _animator;
     SpriteRenderer _sr;
     bool _isReady;
@@ -39,13 +40,11 @@ public class EssenceStatue : DropableBase {
     }
 
     private void Pray() {
-        if (Input.GetKey(KeyCode.G)) {
+        if (Input.GetKey(KeyCode.G) && _isReady) {
             int dreamFragCount = PlayerDataManager.Instance.Status._dream;
             if (dreamFragCount >= _cost) {
-                if (_isReady) {
-                    PlayerDataManager.Instance.SetDream(dreamFragCount - _cost);
-                    PrayTask().Forget();
-                }
+                PlayerDataManager.Instance.SetDream(dreamFragCount - _cost);
+                PrayTask().Forget();
             }
             else {
                 SystemMessageManager.Instance.PushSystemMessage(_message, Color.red);
@@ -55,6 +54,7 @@ public class EssenceStatue : DropableBase {
 
     private async UniTaskVoid PrayTask() {
         _isReady = false;
+        SoundManager.Instance.PlaySFX(_praySound.name);
         _animator.SetTrigger("Activate");
         await UniTask.Delay(TimeSpan.FromSeconds(2));
         DropOneItem(_dropPoint);
