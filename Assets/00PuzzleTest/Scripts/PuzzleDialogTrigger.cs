@@ -23,6 +23,6 @@ public class PuzzleDialogTrigger : MonoBehaviour {
     private async UniTaskVoid ShowPuzzleDialog() {
         SystemMessageManager.Instance.ShowDialogBox("???", _messages, 3).Forget();
         await UniTask.Delay(TimeSpan.FromSeconds(6.6));
-        SystemMessageManager.Instance.PushSystemMessage("F를 눌러 연구원 시점으로 전환하면서 길을 찾아 돌파하세요.", Color.yellow, lastTime: 3);
+        SystemMessageManager.Instance.PushSystemMessage("F를 눌러 연구원 시점으로 전환하여 문제를 해결하세요.", Color.yellow, lastTime: 3);
     }
 }

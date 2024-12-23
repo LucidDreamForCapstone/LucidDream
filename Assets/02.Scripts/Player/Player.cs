@@ -91,6 +91,7 @@ public class Player : MonoBehaviour {
     private InGameUIController _controller;
     private bool _playerEnabled;
     private bool _isAttackable;
+    private bool _autoFlipEnabled;
     private bool _isMessagePrinting;
     private Image _phantomSliderFill;
     #endregion // private variable
@@ -138,6 +139,7 @@ public class Player : MonoBehaviour {
         _controller = FindObjectOfType<InGameUIController>();
         _phantomSliderFill = _phantomSlider.fillRect.GetComponent<Image>();
         _playerEnabled = true;
+        _autoFlipEnabled = true;
         _isAttackable = true;
         _isMessagePrinting = false;
     }
@@ -419,6 +421,22 @@ public class Player : MonoBehaviour {
         _isPhantomForceLocked = false;
     }
 
+    public void AutoFlipEnable() {
+        _autoFlipEnabled = true;
+    }
+
+    public void AutoFlipDisable() {
+        _autoFlipEnabled = false;
+    }
+
+    /// <summary>
+    /// true is right
+    /// </summary>
+    /// <param name="state"></param>
+    public void SetFlipX(bool state) {
+        _spriteRenderer.flipX = state;
+    }
+
     #endregion //public funcs
 
 
@@ -570,7 +588,8 @@ public class Player : MonoBehaviour {
         else if (horizontal < 0)
             _beforeFlipX = false;
 
-        _spriteRenderer.flipX = _beforeFlipX;
+        if (_autoFlipEnabled)
+            _spriteRenderer.flipX = _beforeFlipX;
         _animator.SetInteger("horizontal", (int)horizontal);
         _animator.SetInteger("vertical", (int)vertical);
     }
@@ -640,7 +659,7 @@ public class Player : MonoBehaviour {
         int i, length = nearItems.Length;
         if (length > 0) {
             for (i = 0; i < length; i++) {
-                if (!_magneticList.Contains(nearItems[i].gameObject))
+                if (!_magneticList.Contains(nearItems[i].gameObject) && nearItems[i].GetComponent<ItemBase>().IsGround())
                     _magneticList.Add(nearItems[i].gameObject);
             }
         }

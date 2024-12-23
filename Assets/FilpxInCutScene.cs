@@ -1,9 +1,6 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class FilpxInCutScene : MonoBehaviour
-{
+public class FilpxInCutScene : MonoBehaviour {
     [SerializeField] private GameObject _gameObject;
     public void SetFlipX() {
         // Sprite Renderer ÄÄÆ÷³ÍÆ®¸¦ °¡Á®¿È

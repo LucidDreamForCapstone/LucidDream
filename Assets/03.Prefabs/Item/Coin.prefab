@@ -9,8 +9,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7312344776387743970}
-  - component: {fileID: 6523697106491955209}
   - component: {fileID: 9092335544619919718}
+  - component: {fileID: 6523697106491955209}
   - component: {fileID: 3967712091116896131}
   - component: {fileID: 4012998187246644345}
   m_Layer: 7
@@ -35,6 +35,19 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &9092335544619919718
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 438956390268976642}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 343599b13931d6f4781d44f810c69417, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  coinAmount: 1
 --- !u!212 &6523697106491955209
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -74,7 +87,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 1133919873
-  m_SortingLayer: 5
+  m_SortingLayer: 3
   m_SortingOrder: 0
   m_Sprite: {fileID: 1856176568, guid: 3a62fb590a896f84bbc30036fec4d616, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -87,19 +100,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &9092335544619919718
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 438956390268976642}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 343599b13931d6f4781d44f810c69417, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  coinAmount: 1
 --- !u!58 &3967712091116896131
 CircleCollider2D:
   m_ObjectHideFlags: 0
