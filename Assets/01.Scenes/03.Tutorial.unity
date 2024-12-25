@@ -840,6 +840,10 @@ MonoBehaviour:
   timelineDurations:
   - 16.8
   - 27
+  player1UICanvas: {fileID: 0}
+  player2UICanvas: {fileID: 0}
+  playerSwapManager: {fileID: 0}
+  _player: {fileID: 0}
 --- !u!114 &148706941
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -25123,8 +25127,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3348039780658177386, guid: a3953d91f13026241b9304ad71aa546a, type: 3}
       propertyPath: dropTable.Array.size
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 3348039780658177386, guid: a3953d91f13026241b9304ad71aa546a, type: 3}
+      propertyPath: dropTable.Array.data[1]._item
+      value: 
+      objectReference: {fileID: 333487530329746681, guid: d3b95dbb730d026449fe65dc26f1d829, type: 3}
     - target: {fileID: 4151153953099191616, guid: a3953d91f13026241b9304ad71aa546a, type: 3}
       propertyPath: m_LocalScale.x
       value: 1
@@ -72126,7 +72134,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1581096956051304421, guid: 6e0d97d4e50812941ad588d543a7fc74, type: 3}
       propertyPath: dropTable.Array.size
-      value: 6
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 1581096956051304421, guid: 6e0d97d4e50812941ad588d543a7fc74, type: 3}
       propertyPath: dropTable.Array.data[4]._item
@@ -72137,11 +72145,19 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 6554170899350276541, guid: d9449e93f60efd64293b1a68d91ed88d, type: 3}
     - target: {fileID: 1581096956051304421, guid: 6e0d97d4e50812941ad588d543a7fc74, type: 3}
+      propertyPath: dropTable.Array.data[6]._item
+      value: 
+      objectReference: {fileID: 4748116994987269957, guid: 2af424789dc149144a105b5fd64c6d71, type: 3}
+    - target: {fileID: 1581096956051304421, guid: 6e0d97d4e50812941ad588d543a7fc74, type: 3}
       propertyPath: dropTable.Array.data[4]._dropChance
       value: 80
       objectReference: {fileID: 0}
     - target: {fileID: 1581096956051304421, guid: 6e0d97d4e50812941ad588d543a7fc74, type: 3}
       propertyPath: dropTable.Array.data[5]._dropChance
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 1581096956051304421, guid: 6e0d97d4e50812941ad588d543a7fc74, type: 3}
+      propertyPath: dropTable.Array.data[6]._dropChance
       value: 100
       objectReference: {fileID: 0}
     - target: {fileID: 4288089868547410279, guid: 6e0d97d4e50812941ad588d543a7fc74, type: 3}

@@ -65238,7 +65238,7 @@ MonoBehaviour:
   _damage: 1
   _bodyDamage: 30
   _moveSpeed: 10
-  _maxHp: 15000
+  _maxHp: 1000
   _dieDelay: 1
   _damagedColor:
     serializedVersion: 2
@@ -66344,7 +66344,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!95 &7604711311542175621
 Animator:
   serializedVersion: 5

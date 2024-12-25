@@ -38,6 +38,10 @@ public class MonsterStoneGolem : MonsterBase {
 
     public void SetPosIndex(int index) { _posIndex = index; }
 
+    public void ForceDie() {
+        Die().Forget();
+    }
+
     #endregion
 
 
