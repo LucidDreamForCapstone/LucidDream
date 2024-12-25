@@ -5,17 +5,15 @@ using UnityEngine.Rendering.Universal;
 
 public class TutorialStart : MonoBehaviour {
     [SerializeField] private float fadeDuration = 3f; // Fade-in duration (seconds)
-
+    [SerializeField] private Volume colorVolume;
     private Color startColor = new Color(0, 0, 0, 1); // Initial color (black)
     private Color targetColor = new Color(1, 1, 1, 1); // Target color (white)
     private ColorAdjustments colorAdjustments;
 
     private async void Start() {
         // OptionManager �̱����� ����Ͽ� Volume ��������
-        Volume volume = OptionManager.Instance.GetBrightnessVolume();
-
         // Volume���� ColorAdjustments ��������
-        if (volume.profile.TryGet(out colorAdjustments)) {
+        if (colorVolume.profile.TryGet(out colorAdjustments)) {
             colorAdjustments.colorFilter.overrideState = true; // Enable color filter override
             colorAdjustments.colorFilter.value = startColor; // Set initial color
 

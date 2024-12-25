@@ -60,6 +60,7 @@ public class Player : MonoBehaviour {
     [SerializeField] protected AudioClip dyingSound1;
     [SerializeField] protected AudioClip dyingSound2;
     [SerializeField] private DeathUIController deathUIController; // DeathUIController ����
+    [SerializeField] private float _vignetteSensitivity;
     #endregion // serialized field 
 
 

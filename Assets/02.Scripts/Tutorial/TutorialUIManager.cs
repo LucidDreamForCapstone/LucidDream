@@ -114,20 +114,19 @@ public class TutorialUIManager : MonoBehaviour
     }
 }*/
 using System.Collections;
+using TMPro;
 using UnityEngine;
 using UnityEngine.Rendering;
 using UnityEngine.Rendering.Universal;
-using TMPro;
 
-public class TutorialUIManager : MonoBehaviour
-{
+public class TutorialUIManager : MonoBehaviour {
     [Header("UI Elements")]
     [SerializeField] private GameObject[] tutorialUIs; // Tutorial UI panels
     [SerializeField] private TextMeshProUGUI continueText; // "Press G to continue" text
     [SerializeField] protected float delayBeforeContinueText = 1f; // Delay before showing "Press G to continue" text
 
     [Header("Post Processing Settings")]
-    [SerializeField] private Volume postProcessingVolume; // Post Processing Volume
+    [SerializeField] private Volume colorVolume; // Post Processing Volume
     protected ColorAdjustments colorAdjustments; // Color Adjustments component
 
     private int currentIndex = 0; // Current active UI index
@@ -141,12 +140,12 @@ public class TutorialUIManager : MonoBehaviour
         }
         continueText.gameObject.SetActive(false);
 
-        // Get ColorAdjustments from PostProcessing Volume
-        if (postProcessingVolume != null && postProcessingVolume.profile.TryGet(out colorAdjustments)) {
-            colorAdjustments.colorFilter.value = Color.white; // Initial color: white (255, 255, 255)
+        // ColorAdjustments 가져오기
+        if (colorVolume != null && colorVolume.profile.TryGet<ColorAdjustments>(out var colorAdjustmentsComponent)) {
+            colorAdjustments = colorAdjustmentsComponent;
         }
         else {
-            Debug.LogError("Post Processing Volume or Color Adjustments not set!");
+            Debug.LogError("No colorVolume component or wrong volume component");
         }
     }
 
@@ -209,9 +208,7 @@ public class TutorialUIManager : MonoBehaviour
     /// </summary>
     /// <param name="targetColor">Target color</param>
     protected void SetColorFilter(Color targetColor) {
-        if (colorAdjustments != null) {
-            colorAdjustments.colorFilter.value = targetColor;
-        }
+        colorAdjustments.colorFilter.value = targetColor;
     }
 
     /// <summary>

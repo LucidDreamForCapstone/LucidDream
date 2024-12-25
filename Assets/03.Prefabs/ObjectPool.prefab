@@ -145,4 +145,8 @@ MonoBehaviour:
     _poolAmount: 10
   - _poolObj: {fileID: 6316021950744477793, guid: 4818a41a862a6fa488c5b637e01217f1, type: 3}
     _poolAmount: 10
+  - _poolObj: {fileID: 1291977212005651459, guid: 652f72c4454773c44a4173eacf164980, type: 3}
+    _poolAmount: 20
+  - _poolObj: {fileID: 8244310748568272398, guid: 4da217abad5d0b042a50de9c0738581f, type: 3}
+    _poolAmount: 20
   _parent: {fileID: 8065133806954576645}

@@ -1,4 +1,6 @@
+using Cysharp.Threading.Tasks;
 using UnityEngine;
+using UnityEngine.Rendering;
 
 public class PlayerDataManager : MonoBehaviour {
     #region private variable
@@ -35,6 +37,11 @@ public class PlayerDataManager : MonoBehaviour {
         }
     }
 
+    private void Start() {
+        _isVignetteUsing = true;
+        _vignetteVolume.weight = 0.5f;
+    }
+
     private void Update() {
         _player ??= GameObject.Find("Player");
         if (_player != null)
@@ -53,6 +60,9 @@ public class PlayerDataManager : MonoBehaviour {
     private GameObject _player;
     private Player _playerScript;
     [SerializeField] private PlayerStatus _status = new();
+    [SerializeField] private Volume _vignetteVolume;
+    [SerializeField] private float _vignetteSensitivity;
+    private bool _isVignetteUsing;
     private InGameUIController _ingameUIController = null;
 
     #endregion // private variables
@@ -75,6 +85,7 @@ public class PlayerDataManager : MonoBehaviour {
     public void SetHP(int currHP) {
         _status._hp = currHP;
         _ingameUIController.SetHP(currHP, _status._maxHp);
+        SetVignetteWeightLerp().Forget();
     }
 
     public void HealAbs(int healAmount) {
@@ -330,9 +341,24 @@ public class PlayerDataManager : MonoBehaviour {
 
 
 
-    #region privete funcs
-
-
+    #region private funcs
+    private async UniTaskVoid SetVignetteWeightLerp() {
+        if (_isVignetteUsing) {
+            _isVignetteUsing = false;
+            await UniTask.NextFrame();
+        }
+        _isVignetteUsing = true;
+        float hpRatio = (float)_status._hp / (float)_status._maxHp;
+        float targetWeight = 1.0f - hpRatio * 0.5f;
+        float startWeight = _vignetteVolume.weight;
+        float delta = 0;
+        while (Mathf.Abs(targetWeight - _vignetteVolume.weight) > 0.001f && _isVignetteUsing) {
+            _vignetteVolume.weight = Mathf.Lerp(startWeight, targetWeight, delta);
+            delta += _vignetteSensitivity * 0.01f;
+            await UniTask.NextFrame();
+        }
+        _isVignetteUsing = false;
+    }
 
     #endregion private funcs
 

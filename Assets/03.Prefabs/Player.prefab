@@ -123,6 +123,7 @@ Transform:
   - {fileID: 623130202343408408}
   - {fileID: 5700990400168835459}
   - {fileID: 4903614855967458330}
+  - {fileID: 7092679171567457991}
   - {fileID: 7573947896517907594}
   - {fileID: 3833284255893121612}
   - {fileID: 4403008705357101913}
@@ -254,6 +255,7 @@ MonoBehaviour:
   dyingSound1: {fileID: 8300000, guid: f35c938e146770d48a5fceb119902a08, type: 3}
   dyingSound2: {fileID: 8300000, guid: 1c7e18df881e1814a8469249c2d06db9, type: 3}
   deathUIController: {fileID: 0}
+  _vignetteSensitivity: 0
 --- !u!114 &1519231970995128663
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1058,6 +1060,55 @@ MonoBehaviour:
     m_MipBias: 0
     m_VarianceClampScale: 0.9
     m_ContrastAdaptiveSharpening: 0
+--- !u!1 &6463714151677620244
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7092679171567457991}
+  - component: {fileID: 8912330549978546779}
+  m_Layer: 0
+  m_Name: PlayerVignetteVolume
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7092679171567457991
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6463714151677620244}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 5803989719097209279}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &8912330549978546779
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6463714151677620244}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 172515602e62fb746b5d573b38a5fe58, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_IsGlobal: 1
+  priority: 0
+  blendDistance: 0
+  weight: 0.5
+  sharedProfile: {fileID: 11400000, guid: f91fb0d5cedb58540bcc4f1b423316b7, type: 2}
 --- !u!1 &6970874412136125351
 GameObject:
   m_ObjectHideFlags: 0

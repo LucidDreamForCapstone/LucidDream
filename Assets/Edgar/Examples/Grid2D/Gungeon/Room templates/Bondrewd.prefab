@@ -2404,8 +2404,6 @@ GameObject:
   - component: {fileID: 8778956435953251911}
   - component: {fileID: 4477946716829345580}
   - component: {fileID: 201462349180886944}
-  - component: {fileID: 8561427542465892620}
-  - component: {fileID: 1269953647522898513}
   m_Layer: 5
   m_Name: GlobalCanvas
   m_TagString: Untagged
@@ -2496,37 +2494,6 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
---- !u!114 &8561427542465892620
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5767805931769285491}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5710e92144214d6478675976918497f1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _pauseUI: {fileID: 0}
-  _optionUIController: {fileID: 0}
---- !u!114 &1269953647522898513
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5767805931769285491}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2e885f035b31ccc41b1cffc266736d1b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _revivalCount: 3
-  _revivalPanel: {fileID: 0}
-  _timerTM: {fileID: 0}
-  _countTM: {fileID: 0}
-  _guardEffect: {fileID: 5405011876134803075, guid: a08d282987b94834898bd587081ff727, type: 3}
 --- !u!1 &6083905430883930101
 GameObject:
   m_ObjectHideFlags: 0
