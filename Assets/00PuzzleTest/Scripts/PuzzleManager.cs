@@ -13,28 +13,23 @@ public class PuzzleManager : MonoBehaviour
     bool _isInteractingToPortal = false;
 
     public PuzzleBase CurrentPuzzle { get => currentPuzzle; }
-    public bool IsInteractingToPortal { get { return _isInteractingToPortal; } set { _isInteractingToPortal = value; }  }
-    public int CurrentPuzzleIndex { get { return currentPuzzleIndex; }  }
-    void Start()
-    {
-        if (puzzleList.Count > 0)
-        {
+    public bool IsInteractingToPortal { get { return _isInteractingToPortal; } set { _isInteractingToPortal = value; } }
+    public int CurrentPuzzleIndex { get { return currentPuzzleIndex; } }
+    void Start() {
+        if (puzzleList.Count > 0) {
             currentPuzzle = puzzleList[0];
             currentPuzzleIndex = 0;
         }
     }
 
-    void Update()
-    {
+    void Update() {
         currentPuzzle.IsInteractingToPortal = IsInteractingToPortal;
     }
 
-    public void ChangePuzzle()
-    {
-        if (currentPuzzleIndex < puzzleList.Count - 1)
-        {
-                currentPuzzleIndex++;
-                currentPuzzle = puzzleList[currentPuzzleIndex];
+    public void ChangePuzzle() {
+        if (currentPuzzleIndex < puzzleList.Count - 1) {
+            currentPuzzleIndex++;
+            currentPuzzle = puzzleList[currentPuzzleIndex];
         }
     }
 }

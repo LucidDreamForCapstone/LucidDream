@@ -43,7 +43,7 @@ public class PuzzlePortal : MonoBehaviour, Interactable
     private void HandleTrigger(Collider2D collision, bool isEntering) {
         puzzleManager.IsInteractingToPortal = false;
         if (collision.gameObject.CompareTag("Player")) {
-            if(gungeonGameManager.Stage==4) TeleportPlayerToTarget_Final(player, finalSpawnPoint);
+            if (gungeonGameManager.Stage == 4) TeleportPlayerToTarget_Final(player, finalSpawnPoint);
             Debug.Log($"Player is Colliding to Portal {isEntering}");
             //puzzleManager.IsInteractingToPortal = isEntering;
             if (GungeonGameManager.Instance != null && puzzle.Cleared && Input.GetKey(KeyCode.G) && !isInputDisabled) {
