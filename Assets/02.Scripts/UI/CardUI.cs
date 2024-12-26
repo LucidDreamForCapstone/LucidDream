@@ -10,8 +10,9 @@ public class CardUI : UIBase {
     #region serialized field
 
     public List<GameObject> _cardBGImages;   // 배경 이미지를 담은 리스트
-    public Image _cardImage;               // 카드 이미지를 담은 배열
-    public TMP_Text _cardDescription;        // 카드 설명을 담은 텍스트
+    public List<Sprite> _cardImages;    // 카드 이미지를 담은 리스트
+    public Image _cardImage;           // 실제 카드 이미지
+    public TMP_Text _cardDescription;        // 카드 설명
 
     #endregion // serialized field
 
@@ -31,6 +32,7 @@ public class CardUI : UIBase {
     public void SetShow(Card card) {
         this._card = card;
         SetBGImage();
+        SetCardImage();
         SetDesc();
 
         // Card init
@@ -61,6 +63,11 @@ public class CardUI : UIBase {
         }
     }
 
+    private void SetCardImage() {
+        CardProperty cardProperty = _card._cardProperty;
+        _cardImage.sprite = _cardImages[(int)cardProperty];
+    }
+
     private void SetDesc() {
         _cardDescription.text = _card._description;
     }
@@ -68,37 +75,25 @@ public class CardUI : UIBase {
     // 카드에 대한 Fade In 효과
     private void FadeInCard() {
         // 배경 이미지 Fade In
-        CanvasGroup bgCanvasGroup = _cardBGImages[(int)_card._cardRank].GetComponent<CanvasGroup>();
-        if (bgCanvasGroup != null) {
-            bgCanvasGroup.alpha = 0f;  // 시작 시 완전히 투명
-            bgCanvasGroup.DOFade(1f, 1.5f).SetUpdate(true);  // 1.5초에 걸쳐 Fade In
-        }
-
+        Image bgImage = _cardBGImages[(int)_card._cardRank].GetComponent<Image>();
+        bgImage.color = new Color(1, 1, 1, 0);  // 시작 시 완전히 투명
+        bgImage.DOFade(1f, 1.5f).SetUpdate(true);  // 1.5초에 걸쳐 Fade In
 
         // 카드 이미지 Fade In
-
         _cardImage.color = new Color(1, 1, 1, 0);  // 시작 시 완전히 투명
         _cardImage.DOFade(1f, 1.5f).SetUpdate(true);  // 1.5초에 걸쳐 Fade In
 
-
         // 카드 설명 텍스트 Fade In
-        _cardDescription.alpha = 0;
-        // 시작 시 완전히 투명
+        _cardDescription.alpha = 0; // 시작 시 완전히 투명
         _cardDescription.DOFade(1f, 1.5f).SetUpdate(true);  // 1.5초에 걸쳐 Fade In
     }
 
     // 카드에 대한 Fade Out 효과
     private void FadeOutCard() {
-        // 배경 이미지 Fade Out
-        CanvasGroup bgCanvasGroup = _cardBGImages[(int)_card._cardRank].GetComponent<CanvasGroup>();
-        if (bgCanvasGroup != null) {
-            bgCanvasGroup.DOFade(0f, 0.7f).SetUpdate(true);  // 1.5초에 걸쳐 Fade Out
-        }
+        Image bgImage = _cardBGImages[(int)_card._cardRank].GetComponent<Image>();
+        bgImage.DOFade(0f, 0.7f).SetUpdate(true);  // 0.7초에 걸쳐 Fade Out
 
-
-
-        _cardImage.DOFade(0f, 0.7f).SetUpdate(true);  // 1.5초에 걸쳐 Fade Out
-
+        _cardImage.DOFade(0f, 0.7f).SetUpdate(true);  // 0.7초에 걸쳐 Fade Out
 
         // 카드 설명 텍스트 Fade Out
         _cardDescription.DOFade(0f, 0.7f).SetUpdate(true);  // 1.5초에 걸쳐 Fade Out
