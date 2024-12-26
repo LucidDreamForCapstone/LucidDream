@@ -1,29 +1,35 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class TurretPuzzleManager : PuzzleBase {
+public class TurretPuzzleManager : PuzzleBase
+{
     [SerializeField] List<LabTurret> _turretList;
     private int _leftTurretCount;
 
 
-    private void Start() {
+    private void Start()
+    {
         _leftTurretCount = _turretList.Count;
     }
 
-    private void Update() {
+    private void Update()
+    {
         cleared = IsGameClear();
         DoorController.DoorOpenOnGameClear(cleared);
         //_doorControl.IsInteractingToPortal = isInteractingToPortal;
-        if (DoorController.IsInteractingToPortal)
+        if (isInteractingToPortal)
             DoorController.IsInteractedOnce = true;
     }
 
-    public void DecreaseTurretCount() {
+    public void DecreaseTurretCount()
+    {
         _leftTurretCount--;
     }
 
-    public bool IsGameClear() {
-        if (_leftTurretCount == 0) {
+    public bool IsGameClear()
+    {
+        if (_leftTurretCount == 0)
+        {
             return true;
         }
         return false;
