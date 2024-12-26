@@ -19,21 +19,21 @@ public class CutSceneDreaming : MonoBehaviour {
     [SerializeField]
     private GameObject fogObject; // FogOfWarGrid2D가 연결된 오브젝트
 
-    [SerializeField]
-    //private Volume postProcessingVolume; // 포스트 프로세싱 볼륨
-
+    [SerializeField] Volume colorVolume;
     private FogOfWarGrid2D fogComponent; // FogOfWarGrid2D 컴포넌트
     private bool hasExecutedTimeline = false; // 타임라인 실행 여부 플래그
     private ColorAdjustments colorAdjustments; // ColorAdjustments 컴포넌트
 
     private void Start() {
-        Volume volume = OptionManager.Instance.GetBrightnessVolume();
         if (fogObject != null) {
             fogComponent = fogObject.GetComponent<FogOfWarGrid2D>();
         }
         // ColorAdjustments 가져오기
-        if (volume!= null && volume.profile.TryGet<ColorAdjustments>(out var colorAdjustmentsComponent)) {
+        if (colorVolume != null && colorVolume.profile.TryGet<ColorAdjustments>(out var colorAdjustmentsComponent)) {
             colorAdjustments = colorAdjustmentsComponent;
+        }
+        else {
+            Debug.LogError("No color volume component or wrong volume component");
         }
     }
 
@@ -62,7 +62,7 @@ public class CutSceneDreaming : MonoBehaviour {
             Debug.LogError("Timeline Manager is not assigned!");
         }
 
-        
+
         // Hue Shift와 Saturation 값 변경
         if (colorAdjustments != null) {
             colorAdjustments.hueShift.value = 179f; // Hue Shift 설정
@@ -72,7 +72,7 @@ public class CutSceneDreaming : MonoBehaviour {
         else {
             Debug.LogError("ColorAdjustments component is not available!");
         }
-        
+
     }
 
     /// <summary>

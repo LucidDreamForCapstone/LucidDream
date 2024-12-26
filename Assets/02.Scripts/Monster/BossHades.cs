@@ -239,6 +239,7 @@ public class BossHades : MonsterBase {
         _animator.SetTrigger("Die");
         _hpSlider.gameObject.SetActive(false);
         PlaySoundDelay(_deathSound, 1.2f).Forget();
+        DeleteAllGolems();
         await CameraManager.Instance.CameraFocus(_cameraTarget, 9, 5.5f);
         _hadesCollider.enabled = false;
         _headSr.sortingLayerName = "Default";
@@ -858,26 +859,18 @@ public class BossHades : MonsterBase {
     private async UniTaskVoid SummonGolems(CancellationToken cancellationToken) {
         List<GameObject> aliveGolems = new List<GameObject>();
         if (_isGolemReady) {
-            try {
-                _isGolemReady = false;
+            _isGolemReady = false;
 
-                List<int> posList = PickRandomPosIndex();
+            List<int> posList = PickRandomPosIndex();
 
-                for (int i = 0; i < posList.Count; i++) {
-                    aliveGolems.Add(SummonGolem(posList[i]));
-                    PlaySound(_clipList[5]);
-                }
-
-                await UniTask.Delay(TimeSpan.FromSeconds(_golemPatternCooltime), cancellationToken: cancellationToken);
-                _isGolemReady = true;
+            for (int i = 0; i < posList.Count; i++) {
+                aliveGolems.Add(SummonGolem(posList[i]));
+                PlaySound(_clipList[5]);
             }
-            catch (OperationCanceledException) {
-                int length = aliveGolems.Count;
-                for (int i = 0; i < length; i++) {
-                    if (aliveGolems[i] != null)
-                        Destroy(aliveGolems[i]);
-                }
-            }
+
+            await UniTask.Delay(TimeSpan.FromSeconds(_golemPatternCooltime), cancellationToken: cancellationToken)
+                .SuppressCancellationThrow();
+            _isGolemReady = true;
         }
     }
 
@@ -909,6 +902,18 @@ public class BossHades : MonsterBase {
                 cnt++;
         }
         return cnt;
+    }
+    private void DeleteAllGolems() {
+        var golems = Physics2D.OverlapCircleAll(transform.position, 30, LayerMask.GetMask("Enemy"));
+        int length = golems.Length;
+        if (length > 0) {
+            for (int i = 0; i < length; i++) {
+                var golemScript = golems[i].GetComponent<MonsterStoneGolem>();
+                if (golemScript) {
+                    golemScript.ForceDie();
+                }
+            }
+        }
     }
 
     #endregion //Golem Pattern

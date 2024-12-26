@@ -17,7 +17,7 @@ public class PlayerSwapManager : MonoBehaviour {
     private MonoBehaviour currentPlayer; // ���� ���� ���� ĳ����
     private int currentPlayerNum;
     private GlitchController glitchController; // GlitchController �ν��Ͻ�
-    private VignetteController vignetteController; //�۸�ġ�� ȭ�� ȿ�� �ο�
+    private ColorController colorController; //�۸�ġ�� ȭ�� ȿ�� �ο�
     private bool isGlitching = false; // �۸�ġ ȿ�� ���� �� ����
     private bool fogTag = true;
     [SerializeField] private GameObject _cameraObj;
@@ -44,7 +44,7 @@ public class PlayerSwapManager : MonoBehaviour {
         _miniMapObj.SetActive(true);
         Player2ActiveDelay(2).Forget();
         glitchController = FindObjectOfType<GlitchController>(); // GlitchController ã��
-        vignetteController = FindObjectOfType<VignetteController>();
+        colorController = FindObjectOfType<ColorController>();
         if (Display.displays.Length > 1) Display.displays[1].Activate(); // Display 2 Ȱ��ȭ
         _portalLayer = LayerMask.GetMask("Portal");
     }
@@ -98,7 +98,7 @@ public class PlayerSwapManager : MonoBehaviour {
 
             await UniTask.WhenAll(
                 glitchController.TriggerGlitchEffect(glitchTime), // �۸�ġ ȿ��
-                vignetteController.TriggerColorGlitchEffect(glitchTime, flashCount) // 3�ʰ� 3ȸ �ݺ� ȭ�� ��� ��ȭ
+                colorController.TriggerColorGlitchEffect(glitchTime, flashCount) // 3�ʰ� 3ȸ �ݺ� ȭ�� ��� ��ȭ
             );
         }
 

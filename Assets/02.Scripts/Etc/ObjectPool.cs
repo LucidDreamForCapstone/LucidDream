@@ -128,7 +128,7 @@ public class ObjectPool : MonoBehaviour {
     #region private funcs
 
     private GameObject AddPool(GameObject addObject) {
-        Debug.Log("*******DO NOT USE OBJECT POOL WITH UNAUTOHRIZED OBJECT********");
+        Debug.Log($"*******DO NOT USE OBJECT POOL WITH UNAUTOHRIZED OBJECT [{addObject.name}]********");
         Queue<GameObject> newQueue = new Queue<GameObject>();
         _pooledObjects.Add(addObject.name, newQueue);
         for (int i = 0; i < 10; i++) {

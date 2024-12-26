@@ -69,13 +69,14 @@ MonoBehaviour:
   _isStun: 0
   _isSpawnComplete: 0
   _playerScript: {fileID: 0}
+  _player2: {fileID: 0}
   _rigid: {fileID: 0}
   _spriteRenderer: {fileID: 6488319569655740254}
   _animator: {fileID: 4973221796549229737}
   _useTree: 1
   _isBoss: 0
   _hitSound: []
-  _deathSound: {fileID: 0}
+  _deathSound: {fileID: 8300000, guid: 36d7a1165971c5c4fb266a6b67ab40be, type: 3}
   _searchDist: 10
   _attackDist: 6
   _def: 50

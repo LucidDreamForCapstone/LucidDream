@@ -176,14 +176,14 @@ public class InGameUIController : MonoBehaviour {
             if (skillLocks[i]) {
                 skillTooltip.SetSkillLocked(skillLocks[i]);
                 skillImages[i].sprite = lockedSkillImage;
+                skillCooldownUnderlay[i].sprite = lockedSkillImage;
             }
             else {
                 skillCooldownUnderlay[i].sprite = newUnderlay[i];
-                // �� ��ų �����ܰ� ������ ������Ʈ
                 skillTooltip.SetSkillLocked(skillLocks[i]);
                 skillImages[i].sprite = newSkillIcons[i];
                 standSkillInform[i].sprite = newSkillInform[i];
-                skillTexts[i].text = newSkillDescriptions[i]; // �ؽ�Ʈ ������Ʈ
+                skillTexts[i].text = newSkillDescriptions[i];
                 skillTooltip = skillImages[i].GetComponent<SkillTooltip>();
                 skillTooltip.SetSkillDescription(newSkillDescriptions[i]);
             }

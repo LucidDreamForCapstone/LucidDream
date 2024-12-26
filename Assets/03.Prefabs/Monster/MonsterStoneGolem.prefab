@@ -143,6 +143,7 @@ MonoBehaviour:
   _isStun: 0
   _isSpawnComplete: 0
   _playerScript: {fileID: 0}
+  _player2: {fileID: 0}
   _rigid: {fileID: 0}
   _spriteRenderer: {fileID: 7977076169718144192}
   _animator: {fileID: 199672638078589408}
@@ -152,7 +153,7 @@ MonoBehaviour:
   _deathSound: {fileID: 8300000, guid: 40707bcf0eed07340b8d39a1d43d3703, type: 3}
   _searchDist: 0
   _attackDist: 0
-  _def: 30
+  _def: 200
   _damage: 0
   _bodyDamage: 50
   _moveSpeed: 0
@@ -165,7 +166,7 @@ MonoBehaviour:
   _feverAmount: 25
   _shieldCoolTime: 8
   _shieldLastTime: 7
-  _defPlus: 400
+  _defPlus: 1500
 --- !u!212 &7977076169718144192
 SpriteRenderer:
   m_ObjectHideFlags: 0

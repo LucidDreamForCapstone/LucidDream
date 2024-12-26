@@ -26,6 +26,16 @@ public enum CardRank {
     Legendary,
     Mystic,
 }
+public enum CardProperty {
+    Ad,
+    Ap,
+    Def,
+    Speed,
+    Hp,
+    CritChance,
+    CritDamage,
+    Mystic
+}
 
 public enum WeaponRank {
     Normal,

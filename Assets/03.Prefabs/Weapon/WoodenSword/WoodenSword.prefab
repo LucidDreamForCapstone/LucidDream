@@ -240,10 +240,10 @@ MonoBehaviour:
   _delay2: 0
   _feverDelay: 0
   skillIcons:
-  - {fileID: 21300190, guid: 512a3a5212bdfc048b89d9ef214b8cee, type: 3}
-  - {fileID: 21300192, guid: 512a3a5212bdfc048b89d9ef214b8cee, type: 3}
-  - {fileID: 21300020, guid: 512a3a5212bdfc048b89d9ef214b8cee, type: 3}
-  - {fileID: 21300024, guid: 512a3a5212bdfc048b89d9ef214b8cee, type: 3}
+  - {fileID: 21300000, guid: 0ab1d19080bc25a48ac7a1fb9054a10a, type: 3}
+  - {fileID: 21300000, guid: 0ab1d19080bc25a48ac7a1fb9054a10a, type: 3}
+  - {fileID: 21300000, guid: 0ab1d19080bc25a48ac7a1fb9054a10a, type: 3}
+  - {fileID: 21300000, guid: 0ab1d19080bc25a48ac7a1fb9054a10a, type: 3}
   skillInvens:
   - {fileID: -56226019, guid: 06b0585c59cc5bc4e8b708483cf6fc96, type: 3}
   - {fileID: -56226019, guid: 06b0585c59cc5bc4e8b708483cf6fc96, type: 3}
@@ -260,10 +260,10 @@ MonoBehaviour:
   - {fileID: -1116854389, guid: 06b0585c59cc5bc4e8b708483cf6fc96, type: 3}
   - {fileID: -1116854389, guid: 06b0585c59cc5bc4e8b708483cf6fc96, type: 3}
   skillunderlay:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  - {fileID: 21300000, guid: 0ab1d19080bc25a48ac7a1fb9054a10a, type: 3}
+  - {fileID: 21300000, guid: 0ab1d19080bc25a48ac7a1fb9054a10a, type: 3}
+  - {fileID: 21300000, guid: 0ab1d19080bc25a48ac7a1fb9054a10a, type: 3}
+  - {fileID: 21300000, guid: 0ab1d19080bc25a48ac7a1fb9054a10a, type: 3}
   _basicSkillEffect: {fileID: 2394857725840910095, guid: 3b0ff1d1ef0345c4f9acb3cfbb6746cc, type: 3}
   _skillEffect1: {fileID: 0}
   _skillEffect2: {fileID: 0}
@@ -272,6 +272,9 @@ MonoBehaviour:
   _feverRange: 0
   _isBuffTypeFeverSkill: 0
   _normalAttackSound: {fileID: 8300000, guid: 444f3cfff916cd240913c885fa7bdc3d, type: 3}
+  shakeDuration: 0.3
+  shakeAmplitude: 3
+  shakeFrequency: 25
   _basicRange: 2
   _basicAngle: 120
 --- !u!212 &6826478546705928515

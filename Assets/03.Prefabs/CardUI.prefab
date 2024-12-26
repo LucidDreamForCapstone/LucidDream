@@ -17,7 +17,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1511191255940077174
 RectTransform:
   m_ObjectHideFlags: 0
@@ -34,8 +34,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -4.152008, y: 333.5466}
-  m_SizeDelta: {x: -120.8943, y: -796.7039}
+  m_AnchoredPosition: {x: -4.1520233, y: -0.00024414062}
+  m_SizeDelta: {x: 0.0005, y: -6.1118044e-10}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &4889197602422226227
 CanvasRenderer:
@@ -58,14 +58,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.4481132, g: 1, b: 0.8061428, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 0}
+  m_Sprite: {fileID: 21300000, guid: 4e8431f775f896447a0823653ca4d919, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -403,6 +403,15 @@ MonoBehaviour:
   - {fileID: 5152200998871067065}
   - {fileID: 2766286086002668031}
   - {fileID: 2884123310055634089}
+  _cardImages:
+  - {fileID: 21300000, guid: 4e8431f775f896447a0823653ca4d919, type: 3}
+  - {fileID: 21300000, guid: 1ea815ca99a3ad740bce2ac5c53e03bc, type: 3}
+  - {fileID: 21300000, guid: a67b8f12a3be49641aa3335315ef1225, type: 3}
+  - {fileID: 21300000, guid: f92b24a116065e94d9856a093c8b2907, type: 3}
+  - {fileID: 21300000, guid: a51165c10a988ec4dae06772b88d5ad6, type: 3}
+  - {fileID: 21300000, guid: 8a185b8ccb1f3574dbdc012b9474dfe6, type: 3}
+  - {fileID: 21300000, guid: 6a33480e9ea12004684aa9cc7115ca19, type: 3}
+  - {fileID: 21300000, guid: 4e8431f775f896447a0823653ca4d919, type: 3}
   _cardImage: {fileID: 7717029243136938374}
   _cardDescription: {fileID: 3001849697740262132}
 --- !u!114 &3196153048909262868

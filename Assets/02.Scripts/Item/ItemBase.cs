@@ -49,6 +49,10 @@ public abstract class ItemBase : MonoBehaviour, Interactable {
            .SetEase(Ease.OutCubic);
     }
 
+    public bool IsGround() {
+        return _isGround;
+    }
+
     /// <summary>
     /// You MUST Override this function when you want this item as EQUIPMENT.
     /// </summary>

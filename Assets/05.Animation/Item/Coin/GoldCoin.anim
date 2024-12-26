@@ -6,7 +6,7 @@ AnimationClip:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: CoinAni
+  m_Name: GoldCoin
   serializedVersion: 7
   m_Legacy: 0
   m_Compressed: 0
@@ -30,7 +30,7 @@ AnimationClip:
       value: {fileID: 1851396442, guid: 3a62fb590a896f84bbc30036fec4d616, type: 3}
     - time: 0.6
       value: {fileID: -620579632, guid: 3a62fb590a896f84bbc30036fec4d616, type: 3}
-    - time: 0.76666665
+    - time: 0.75
       value: {fileID: -930675398, guid: 3a62fb590a896f84bbc30036fec4d616, type: 3}
     attribute: m_Sprite
     path: 
@@ -65,7 +65,7 @@ AnimationClip:
     m_AdditiveReferencePoseClip: {fileID: 0}
     m_AdditiveReferencePoseTime: 0
     m_StartTime: 0
-    m_StopTime: 0.7833333
+    m_StopTime: 0.76666665
     m_OrientationOffsetY: 0
     m_Level: 0
     m_CycleOffset: 0

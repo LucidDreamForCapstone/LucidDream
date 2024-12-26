@@ -54,6 +54,7 @@ public class WoodenStaff : WeaponBase {
     protected override void BasicAttackAnimation() {
         _playerScript.AttackNow(_basicDelay).Forget();
         _playerScript.ArmTrigger("Staff");
+        PlaySoundDelay(_normalAttackSound, 0.2f).Forget();
     }
 
     protected override void Skill1Animation() {

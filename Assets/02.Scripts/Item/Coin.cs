@@ -8,7 +8,6 @@ public class Coin : ItemBase {
     #endregion //serialize field
 
     #region mono funcs
-
     private void OnTriggerEnter2D(Collider2D collision) {
         if (collision.GetComponent<Player>() && _isGround) {
             PlayerDataManager.Instance.SetCoin(PlayerDataManager.Instance.Status._coin + coinAmount);

@@ -5,6 +5,7 @@ using UnityEngine.Rendering.Universal;
 public class PlayerTeleporter : MonoBehaviour {
     [SerializeField] private GameObject player;
     [SerializeField] private GameObject target;
+    [SerializeField] private Volume colorVolume;
     private ColorAdjustments colorAdjustments; // ColorAdjustments 컴포넌트
     /// <summary>
     /// 플레이어를 특정 오브젝트 위치로 순간 이동시킵니다.
@@ -13,15 +14,13 @@ public class PlayerTeleporter : MonoBehaviour {
     /// <param name="targetObject">목표 위치를 가진 오브젝트</param>
     /// 
     private void Start() {
-        Volume volume = OptionManager.Instance.GetBrightnessVolume();
-        // ColorAdjustments 컴포넌트 가져오기
-        if (volume!= null && volume.profile.TryGet(out ColorAdjustments adjustments)) {
+        if (colorVolume != null && colorVolume.profile.TryGet(out ColorAdjustments adjustments)) {
             colorAdjustments = adjustments;
         }
         else {
             Debug.LogError("ColorAdjustments component not found in the Volume profile!");
         }
-        
+
     }
     public void TeleportPlayerToTarget(GameObject player, GameObject targetObject) {
         if (player == null) {
@@ -45,7 +44,7 @@ public class PlayerTeleporter : MonoBehaviour {
         playerTransform.rotation = targetTransform.rotation;
 
         Debug.Log($"Player {player.name} teleported to {targetObject.name} at position {targetTransform.position}");
-        
+
         // ColorAdjustments 변경
         if (colorAdjustments != null) {
             colorAdjustments.hueShift.value = 0f; // Hue Shift 0으로 설정
@@ -55,7 +54,7 @@ public class PlayerTeleporter : MonoBehaviour {
         else {
             Debug.LogError("ColorAdjustments component is not available!");
         }
-        
+
     }
 
     /// <summary>
