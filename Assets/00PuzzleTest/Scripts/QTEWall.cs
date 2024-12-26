@@ -5,15 +5,17 @@ using UnityEngine.Tilemaps;
 public class QTEWall : MonoBehaviour
 {
     [SerializeField]
-    ButtonPressQTEPuzzle buttonpressQTE;
+    public ButtonPressQTEPuzzle buttonpressQTE;
     [SerializeField]
-    PritoQTEPuzzle pritoQTEPuzzle;
+    public PritoQTEPuzzle pritoQTEPuzzle;
     [SerializeField]
-    PuzzleBase targetPuzzle;
+    public PuzzleBase targetPuzzle;
     [SerializeField]
     bool visible = false;
     [SerializeField]
     TilemapRenderer tilemapRenderer;
+    [SerializeField]
+    public int puzzleType;
 
 
     [SerializeField]
@@ -34,23 +36,23 @@ public class QTEWall : MonoBehaviour
         pritoQTEPuzzle = GameObject.Find("PritoQTEPuzzle").GetComponent<PritoQTEPuzzle>();
         SpriteRenderer pritoRenderer = pritoQTEPuzzle.gameObject.GetComponent<SpriteRenderer>();
         SpriteRenderer buttonpressRenderer = buttonpressQTE.gameObject.GetComponent<SpriteRenderer>();
-        MakeTransParent(pritoRenderer, 1.0f);
-        MakeTransParent(buttonpressRenderer, 1.0f);
-        int type = Random.Range(0, 2);
-        Debug.Log("type is : " + type);
-        switch (type)
+        MakeTransParent(pritoRenderer, 0.1f);
+        MakeTransParent(buttonpressRenderer, 0.1f);
+        puzzleType = Random.Range(0, 2);
+        Debug.Log("type is : " + puzzleType);
+        switch (puzzleType)
         {
             case 0:
                 targetPuzzle = buttonpressQTE;
-                buttonpressQTE.Interactable = true;
-                MakeTransParent(pritoRenderer, 0.3f);
-                pritoQTEPuzzle.Interactable = false;
+                //buttonpressQTE.Interactable = true;
+                //MakeTransParent(pritoRenderer, 0.3f);
+                //pritoQTEPuzzle.Interactable = false;
                 break;
             case 1:
                 targetPuzzle = pritoQTEPuzzle;
-                pritoQTEPuzzle.Interactable = true;
-                MakeTransParent(buttonpressRenderer, 0.3f);
-                buttonpressQTE.Interactable = false;
+                //pritoQTEPuzzle.Interactable = true;
+                //MakeTransParent(buttonpressRenderer, 0.3f);
+                //buttonpressQTE.Interactable = false;
                 break;
         }
         tilemapMaterial = tilemapRenderer.material;
