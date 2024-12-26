@@ -41,7 +41,7 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
-    - _ColorDrift: 0
+    - _ColorDrift: 1
     - _EnableExternalAlpha: 0
     - _GlitchStrength: 0.5
     - _Intensity: 0.006197512
