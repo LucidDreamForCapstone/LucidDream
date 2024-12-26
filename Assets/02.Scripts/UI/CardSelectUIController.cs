@@ -5,6 +5,7 @@ public class CardSelectUIController : UIBase {
     #region serialized field
 
     [SerializeField] private List<CardUI> _cards;
+    [SerializeField] private AudioClip _cardUISound;
     [SerializeField] GameObject _pauseUI;
 
     #endregion // serialized field
@@ -41,10 +42,10 @@ public class CardSelectUIController : UIBase {
             if (null != _cards[i]) {
                 _cards[i].Initialize(_cardCallback);
                 _cards[i].SetShow(cards[i]);
-
             }
         }
         base.SetShow();
+        SoundManager.Instance.PlaySFX(_cardUISound.name, true);
     }
 
     #endregion // public funcs

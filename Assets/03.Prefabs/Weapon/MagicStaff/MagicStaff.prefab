@@ -100,7 +100,7 @@ MonoBehaviour:
   _feverSkillEffect1: {fileID: 0}
   _feverRange: 0
   _isBuffTypeFeverSkill: 1
-  _normalAttackSound: {fileID: 0}
+  _normalAttackSound: {fileID: 8300000, guid: 46b5c764763d9fb4597dec19bbf6637e, type: 3}
   shakeDuration: 0.3
   shakeAmplitude: 3
   shakeFrequency: 25

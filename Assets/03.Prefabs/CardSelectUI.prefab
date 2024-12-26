@@ -159,6 +159,7 @@ MonoBehaviour:
   - {fileID: 3552608906045145562}
   - {fileID: 5418292571330974798}
   - {fileID: 2938842793322012778}
+  _cardUISound: {fileID: 8300000, guid: 1d7ef908b83a8ad41a06bcb17748aefd, type: 3}
   _pauseUI: {fileID: 0}
 --- !u!1001 &4310347807774887692
 PrefabInstance:
