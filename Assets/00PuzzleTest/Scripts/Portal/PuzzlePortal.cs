@@ -45,15 +45,17 @@ public class PuzzlePortal : MonoBehaviour, Interactable {
             if (gungeonGameManager.Stage == 4) TeleportPlayerToTarget_Final(player, finalSpawnPoint);
             Debug.Log($"Player is Colliding to Portal {isEntering}");
             //puzzleManager.IsInteractingToPortal = isEntering;
-            if (GungeonGameManager.Instance != null && puzzle.Cleared && Input.GetKey(KeyCode.G) && !isInputDisabled) {
-                isInputDisabled = true;
-                puzzleManager.CurrentPuzzle.DoorController.IsInteractedOnce = true;
-                Debug.Log("GPressed!");
-                GungeonGameManager.Instance.SetIsGenerating(isEntering);
-                Debug.Log($"isGenerating set to {isEntering}");
-                if (!preventPuzzleStageUpdate) {
-                    puzzleManager.ChangePuzzle();
-                    preventPuzzleStageUpdate = true;
+            if (GungeonGameManager.Instance != null && puzzle.Cleared && !isInputDisabled) {
+                if (Input.GetKey(KeyCode.G)) {
+                    isInputDisabled = true;
+                    puzzleManager.CurrentPuzzle.DoorController.IsInteractedOnce = true;
+                    Debug.Log("GPressed!");
+                    GungeonGameManager.Instance.SetIsGenerating(isEntering);
+                    Debug.Log($"isGenerating set to {isEntering}");
+                    if (!preventPuzzleStageUpdate) {
+                        puzzleManager.ChangePuzzle();
+                        preventPuzzleStageUpdate = true;
+                    }
                 }
             }
             else {

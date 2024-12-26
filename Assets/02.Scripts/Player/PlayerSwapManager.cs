@@ -68,7 +68,7 @@ public class PlayerSwapManager : MonoBehaviour {
             Debug.LogError("Player reference is not assigned.");
             return false; // �÷��̾ �Ҵ���� ���� ���
         }
-        if (!IsFinalBossStage()) {
+        if (!IsBossStage() && CurrentPlayerIsOne()) {
             LayerMask enemyLayer = LayerMask.GetMask("Enemy"); // Enemy ���̾� ����ũ ��������
             Collider2D[] colliders = Physics2D.OverlapCircleAll(player1.transform.position, 20f, enemyLayer); // ������ 20, enemyLayer�� ����
             foreach (var collider in colliders) {
@@ -80,8 +80,9 @@ public class PlayerSwapManager : MonoBehaviour {
         return true; // ���� ����
     }
 
-    private bool IsFinalBossStage() {
-        return _dungeonManager.Stage == 5;
+    private bool IsBossStage() {
+        Debug.Log("Stage : " + _dungeonManager.Stage);
+        return _dungeonManager.Stage == 4;
     }
 
 
