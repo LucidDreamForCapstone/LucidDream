@@ -12,7 +12,8 @@ public class InGameUIController : MonoBehaviour {
         HPSlider,
         Coin,
         Dream,
-        PlayerStatus
+        PlayerStatus,
+        HPSlider2
     }
 
     #endregion // type def
@@ -25,6 +26,7 @@ public class InGameUIController : MonoBehaviour {
 
     [SerializeField] private List<TMP_Text> _texts;
     [SerializeField] private Slider _hpSlider;
+    [SerializeField] private Slider _hpSlider2;
     [SerializeField] private Slider _feverSlider;
 
     [SerializeField] private CardSelectUIController _cardUIController;
@@ -117,7 +119,9 @@ public class InGameUIController : MonoBehaviour {
 
     public void SetHP(int currHP, int maxHP) {
         _texts[(int)TextType.HPSlider].text = string.Format("{0}/{1}", currHP, maxHP);
+        _texts[(int)TextType.HPSlider2].text = string.Format("{0}/{1}", currHP, maxHP);
         _hpSlider.value = (float)currHP / (float)maxHP;
+        _hpSlider2.value = (float)currHP / (float)maxHP;
     }
 
     public void SetCoin(int coin) {

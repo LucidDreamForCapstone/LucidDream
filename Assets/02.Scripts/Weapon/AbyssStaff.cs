@@ -64,8 +64,8 @@ public class AbyssStaff : WeaponBase {
 
     protected override void Skill1Animation() {
         _playerScript.AttackNow(_delay1).Forget();
-        PlaySound(wSound);
-        Skill1();
+        _playerScript.ArmTrigger("StaffSkill");
+        PlaySoundDelay(wSound, 0.25f).Forget();
     }
 
     protected override void Skill2Animation() {
@@ -74,6 +74,7 @@ public class AbyssStaff : WeaponBase {
 
     protected override void FeverSkillAnimation() {
         _playerScript.AttackNow(_feverDelay).Forget();
+        _playerScript.ArmTrigger("Buff");
         PlaySound(fever_Sound, false);
         FeverSkill();
     }
