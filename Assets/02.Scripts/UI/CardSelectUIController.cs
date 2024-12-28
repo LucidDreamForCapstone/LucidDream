@@ -15,7 +15,6 @@ public class CardSelectUIController : UIBase {
     #region private variables
 
     private System.Action<Card> _cardCallback;
-    private CardUI _card;
 
     #endregion // private variables
 
@@ -38,6 +37,7 @@ public class CardSelectUIController : UIBase {
     }
 
     public void SetShow(List<Card> cards) {
+        CardUI.BeforePointedCardIndex = -1;
         for (int i = 0, count = cards.Count; i < count; ++i) {
             if (null != _cards[i]) {
                 _cards[i].Initialize(_cardCallback);
@@ -59,11 +59,24 @@ public class CardSelectUIController : UIBase {
     private void SelectCardWithKey() {
         if (!_pauseUI.activeSelf) {
             if (Input.GetKeyDown(KeyCode.Alpha1))
-                _cards[0].OnClick_Card();
+                CardInputCheck(0);
             else if (Input.GetKeyDown(KeyCode.Alpha2))
-                _cards[1].OnClick_Card();
+                CardInputCheck(1);
             else if (Input.GetKeyDown(KeyCode.Alpha3))
-                _cards[2].OnClick_Card();
+                CardInputCheck(2);
+        }
+    }
+
+    private void CardInputCheck(int cardIndex) {
+        int beforeIndex = CardUI.BeforePointedCardIndex;
+        if (beforeIndex == cardIndex) {
+            _cards[cardIndex].OnClick_Card();
+        }
+        else {
+            _cards[cardIndex].OnPointerEnter();
+            if (beforeIndex >= 0)
+                _cards[beforeIndex].OnPointerExit();
+            CardUI.BeforePointedCardIndex = cardIndex;
         }
     }
 

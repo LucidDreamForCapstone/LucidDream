@@ -397,6 +397,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _texts: []
+  _cardIndex: 0
   _cardBGImages:
   - {fileID: 7281095250153244205}
   - {fileID: 7973624997892897365}
