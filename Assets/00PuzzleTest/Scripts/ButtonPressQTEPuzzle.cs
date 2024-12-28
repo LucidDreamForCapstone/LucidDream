@@ -13,6 +13,8 @@ public class ButtonPressQTEPuzzle : PuzzleBase, Interactable {
     [SerializeField] float _plusAmount;
     [SerializeField] float _eventDelay;
     [SerializeField] AudioClip _successSound;
+    [SerializeField] AudioClip _insertSound;
+    [SerializeField] AudioClip _successProgressSound;
     [SerializeField] bool _interactable;
     PressKey randomKey;
     //[SerializeField] float _activeTime=_MaxTime;
@@ -110,6 +112,7 @@ public class ButtonPressQTEPuzzle : PuzzleBase, Interactable {
 
             while (_currentGauge < 100 && _isPlayerConnected) {
                 if (Input.GetKeyDown(selectedKey)) {
+                    SoundManager.Instance.PlaySFX(_insertSound.name, false);
                     _currentGauge += _plusAmount;
                     _keyBoards[(int)randomKey].Pressed();
                 }

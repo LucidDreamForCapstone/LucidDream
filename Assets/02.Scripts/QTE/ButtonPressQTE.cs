@@ -13,6 +13,7 @@ public class ButtonPressQTE : MonoBehaviour {
     [SerializeField] float _plusAmount;
     [SerializeField] float _eventDelay;
     [SerializeField] AudioClip _successSound;
+    [SerializeField] AudioClip _insertSound;
 
     //BoxCollider2D _triggerCollider;
     private bool _isPlayerConnected; //check if player2 collider is on the event trigger collider
@@ -94,6 +95,7 @@ public class ButtonPressQTE : MonoBehaviour {
 
             while (_currentGauge < 100 && _isPlayerConnected) {
                 if (Input.GetKeyDown(selectedKey)) {
+                    SoundManager.Instance.PlaySFX(_insertSound.name, false);
                     _currentGauge += _plusAmount;
                     _keyBoards[(int)randomKey].Pressed();
                 }

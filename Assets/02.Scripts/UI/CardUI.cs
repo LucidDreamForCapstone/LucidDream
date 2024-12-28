@@ -10,10 +10,10 @@ public class CardUI : UIBase {
     #region serialized field
 
     public int _cardIndex;
-    public List<GameObject> _cardBGImages;   // ¹è°æ ÀÌ¹ÌÁö¸¦ ´ãÀº ¸®½ºÆ®
-    public List<Sprite> _cardImages;    // Ä«µå ÀÌ¹ÌÁö¸¦ ´ãÀº ¸®½ºÆ®
-    public Image _cardImage;           // ½ÇÁ¦ Ä«µå ÀÌ¹ÌÁö
-    public TMP_Text _cardDescription;        // Ä«µå ¼³¸í
+    public List<GameObject> _cardBGImages;   // ï¿½ï¿½ï¿½ ï¿½Ì¹ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Æ®
+    public List<Sprite> _cardImages;    // Ä«ï¿½ï¿½ ï¿½Ì¹ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Æ®
+    public Image _cardImage;           // ï¿½ï¿½ï¿½ï¿½ Ä«ï¿½ï¿½ ï¿½Ì¹ï¿½ï¿½ï¿½
+    public TMP_Text _cardDescription;        // Ä«ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 
     #endregion // serialized field
 
@@ -29,7 +29,8 @@ public class CardUI : UIBase {
 
 
     #region private variables
-
+    [SerializeField] AudioClip _touchSound;
+    [SerializeField] AudioClip _clickedSound;
     private Card _card;
     private System.Action<Card> _callback;
 
@@ -56,6 +57,7 @@ public class CardUI : UIBase {
     }
 
     public void OnClick_Card() {
+        SoundManager.Instance.PlaySFX(_clickedSound.name, true);
         Debug.Log("Card clicked!");
         if (_callback != null) {
             _callback(_card);
@@ -84,31 +86,31 @@ public class CardUI : UIBase {
         _cardDescription.text = _card._description;
     }
 
-    // Ä«µå¿¡ ´ëÇÑ Fade In È¿°ú
+    // Ä«ï¿½å¿¡ ï¿½ï¿½ï¿½ï¿½ Fade In È¿ï¿½ï¿½
     private void FadeInCard() {
-        // ¹è°æ ÀÌ¹ÌÁö Fade In
+        // ï¿½ï¿½ï¿½ ï¿½Ì¹ï¿½ï¿½ï¿½ Fade In
         Image bgImage = _cardBGImages[(int)_card._cardRank].GetComponent<Image>();
-        bgImage.color = new Color(1, 1, 1, 0);  // ½ÃÀÛ ½Ã ¿ÏÀüÈ÷ Åõ¸í
-        bgImage.DOFade(1f, 1.5f).SetUpdate(true);  // 1.5ÃÊ¿¡ °ÉÃÄ Fade In
+        bgImage.color = new Color(1, 1, 1, 0);  // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
+        bgImage.DOFade(1f, 1.5f).SetUpdate(true);  // 1.5ï¿½Ê¿ï¿½ ï¿½ï¿½ï¿½ï¿½ Fade In
 
-        // Ä«µå ÀÌ¹ÌÁö Fade In
-        _cardImage.color = new Color(1, 1, 1, 0);  // ½ÃÀÛ ½Ã ¿ÏÀüÈ÷ Åõ¸í
-        _cardImage.DOFade(1f, 1.5f).SetUpdate(true);  // 1.5ÃÊ¿¡ °ÉÃÄ Fade In
+        // Ä«ï¿½ï¿½ ï¿½Ì¹ï¿½ï¿½ï¿½ Fade In
+        _cardImage.color = new Color(1, 1, 1, 0);  // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
+        _cardImage.DOFade(1f, 1.5f).SetUpdate(true);  // 1.5ï¿½Ê¿ï¿½ ï¿½ï¿½ï¿½ï¿½ Fade In
 
-        // Ä«µå ¼³¸í ÅØ½ºÆ® Fade In
-        _cardDescription.alpha = 0; // ½ÃÀÛ ½Ã ¿ÏÀüÈ÷ Åõ¸í
-        _cardDescription.DOFade(1f, 1.5f).SetUpdate(true);  // 1.5ÃÊ¿¡ °ÉÃÄ Fade In
+        // Ä«ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ø½ï¿½Æ® Fade In
+        _cardDescription.alpha = 0; // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
+        _cardDescription.DOFade(1f, 1.5f).SetUpdate(true);  // 1.5ï¿½Ê¿ï¿½ ï¿½ï¿½ï¿½ï¿½ Fade In
     }
 
-    // Ä«µå¿¡ ´ëÇÑ Fade Out È¿°ú
+    // Ä«ï¿½å¿¡ ï¿½ï¿½ï¿½ï¿½ Fade Out È¿ï¿½ï¿½
     private void FadeOutCard() {
         Image bgImage = _cardBGImages[(int)_card._cardRank].GetComponent<Image>();
-        bgImage.DOFade(0f, 0.7f).SetUpdate(true);  // 0.7ÃÊ¿¡ °ÉÃÄ Fade Out
+        bgImage.DOFade(0f, 0.7f).SetUpdate(true);  // 0.7ï¿½Ê¿ï¿½ ï¿½ï¿½ï¿½ï¿½ Fade Out
 
-        _cardImage.DOFade(0f, 0.7f).SetUpdate(true);  // 0.7ÃÊ¿¡ °ÉÃÄ Fade Out
+        _cardImage.DOFade(0f, 0.7f).SetUpdate(true);  // 0.7ï¿½Ê¿ï¿½ ï¿½ï¿½ï¿½ï¿½ Fade Out
 
-        // Ä«µå ¼³¸í ÅØ½ºÆ® Fade Out
-        _cardDescription.DOFade(0f, 0.7f).SetUpdate(true);  // 1.5ÃÊ¿¡ °ÉÃÄ Fade Out
+        // Ä«ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ø½ï¿½Æ® Fade Out
+        _cardDescription.DOFade(0f, 0.7f).SetUpdate(true);  // 1.5ï¿½Ê¿ï¿½ ï¿½ï¿½ï¿½ï¿½ Fade Out
     }
 
     private void AddEventTriggers() {
@@ -127,13 +129,14 @@ public class CardUI : UIBase {
         trigger.triggers.Add(entryExit);
     }
 
-    // ¸¶¿ì½º°¡ Ä«µå À§·Î ¿Ã¶ó¿ÔÀ» ¶§
+    // ï¿½ï¿½ï¿½ì½ºï¿½ï¿½ Ä«ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ã¶ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½
     public void OnPointerEnter() {
         BeforePointedCardIndex = _cardIndex;
+        SoundManager.Instance.PlaySFX(_touchSound.name,true);
         ScaleUpCard();
     }
 
-    // ¸¶¿ì½º°¡ Ä«µå¿¡¼­ ¹þ¾î³µÀ» ¶§
+    // ï¿½ï¿½ï¿½ì½ºï¿½ï¿½ Ä«ï¿½å¿¡ï¿½ï¿½ ï¿½ï¿½ï¿½î³µï¿½ï¿½ ï¿½ï¿½
     public void OnPointerExit() {
         ScaleDownCard();
     }

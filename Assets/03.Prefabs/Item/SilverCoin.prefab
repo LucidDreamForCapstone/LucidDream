@@ -48,6 +48,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   coinAmount: 5
+  _coinClip: {fileID: 8300000, guid: c70dc3fd2702f8745934e3b09eeda420, type: 3}
 --- !u!212 &5232033463475314858
 SpriteRenderer:
   m_ObjectHideFlags: 0

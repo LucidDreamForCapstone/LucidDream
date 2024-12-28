@@ -20,7 +20,7 @@ public class PlayerWeaponManager : MonoBehaviour {
     [SerializeField] private InGameUIController _inGameUIController;
     [SerializeField] string _warningMessage;
     [SerializeField] Color _cooldownWarningTextColor;
-
+    [SerializeField] AudioClip _swapSound;
     #endregion //serialized field 
 
 
@@ -71,6 +71,7 @@ public class PlayerWeaponManager : MonoBehaviour {
             return;
         }
         DropEquippedWeapon();
+        SoundManager.Instance.PlaySFX(_swapSound.name, false);
         //새 무기 장착.
         _inGameUIController.SetFever(PlayerDataManager.Instance.Status._feverGauge, PlayerDataManager.Instance.Status._maxFeverGauge);
         _equippedWeapon = changedWeapon;

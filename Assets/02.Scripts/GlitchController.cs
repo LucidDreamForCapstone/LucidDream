@@ -5,8 +5,10 @@ using UnityEngine.Rendering;
 public class GlitchController : MonoBehaviour {
     public Volume volume;
     private bool isActive = false;
+    [SerializeField] AudioClip _glitchSound;
 
     public async UniTask TriggerGlitchEffect(float duration = 3f) {
+        SoundManager.Instance.PlaySFX(_glitchSound.name, false);
         isActive = true;
         volume.weight = 1f; // 최대 강도로 설정
         float startWeight = volume.weight; // 시작 강도

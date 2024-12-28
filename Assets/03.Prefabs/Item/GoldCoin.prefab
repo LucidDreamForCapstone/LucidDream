@@ -48,7 +48,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 343599b13931d6f4781d44f810c69417, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  coinAmount: 20
+  coinAmount: 10
+  _coinClip: {fileID: 8300000, guid: c70dc3fd2702f8745934e3b09eeda420, type: 3}
 --- !u!212 &1017386281855949933
 SpriteRenderer:
   m_ObjectHideFlags: 0

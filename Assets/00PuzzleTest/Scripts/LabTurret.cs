@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class LabTurret : Turret {
     [SerializeField] TurretPuzzleManager _puzzleManager;
-
     protected override void Groggy() {
         base.Groggy();
         Die().Forget();
@@ -13,6 +12,7 @@ public class LabTurret : Turret {
     protected async override UniTaskVoid Die() {
         _isDead = true;
         _hp = 0;
+        SoundManager.Instance.PlaySFX(_deathSound.name, false);
         gameObject.layer = LayerMask.NameToLayer("DeadEnemy");
         _animator.SetTrigger("Die");
         _puzzleManager.DecreaseTurretCount();
