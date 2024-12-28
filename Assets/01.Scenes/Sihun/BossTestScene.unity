@@ -34303,9 +34303,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _systemMessageTM: {fileID: 0}
   _warningSound: {fileID: 8300000, guid: 746072977aca3dc4cb910ce255183f1f, type: 3}
-  _dialogBox: {fileID: 1750171375}
-  _dialogNameTM: {fileID: 1851047640}
-  _dialogMessageTM: {fileID: 174575829}
+  _dialogBoxList: []
+  _dialogNameTMList: []
+  _dialogMessageTMList: []
   _dialogStartSound: {fileID: 8300000, guid: 9328b9217cce52b4abb979acdd325165, type: 3}
   _dialogEndSound: {fileID: 8300000, guid: 60405be52dc3c1e4d8e60e2391e3810d, type: 3}
 --- !u!114 &1854174337
@@ -64943,75 +64943,6 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
---- !u!1001 &4282640195111711393
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 10435899210898874, guid: 0bf55de086627fe439bdc41ab834f09b, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: -24.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 10435899210898874, guid: 0bf55de086627fe439bdc41ab834f09b, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 11.43
-      objectReference: {fileID: 0}
-    - target: {fileID: 10435899210898874, guid: 0bf55de086627fe439bdc41ab834f09b, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: -0.08350018
-      objectReference: {fileID: 0}
-    - target: {fileID: 10435899210898874, guid: 0bf55de086627fe439bdc41ab834f09b, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 10435899210898874, guid: 0bf55de086627fe439bdc41ab834f09b, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 10435899210898874, guid: 0bf55de086627fe439bdc41ab834f09b, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 10435899210898874, guid: 0bf55de086627fe439bdc41ab834f09b, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 10435899210898874, guid: 0bf55de086627fe439bdc41ab834f09b, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 10435899210898874, guid: 0bf55de086627fe439bdc41ab834f09b, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 10435899210898874, guid: 0bf55de086627fe439bdc41ab834f09b, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1994459442765358620, guid: 0bf55de086627fe439bdc41ab834f09b, type: 3}
-      propertyPath: m_Name
-      value: Turret
-      objectReference: {fileID: 0}
-    - target: {fileID: 1994459442765358620, guid: 0bf55de086627fe439bdc41ab834f09b, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4387709287338716752, guid: 0bf55de086627fe439bdc41ab834f09b, type: 3}
-      propertyPath: m_AnchorMax.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4387709287338716752, guid: 0bf55de086627fe439bdc41ab834f09b, type: 3}
-      propertyPath: m_AnchorMax.y
-      value: 0
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 0bf55de086627fe439bdc41ab834f09b, type: 3}
 --- !u!1 &4290330352752082088
 GameObject:
   m_ObjectHideFlags: 0
@@ -66620,6 +66551,5 @@ SceneRoots:
   - {fileID: 8493513023370123068}
   - {fileID: 4518547243253587043}
   - {fileID: 419212307}
-  - {fileID: 4282640195111711393}
   - {fileID: 2037806373}
   - {fileID: 1526666539}

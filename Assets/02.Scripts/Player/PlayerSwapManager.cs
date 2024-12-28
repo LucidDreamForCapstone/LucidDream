@@ -81,7 +81,6 @@ public class PlayerSwapManager : MonoBehaviour {
     }
 
     private bool IsBossStage() {
-        Debug.Log("Stage : " + _dungeonManager.Stage);
         return _dungeonManager.Stage == 4;
     }
 
@@ -105,7 +104,10 @@ public class PlayerSwapManager : MonoBehaviour {
 
         if (currentPlayerNum == 1) {
             player1.SetEnable(false);
+            if (!IsBossStage())
+                player1.ColliderOff();
             player2.SetEnable(true);
+            player2.ColliderOn();
             currentPlayer = player2;
             player1UICanvas.targetDisplay = 1;
             player2UICanvas.targetDisplay = 0;
@@ -115,7 +117,9 @@ public class PlayerSwapManager : MonoBehaviour {
         }
         else if (currentPlayerNum == 2) {
             player2.SetEnable(false);
+            player2.ColliderOff();
             player1.SetEnable(true);
+            player1.ColliderOn();
             currentPlayer = player1;
             currentPlayerNum = 1;
             player1UICanvas.targetDisplay = 0;
