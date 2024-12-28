@@ -184,6 +184,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _message: "'G'\uB97C \uB20C\uB7EC \uB2E4\uC74C \uC2A4\uD14C\uC774\uC9C0\uB85C \uC774\uB3D9"
+  _message2: "F\uB97C \uB20C\uB7EC \uC5F0\uAD6C\uC6D0 \uC2DC\uC810\uC5D0\uC11C \uD37C\uC990\uC744
+    \uD074\uB9AC\uC5B4\uD558\uC5EC \uD3EC\uD0C8\uC744 \uD65C\uC131\uD654\uD558\uC138\uC694."
   _messageColor: {r: 1, g: 0, b: 0, a: 1}
   puzzle: {fileID: 0}
   puzzleManager: {fileID: 0}
@@ -199,3 +201,8 @@ MonoBehaviour:
     m_Interactions: 
     m_SingletonActionBindings: []
     m_Flags: 0
+  _messages: []
+  _messages2:
+  - "\uD3EC\uD0C8\uC774 \uBA40\uCA61\uD574\uC9C4 \uAC83 \uAC19\uC544!"
+  _normalMat: {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
+  _glitchMat: {fileID: 2100000, guid: a32f8943ab6f48548bc6d0ed6c1f77d8, type: 2}
