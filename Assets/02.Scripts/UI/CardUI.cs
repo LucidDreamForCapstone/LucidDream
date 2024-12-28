@@ -9,12 +9,24 @@ public class CardUI : UIBase {
 
     #region serialized field
 
+    public int _cardIndex;
     public List<GameObject> _cardBGImages;   // 배경 이미지를 담은 리스트
     public List<Sprite> _cardImages;    // 카드 이미지를 담은 리스트
     public Image _cardImage;           // 실제 카드 이미지
     public TMP_Text _cardDescription;        // 카드 설명
 
     #endregion // serialized field
+
+
+
+
+    #region property
+
+    public static int BeforePointedCardIndex { get; set; }
+
+    #endregion
+
+
 
     #region private variables
 
@@ -117,6 +129,7 @@ public class CardUI : UIBase {
 
     // 마우스가 카드 위로 올라왔을 때
     public void OnPointerEnter() {
+        BeforePointedCardIndex = _cardIndex;
         ScaleUpCard();
     }
 

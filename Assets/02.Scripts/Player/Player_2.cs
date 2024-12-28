@@ -26,6 +26,7 @@ public class Player_2 : MonoBehaviour {
     private Vector2 _moveDir; // 이동 방향
     private bool _playerEnabled;
     private float _hp;
+    private Collider2D _collider;
     #endregion // private variable
 
     #region property
@@ -37,9 +38,11 @@ public class Player_2 : MonoBehaviour {
         _isDead = false;
         _isInvincible = false;
         _playerEnabled = false;
+        _collider = GetComponent<Collider2D>();
         MoveDir = Vector2.down;
         _hp = _maxHp;
         UpdateHpSlider();
+
     }
 
     private void FixedUpdate() {
@@ -85,6 +88,13 @@ public class Player_2 : MonoBehaviour {
             await UniTask.NextFrame();
         }
         _hp = _maxHp;
+    }
+    public void ColliderOn() {
+        _collider.enabled = true;
+    }
+
+    public void ColliderOff() {
+        _collider.enabled = false;
     }
     #endregion // public funcs
 
@@ -136,7 +146,7 @@ public class Player_2 : MonoBehaviour {
         HealMax().Forget();
         List<string> messages = new List<string>();
         messages.Add("이번만 봐드립니다.");
-        SystemMessageManager.Instance.ShowDialogBox("개발자Y", messages).Forget();
+        SystemMessageManager.Instance.ShowDialogBox("개발자", messages).Forget();
     }
 
     private void UpdateHpSlider() {

@@ -43,7 +43,7 @@ public class HomingBullet : ExplosiveBullet {
                 float t = elapsedTime * _homingStrength * 0.001f;
 
                 // Slerp로 방향 전환
-                transform.right = Vector3.Slerp(transform.right, lookAt, t);
+                transform.right = (Vector2)Vector3.Slerp(transform.right, lookAt, t);
                 _rigid.velocity = transform.right * _fireSpeed;
             }
             await UniTask.NextFrame();

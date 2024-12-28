@@ -13,13 +13,14 @@ public class SystemMessageManager : MonoBehaviour {
     [SerializeField] TextMeshProUGUI _systemMessageTM;
     [SerializeField] AudioClip _warningSound;
 
-    [SerializeField] RectTransform _dialogBox;
-    [SerializeField] TextMeshProUGUI _dialogNameTM;
-    [SerializeField] TextMeshProUGUI _dialogMessageTM;
+    [SerializeField] List<RectTransform> _dialogBoxList;
+    [SerializeField] List<TextMeshProUGUI> _dialogNameTMList;
+    [SerializeField] List<TextMeshProUGUI> _dialogMessageTMList;
     [SerializeField] AudioClip _dialogStartSound;
     [SerializeField] AudioClip _dialogEndSound;
 
     bool _isReady;
+    bool[] _isDialogBoxReady = { true, true };
 
     private void Awake() {
         _instance = this;
@@ -27,6 +28,7 @@ public class SystemMessageManager : MonoBehaviour {
         _messageList = new List<SystemMessageData>();
         _isPrinting = false;
         _isReady = true;
+        _dialogBoxList.ForEach(box => box.gameObject.SetActive(false));
     }
 
     private void Update() {
@@ -37,15 +39,18 @@ public class SystemMessageManager : MonoBehaviour {
 
 
     public async UniTaskVoid ShowDialogBox(string name, List<string> messages, float lastTime = 3.0f) {
-        _dialogNameTM.text = name;
-        _dialogBox.DOMoveX(_dialogBox.rect.x + 860, 2).SetUpdate(true).ToUniTask().Forget();
+        int index = GetDialogBox();
+        _dialogNameTMList[index].text = name;
+        _dialogBoxList[index].DOMoveX(_dialogBoxList[index].rect.x + 860, 2).SetUpdate(true).ToUniTask().Forget();
         for (int i = 0; i < messages.Count; i++) {
             SoundManager.Instance.PlaySFX(_dialogStartSound.name, true);
-            await DynamicDialogText(messages[i]);
+            await DynamicDialogText(index, messages[i]);
             await UniTask.Delay(TimeSpan.FromSeconds(lastTime), ignoreTimeScale: true);
         }
-        SoundManager.Instance.PlaySFX(_dialogEndSound.name, true);
-        await _dialogBox.DOMoveX(_dialogBox.rect.x - 860, 2).SetUpdate(true);
+        if (_isDialogBoxReady[0] || _isDialogBoxReady[1])
+            SoundManager.Instance.PlaySFX(_dialogEndSound.name, true);
+        await _dialogBoxList[index].DOMoveX(_dialogBoxList[index].rect.x - 860, 2).SetUpdate(true);
+        _isDialogBoxReady[index] = true;
     }
 
 
@@ -76,12 +81,27 @@ public class SystemMessageManager : MonoBehaviour {
         }
     }
 
-    private async UniTask DynamicDialogText(string message, float delay = 0.05f) {
+    private async UniTask DynamicDialogText(int index, string message, float delay = 0.05f) {
         string[] words = message.Split(' ');
-        _dialogMessageTM.text = "";
+        _dialogMessageTMList[index].text = "";
         for (int i = 0; i < words.Length; i++) {
-            _dialogMessageTM.text += words[i] + " ";
+            _dialogMessageTMList[index].text += words[i] + " ";
             await UniTask.Delay(TimeSpan.FromSeconds(delay), ignoreTimeScale: true);
+        }
+    }
+
+    private int GetDialogBox() {
+        if (_isDialogBoxReady[0] || !_isDialogBoxReady[0] && !_isDialogBoxReady[1]) {
+            _isDialogBoxReady[0] = false;
+            _dialogBoxList[0].gameObject.SetActive(true);
+            _dialogBoxList[1].gameObject.SetActive(false);
+            return 0;
+        }
+        else {
+            _isDialogBoxReady[1] = false;
+            _dialogBoxList[0].gameObject.SetActive(false);
+            _dialogBoxList[1].gameObject.SetActive(true);
+            return 1;
         }
     }
 

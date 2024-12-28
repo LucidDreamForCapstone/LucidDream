@@ -60,7 +60,6 @@ public class Player : MonoBehaviour {
     [SerializeField] protected AudioClip dyingSound1;
     [SerializeField] protected AudioClip dyingSound2;
     [SerializeField] private DeathUIController deathUIController; // DeathUIController ����
-    [SerializeField] private float _vignetteSensitivity;
     #endregion // serialized field 
 
 
@@ -95,6 +94,7 @@ public class Player : MonoBehaviour {
     private bool _autoFlipEnabled;
     private bool _isMessagePrinting;
     private Image _phantomSliderFill;
+    private Collider2D _collider;
     #endregion // private variable
 
 
@@ -118,6 +118,7 @@ public class Player : MonoBehaviour {
         _armAnimator.updateMode = AnimatorUpdateMode.UnscaledTime;
         TimeScaleManager.Instance.AddAnimator(_animator);
         TimeScaleManager.Instance.AddAnimator(_armAnimator);
+        _collider = GetComponent<Collider2D>();
         MoveDir = Vector2.down;
         _isDead = false;
         _isInvincible = false;
@@ -160,14 +161,6 @@ public class Player : MonoBehaviour {
         SlowState();
         if (_isDead && Input.GetKeyDown(KeyCode.X)) {
             ReturnToDungeon();
-        }
-
-        List<string> sentenceList = new List<string>();
-        sentenceList.Add("마실수록 더 큰 혜택, 더벤티 멤버십");
-        sentenceList.Add("전국 더벤티 매장에서");
-        sentenceList.Add("스탬프 적립, 쿠폰 사용 가능");
-        if (Input.GetKeyDown(KeyCode.Y)) {
-            _textBubbleRealTime.PrintSentenceSequence(sentenceList, afterDelay: 1);
         }
     }
 
@@ -438,6 +431,13 @@ public class Player : MonoBehaviour {
         _spriteRenderer.flipX = state;
     }
 
+    public void ColliderOn() {
+        _collider.enabled = true;
+    }
+
+    public void ColliderOff() {
+        _collider.enabled = false;
+    }
     #endregion //public funcs
 
 

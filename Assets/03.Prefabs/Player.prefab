@@ -202,7 +202,7 @@ MonoBehaviour:
   _phantomSlider: {fileID: 0}
   _phantomGaugeColor:
     serializedVersion: 2
-    rgba: 4294901889
+    rgba: 4283870697
   _phantomGaugeReboundColor:
     serializedVersion: 2
     rgba: 4278452335
@@ -255,7 +255,6 @@ MonoBehaviour:
   dyingSound1: {fileID: 8300000, guid: f35c938e146770d48a5fceb119902a08, type: 3}
   dyingSound2: {fileID: 8300000, guid: 1c7e18df881e1814a8469249c2d06db9, type: 3}
   deathUIController: {fileID: 0}
-  _vignetteSensitivity: 0
 --- !u!114 &1519231970995128663
 MonoBehaviour:
   m_ObjectHideFlags: 0

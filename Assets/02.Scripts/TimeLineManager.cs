@@ -1,10 +1,9 @@
-using UnityEngine;
-using UnityEngine.Playables;
 using Cysharp.Threading.Tasks;
 using System.Collections.Generic;
+using UnityEngine;
+using UnityEngine.Playables;
 
-public class TimeLineManager : MonoBehaviour
-{
+public class TimeLineManager : MonoBehaviour {
     [Header("Timeline Settings")]
     [SerializeField] private PlayableDirector timeline; // 타임라인 관리
     [SerializeField] private List<float> timelineDurations; // 타임라인 진행 시간 리스트
@@ -55,7 +54,7 @@ public class TimeLineManager : MonoBehaviour
 
         // 타임라인 멈춤
         timeline.Pause();
-        _player.PlayerUnPause();    
+        _player.PlayerUnPause();
         lastSavedTime = targetTime; // 현재 구간 종료 시간 저장
         isTimelineRunning = false;
         timeline.gameObject.SetActive(false);
