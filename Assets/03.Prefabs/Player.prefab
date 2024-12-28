@@ -172,7 +172,7 @@ SpriteRenderer:
   m_SortingOrder: 5
   m_Sprite: {fileID: -1041981242, guid: 6adb8bc07f2d9194e81ed68de7587f6d, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_FlipX: 0
+  m_FlipX: 1
   m_FlipY: 0
   m_DrawMode: 0
   m_Size: {x: 1.0625, y: 1.875}
@@ -606,6 +606,7 @@ MonoBehaviour:
   _warningMessage: "\uC2A4\uD0AC \uCFE8\uD0C0\uC784 \uC911\uC5D0\uB294 \uC7A5\uBE44\uB97C
     \uAD50\uCCB4\uD560 \uC218 \uC5C6\uC2B5\uB2C8\uB2E4."
   _cooldownWarningTextColor: {r: 0.50980395, g: 0.7294118, b: 1, a: 1}
+  _swapSound: {fileID: 8300000, guid: 99d68515875b6b84cbf203f777bf6283, type: 3}
 --- !u!212 &562714066122027051
 SpriteRenderer:
   m_ObjectHideFlags: 0
