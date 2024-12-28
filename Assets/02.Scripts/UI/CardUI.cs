@@ -17,7 +17,8 @@ public class CardUI : UIBase {
     #endregion // serialized field
 
     #region private variables
-
+    [SerializeField] AudioClip _touchSound;
+    [SerializeField] AudioClip _clickedSound;
     private Card _card;
     private System.Action<Card> _callback;
 
@@ -44,6 +45,7 @@ public class CardUI : UIBase {
     }
 
     public void OnClick_Card() {
+        SoundManager.Instance.PlaySFX(_clickedSound.name, true);
         Debug.Log("Card clicked!");
         if (_callback != null) {
             _callback(_card);
@@ -117,6 +119,7 @@ public class CardUI : UIBase {
 
     // 마우스가 카드 위로 올라왔을 때
     public void OnPointerEnter() {
+        SoundManager.Instance.PlaySFX(_touchSound.name,true);
         ScaleUpCard();
     }
 

@@ -47,6 +47,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   dreamAmount: 5
+  _dreamSound: {fileID: 8300000, guid: 2d32133646afcc04586c8eb060955607, type: 3}
 --- !u!212 &8240682744793898360
 SpriteRenderer:
   m_ObjectHideFlags: 0

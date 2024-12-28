@@ -542,7 +542,7 @@ MonoBehaviour:
   _useTree: 1
   _isBoss: 0
   _hitSound: []
-  _deathSound: {fileID: 0}
+  _deathSound: {fileID: 8300000, guid: dfc18c9502509014abdc037430b4b9b0, type: 3}
   _searchDist: 0
   _attackDist: 0
   _def: 10000
@@ -566,7 +566,7 @@ MonoBehaviour:
   _homingStrength: 8
   _missileGroggyGaugeDecreaseAmount: 35
   _groggyGaugeDecreaseAmount: 50
-  attackSound: {fileID: 0}
+  attackSound: {fileID: 8300000, guid: f4f3f053255c88240a9608e2a1325455, type: 3}
   _groggySlider: {fileID: 6816719437518483610}
   _puzzleManager: {fileID: 0}
 --- !u!212 &1728627184325400071

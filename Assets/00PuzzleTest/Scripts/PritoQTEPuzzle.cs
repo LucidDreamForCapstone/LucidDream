@@ -17,6 +17,8 @@ public class PritoQTEPuzzle : PuzzleBase, Interactable {
     [SerializeField] AudioClip _successSound;
     [SerializeField] AudioClip _failSound;
     [SerializeField] bool _interactable;
+    [SerializeField] AudioClip _insertSound;
+    [SerializeField] AudioClip _successProgressSound;
 
     public bool Interactable { get { return _interactable; } set { _interactable = value; } }
     //BoxCollider2D _triggerCollider;
@@ -26,7 +28,7 @@ public class PritoQTEPuzzle : PuzzleBase, Interactable {
     private bool _isReady;
     private float _currentGauge;
     private Image _sliderFill;
-
+    private bool _isMissionComplete = false; // 성공 여부를 나타내는 플래그
     private void Start() {
         _currentGauge = 0;
         UpdateSlider();
@@ -79,6 +81,7 @@ public class PritoQTEPuzzle : PuzzleBase, Interactable {
 
             if (i == patternCount) { //Mission Complete
                 Cleared = true;
+                _isMissionComplete = true; // Mission 완료 상태 설정
                 SoundManager.Instance.PlaySFX(_successSound.name, true);
                 _sliderFill.color = Color.green;
                 List<string> messages = new List<string>();
@@ -97,6 +100,7 @@ public class PritoQTEPuzzle : PuzzleBase, Interactable {
             else {
                 DecreaseGauge().Forget();
                 _isReady = true;
+                _isMissionComplete = false; // Mission 실패 시 플래그 초기화
             }
 
             DestroyAllKeyObjects();
@@ -122,6 +126,7 @@ public class PritoQTEPuzzle : PuzzleBase, Interactable {
                     keyBoards[progressPointer].Pressed();
                     keyBoardImages[progressPointer].DOFade(0.4f, 0.5f).ToUniTask().Forget();
                     progressPointer++;
+                    SoundManager.Instance.PlaySFX(_insertSound.name, false);
                 }
                 else if (!Input.GetKeyDown(targetKeycode)) { //Pressed Wrong Button
                     progressPointer = 0;
@@ -186,6 +191,10 @@ public class PritoQTEPuzzle : PuzzleBase, Interactable {
             _currentGauge += _plusAmount * Time.deltaTime;
             UpdateSlider();
             await UniTask.NextFrame();
+        }
+        // Mission이 완료되지 않은 상태에서만 successProgressSound 재생
+        if (!_isMissionComplete) {
+            SoundManager.Instance.PlaySFX(_successProgressSound.name, false);
         }
         _currentGauge = targetGauge;
     }

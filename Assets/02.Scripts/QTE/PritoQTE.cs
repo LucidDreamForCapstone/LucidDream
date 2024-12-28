@@ -17,14 +17,15 @@ public class PritoQTE : MonoBehaviour { //Maplestory Prito Mini Game
     [SerializeField] float _eventDelay;
     [SerializeField] AudioClip _successSound;
     [SerializeField] AudioClip _failSound;
-
+    [SerializeField] AudioClip _successProgressSound;
+    [SerializeField] AudioClip _insertSound;
     //BoxCollider2D _triggerCollider;
     private bool _isPlayerConnected; //check if player2 collider is on the event trigger collider
     private bool _isEventOnProcess;
     private bool _isReady;
     private float _currentGauge;
     private Image _sliderFill;
-
+    private bool _isMissionComplete = false; // 성공 여부를 나타내는 플래그
     private void Start() {
         _currentGauge = 0;
         UpdateSlider();
@@ -78,6 +79,7 @@ public class PritoQTE : MonoBehaviour { //Maplestory Prito Mini Game
             }
 
             if (i == patternCount) { //Mission Complete
+                _isMissionComplete = true;
                 SoundManager.Instance.PlaySFX(_successSound.name, true);
                 _sliderFill.color = Color.green;
                 _boss.ShowExplosionWarning(); //make warning effect visible
@@ -92,6 +94,7 @@ public class PritoQTE : MonoBehaviour { //Maplestory Prito Mini Game
                 _isReady = true;
             }
             else {
+                _isMissionComplete = false;
                 DecreaseGauge().Forget();
                 _isReady = true;
             }
@@ -119,6 +122,7 @@ public class PritoQTE : MonoBehaviour { //Maplestory Prito Mini Game
                     keyBoards[progressPointer].Pressed();
                     keyBoardImages[progressPointer].DOFade(0.4f, 0.5f).ToUniTask().Forget();
                     progressPointer++;
+                    SoundManager.Instance.PlaySFX(_insertSound.name, false);
                 }
                 else if (!Input.GetKeyDown(targetKeycode)) { //Pressed Wrong Button
                     progressPointer = 0;
@@ -183,6 +187,9 @@ public class PritoQTE : MonoBehaviour { //Maplestory Prito Mini Game
             _currentGauge += _plusAmount * Time.deltaTime;
             UpdateSlider();
             await UniTask.NextFrame();
+        }
+        if (!_isMissionComplete) {
+            SoundManager.Instance.PlaySFX(_successProgressSound.name, false);
         }
         _currentGauge = targetGauge;
     }
