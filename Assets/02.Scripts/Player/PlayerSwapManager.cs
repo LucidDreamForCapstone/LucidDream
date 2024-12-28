@@ -20,6 +20,7 @@ public class PlayerSwapManager : MonoBehaviour {
     private ColorController colorController; //�۸�ġ�� ȭ�� ȿ�� �ο�
     private bool isGlitching = false; // �۸�ġ ȿ�� ���� �� ����
     private bool fogTag = true;
+    private bool _isInPuzzleQTE = false;
     [SerializeField] private GameObject _cameraObj;
     [SerializeField] private Canvas player1UICanvas; // Player1 UI Canvas
     [SerializeField] private Canvas player2UICanvas; // Player2 UI Canvas
@@ -33,6 +34,10 @@ public class PlayerSwapManager : MonoBehaviour {
     private LayerMask _portalLayer;
 
     public bool SwapFlag { get => swapFlag; set => swapFlag = value; }
+
+    public void SetInPuzzleQTE(bool state) {
+        _isInPuzzleQTE = state;
+    }
 
     private void Awake() {
         _instance = this;
@@ -104,7 +109,7 @@ public class PlayerSwapManager : MonoBehaviour {
 
         if (currentPlayerNum == 1) {
             player1.SetEnable(false);
-            if (!IsBossStage())
+            if (!IsBossStage() && !_isInPuzzleQTE)
                 player1.ColliderOff();
             player2.SetEnable(true);
             player2.ColliderOn();
