@@ -1,7 +1,6 @@
 using UnityEngine;
 
-public class PuzzleEnableTrigger : MonoBehaviour
-{
+public class PuzzleEnableTrigger : MonoBehaviour {
     [SerializeField]
     QTEWall QteWall;
     [SerializeField]
@@ -9,25 +8,21 @@ public class PuzzleEnableTrigger : MonoBehaviour
     [SerializeField]
     SpriteRenderer buttonpressRenderer;
 
-    void Start()
-    {
+    void Start() {
         pritoRenderer = QteWall.pritoQTEPuzzle.gameObject.GetComponent<SpriteRenderer>();
         buttonpressRenderer = QteWall.buttonpressQTE.gameObject.GetComponent<SpriteRenderer>();
     }
 
-    void Update()
-    {
+    void Update() {
 
     }
 
 
 
-    private void OnTriggerStay2D(Collider2D collision)
-    {
-        if (collision.gameObject.tag == "Player")
-        {
-            switch (QteWall.puzzleType)
-            {
+    private void OnTriggerEnter2D(Collider2D collision) {
+        if (collision.gameObject.tag == "Player") {
+            PlayerSwapManager.Instance.SetInPuzzleQTE(true);
+            switch (QteWall.puzzleType) {
                 case 0:
                     QteWall.buttonpressQTE.Interactable = true;
                     QteWall.MakeTransParent(buttonpressRenderer, 1.0f);
@@ -42,10 +37,9 @@ public class PuzzleEnableTrigger : MonoBehaviour
         }
     }
 
-    private void OnTriggerExit2D(Collider2D collision)
-    {
-        if (collision.gameObject.tag == "Player")
-        {
+    private void OnTriggerExit2D(Collider2D collision) {
+        if (collision.gameObject.tag == "Player") {
+            PlayerSwapManager.Instance.SetInPuzzleQTE(false);
             QteWall.buttonpressQTE.Interactable = false;
             QteWall.pritoQTEPuzzle.Interactable = false;
             QteWall.MakeTransParent(pritoRenderer, 0.1f);
