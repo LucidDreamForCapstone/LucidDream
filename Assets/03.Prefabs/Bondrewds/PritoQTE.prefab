@@ -431,6 +431,8 @@ MonoBehaviour:
   _eventDelay: 15
   _successSound: {fileID: 8300000, guid: ac417b54a7417774f8668065985da5f7, type: 3}
   _failSound: {fileID: 8300000, guid: e4daa5f10af607b4d8b814270623acca, type: 3}
+  _successProgressSound: {fileID: 8300000, guid: d849862e06d882b43b64a9a409bbbbca, type: 3}
+  _insertSound: {fileID: 8300000, guid: ccaf3aa8a16b94844bfab4953757d595, type: 3}
 --- !u!61 &4759134496082086113
 BoxCollider2D:
   m_ObjectHideFlags: 0

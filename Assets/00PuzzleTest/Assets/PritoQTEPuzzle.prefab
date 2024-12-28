@@ -462,6 +462,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cleared: 0
+  isInteractingToPortal: 0
+  doorController: {fileID: 0}
   _keyboardCanvas: {fileID: 6533198035133596383}
   _progressSlider: {fileID: 3860233424303469460}
   _keyBoardObjList:
@@ -477,6 +479,8 @@ MonoBehaviour:
   _successSound: {fileID: 8300000, guid: ac417b54a7417774f8668065985da5f7, type: 3}
   _failSound: {fileID: 8300000, guid: e4daa5f10af607b4d8b814270623acca, type: 3}
   _interactable: 0
+  _insertSound: {fileID: 8300000, guid: ccaf3aa8a16b94844bfab4953757d595, type: 3}
+  _successProgressSound: {fileID: 8300000, guid: d849862e06d882b43b64a9a409bbbbca, type: 3}
 --- !u!1 &6397325846949231958
 GameObject:
   m_ObjectHideFlags: 0

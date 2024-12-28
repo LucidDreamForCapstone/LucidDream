@@ -456,6 +456,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cleared: 0
+  isInteractingToPortal: 0
+  doorController: {fileID: 0}
   _chargers:
   - {fileID: 0}
   - {fileID: 0}
@@ -468,9 +470,11 @@ MonoBehaviour:
   - {fileID: 6175882227632397367}
   - {fileID: 519540780090228962}
   _minusAmount: 10
-  _plusAmount: 3
-  _eventDelay: 5
+  _plusAmount: 20
+  _eventDelay: 10
   _successSound: {fileID: 8300000, guid: ac417b54a7417774f8668065985da5f7, type: 3}
+  _insertSound: {fileID: 8300000, guid: ccaf3aa8a16b94844bfab4953757d595, type: 3}
+  _successProgressSound: {fileID: 8300000, guid: d849862e06d882b43b64a9a409bbbbca, type: 3}
   _interactable: 0
 --- !u!1 &5118955998162047971
 GameObject:
