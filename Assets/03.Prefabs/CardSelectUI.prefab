@@ -378,6 +378,18 @@ PrefabInstance:
       propertyPath: m_Name
       value: CardUI
       objectReference: {fileID: 0}
+    - target: {fileID: 7281095250153244205, guid: 74e6beb9d26881840a8c31300db5797c, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7717029243136938374, guid: 74e6beb9d26881840a8c31300db5797c, type: 3}
+      propertyPath: m_PreserveAspect
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7973624997892897365, guid: 74e6beb9d26881840a8c31300db5797c, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
