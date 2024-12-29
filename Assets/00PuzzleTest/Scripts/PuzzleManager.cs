@@ -32,4 +32,12 @@ public class PuzzleManager : MonoBehaviour
             currentPuzzle = puzzleList[currentPuzzleIndex];
         }
     }
+    public void SetDoorInteractedOncesUnder(int stage, bool value)
+    {
+        for(int i=0;i<stage;i++)
+        {
+            puzzleList[i].DoorController.IsInteractedOnce= value;
+            Debug.Log($"puzzleList{i} ON ");
+        }
+    }
 }
