@@ -1,5 +1,4 @@
 using Cysharp.Threading.Tasks;
-using Edgar.Unity;
 using Edgar.Unity.Examples.Gungeon;
 using System;
 using System.Collections;
@@ -21,7 +20,6 @@ public class PuzzlePortal : MonoBehaviour, Interactable {
     [SerializeField] List<string> _messages2;
     [SerializeField] Material _normalMat;
     [SerializeField] Material _glitchMat;
-    [SerializeField] private GameObject _cameraObj;
     private GameObject finalSpawnPoint;
     private SpriteRenderer _sr;
     private bool stageChecked = false;
@@ -67,7 +65,7 @@ public class PuzzlePortal : MonoBehaviour, Interactable {
     }
 
     private void HandleTrigger(Collider2D collision, bool isEntering) {
-       // puzzleManager.IsInteractingToPortal = true;
+        // puzzleManager.IsInteractingToPortal = true;
         if (collision.gameObject.CompareTag("Player")) {
             puzzleManager.SetDoorInteractedOncesUnder(_activatedStage, true);
             if (gungeonGameManager.Stage == 4) {
@@ -76,7 +74,7 @@ public class PuzzlePortal : MonoBehaviour, Interactable {
             }
 
             Debug.Log($"Player is Colliding to Portal {isEntering}");
-            if (GungeonGameManager.Instance != null && puzzle.Cleared && !isInputDisabled ) {
+            if (GungeonGameManager.Instance != null && puzzle.Cleared && !isInputDisabled) {
                 if (Input.GetKey(KeyCode.G)) {
                     isInputDisabled = true;
                     Debug.Log("GPressed!");
@@ -103,8 +101,7 @@ public class PuzzlePortal : MonoBehaviour, Interactable {
     }
 
     private void OnTriggerStay2D(Collider2D collision) {
-        if (puzzleManager.CurrentPuzzleIndex == 0)
-        {
+        if (puzzleManager.CurrentPuzzleIndex == 0) {
             puzzleManager.CurrentPuzzle.DoorController.IsDoorOpen = true;
             puzzleManager.ChangePuzzle();
             Debug.Log(puzzleManager.CurrentPuzzle.transform.name);
