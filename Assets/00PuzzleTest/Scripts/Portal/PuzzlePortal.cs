@@ -28,7 +28,8 @@ public class PuzzlePortal : MonoBehaviour, Interactable {
     private bool preventPuzzleStageUpdate = false;
     private bool isInputDisabled = false;
     private bool _isPortalDialogReady = true;
-
+    [SerializeField]
+    private int _activatedStage = 0;
     void Start() {
         _sr = GetComponent<SpriteRenderer>();
         gungeonGameManager = GungeonGameManager.Instance;
@@ -38,6 +39,7 @@ public class PuzzlePortal : MonoBehaviour, Interactable {
         player = InteractManager.Instance.gameObject;
         _messages.Add("��....?\n���� ���������� ���� ��Ż��\n�� �� ���� ������ �����ִ� �� ����.");
         _messages.Add("���� �� �տ� �ִ� <size=45><color=red>������ �ذ��ϸ�</color></size>\n��Ż�� ������ �� ���� �� ������?");
+        _activatedStage = gungeonGameManager.Stage;
     }
 
 
@@ -65,19 +67,18 @@ public class PuzzlePortal : MonoBehaviour, Interactable {
     }
 
     private void HandleTrigger(Collider2D collision, bool isEntering) {
-        puzzleManager.IsInteractingToPortal = false;
+       // puzzleManager.IsInteractingToPortal = true;
         if (collision.gameObject.CompareTag("Player")) {
+            puzzleManager.SetDoorInteractedOncesUnder(_activatedStage, true);
             if (gungeonGameManager.Stage == 4) {
                 CameraManager.Instance.SetFogOfWar(false);
                 TeleportPlayerToTarget_Final(player, finalSpawnPoint);
             }
 
             Debug.Log($"Player is Colliding to Portal {isEntering}");
-            //puzzleManager.IsInteractingToPortal = isEntering;
-            if (GungeonGameManager.Instance != null && puzzle.Cleared && !isInputDisabled) {
+            if (GungeonGameManager.Instance != null && puzzle.Cleared && !isInputDisabled ) {
                 if (Input.GetKey(KeyCode.G)) {
                     isInputDisabled = true;
-                    puzzleManager.CurrentPuzzle.DoorController.IsInteractedOnce = true;
                     Debug.Log("GPressed!");
                     GungeonGameManager.Instance.SetIsGenerating(isEntering);
                     Debug.Log($"isGenerating set to {isEntering}");
@@ -95,7 +96,6 @@ public class PuzzlePortal : MonoBehaviour, Interactable {
                 }
                 Debug.LogError("GGM instance is null");
             }
-            //puzzleManager.IsInteractingToPortal = isEntering;
         }
     }
 
@@ -103,7 +103,8 @@ public class PuzzlePortal : MonoBehaviour, Interactable {
     }
 
     private void OnTriggerStay2D(Collider2D collision) {
-        if (puzzleManager.CurrentPuzzleIndex == 0) {
+        if (puzzleManager.CurrentPuzzleIndex == 0)
+        {
             puzzleManager.CurrentPuzzle.DoorController.IsDoorOpen = true;
             puzzleManager.ChangePuzzle();
             Debug.Log(puzzleManager.CurrentPuzzle.transform.name);
