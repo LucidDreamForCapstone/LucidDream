@@ -184,10 +184,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _type: 4
   _rank: 3
-  _chance: 20
+  _chance: 30
   _lastTime: -1
   _ratio: -1
-  _tickDamage: 40
+  _tickDamage: 200
   _tickTime: 2
   _tickCount: 6
   _isEquipped: 0

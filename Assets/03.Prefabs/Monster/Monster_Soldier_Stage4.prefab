@@ -90,11 +90,11 @@ MonoBehaviour:
   _deathSound: {fileID: 8300000, guid: 1207edc068aa6944a86960c78ccec253, type: 3}
   _searchDist: 0
   _attackDist: 0
-  _def: 50
+  _def: 150
   _damage: 160
   _bodyDamage: 15
   _moveSpeed: 6
-  _maxHp: 2700
+  _maxHp: 3000
   _dieDelay: 2
   _damagedColor:
     serializedVersion: 2

@@ -184,7 +184,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _type: 3
   _rank: 3
-  _chance: 12
+  _chance: 15
   _lastTime: 2.5
   _ratio: -1
   _tickDamage: 0

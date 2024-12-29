@@ -90,7 +90,7 @@ MonoBehaviour:
   _deathSound: {fileID: 8300000, guid: 1207edc068aa6944a86960c78ccec253, type: 3}
   _searchDist: 0
   _attackDist: 0
-  _def: 50
+  _def: 100
   _damage: 130
   _bodyDamage: 15
   _moveSpeed: 5
