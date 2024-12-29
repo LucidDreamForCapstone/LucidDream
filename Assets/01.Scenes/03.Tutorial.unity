@@ -23253,7 +23253,8 @@ MonoBehaviour:
   m_text: "\uB808\uBCA8\uC774 \uC624\uB97C \uB54C \uB9C8\uB2E4 \uD2B9\uC218\uD55C
     \uC120\uD0DD\uC9C0\uB4E4\uC774 \uC8FC\uC5B4\uC9D1\uB2C8\uB2E4.              \uD55C\uBC88\uC5D0
     \uB2E8 \uD558\uB098\uC758 \uC120\uD0DD\uC9C0\uB9CC\uC744 \uC120\uD0DD\uD560 \uC218
-    \uC788\uC2B5\uB2C8\uB2E4.\n"
+    \uC788\uC2B5\uB2C8\uB2E4.\n\uB9C8\uC6B0\uC2A4 \uB610\uB294 1 2 3\uBC84\uD2BC\uC73C\uB85C
+    \uC120\uD0DD \uAC00\uB2A5\uD569\uB2C8\uB2E4."
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: d887971345ee72a4aa0f03f8c501c103, type: 2}
   m_sharedMaterial: {fileID: 4985760020309454812, guid: d887971345ee72a4aa0f03f8c501c103, type: 2}
