@@ -28,13 +28,18 @@ namespace Edgar.Unity.Examples.Gungeon {
 
         public LevelGraph CurrentLevelGraph;
 
+        private bool _isStageIncreaseReady = true;
+
         /*[Header("Post-processing tasks for each stage")]
         public GungeonPostProcessingTask Stage1PostProcessing;
         public GungeonPostProcessingTask Stage3PostProcessing;
         public GungeonPostProcessingTask Stage4PostProcessing;*/
 
         public void Update() {
-            if (InputHelper.GetKeyDown(KeyCode.G) && isGenerating) {
+            if (InputHelper.GetKey(KeyCode.G) && isGenerating && _isStageIncreaseReady) {
+                UnityEngine.Debug.Log("Go to Next Stage");
+                _isStageIncreaseReady = false;
+                Invoke("StageIncreaseReady", 10);
                 Stage += 1;
                 LoadNextLevel();  // G는 같은 스테이지에서 다시 제네레이트
             }
@@ -57,6 +62,10 @@ namespace Edgar.Unity.Examples.Gungeon {
                 default: return Stage1PostProcessing; // 기본적으로 스테이지 1을 반환
             }
         }*/
+
+        private void StageIncreaseReady() {
+            _isStageIncreaseReady = true;
+        }
 
         public void SetIsGenerating(bool value) {
             isGenerating = value;

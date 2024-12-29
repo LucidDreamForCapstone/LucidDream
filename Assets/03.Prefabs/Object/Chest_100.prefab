@@ -396,22 +396,46 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   dropTable:
-  - _item: {fileID: 438956390268976642, guid: f14bcc985c06b074a932d910b3d2df3e, type: 3}
-    _dropChance: 100
-  - _item: {fileID: 2397993577778757249, guid: 47ee25402d47a4a41a9b90426bb271d7, type: 3}
-    _dropChance: 10
-  - _item: {fileID: 1782461251843806131, guid: 2e7cce9df1eeced4ca983c3126477d58, type: 3}
-    _dropChance: 10
-  - _item: {fileID: 3579808356831541882, guid: 05b74ee39875fc14aae218c401ebe8f6, type: 3}
-    _dropChance: 100
   - _item: {fileID: 3596559577025724964, guid: 4327f566d4fccc44bba0aa55a9243b1c, type: 3}
-    _dropChance: 5
+    _dropChance: 20
+  - _item: {fileID: 6034467555048407030, guid: 7b91d6586cde091499e578b1d827ad96, type: 3}
+    _dropChance: 20
   - _item: {fileID: 6554170899350276541, guid: d9449e93f60efd64293b1a68d91ed88d, type: 3}
     _dropChance: 40
   - _item: {fileID: 4748116994987269957, guid: 2af424789dc149144a105b5fd64c6d71, type: 3}
     _dropChance: 40
-  - _item: {fileID: 6034467555048407030, guid: 7b91d6586cde091499e578b1d827ad96, type: 3}
-    _dropChance: 5
+  - _item: {fileID: 3579808356831541882, guid: 05b74ee39875fc14aae218c401ebe8f6, type: 3}
+    _dropChance: 100
+  - _item: {fileID: 3579808356831541882, guid: 05b74ee39875fc14aae218c401ebe8f6, type: 3}
+    _dropChance: 100
+  - _item: {fileID: 3579808356831541882, guid: 05b74ee39875fc14aae218c401ebe8f6, type: 3}
+    _dropChance: 100
+  - _item: {fileID: 3579808356831541882, guid: 05b74ee39875fc14aae218c401ebe8f6, type: 3}
+    _dropChance: 100
+  - _item: {fileID: 3579808356831541882, guid: 05b74ee39875fc14aae218c401ebe8f6, type: 3}
+    _dropChance: 100
+  - _item: {fileID: 3579808356831541882, guid: 05b74ee39875fc14aae218c401ebe8f6, type: 3}
+    _dropChance: 80
+  - _item: {fileID: 3579808356831541882, guid: 05b74ee39875fc14aae218c401ebe8f6, type: 3}
+    _dropChance: 80
+  - _item: {fileID: 3579808356831541882, guid: 05b74ee39875fc14aae218c401ebe8f6, type: 3}
+    _dropChance: 80
+  - _item: {fileID: 3579808356831541882, guid: 05b74ee39875fc14aae218c401ebe8f6, type: 3}
+    _dropChance: 80
+  - _item: {fileID: 3579808356831541882, guid: 05b74ee39875fc14aae218c401ebe8f6, type: 3}
+    _dropChance: 80
+  - _item: {fileID: 3579808356831541882, guid: 05b74ee39875fc14aae218c401ebe8f6, type: 3}
+    _dropChance: 80
+  - _item: {fileID: 3579808356831541882, guid: 05b74ee39875fc14aae218c401ebe8f6, type: 3}
+    _dropChance: 80
+  - _item: {fileID: 3579808356831541882, guid: 05b74ee39875fc14aae218c401ebe8f6, type: 3}
+    _dropChance: 80
+  - _item: {fileID: 3579808356831541882, guid: 05b74ee39875fc14aae218c401ebe8f6, type: 3}
+    _dropChance: 80
+  - _item: {fileID: 3579808356831541882, guid: 05b74ee39875fc14aae218c401ebe8f6, type: 3}
+    _dropChance: 80
+  - _item: {fileID: 3579808356831541882, guid: 05b74ee39875fc14aae218c401ebe8f6, type: 3}
+    _dropChance: 80
   _chestRank: 2
   _openSound: {fileID: 8300000, guid: 01eda33b54ebe7b4894c6dd958381ba8, type: 3}
   _message: "\uCF54\uC778\uC774 \uBD80\uC871\uD569\uB2C8\uB2E4."

@@ -53,7 +53,7 @@ MonoBehaviour:
   _price: 20
   _name: "\uD68C\uBCF5\uD3EC\uC158"
   _warningMessage: "\uC774\uBBF8 \uCCB4\uB825\uC774 \uCD5C\uB300\uC785\uB2C8\uB2E4."
-  _recoveryAmount: 30
+  _recoveryAmount: 60
   potionSound: {fileID: 8300000, guid: f4fad9329c5f93d48b39ce4caa93062f, type: 3}
 --- !u!212 &2128403838987545142
 SpriteRenderer:

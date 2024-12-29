@@ -36,7 +36,8 @@ public class StateEffectManager : MonoBehaviour {
         GameObject stateEffect = Instantiate(_stateObjs[(int)stateType], caster);
         stateEffect.transform.localPosition = Vector3.up * offsetY;
         stateEffect.transform.localScale = new Vector3(scale, scale, 1);
-        SoundManager.Instance.PlaySFX(_stateSounds[(int)stateType].name);
+        if (_stateSounds[(int)stateType] != null)
+            SoundManager.Instance.PlaySFX(_stateSounds[(int)stateType].name);
         await UniTask.Delay(TimeSpan.FromSeconds(lastTime));
         Destroy(stateEffect);
     }
