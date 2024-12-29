@@ -22,6 +22,7 @@ public class PuzzlePortal : MonoBehaviour, Interactable {
     [SerializeField] Material _glitchMat;
     private GameObject finalSpawnPoint;
     private SpriteRenderer _sr;
+    private Collider2D _collider;
     private bool stageChecked = false;
     private bool preventPuzzleStageUpdate = false;
     private bool isInputDisabled = false;
