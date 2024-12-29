@@ -145,7 +145,7 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 2450e23eb00dbc74087c921bd109d209, type: 3}
   - {fileID: 0}
   - {fileID: 0}
-  - {fileID: 0}
+  - {fileID: 8300000, guid: e66ca87726c4f4641885c1eb4b3fb67f, type: 3}
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
