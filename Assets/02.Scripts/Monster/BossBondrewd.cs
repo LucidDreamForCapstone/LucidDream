@@ -197,7 +197,9 @@ public class BossBondrewd : MonsterBase {
     public override void Damaged(int dmg, bool isCrit, bool isPoison = false)//플레이어 공격에 데미지를 입음
     {
         base.Damaged(dmg, isCrit);
-        DecreaseGroggyGauge(_normalGroggyDecreaseAmount);
+        if (!_isChainExplosionActivated) {
+            DecreaseGroggyGauge(_normalGroggyDecreaseAmount);
+        }
         if (!_isPhase2Reached && CheckHpRatio(2.0f / 3.0f)) {
             _hpSlider.fillRect.GetComponent<Image>().color = _phase2HpColor;
             _hpSlider.transform.GetChild(0).GetComponent<Image>().color = _phase3HpColor;
