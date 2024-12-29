@@ -120,13 +120,13 @@ namespace Edgar.Unity.Examples.Gungeon {
                     enemyPrefab = EnemyPrefabs[Random.Next(0, 2)];  // 스테이지 1에서는 기본 적
                 }
                 else if (GungeonGameManager.Instance.Stage == 2) {
-                    enemyPrefab = EnemyPrefabs[Random.Next(2, 4)];
+                    enemyPrefab = EnemyPrefabs[Random.Next(2, 5)];
                 }
                 else if (GungeonGameManager.Instance.Stage == 3) {
-                    enemyPrefab = EnemyPrefabs[Random.Next(4, 7)]; // 스테이지 3에서는 첫 번째, 두 번째, 세 번째 적
+                    enemyPrefab = EnemyPrefabs[Random.Next(5, 9)]; // 스테이지 3에서는 첫 번째, 두 번째, 세 번째 적
                 }
                 else {
-                    enemyPrefab = EnemyPrefabs[Random.Next(7, EnemyPrefabs.Length)]; // 스테이지 4에서는 모든 적 중 무작위
+                    enemyPrefab = EnemyPrefabs[Random.Next(9, EnemyPrefabs.Length)]; // 스테이지 4에서는 모든 적 중 무작위
                 }
                 // Create an instance of the enemy and set position and parent
                 var enemy = Instantiate(enemyPrefab, roomInstance.RoomTemplateInstance.transform, true);
