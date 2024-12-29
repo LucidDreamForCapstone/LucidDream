@@ -415,6 +415,8 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 6bb5c4f6b60bbe44b90222b862347b6d, type: 3}
   _cardImage: {fileID: 7717029243136938374}
   _cardDescription: {fileID: 3001849697740262132}
+  _touchSound: {fileID: 8300000, guid: 21d6e8d6b822ebf42b8a02f793c92aee, type: 3}
+  _clickedSound: {fileID: 8300000, guid: ba3c15a3c84bbf44ab9ac901ab6f36d4, type: 3}
 --- !u!114 &3196153048909262868
 MonoBehaviour:
   m_ObjectHideFlags: 0

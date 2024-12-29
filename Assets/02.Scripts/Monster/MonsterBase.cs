@@ -173,7 +173,7 @@ public abstract class MonsterBase : DropableBase {
         float minusAtt = _damage * minusRate * 0.01f;
         _attCache.Push(_damage);
         _damage -= (int)minusAtt;
-        StateEffectManager.Instance.SummonEffect(transform, StateType.Fear2, offsetY, lastTime, scale).Forget();
+        StateEffectManager.Instance.SummonEffect(transform, StateType.Fear, offsetY, lastTime, scale).Forget();
         await UniTask.Delay(TimeSpan.FromSeconds(lastTime));
         _damage = _attCache.Pop();
     }
@@ -181,7 +181,7 @@ public abstract class MonsterBase : DropableBase {
         float minusAtt = _def * minusRate * 0.01f;
         _defCache.Push(_def);
         _def -= (int)minusAtt;
-        StateEffectManager.Instance.SummonEffect(transform, StateType.Fear, offsetY, lastTime, scale).Forget();
+        StateEffectManager.Instance.SummonEffect(transform, StateType.Fear2, offsetY, lastTime, scale).Forget();
         await UniTask.Delay(TimeSpan.FromSeconds(lastTime));
         _def = _defCache.Pop();
     }

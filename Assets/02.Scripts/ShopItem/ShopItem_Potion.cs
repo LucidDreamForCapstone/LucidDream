@@ -22,7 +22,7 @@ public class ShopItem_Potion : ShopItemBase {
             SoundManager.Instance.PlaySFX(potionSound.name);
         }
 
-        PlayerDataManager.Instance.HealByMaxPercent(_recoveryAmount);
+        PlayerDataManager.Instance.HealPercent(_recoveryAmount);
         Destroy(gameObject, 0.5f); // 구매 후 0.5초 뒤에 오브젝트 삭제
     }
 }

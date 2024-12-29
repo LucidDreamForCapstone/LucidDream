@@ -31,7 +31,7 @@ public class PlayerRevival : MonoBehaviour {
             _revivalCount--;
             Player player = PlayerDataManager.Instance.Player;
             player.CustomInvincible(3).Forget();
-            PlayerDataManager.Instance.HealByMaxPercent(100);
+            PlayerDataManager.Instance.HealPercent(100);
             Vector3 effectPosition = player.transform.position + new Vector3(0, 0.7f, 0);
             GameObject effectInstance = Instantiate(_guardEffect, effectPosition, Quaternion.identity);
             effectInstance.transform.SetParent(player.transform);
