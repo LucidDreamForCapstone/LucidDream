@@ -657,6 +657,10 @@ MonoBehaviour:
   _explosionObj: {fileID: 2369603767111171399, guid: 36293e28c821cd24783d875f04ab4d13, type: 3}
   _explosionCenterFlag: {fileID: 7271903972332303409}
   _phantomGhostObj: {fileID: 952376227452689569, guid: 87227546723202f41b84539dbddee9d4, type: 3}
+  _chargerList:
+  - {fileID: 3362516274422991455}
+  - {fileID: 706486821581518159}
+  - {fileID: 1993944919083767612}
   _bossBGM: {fileID: 8300000, guid: 81fc557ee66e59f448bced44f5ca3f81, type: 3}
   _wakeUpCollider: {fileID: 5843039024781609472}
   _legSr: {fileID: 4911408381849233753}
@@ -691,6 +695,7 @@ MonoBehaviour:
   _bulletInterval: 0.03
   _sideDist: 5
   _shootInterval: 1
+  _shootSound: {fileID: 8300000, guid: f4f3f053255c88240a9608e2a1325455, type: 3}
   _missileCooltime: 37
   _missileInterval: 2
   _missileCount: 3
@@ -703,11 +708,12 @@ MonoBehaviour:
   _explodeRadius: 4
   _groggyDecreaseAmount: 15
   _explosionCooltime: 120
-  _explosionDamage: 20
+  _explosionDamage: 40
   _explosionWarningTime: 20
   _explosionLastTime: 4
   _explosionPosInterval: 5
   _excludeCount: 18
+  _specialDef: 4000
   _explosionSizeHalf: {x: 6, y: 4}
   _ghostInterval: 0.01
   _ghostLastTime: 0.7
@@ -5571,7 +5577,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &7094797378385359746
 Transform:
   m_ObjectHideFlags: 0
@@ -5846,7 +5852,7 @@ GameObject:
   - component: {fileID: 107371616515449603}
   - component: {fileID: 6558073396344018519}
   - component: {fileID: 7655734093334184743}
-  m_Layer: 15
+  m_Layer: 14
   m_Name: Floor
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -39274,6 +39280,17 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: dff4fc415cc77de4a9afc379d457c333, type: 3}
+--- !u!114 &3362516274422991455 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5563730049078190089, guid: dff4fc415cc77de4a9afc379d457c333, type: 3}
+  m_PrefabInstance: {fileID: 7177710570262178390}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 38bfc9b7e10c6d940a6b5f7c16979644, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &5590976837341585910 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3317880187917798304, guid: dff4fc415cc77de4a9afc379d457c333, type: 3}

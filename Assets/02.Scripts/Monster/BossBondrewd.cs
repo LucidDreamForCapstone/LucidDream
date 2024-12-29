@@ -23,6 +23,7 @@ public class BossBondrewd : MonsterBase {
     [SerializeField] GameObject _explosionObj;
     [SerializeField] GameObject _explosionCenterFlag;
     [SerializeField] GameObject _phantomGhostObj;
+    [SerializeField] List<Charger> _chargerList;
     [SerializeField] AudioClip _bossBGM;
     [SerializeField] CircleCollider2D _wakeUpCollider;
     //[SerializeField] AudioClip _dashSound;
@@ -59,6 +60,7 @@ public class BossBondrewd : MonsterBase {
     [SerializeField] float _bulletInterval;
     [SerializeField] float _sideDist;
     [SerializeField] float _shootInterval;
+    [SerializeField] AudioClip _shootSound;
     [Header("\nMissile")]
     [SerializeField] float _missileCooltime;
     [SerializeField] float _missileInterval;
@@ -78,6 +80,7 @@ public class BossBondrewd : MonsterBase {
     [SerializeField] float _explosionLastTime;
     [SerializeField] float _explosionPosInterval;
     [SerializeField] int _excludeCount;
+    [SerializeField] int _specialDef;
     [SerializeField] Vector2 _explosionSizeHalf;
     [Header("\nPhantom State")]
     [SerializeField] float _ghostInterval;
@@ -250,6 +253,7 @@ public class BossBondrewd : MonsterBase {
         _cts.Cancel();
         _isDead = true;
         _hp = 0;
+        _chargerList.ForEach(charger => charger.Sleep().Forget());
         _animator.SetTrigger("Die");
         _spriteRenderer.sortingLayerName = "Default";
         _legSr.sortingLayerName = "Default";
@@ -458,6 +462,7 @@ public class BossBondrewd : MonsterBase {
     }
 
     private void FireBullet(Vector3 dir, Vector3 offsetDir) {
+        SoundManager.Instance.PlaySFX(_shootSound.name);
         GameObject projectile = ObjectPool.Instance.GetObject(_bulletObj);
         Bullet projectileScript = projectile.GetComponent<Bullet>();
         projectileScript.SetPlayer(_playerScript);
@@ -534,12 +539,14 @@ public class BossBondrewd : MonsterBase {
     private async UniTaskVoid ChainExplosion() {
         _attackStateList[5] = AttackState.Attacking;
         _isChainExplosionActivated = true;
+        int originDef = _def;
         Vector2 chainExplosionCenterPos = _explosionCenterFlag.transform.position;
         float duration = CalculateManhattanDist(transform.position, chainExplosionCenterPos) / _moveSpeed;
         SetFlipX(chainExplosionCenterPos - (Vector2)transform.position);
         _animator.SetBool("Run", true);
         try {
             await DOTween.To(() => _rigid.position, x => _rigid.MovePosition(x), chainExplosionCenterPos, duration).WithCancellation(_cts.Token);
+            _def = _specialDef;
             _animator.SetBool("Run", false);
             SetFlipX(Vector2.left);
             _chargingEffect.GetComponent<SpriteRenderer>().color = Color.white;
@@ -606,6 +613,7 @@ public class BossBondrewd : MonsterBase {
                 ObjectPool.Instance.ReturnObject(_explosionCache[i].gameObject);
             }
             await _chargingEffect.GetComponent<SpriteRenderer>().DOFade(0, 1);
+            _def = originDef;
             _chargingEffect.SetActive(false);
             _isChainExplosionWarning = false;
             _isChainExplosionActivated = false;
@@ -636,6 +644,7 @@ public class BossBondrewd : MonsterBase {
                 if (_phantomGauge > 100) {
                     _phantomTimer = 0;
                     SoundManager.Instance.PlaySFX(_phantomOnSound.name, true);
+                    SystemMessageManager.Instance.PushSystemMessage("연구소장이 팬텀 상태에 진입합니다.", Color.cyan, false, 2);
                     _currentPhantomState = PhantomState.Activated;
                     _phantomGauge = 100;
                     _phantomGaugeSlider.fillRect.GetComponent<Image>().color = _phantomGaugeActivateColor;
@@ -661,6 +670,7 @@ public class BossBondrewd : MonsterBase {
                 if (_phantomGauge < 0) {
                     _phantomTimer = 0;
                     SoundManager.Instance.PlaySFX(_phantomOffSound.name, false);
+                    SystemMessageManager.Instance.PushSystemMessage("연구소장의 팬텀 상태가 해제됩니다.", Color.cyan, false, 2);
                     _currentPhantomState = PhantomState.DeActivated;
                     _phantomGauge = 0;
                     _phantomGaugeSlider.fillRect.GetComponent<Image>().color = _phantomGaugeDeactivateColor;

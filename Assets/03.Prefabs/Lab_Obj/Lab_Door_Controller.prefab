@@ -136,3 +136,7 @@ MonoBehaviour:
   isdoorOpen: 1
   labDoor: {fileID: 0}
   openDoor: {fileID: 0}
+  isInteractingToPortal: 0
+  isInteractedOnce: 0
+  Stage: 0
+  _labDoorOpenSound: {fileID: 8300000, guid: 34c9f2693ba8a39488007c9f2d6e8722, type: 3}
