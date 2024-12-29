@@ -35,8 +35,8 @@ public class PuzzlePortal : MonoBehaviour, Interactable {
         puzzle = puzzleManager.CurrentPuzzle;
         finalSpawnPoint = GameObject.Find("SpawnPosition");
         player = InteractManager.Instance.gameObject;
-        _messages.Add("��....?\n���� ���������� ���� ��Ż��\n�� �� ���� ������ �����ִ� �� ����.");
-        _messages.Add("���� �� �տ� �ִ� <size=45><color=red>������ �ذ��ϸ�</color></size>\n��Ż�� ������ �� ���� �� ������?");
+        _messages.Add("음....?\n다음 스테이지로 가는 포탈이\n알 수 없는 힘으로 깨져있는 것 같아.");
+        _messages.Add("왠지 내 앞에 있는 <size=45><color=red>퍼즐을 해결하면</color></size>\n포탈을 복구할 수 있을 것 같은데?");
         _activatedStage = gungeonGameManager.Stage;
     }
 
@@ -50,8 +50,8 @@ public class PuzzlePortal : MonoBehaviour, Interactable {
 
         if (puzzle.Cleared && puzzleManager.CurrentPuzzleIndex != 0 && !clearedOnce) {
             if (gungeonGameManager.Stage < 4) {
-                SystemMessageManager.Instance.ShowDialogBox("���ΰ�", _messages2, 3).Forget();
-                SystemMessageManager.Instance.PushSystemMessage("���� Ŭ����!", Color.green, false, 2f);
+                SystemMessageManager.Instance.ShowDialogBox("주인공", _messages2, 3).Forget();
+                SystemMessageManager.Instance.PushSystemMessage("퍼즐 클리어!", Color.green, false, 2f);
             }
             clearedOnce = true;
         }
@@ -125,7 +125,7 @@ public class PuzzlePortal : MonoBehaviour, Interactable {
 
     public bool IsInteractBlock() => !puzzle.Cleared;
 
-    public string GetInteractText() => "�̵� (G)";
+    public string GetInteractText() => "이동 (G)";
 
     private IEnumerator DisableInputForSeconds(float duration) {
         isInputDisabled = true;

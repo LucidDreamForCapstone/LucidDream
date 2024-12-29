@@ -627,7 +627,7 @@ MonoBehaviour:
   _useTree: 1
   _isBoss: 1
   _hitSound: []
-  _deathSound: {fileID: 0}
+  _deathSound: {fileID: 8300000, guid: a2c45a66e12ff584586d60f5da229d94, type: 3}
   _searchDist: 0
   _attackDist: 0
   _def: 100
@@ -707,6 +707,7 @@ MonoBehaviour:
   _missileDamage: 80
   _explodeRadius: 4
   _groggyDecreaseAmount: 15
+  _missileShootSound: {fileID: 8300000, guid: f4f3f053255c88240a9608e2a1325455, type: 3}
   _explosionCooltime: 120
   _explosionDamage: 40
   _explosionWarningTime: 20

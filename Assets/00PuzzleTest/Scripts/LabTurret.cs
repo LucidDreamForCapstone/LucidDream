@@ -12,7 +12,7 @@ public class LabTurret : Turret {
     protected async override UniTaskVoid Die() {
         _isDead = true;
         _hp = 0;
-        SoundManager.Instance.PlaySFX(_deathSound.name, false);
+        DeathSoundWithDelay(1.4f).Forget();
         gameObject.layer = LayerMask.NameToLayer("DeadEnemy");
         _animator.SetTrigger("Die");
         _puzzleManager.DecreaseTurretCount();
@@ -42,5 +42,10 @@ public class LabTurret : Turret {
         projectileScript.SetHomingStrength(_homingStrength);
         projectileScript.SetGroggyDecreaseAmount(_missileGroggyGaugeDecreaseAmount);
         projectile.SetActive(true);
+    }
+
+    private async UniTaskVoid DeathSoundWithDelay(float delay) {
+        await UniTask.Delay(TimeSpan.FromSeconds(delay));
+        SoundManager.Instance.PlaySFX(_deathSound.name, false);
     }
 }

@@ -470,7 +470,7 @@ MonoBehaviour:
   - {fileID: 6175882227632397367}
   - {fileID: 519540780090228962}
   _minusAmount: 10
-  _plusAmount: 20
+  _plusAmount: 5
   _eventDelay: 10
   _successSound: {fileID: 8300000, guid: ac417b54a7417774f8668065985da5f7, type: 3}
   _insertSound: {fileID: 8300000, guid: ccaf3aa8a16b94844bfab4953757d595, type: 3}

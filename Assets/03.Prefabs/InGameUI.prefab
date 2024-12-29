@@ -1659,11 +1659,9 @@ MonoBehaviour:
   - {fileID: 2928520788872735216}
   - {fileID: 7864630952978412292}
   - {fileID: 3864373150870045994}
-  - {fileID: 3864373150870045994}
-  - {fileID: 3864373150870045994}
-  - {fileID: 3864373150870045994}
-  - {fileID: 3864373150870045994}
+  - {fileID: 0}
   _hpSlider: {fileID: 2935535047528205132}
+  _hpSlider2: {fileID: 0}
   _feverSlider: {fileID: 8609986767256550202}
   _cardUIController: {fileID: 0}
   playerStatusUI: {fileID: 7487479252707579321}

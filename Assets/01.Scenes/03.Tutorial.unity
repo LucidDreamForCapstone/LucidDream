@@ -20982,6 +20982,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2335274690397529688, guid: aac7bedbbcbfff449b85a763e9af3024, type: 3}
+      propertyPath: _hpSlider2
+      value: 
+      objectReference: {fileID: 840934880}
+    - target: {fileID: 2335274690397529688, guid: aac7bedbbcbfff449b85a763e9af3024, type: 3}
       propertyPath: _equippedWeapon
       value: 
       objectReference: {fileID: 0}
@@ -20989,6 +20993,14 @@ PrefabInstance:
       propertyPath: _cardUIController
       value: 
       objectReference: {fileID: 1275233488}
+    - target: {fileID: 2335274690397529688, guid: aac7bedbbcbfff449b85a763e9af3024, type: 3}
+      propertyPath: _texts.Array.size
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 2335274690397529688, guid: aac7bedbbcbfff449b85a763e9af3024, type: 3}
+      propertyPath: _texts.Array.data[5]
+      value: 
+      objectReference: {fileID: 840934879}
     - target: {fileID: 2618619422945412448, guid: aac7bedbbcbfff449b85a763e9af3024, type: 3}
       propertyPath: m_Color.b
       value: 0.33865267
@@ -21709,6 +21721,28 @@ PrefabInstance:
       insertIndex: -1
       addedObject: {fileID: 1159814359}
   m_SourcePrefab: {fileID: 100100000, guid: aac7bedbbcbfff449b85a763e9af3024, type: 3}
+--- !u!114 &840934879 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2227245345421776832, guid: aac7bedbbcbfff449b85a763e9af3024, type: 3}
+  m_PrefabInstance: {fileID: 840934878}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &840934880 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2935535047528205132, guid: aac7bedbbcbfff449b85a763e9af3024, type: 3}
+  m_PrefabInstance: {fileID: 840934878}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 67db9e8f0e2ae9c40bc1e2b64352a6b4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &846263072
 GameObject:
   m_ObjectHideFlags: 0
@@ -26191,9 +26225,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _systemMessageTM: {fileID: 306477380}
   _warningSound: {fileID: 8300000, guid: 746072977aca3dc4cb910ce255183f1f, type: 3}
-  _dialogBox: {fileID: 0}
-  _dialogNameTM: {fileID: 0}
-  _dialogMessageTM: {fileID: 0}
+  _dialogBoxList: []
+  _dialogNameTMList: []
+  _dialogMessageTMList: []
   _dialogStartSound: {fileID: 8300000, guid: 9328b9217cce52b4abb979acdd325165, type: 3}
   _dialogEndSound: {fileID: 8300000, guid: 60405be52dc3c1e4d8e60e2391e3810d, type: 3}
 --- !u!114 &1593478959

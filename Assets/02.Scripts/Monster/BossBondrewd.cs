@@ -73,6 +73,7 @@ public class BossBondrewd : MonsterBase {
     [SerializeField] int _missileDamage;
     [SerializeField] float _explodeRadius;
     [SerializeField] int _groggyDecreaseAmount;
+    [SerializeField] AudioClip _missileShootSound;
     [Header("\nChain Explosion")]
     [SerializeField] float _explosionCooltime;
     [SerializeField] int _explosionDamage;
@@ -263,6 +264,7 @@ public class BossBondrewd : MonsterBase {
         _chargerUIList.ForEach((chargeUI) => chargeUI.gameObject.SetActive(false));
         DropItems();
         _playerScript.GetExp(_exp);
+        SoundManager.Instance.PlaySFX(_deathSound.name);
         PlayerDataManager.Instance.SetFeverGauge(PlayerDataManager.Instance.Status._feverGauge + _feverAmount);
         await UniTask.Delay(TimeSpan.FromSeconds(2));
         _cts.Dispose();
@@ -524,6 +526,7 @@ public class BossBondrewd : MonsterBase {
         projectileScript.SetHomingStrength(_homingStrength);
         projectileScript.SetGroggyDecreaseAmount(_groggyDecreaseAmount);
         projectile.SetActive(true);
+        SoundManager.Instance.PlaySFX(_missileShootSound.name);
     }
     #endregion
 
