@@ -155,7 +155,7 @@ MonoBehaviour:
   _chance: 15
   _lastTime: -1
   _ratio: -1
-  _tickDamage: 30
+  _tickDamage: 100
   _tickTime: 2.5
   _tickCount: 5
   _isEquipped: 0

@@ -219,7 +219,7 @@ MonoBehaviour:
   _chance: 10
   _lastTime: -1
   _ratio: -1
-  _tickDamage: 20
+  _tickDamage: 50
   _tickTime: 3
   _tickCount: 4
   _isEquipped: 0

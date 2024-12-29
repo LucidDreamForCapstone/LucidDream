@@ -62,8 +62,6 @@ MonoBehaviour:
     _dropChance: 100
   - _item: {fileID: 1782461251843806131, guid: 2e7cce9df1eeced4ca983c3126477d58, type: 3}
     _dropChance: 100
-  - _item: {fileID: 1782461251843806131, guid: 2e7cce9df1eeced4ca983c3126477d58, type: 3}
-    _dropChance: 100
   - _item: {fileID: 4748116994987269957, guid: 2af424789dc149144a105b5fd64c6d71, type: 3}
     _dropChance: 20
   - _item: {fileID: 8244310748568272398, guid: 4da217abad5d0b042a50de9c0738581f, type: 3}
@@ -90,11 +88,11 @@ MonoBehaviour:
   _deathSound: {fileID: 8300000, guid: 1207edc068aa6944a86960c78ccec253, type: 3}
   _searchDist: 0
   _attackDist: 0
-  _def: 40
+  _def: 60
   _damage: 90
   _bodyDamage: 15
   _moveSpeed: 4
-  _maxHp: 900
+  _maxHp: 1000
   _dieDelay: 2
   _damagedColor:
     serializedVersion: 2
