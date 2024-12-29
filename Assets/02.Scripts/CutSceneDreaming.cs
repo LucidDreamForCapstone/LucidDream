@@ -61,18 +61,7 @@ public class CutSceneDreaming : MonoBehaviour {
         else {
             Debug.LogError("Timeline Manager is not assigned!");
         }
-
-
-        // Hue Shift와 Saturation 값 변경
-        if (colorAdjustments != null) {
-            colorAdjustments.hueShift.value = 179f; // Hue Shift 설정
-            colorAdjustments.saturation.value = -68f; // Saturation 설정
-            Debug.Log("Color adjustments applied: Hue Shift = 179, Saturation = -68");
-        }
-        else {
-            Debug.LogError("ColorAdjustments component is not available!");
-        }
-
+        ChangeHueShift();
     }
 
     /// <summary>
@@ -85,6 +74,22 @@ public class CutSceneDreaming : MonoBehaviour {
         }
         else {
             Debug.LogError("Player or StartPoint is not assigned!");
+        }
+    }
+
+
+    public void ChangeHueShift() {
+        // Hue Shift와 Saturation 값 변경
+        if (colorAdjustments != null) {
+            colorAdjustments.hueShift.value = 27f; // Hue Shift 설정
+            colorAdjustments.saturation.value = -68f; // Saturation 설정
+        }
+    }
+
+    public void ChangeHueShiftReset() {
+        if (colorAdjustments != null) {
+            colorAdjustments.hueShift.value = 0f; // Hue Shift 설정
+            colorAdjustments.saturation.value = 0f; // Saturation 설정
         }
     }
 }

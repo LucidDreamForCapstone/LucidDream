@@ -82,7 +82,7 @@ public class TimeLineManager : MonoBehaviour {
     /// <summary>
     /// Player2 UI로 전환
     /// </summary>
-    private void SwitchToPlayer2UI() {
+    public void SwitchToPlayer2UI() {
         player1UICanvas.targetDisplay = 1;
         player2UICanvas.targetDisplay = 0;
         Debug.Log("Switched to Player2 UI.");
@@ -91,7 +91,7 @@ public class TimeLineManager : MonoBehaviour {
     /// <summary>
     /// Player1 UI로 전환
     /// </summary>
-    private void SwitchToPlayer1UI() {
+    public void SwitchToPlayer1UI() {
         player1UICanvas.targetDisplay = 0;
         player2UICanvas.targetDisplay = 1;
         Debug.Log("Switched back to Player1 UI.");

@@ -47,5 +47,9 @@ public class CameraManager : MonoBehaviour {
         _fow2d.enabled = state;
     }
 
+    public void SetFogOfwarTrue() {
+        _fow2d.enabled = true;
+    }
+
     #endregion
 }

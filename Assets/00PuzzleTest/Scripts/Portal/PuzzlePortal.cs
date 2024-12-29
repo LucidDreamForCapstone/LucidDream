@@ -43,11 +43,6 @@ public class PuzzlePortal : MonoBehaviour, Interactable {
 
 
     void Update() {
-        //if (!stageChecked && gungeonGameManager.Stage == 4) {
-        //    stageChecked = true;
-        //    TeleportPlayerToTarget_Final(player, finalSpawnPoint);
-        //}
-
         if (puzzle.Cleared && puzzleManager.CurrentPuzzleIndex != 0 && !clearedOnce) {
             if (gungeonGameManager.Stage < 4) {
                 SystemMessageManager.Instance.ShowDialogBox("주인공", _messages2, 3).Forget();
