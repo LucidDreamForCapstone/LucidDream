@@ -1,12 +1,6 @@
 fileFormatVersion: 2
-<<<<<<<< HEAD:Assets/05.Animation/Item/Coin.meta
-guid: a53423b7c523a9e4cb2f6cf808e28bba
-folderAsset: yes
-DefaultImporter:
-========
-guid: 49d0e342f1872eb4eac0492d12f314c6
+guid: 20848c393585bb341bf6b86f6f144a12
 PrefabImporter:
->>>>>>>> origin/fixDoor:Assets/00PuzzleTest/Assets/PuzzleManager 1.prefab.meta
   externalObjects: {}
   userData: 
   assetBundleName: 
