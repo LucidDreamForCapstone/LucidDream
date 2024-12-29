@@ -2,15 +2,14 @@ using Cysharp.Threading.Tasks;
 using System;
 using UnityEngine;
 
-public class MonsterDemon : MonsterBase {
-
+public class MonsterSoldier : MonsterBase {
     #region serialize field
-    [SerializeField] private GameObject _fireballObj;
+    [SerializeField] private GameObject _bulletObj;
+    [SerializeField] private int _fireCount;
     [SerializeField] private float _fireSpeed;
     [SerializeField] private float _fireLastTime;
-    //[SerializeField] private float _searchRange;
-    //[SerializeField] private float _attackRange;
     [SerializeField] private float _fireCoolTime;
+    [SerializeField] private float _fireDelay;
     [SerializeField] private AudioClip attackSound;
 
     #endregion //serialize field
@@ -22,7 +21,6 @@ public class MonsterDemon : MonsterBase {
     #region private variable
 
     private bool _isFireReady;
-    private float _fireDelay;
 
     #endregion //private variable
 
@@ -33,7 +31,6 @@ public class MonsterDemon : MonsterBase {
         base.OnEnable();
         _attackFuncList.Add(FireTask);
         _isFireReady = true;
-        _fireDelay = 0.5f;
     }
 
     #endregion //mono func
@@ -46,17 +43,26 @@ public class MonsterDemon : MonsterBase {
 
     private async UniTaskVoid FireTask() {
         _isFireReady = false;
-        Fire().Forget();
+        FireMultiple().Forget();
         await UniTask.Delay(TimeSpan.FromSeconds(_fireCoolTime));
         _isFireReady = true;
         _attackStateList[0] = AttackState.Ready;
     }
 
-    private async UniTaskVoid Fire() {
+    private async UniTaskVoid FireMultiple() {
         _attackStateList[0] = AttackState.Attacking;
+        for (int i = 0; i < _fireCount; i++) {
+            SetFlipX();
+            Fire();
+            await UniTask.Delay(TimeSpan.FromSeconds(_fireDelay));
+        }
+        _attackStateList[0] = AttackState.CoolTime;
+    }
+
+    private void Fire() {
         _animator.SetTrigger("Attack");
         PlaySound(attackSound);
-        GameObject fireBall = ObjectPool.Instance.GetObject(_fireballObj);
+        GameObject fireBall = ObjectPool.Instance.GetObject(_bulletObj);
         Bullet fireBallScript = fireBall.GetComponent<Bullet>();
         Vector2 fireDir = _playerScript.transform.position - transform.position;
         fireBall.transform.right = fireDir;
@@ -66,8 +72,14 @@ public class MonsterDemon : MonsterBase {
         fireBallScript.SetDmg(_damage);
         fireBallScript.SetLastTime(_fireLastTime);
         fireBall.SetActive(true);
-        await UniTask.Delay(TimeSpan.FromSeconds(_fireDelay));
-        _attackStateList[0] = AttackState.CoolTime;
+    }
+
+    private void SetFlipX() {
+        Vector2 fireDir = _playerScript.transform.position - transform.position;
+        if (fireDir.x >= 0)
+            _spriteRenderer.flipX = false;
+        else
+            _spriteRenderer.flipX = true;
     }
 
     #endregion //private funcs
