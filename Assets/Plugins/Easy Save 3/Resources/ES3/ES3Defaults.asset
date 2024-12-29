@@ -15,7 +15,7 @@ MonoBehaviour:
   settings:
     _location: 0
     path: SaveFile.es3
-    encryptionType: 0
+    encryptionType: 1
     compressionType: 0
     encryptionPassword: PassWorD
     directory: 0
