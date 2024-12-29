@@ -1,4 +1,5 @@
 using Cysharp.Threading.Tasks;
+using Edgar.Unity;
 using Edgar.Unity.Examples.Gungeon;
 using System;
 using System.Collections;
@@ -20,6 +21,7 @@ public class PuzzlePortal : MonoBehaviour, Interactable {
     [SerializeField] List<string> _messages2;
     [SerializeField] Material _normalMat;
     [SerializeField] Material _glitchMat;
+    [SerializeField] private GameObject _cameraObj;
     private GameObject finalSpawnPoint;
     private SpriteRenderer _sr;
     private bool stageChecked = false;
@@ -65,7 +67,10 @@ public class PuzzlePortal : MonoBehaviour, Interactable {
     private void HandleTrigger(Collider2D collision, bool isEntering) {
         puzzleManager.IsInteractingToPortal = false;
         if (collision.gameObject.CompareTag("Player")) {
-            if (gungeonGameManager.Stage == 4) TeleportPlayerToTarget_Final(player, finalSpawnPoint);
+            if (gungeonGameManager.Stage == 4) {
+                _cameraObj.GetComponent<FogOfWarGrid2D>().enabled = false;
+                TeleportPlayerToTarget_Final(player, finalSpawnPoint);
+            }
             Debug.Log($"Player is Colliding to Portal {isEntering}");
             //puzzleManager.IsInteractingToPortal = isEntering;
             if (GungeonGameManager.Instance != null && puzzle.Cleared && !isInputDisabled) {
