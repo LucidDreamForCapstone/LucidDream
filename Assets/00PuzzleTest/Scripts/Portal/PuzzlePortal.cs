@@ -36,8 +36,8 @@ public class PuzzlePortal : MonoBehaviour, Interactable {
         puzzle = puzzleManager.CurrentPuzzle;
         finalSpawnPoint = GameObject.Find("SpawnPosition");
         player = InteractManager.Instance.gameObject;
-        _messages.Add("À½....?\n´ÙÀ½ ½ºÅ×ÀÌÁö·Î °¡´Â Æ÷Å»ÀÌ\n¾Ë ¼ö ¾ø´Â ÈûÀ¸·Î ±úÁ®ÀÖ´Â °Í °°¾Æ.");
-        _messages.Add("¿ØÁö ³» ¾Õ¿¡ ÀÖ´Â <size=45><color=red>ÆÛÁñÀ» ÇØ°áÇÏ¸é</color></size>\nÆ÷Å»À» º¹±¸ÇÒ ¼ö ÀÖÀ» °Í °°Àºµ¥?");
+        _messages.Add("ï¿½ï¿½....?\nï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Å»ï¿½ï¿½\nï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ö´ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½.");
+        _messages.Add("ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½Õ¿ï¿½ ï¿½Ö´ï¿½ <size=45><color=red>ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ø°ï¿½ï¿½Ï¸ï¿½</color></size>\nï¿½ï¿½Å»ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½?");
     }
 
 
@@ -50,8 +50,8 @@ public class PuzzlePortal : MonoBehaviour, Interactable {
 
         if (puzzle.Cleared && puzzleManager.CurrentPuzzleIndex != 0 && !clearedOnce) {
             if (gungeonGameManager.Stage < 4) {
-                SystemMessageManager.Instance.ShowDialogBox("ÁÖÀÎ°ø", _messages2, 3).Forget();
-                SystemMessageManager.Instance.PushSystemMessage("ÆÛÁñ Å¬¸®¾î!", Color.green, false, 2f);
+                SystemMessageManager.Instance.ShowDialogBox("ï¿½ï¿½ï¿½Î°ï¿½", _messages2, 3).Forget();
+                SystemMessageManager.Instance.PushSystemMessage("ï¿½ï¿½ï¿½ï¿½ Å¬ï¿½ï¿½ï¿½ï¿½!", Color.green, false, 2f);
             }
             clearedOnce = true;
         }
@@ -68,9 +68,10 @@ public class PuzzlePortal : MonoBehaviour, Interactable {
         puzzleManager.IsInteractingToPortal = false;
         if (collision.gameObject.CompareTag("Player")) {
             if (gungeonGameManager.Stage == 4) {
-                _cameraObj.GetComponent<FogOfWarGrid2D>().enabled = false;
+                CameraManager.Instance.SetFogOfWar(false);
                 TeleportPlayerToTarget_Final(player, finalSpawnPoint);
             }
+
             Debug.Log($"Player is Colliding to Portal {isEntering}");
             //puzzleManager.IsInteractingToPortal = isEntering;
             if (GungeonGameManager.Instance != null && puzzle.Cleared && !isInputDisabled) {
@@ -126,7 +127,7 @@ public class PuzzlePortal : MonoBehaviour, Interactable {
 
     public bool IsInteractBlock() => !puzzle.Cleared;
 
-    public string GetInteractText() => "ÀÌµ¿ (G)";
+    public string GetInteractText() => "ï¿½Ìµï¿½ (G)";
 
     private IEnumerator DisableInputForSeconds(float duration) {
         isInputDisabled = true;

@@ -84,6 +84,12 @@ public class CardUI : UIBase {
 
     private void SetDesc() {
         _cardDescription.text = _card._description;
+        if (_card._cardRank == CardRank.Mystic) {
+            _cardDescription.color = Color.white;
+        }
+        else {
+            _cardDescription.color = Color.black;
+        }
     }
 
     // ī�忡 ���� Fade In ȿ��
@@ -132,7 +138,7 @@ public class CardUI : UIBase {
     // ���콺�� ī�� ���� �ö���� ��
     public void OnPointerEnter() {
         BeforePointedCardIndex = _cardIndex;
-        SoundManager.Instance.PlaySFX(_touchSound.name,true);
+        SoundManager.Instance.PlaySFX(_touchSound.name, true);
         ScaleUpCard();
     }
 

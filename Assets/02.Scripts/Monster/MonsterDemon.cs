@@ -21,7 +21,6 @@ public class MonsterDemon : MonsterBase {
 
     #region private variable
 
-    private bool _isFiring;
     private bool _isFireReady;
     private float _fireDelay;
 
@@ -33,7 +32,6 @@ public class MonsterDemon : MonsterBase {
     new private void OnEnable() {
         base.OnEnable();
         _attackFuncList.Add(FireTask);
-        _isFiring = false;
         _isFireReady = true;
         _fireDelay = 0.5f;
     }
@@ -56,7 +54,6 @@ public class MonsterDemon : MonsterBase {
 
     private async UniTaskVoid Fire() {
         _attackStateList[0] = AttackState.Attacking;
-        _isFiring = true;
         _animator.SetTrigger("Attack");
         PlaySound(attackSound);
         GameObject fireBall = ObjectPool.Instance.GetObject(_fireballObj);
@@ -70,12 +67,7 @@ public class MonsterDemon : MonsterBase {
         fireBallScript.SetLastTime(_fireLastTime);
         fireBall.SetActive(true);
         await UniTask.Delay(TimeSpan.FromSeconds(_fireDelay));
-        _isFiring = false;
         _attackStateList[0] = AttackState.CoolTime;
-    }
-
-    private double CalculateManhattanDist(Vector2 a, Vector2 b) {
-        return Mathf.Abs(a.x - b.x) + Mathf.Abs(a.y - b.y);
     }
 
     #endregion //private funcs

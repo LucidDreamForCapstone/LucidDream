@@ -1,5 +1,6 @@
 using Cysharp.Threading.Tasks;
 using System;
+using System.Threading;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -16,16 +17,20 @@ public class Charger : MonsterBase {
     CircleCollider2D _shieldCollider;
     SpriteRenderer _sr;
     SpriteRenderer _shieldSr;
+    SpriteRenderer _minimapIconSr;
     Animator _shieldAnimator;
     bool _isShieldActivated;
+    CancellationTokenSource _cts;
 
     private void Start() {
+        _cts = new CancellationTokenSource();
         _chargerCollider = GetComponent<CapsuleCollider2D>();
         _shieldCollider = GetComponent<CircleCollider2D>();
         _sr = GetComponent<SpriteRenderer>();
         _chargerQTE = GameObject.Find("ButtonPressQTE").GetComponent<ButtonPressQTE>();
         _shieldAnimator = transform.GetChild(0).GetComponent<Animator>();
         _shieldSr = transform.GetChild(0).GetComponent<SpriteRenderer>();
+        _minimapIconSr = transform.GetChild(2).GetComponent<SpriteRenderer>();
         InitializeCharger(_chargerIndex + 1).Forget();
         UpdateHpSlider();
     }
@@ -80,6 +85,13 @@ public class Charger : MonsterBase {
         RemoveShield().Forget();
     }
 
+    public async UniTaskVoid Sleep() {
+        _cts.Cancel();
+        await UniTask.Delay(TimeSpan.FromSeconds(2));
+        _cts.Dispose();
+        _cts = null;
+    }
+
     private async UniTaskVoid RemoveShield() { //after called by lab
         _shieldAnimator.SetTrigger("Pop");
         await UniTask.Delay(TimeSpan.FromSeconds(0.8f));
@@ -102,6 +114,7 @@ public class Charger : MonsterBase {
         _animator.SetTrigger("Up");
         _chargerQTE.UpdateChargingState(_chargerIndex, true);
         _boss.ChargerCntIncrease(_chargerIndex);
+        _minimapIconSr.color = Color.red;
         SoundManager.Instance.PlaySFX(_chargerOnSound.name, false);
         SystemMessageManager.Instance.PushSystemMessage("영혼 가속기가 활성화 되어 연구소장의 팬텀 게이지가 더욱 빠르게 상승합니다.", Color.red, lastTime: 2);
     }
@@ -110,18 +123,25 @@ public class Charger : MonsterBase {
         _animator.SetTrigger("Down");
         _chargerQTE.UpdateChargingState(_chargerIndex, false);
         _boss.ChargerCntDecrease(_chargerIndex);
+        _minimapIconSr.color = Color.blue;
         SoundManager.Instance.PlaySFX(_chargerOffSound.name, false);
         RecoverHp().Forget();
     }
 
-    private async UniTaskVoid RecoverHp() {
-        while (_hp < _maxHp) {
-            _hp += _hpRecoverAmount;
-            UpdateHpSlider();
-            await UniTask.Delay(TimeSpan.FromSeconds(1f));
+    private async UniTask RecoverHp(float delay = 1.0f) {
+        try {
+            while (_hp < _maxHp) {
+                _hp += _hpRecoverAmount;
+                UpdateHpSlider();
+                await UniTask.Delay(TimeSpan.FromSeconds(delay), cancellationToken: _cts.Token);
+            }
+            _hp = _maxHp;
+            ChargerOn();
         }
-        _hp = _maxHp;
-        ChargerOn();
+        catch (OperationCanceledException) {
+            ChargerOff();
+            RemoveShield().Forget();
+        }
     }
 
     private async UniTaskVoid InitializeCharger(float delay) {
@@ -129,13 +149,7 @@ public class Charger : MonsterBase {
         await UniTask.WaitUntil(() => _boss.CheckBossWakeUp());
         _hp = 1;
         GenerateShield();
-        while (_hp < _maxHp) {
-            _hp += _hpRecoverAmount;
-            UpdateHpSlider();
-            await UniTask.Delay(TimeSpan.FromSeconds(delay));
-        }
-        _hp = _maxHp;
-        ChargerOn();
+        await RecoverHp(delay);
     }
 
     private void UpdateHpSlider() {

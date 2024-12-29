@@ -119,23 +119,6 @@ public class PlayerDataManager : MonoBehaviour {
         SetHP(afterHp);
     }
 
-    public void HealByMaxPercent(float percent) {
-        int maxHP = _status._maxHp;
-        int healAmount = Mathf.CeilToInt(maxHP * percent * 0.01f); // 최대 체력의 percent %를 계산
-        int currentHp = _status._hp;
-        int afterHp = currentHp + healAmount;
-
-        if (afterHp > maxHP) {
-            afterHp = maxHP;
-            FloatingDamageManager.Instance.ShowDamage(_player, maxHP - currentHp, true, false, true);
-        }
-        else {
-            FloatingDamageManager.Instance.ShowDamage(_player, healAmount, true, false, true);
-        }
-
-        SetHP(afterHp);
-    }
-
     public void SetMaxHP(int maxHP) {
         _status._maxHp = maxHP;
     }

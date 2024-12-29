@@ -438,6 +438,7 @@ public class Player : MonoBehaviour {
     public void ColliderOff() {
         _collider.enabled = false;
     }
+
     #endregion //public funcs
 
 
@@ -612,7 +613,7 @@ public class Player : MonoBehaviour {
     private async UniTaskVoid Die() {
         if (InventoryManager.Instance.HasItem(ItemType.Guard)) {
             PlaySound(GuardSound);
-            PlayerDataManager.Instance.HealByMaxPercent(30);
+            PlayerDataManager.Instance.HealPercent(30);
             if (guardEffectPrefab != null) {
                 Vector3 effect0Position = transform.position + new Vector3(0, 0.7f, 0);
                 GameObject effectInstance = Instantiate(guardEffectPrefab, effect0Position, Quaternion.identity);

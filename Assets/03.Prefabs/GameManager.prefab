@@ -130,6 +130,31 @@ MonoBehaviour:
   - {fileID: 792317746891172702, guid: 1035a68f2489f42a3b88c70cca0d5435, type: 3}
   - {fileID: 4618771074998799583, guid: 619d0cf90a7ea3541a7fcab33fad7968, type: 3}
   - {fileID: 841143154332405800, guid: fbe02ab71561c8240b1d53c97c898aa3, type: 3}
+  _stateSounds:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 8300000, guid: e53ff7c8af0a91a43b91d3d87068ecd3, type: 3}
+  - {fileID: 0}
+  - {fileID: 8300000, guid: 2888892a4276a5b43bb4855c6cfe7d96, type: 3}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 8300000, guid: e431ee02da9e92448be4b9af95f7aeb5, type: 3}
+  - {fileID: 0}
+  - {fileID: 8300000, guid: 920895f416b7eb049a271cccbde945e8, type: 3}
+  - {fileID: 8300000, guid: 2450e23eb00dbc74087c921bd109d209, type: 3}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 8300000, guid: e66ca87726c4f4641885c1eb4b3fb67f, type: 3}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 8300000, guid: 0b713ef0f73627f44a1e85e7f57476a1, type: 3}
+  - {fileID: 0}
+  - {fileID: 0}
   _coldMat: {fileID: 2100000, guid: 66410b03b9683884894631a67ff16aa7, type: 2}
 --- !u!114 &3466549801065252712
 MonoBehaviour:

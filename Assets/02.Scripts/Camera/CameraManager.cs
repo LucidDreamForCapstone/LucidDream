@@ -1,6 +1,6 @@
 using Cinemachine;
 using Cysharp.Threading.Tasks;
-using DG.Tweening;
+using Edgar.Unity;
 using System;
 using UnityEngine;
 using UnityEngine.Experimental.Rendering.Universal;
@@ -9,6 +9,7 @@ public class CameraManager : MonoBehaviour {
     private static CameraManager _instance;
     private Camera _camera;
     private PixelPerfectCamera _pixelPerfectCamera;
+    private FogOfWarGrid2D _fow2d;
     [SerializeField] CinemachineVirtualCamera _virtualCamera;
 
     public static CameraManager Instance { get { return _instance; } }
@@ -18,12 +19,13 @@ public class CameraManager : MonoBehaviour {
         _instance = this;
         _camera = GetComponent<Camera>();
         _pixelPerfectCamera = GetComponent<PixelPerfectCamera>();
+        _fow2d = GetComponent<FogOfWarGrid2D>();
     }
 
     #endregion
 
 
-    
+
     #region public funcs
 
     public async UniTask CameraFocus(Transform targetTransform, int offset, float focusTime) {
@@ -40,5 +42,10 @@ public class CameraManager : MonoBehaviour {
         player.PlayerUnPause();
         _virtualCamera.Follow = originTarget;
     }
+
+    public void SetFogOfWar(bool state) {
+        _fow2d.enabled = state;
+    }
+
     #endregion
 }
