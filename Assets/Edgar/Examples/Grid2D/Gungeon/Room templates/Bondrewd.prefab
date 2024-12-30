@@ -801,7 +801,7 @@ MonoBehaviour:
   _groggyDecreaseAmount: 15
   _missileShootSound: {fileID: 8300000, guid: f4f3f053255c88240a9608e2a1325455, type: 3}
   _explosionCooltime: 120
-  _explosionDamage: 40
+  _explosionDamage: 100
   _explosionWarningTime: 20
   _explosionLastTime: 4
   _explosionPosInterval: 5

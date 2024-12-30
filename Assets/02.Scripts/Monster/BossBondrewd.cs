@@ -649,7 +649,8 @@ public class BossBondrewd : MonsterBase {
                 if (_phantomGauge > 100) {
                     _phantomTimer = 0;
                     SoundManager.Instance.PlaySFX(_phantomOnSound.name, true);
-                    SystemMessageManager.Instance.PushSystemMessage("연구소장이 팬텀 상태에 진입합니다.", Color.cyan, false, 2);
+                    if (!_isDead)
+                        SystemMessageManager.Instance.PushSystemMessage("연구소장이 팬텀 상태에 진입합니다.", Color.cyan, false, 2);
                     _currentPhantomState = PhantomState.Activated;
                     _phantomGauge = 100;
                     _phantomGaugeSlider.fillRect.GetComponent<Image>().color = _phantomGaugeActivateColor;
@@ -675,7 +676,8 @@ public class BossBondrewd : MonsterBase {
                 if (_phantomGauge < 0) {
                     _phantomTimer = 0;
                     SoundManager.Instance.PlaySFX(_phantomOffSound.name, false);
-                    SystemMessageManager.Instance.PushSystemMessage("연구소장의 팬텀 상태가 해제됩니다.", Color.cyan, false, 2);
+                    if (!_isDead)
+                        SystemMessageManager.Instance.PushSystemMessage("연구소장의 팬텀 상태가 해제됩니다.", Color.cyan, false, 2);
                     _currentPhantomState = PhantomState.DeActivated;
                     _phantomGauge = 0;
                     _phantomGaugeSlider.fillRect.GetComponent<Image>().color = _phantomGaugeDeactivateColor;
