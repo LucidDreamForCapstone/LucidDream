@@ -27434,7 +27434,7 @@ MonoBehaviour:
     serializedVersion: 2
     rgba: 4283322111
   _exp: 0
-  _feverAmount: 0
+  _feverAmount: 100
   _chargerIndex: 2
   _hpRecoverAmount: 30
   _boss: {fileID: 2920947090125769740}
@@ -28704,7 +28704,7 @@ MonoBehaviour:
     serializedVersion: 2
     rgba: 4283322111
   _exp: 0
-  _feverAmount: 0
+  _feverAmount: 100
   _chargerIndex: 1
   _hpRecoverAmount: 30
   _boss: {fileID: 2920947090125769740}

@@ -50,7 +50,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _type: 1
   _rank: 2
-  _chance: 15
+  _chance: 10
   _lastTime: -1
   _ratio: 10
   _tickDamage: 0
