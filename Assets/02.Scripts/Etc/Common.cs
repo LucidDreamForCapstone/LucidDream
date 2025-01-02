@@ -144,11 +144,6 @@ public static class Common {
     public static int baseFeverMaxGauge = 100;
     public static int secondFeverMaxGauge = 90;
     public static int thirdFeverMaxGauge = 80;
-    public static float cardNormalRate = 0.49f;
-    public static float cardRareRate = 0.35f;
-    public static float cardUniqueRate = 0.14f;
-    public static float cardLegendaryRate = 0.0196f;
-    public static float cardMysticRate = 0.0004f;
 }
 
 #endregion // Common class
