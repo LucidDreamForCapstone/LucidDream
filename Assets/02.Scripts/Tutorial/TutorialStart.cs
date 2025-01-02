@@ -56,7 +56,27 @@ public class TutorialStart : MonoBehaviour {
         colorAdjustments.colorFilter.value = targetColor;
     }
 
+    protected async UniTask FadeOutColor() {
+        if (colorAdjustments == null) return;
+
+        float elapsedTime = 0f;
+
+        while (elapsedTime < fadeDuration) {
+            elapsedTime += Time.deltaTime; // Frame-independent timing
+            float t = elapsedTime / fadeDuration; // Calculate normalized time
+            colorAdjustments.colorFilter.value = Color.Lerp(targetColor, startColor, t); // Interpolate color
+            await UniTask.Yield(); // Wait for the next frame
+        }
+
+        // Ensure the final color is precisely set
+        colorAdjustments.colorFilter.value = startColor;
+    }
+
     public void FadeinSignal() {
         FadeInColor().Forget();
+    }
+
+    public void FadeOutSignal() {
+        FadeOutColor().Forget();
     }
 }

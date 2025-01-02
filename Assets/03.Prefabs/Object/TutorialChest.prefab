@@ -55,6 +55,8 @@ MonoBehaviour:
     _dropChance: 100
   - _item: {fileID: 333487530329746681, guid: d3b95dbb730d026449fe65dc26f1d829, type: 3}
     _dropChance: 100
+  - _item: {fileID: 6554170899350276541, guid: d9449e93f60efd64293b1a68d91ed88d, type: 3}
+    _dropChance: 100
   _chestRank: 0
   _openSound: {fileID: 8300000, guid: 01eda33b54ebe7b4894c6dd958381ba8, type: 3}
 --- !u!212 &2128403838987545142

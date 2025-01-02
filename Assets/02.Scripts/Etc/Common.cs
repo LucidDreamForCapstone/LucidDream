@@ -1,4 +1,4 @@
-﻿#region Definations
+#region Definations
 
 
 public enum NoneType {
