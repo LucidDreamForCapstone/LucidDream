@@ -217,12 +217,14 @@ public class BossBondrewd : MonsterBase {
 
     public async override UniTaskVoid Stun(float lastTime, float offsetY = 2.5f, float scale = 2) {
         if (!_isChainExplosionActivated) {
-            _cts.Cancel();
-            base.Stun(lastTime, 2.5f, 2).Forget();
-            await UniTask.Delay(TimeSpan.FromSeconds(lastTime));
-            _cts.Dispose();
-            _cts = null;
-            _cts = new CancellationTokenSource();
+            if (_cts != null) {
+                _cts.Cancel();
+                base.Stun(lastTime, 2.5f, 2).Forget();
+                await UniTask.Delay(TimeSpan.FromSeconds(lastTime));
+                _cts.Dispose();
+                _cts = null;
+                _cts = new CancellationTokenSource();
+            }
         }
         else {
             SystemMessageManager.Instance.PushSystemMessage("보스가 일시적으로 스턴에 걸리지 않습니다.", Color.yellow);
@@ -253,7 +255,8 @@ public class BossBondrewd : MonsterBase {
     }
 
     protected override async UniTaskVoid Die() {
-        _cts.Cancel();
+        if (_cts != null)
+            _cts.Cancel();
         _isDead = true;
         _hp = 0;
         _chargerList.ForEach(charger => charger.Sleep().Forget());
@@ -269,8 +272,10 @@ public class BossBondrewd : MonsterBase {
         SoundManager.Instance.PlaySFX(_deathSound.name);
         PlayerDataManager.Instance.SetFeverGauge(PlayerDataManager.Instance.Status._feverGauge + _feverAmount);
         await UniTask.Delay(TimeSpan.FromSeconds(2));
-        _cts.Dispose();
-        _cts = null;
+        if (_cts != null) {
+            _cts.Dispose();
+            _cts = null;
+        }
         _timeLineManager.ResumeTimeline();
     }
 
@@ -735,7 +740,8 @@ public class BossBondrewd : MonsterBase {
     private async UniTaskVoid Groggy() {
         Debug.Log("Groggy Start");
         _isGroggy = true;
-        _cts.Cancel();
+        if (_cts != null)
+            _cts.Cancel();
         _useTree = false;
         _groggyEffect.SetActive(true);
         StateEffectManager.Instance.SummonEffect(transform, StateType.Confusion, 3, _groggyLastTime, 3).Forget();
@@ -752,9 +758,11 @@ public class BossBondrewd : MonsterBase {
             await UniTask.NextFrame();
         }
         _groggyGauge = 100;
-        _cts.Dispose();
-        _cts = null;
-        _cts = new CancellationTokenSource();
+        if (_cts != null) {
+            _cts.Dispose();
+            _cts = null;
+            _cts = new CancellationTokenSource();
+        }
         _groggyEffect.SetActive(false);
         await UniTask.Delay(TimeSpan.FromSeconds(1));
         _isGroggy = false;

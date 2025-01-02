@@ -99,6 +99,9 @@ namespace Edgar.Unity.Examples.Gungeon {
 
             var enemies = new List<GungeonEnemy>();
             var totalEnemiesCount = Random.Next(1, 5);
+            if (GungeonGameManager.Instance.Stage == 4) {
+                totalEnemiesCount++;
+            }
 
             while (enemies.Count < totalEnemiesCount) {
                 // Find random position inside floor collider bounds
@@ -211,14 +214,17 @@ namespace Edgar.Unity.Examples.Gungeon {
         /// <param name="enemy"></param>
         public void OnEnemyKilled(GameObject enemy) {
             //Destroy(enemy);
-            RemainingEnemies.Remove(enemy.GetComponent<GungeonEnemy>());
+            if (!(GungeonGameManager.Instance.Stage == 4 && RemainingEnemies.Count == 1))
+                RemainingEnemies.Remove(enemy.GetComponent<GungeonEnemy>());
 
             // Open doors if there are no enemies left in the room
             if (RemainingEnemies.Count == 0) {
                 OpenDoors();
             }
         }
-
+        public void HadesKilled() {
+            OpenDoors();
+        }
         #endregion
     }
 

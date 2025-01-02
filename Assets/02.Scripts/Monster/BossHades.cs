@@ -1,5 +1,6 @@
 using Cysharp.Threading.Tasks;
 using DG.Tweening;
+using Edgar.Unity.Examples.Gungeon;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -241,6 +242,7 @@ public class BossHades : MonsterBase {
         PlaySoundDelay(_deathSound, 1.2f).Forget();
         DeleteAllGolems();
         await CameraManager.Instance.CameraFocus(_cameraTarget, 9, 5.5f);
+        GameObject.Find("Boss - Boss").GetComponent<GungeonRoomManager>().HadesKilled();
         _hadesCollider.enabled = false;
         _headSr.sortingLayerName = "Default";
         _jawSr.sortingLayerName = "Default";
