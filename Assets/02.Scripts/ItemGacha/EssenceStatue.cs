@@ -60,6 +60,7 @@ public class EssenceStatue : DropableBase {
         DropOneItem(_dropPoint);
         await UniTask.Delay(TimeSpan.FromSeconds(1.5f));
         _animator.SetTrigger("Deactivate");
+        await UniTask.Delay(TimeSpan.FromSeconds(1));
         _isReady = true;
     }
 
