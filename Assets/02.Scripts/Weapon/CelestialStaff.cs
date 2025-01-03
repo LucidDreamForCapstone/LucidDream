@@ -141,7 +141,7 @@ public class CelestialStaff : WeaponBase {
 
                 if (targetMonster != null) {
                     // 피격 대상에게 마법 공격
-                    _playerScript.NormalMagicalAttack(targetMonster, 2);
+                    _playerScript.NormalMagicalAttack(targetMonster, 3);
 
                     // 0.3초 대기 후 적 위치에 이펙트 생성
                     SpawnDelayedEffect(targetMonster).Forget();
